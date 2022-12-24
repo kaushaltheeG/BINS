@@ -18,6 +18,35 @@ class User < ApplicationRecord
     validates :name, presence: true 
     validates :password, length: {in: 6..255}, allow_nil: true 
 
-    
+    #S.P.I.R.E, has_secure_password gives us a password=
+
+  before_validation :ensure_session_token 
+
+  def self.find_by_credentials(email, password)
+    if email.include?('@') 
+      user = User.find_by(email: email )
+      return user if user && user.authenticate(password)
+    end 
+    nil 
+  end 
+
+  def reset_session_token! 
+    self.session_token = generate_unique_session_token
+    self.save!
+    self.session_token
+  end 
+
+  private 
+
+  def ensure_session_token 
+    self.session_token ||= generate_unique_session_token
+  end 
+
+  def generate_unique_session_token  
+    while true 
+      token = SecureRandom::urlsafe_base64 
+      return token unless User.exists?(session_token: token)
+    end 
+  end 
 
 end
