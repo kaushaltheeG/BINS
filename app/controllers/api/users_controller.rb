@@ -5,8 +5,7 @@ class Api::UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       login!(@user)
-      # render :show 
-      render json: {user: @user}
+      render :show 
       return 
     end 
     render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity 
