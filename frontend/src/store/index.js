@@ -1,9 +1,12 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
+import session from './session'
 
 
 let enhancer;
-export const rootReducer = combineReducers({})
+export const rootReducer = combineReducers({
+    session
+})
 
 if (process.env.NODE_ENV === 'production') {
     enhancer = applyMiddleware(thunk);
