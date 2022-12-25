@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import './SigninForm.css'
 
-function LoginFormPage() {
+const LoginFormPage = () => {
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
     const [email, setEmail] = useState('');
@@ -42,7 +42,7 @@ function LoginFormPage() {
                     <div className='signin-form-header_sidelink'>
                         New to BINS?
                         <br />
-                        <a target="_self" className="create-link" href="#">Create an account</a>
+                        <a target="_self" className="create-link" href="/createnew">Create an account</a>
                     </div>
                 </div>
             </header>
@@ -72,7 +72,7 @@ function LoginFormPage() {
                             onChange={(e) => setPassword(e.target.value)}
                             required
                         />
-                    <button className='form-ele' type="submit">Sign In With Email</button>
+                    <button className='form-ele' type="submit">Welcome Back</button>
                     <ul>
                         {errors.map(error => <li className="error-li" key={error}>{error}</li>)}
                     </ul>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
+import CreateNewPage from './components/CreateNewPage';
 import SigninFormPage from './components/SigninFormPage';
 
 function App() {
@@ -11,6 +12,9 @@ function App() {
       </Route>
       <Route path="/signin">
         <SigninFormPage />
+      </Route>
+      <Route path="/createnew">
+        <CreateNewPage />
       </Route>
     </Switch>
   );
