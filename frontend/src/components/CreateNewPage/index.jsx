@@ -90,7 +90,7 @@ const CreateNewPage = () => {
                         onChange={(e) => setConfirmPassword(e.target.value)}
                         required
                     />
-                    <button className='form-ele' type="submit">Welcome in, {name}</button>
+                    <button className='form-ele' id='form-only' type="submit">Welcome in, {name}</button>
                     <ul className='form-ele'>
                         {errors.map(error => <li className="error-li" key={error}>{error}</li>)}
                     </ul>

@@ -1,0 +1,28 @@
+.inside-workarea {
+    background: #350d36;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    padding-left: 0;
+    position: relative;
+
+    grid-area: p-top_nav;
+        grid-row-start: p-top_nav;
+        grid-column-start: p-top_nav;
+        grid-row-end: p-top_nav;
+        grid-column-end: p-top_nav;
+    
+}
+
+#top-searchbar{
+    display: flex;
+    flex: 2;
+    max-width: 732px;
+    min-width: 0;
+    position: relative;
+}
+
+#search-input {
+    width: 100%;
+}

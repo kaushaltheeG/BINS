@@ -72,7 +72,7 @@ const LoginFormPage = () => {
                             onChange={(e) => setPassword(e.target.value)}
                             required
                         />
-                    <button className='form-ele' type="submit">Welcome Back</button>
+                    <button className='form-ele' id='form-only' type="submit">Welcome Back</button>
                     <ul>
                         {errors.map(error => <li className="error-li" key={error}>{error}</li>)}
                     </ul>

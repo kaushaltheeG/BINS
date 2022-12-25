@@ -86,7 +86,7 @@ input.form-ele {
     width: 100%;
 }
 
-button {
+button#form-only {
     margin-bottom: 20px;
     width: 100%;
     background-color: #4a154b;
@@ -101,7 +101,7 @@ button {
     cursor: pointer;
 }
 
-button:hover {
+button#form-only:hover {
     text-decoration: none;
     background-color: #5e1b5f;
 }
