@@ -7,8 +7,11 @@ function App() {
   // const user = useSelector(state => Object.values(state.session))
   return (
     <Switch>
-      <Route path='/' exact>
-        <h2>Hello User!</h2>
+      <Route path='/' exact>  
+        <h2>Welcome to BINS: Sign In or Sign Up</h2>
+      </Route>
+      <Route path='/client/workareas'>
+        <h2>These display your workareas</h2>
       </Route>
       <Route path="/signin">
         <SigninFormPage />
