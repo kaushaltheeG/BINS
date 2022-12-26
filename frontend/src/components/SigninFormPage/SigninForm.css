@@ -122,6 +122,14 @@ li.error-li {
     font-size: 15px;
 }
 
+li.error-specific {
+    width: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin: 0 0 20px;
+}
+
 input.form-ele {
     padding: 11px 12px 13px;
     height: 44px;

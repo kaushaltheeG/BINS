@@ -89,9 +89,9 @@ const LoginFormPage = () => {
                             required
                         />
                     <button className='form-ele' id='form-only' type="submit">Welcome Back</button>
-                    <ul>
-                        {errors.map(error => <li className="error-li" key={error}>{error}</li>)}
-                    </ul>
+                    <div>
+                        {errors.map(error => <li className="error-li error-specific" key={error}>{error}</li>)}
+                    </div>
                     <div className="or-break">
                         <hr className="general-hr left-hr" />
                         <div className="or-text">OR</div>

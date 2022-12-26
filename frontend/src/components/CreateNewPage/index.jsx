@@ -107,9 +107,9 @@ const CreateNewPage = () => {
                         required
                     />
                     <button id='form-only' type="submit">Welcome in, {name}</button>
-                    <ul className='form-ele'>
-                        {errors.map(error => <li className="error-li" key={error}>{error}</li>)}
-                    </ul>
+                    <div>
+                        {errors.map(error => <li className="error-li error-specific" key={error}>{error}</li>)}
+                    </div>
                     <div className="or-break">
                         <hr className="general-hr left-hr" />
                         <div className="or-text">OR</div>
