@@ -4,3 +4,25 @@
     align-items: center;
     padding: 0;
 }
+
+#demo-user-signin {
+    padding: 11px 12px 13px;
+    height: 44px;
+    font-size: 18px;
+    line-height: 1.33333;
+
+    font-family: Slack-Lato, Slack-Fractions, appleLogo, sans-serif;
+    font-size: 18px;
+    border-radius: 4px;
+    background-color: #fff;
+    border: 2px solid #4285f4;
+    color: #4285f4;
+    margin: 0 0 20px;
+    width: 100%;
+}
+
+
+#demo-user-signin:hover {
+    cursor: pointer;
+    box-shadow: 5px 5px 5px rgb(183, 181, 181);
+}

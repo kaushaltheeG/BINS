@@ -39,6 +39,15 @@ const CreateNewPage = () => {
         return setErrors(['Confirm Password field must be the same as the Password field']);
     };
 
+    const signAsDemo = (e) => {
+        e.preventDefault();
+        const demoData = {
+            email: 'demo@user.io',
+            password: 'password'
+        }
+        dispatch(sessionActions.login(demoData))
+    }
+
     return (
         <>
             <header className='signin-form-header'>
@@ -97,11 +106,17 @@ const CreateNewPage = () => {
                         onChange={(e) => setConfirmPassword(e.target.value)}
                         required
                     />
-                    <button className='form-ele' id='form-only' type="submit">Welcome in, {name}</button>
+                    <button id='form-only' type="submit">Welcome in, {name}</button>
                     <ul className='form-ele'>
                         {errors.map(error => <li className="error-li" key={error}>{error}</li>)}
                     </ul>
-                    <div>
+                    <div className="or-break">
+                        <hr className="general-hr left-hr" />
+                        <div className="or-text">OR</div>
+                        <hr className="general-hr right-hr" />
+                    </div>
+                    <button id='demo-user-signin' onClick={signAsDemo}>Sign In As Guest</button>
+                    <div >
                         <div className='signin-form-header_sidelink' id="createnew-toggle">
                             Already using BINS?
                             <br />

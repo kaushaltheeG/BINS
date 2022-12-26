@@ -45,6 +45,40 @@
     justify-content: center;
 }
 
+.or-break {
+    margin-bottom: 24px;
+    align-items: center;
+    display: flex;
+}
+.or-text {
+    padding: 0 20px;
+    font-family: Slack-Lato,Slack-Fractions,appleLogo,sans-serif;
+    font-size: 15px;
+    line-height: 1.46668;
+    font-weight: initial;
+    color: #1d1c1d;
+    font-variant-ligatures: common-ligatures;
+    -webkit-font-smoothing: antialiased;
+}
+.general-hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    clear: both;
+    
+}
+
+.left-hr{
+    flex-grow: 1;
+    margin: 0;
+}
+
+.right-hr {
+    flex-grow: 1;
+    margin: 0;
+}
+
+
+
 #form-logo-font {
     font-family: Slack-Lato, Slack-Fractions, appleLogo, sans-serif;
     font-weight: bold;

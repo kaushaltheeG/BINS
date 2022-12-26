@@ -33,6 +33,15 @@ const LoginFormPage = () => {
             });
     }
 
+    const signAsDemo = (e) => {
+        e.preventDefault();
+        const demoData = {
+            email: 'demo@user.io',
+            password: 'password'
+        }
+        dispatch(sessionActions.login(demoData))
+    }
+
     return (
         <>
             <header className='signin-form-header'>
@@ -83,6 +92,19 @@ const LoginFormPage = () => {
                     <ul>
                         {errors.map(error => <li className="error-li" key={error}>{error}</li>)}
                     </ul>
+                    <div className="or-break">
+                        <hr className="general-hr left-hr" />
+                        <div className="or-text">OR</div>
+                        <hr className="general-hr right-hr" />
+                    </div>
+                    <button id='demo-user-signin' onClick={signAsDemo}>Sign In As Guest</button>
+                    <div >
+                        <div className='signin-form-header_sidelink' id="createnew-toggle">
+                            Already using BINS?
+                            <br />
+                            <a target="_self" className="create-link" href="/signin">Sign in to an existing work area</a>
+                        </div>
+                    </div>
                 </form>
             </div>
         </>
