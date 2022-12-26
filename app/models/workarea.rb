@@ -1,0 +1,2 @@
+class Workarea < ApplicationRecord
+end
