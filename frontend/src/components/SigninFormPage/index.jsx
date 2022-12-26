@@ -98,13 +98,6 @@ const LoginFormPage = () => {
                         <hr className="general-hr right-hr" />
                     </div>
                     <button id='demo-user-signin' onClick={signAsDemo}>Sign In As Guest</button>
-                    <div >
-                        <div className='signin-form-header_sidelink' id="createnew-toggle">
-                            Already using BINS?
-                            <br />
-                            <a target="_self" className="create-link" href="/signin">Sign in to an existing work area</a>
-                        </div>
-                    </div>
                 </form>
             </div>
         </>
