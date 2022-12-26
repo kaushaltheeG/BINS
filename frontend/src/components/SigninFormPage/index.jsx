@@ -3,6 +3,8 @@ import * as sessionActions from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import './SigninForm.css'
+import slackLogo from '../.././utils/images/slack-logo-thumb.png'
+
 
 const LoginFormPage = () => {
     const dispatch = useDispatch();
@@ -36,7 +38,12 @@ const LoginFormPage = () => {
             <header className='signin-form-header'>
                 <div className='leftcol'></div>
                 <div className='centercol'>
-                    <a target="_self" href="#">"logo" BINS ~ take to main pg </a>
+                    <a target="_self" href="/" id='form-logo-font'>
+                        <div className="form-logo">
+                                <img src={slackLogo} alt="" id='logo-img' />
+                            <p >BINS</p>
+                        </div>
+                    </a>
                 </div>
                 <div className='rightcol'>
                     <div className='signin-form-header_sidelink'>

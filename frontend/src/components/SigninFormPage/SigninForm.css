@@ -23,7 +23,7 @@
         Tahoma,
         Arial,
         sans-serif;
-    /* font-size: 48px; */
+    font-size: 25px;
     font-weight: 700;
     letter-spacing: -.75px;
     max-width: 700px;
@@ -37,6 +37,20 @@
     margin-bottom: 32px;
     max-width: 700px;
     text-align: center;
+}
+
+.form-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#form-logo-font {
+    font-family: Slack-Lato, Slack-Fractions, appleLogo, sans-serif;
+    font-weight: bold;
+    font-size: 2rem;
+    text-decoration: none;
+    color: black;
 }
 
 header.signin-form-header {

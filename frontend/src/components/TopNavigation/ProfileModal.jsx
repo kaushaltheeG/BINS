@@ -31,18 +31,6 @@ function ProfileModal({ user }) {
 
     return (
         <>
-            {/* <button onClick={openMenu}>{user.name[0].toUpperCase()}
-                <i className="fa-solid fa-user-circle" />
-            </button>
-            {showMenu && (
-                <ul className="profile-dropdown">
-                    <li>{user.name}</li>
-                    <li>{user.email}</li>
-                    <li>
-                        <button onClick={logout}>Log Out</button>
-                    </li>
-                </ul>
-            )} */}
             <div className="profile-modal-background">
                 <div className="profile-modal-container">
                     <div className="profile-model-info font-profile-modal">

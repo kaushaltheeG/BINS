@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import './CreateNew.css'
+import slackLogo from '../.././utils/images/slack-logo-thumb.png'
+
 
 
 const CreateNewPage = () => {
@@ -42,14 +44,19 @@ const CreateNewPage = () => {
             <header className='signin-form-header'>
                 <div className='leftcol'></div>
                 <div className='centercol'>
-                    <a target="_self" href="#">"logo" BINS ~ take to main pg </a>
+                    <a target="_self" href="/" id='form-logo-font'>
+                        <div className="form-logo">
+                            <img src={slackLogo} alt="" id='logo-img' />
+                            <p >BINS</p>
+                        </div>
+                    </a>
                 </div>
                 <div className='rightcol'>
                 </div>
             </header>
             <div className='signin-form'>
                 <div className='signin-form-h1'>
-                    <h1>Lets Get Started, New Member</h1>
+                    <h1>Lets Get Started</h1>
                 </div>
                 <div className='signin-form-subheader'>
                     We recommend using your

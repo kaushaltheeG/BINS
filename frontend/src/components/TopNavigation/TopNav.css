@@ -25,6 +25,52 @@
     position: relative;
 }
 
+.outside-workarea {
+    height: 80px;
+    /* background-color: transparent; */
+    background-color: #4a154b;
+    z-index: 1000;
+    border-bottom: none;
+    top: 0;
+    position: absolute;
+    width: 100%;
+}
+
+.outside-container {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: 76.875rem;
+    padding: 0;
+}
+
+.entry-btns {
+    /* background-color: burlywood; */
+    display: flex;
+    width: 20rem;
+    justify-content: space-evenly;
+    min-width: 10rem;
+}
+
+.btn-padding_outside {
+    margin-top: 1.5rem;
+
+}
+
+.binslogo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+#logo-img {
+    height: 3rem;
+    width: 3rem;
+    /* margin-bottom: 4rem; */
+}
+
 
 #top-searchbar{
     display: flex;
@@ -38,8 +84,17 @@
     width: 100%;
 }
 
+#outside-font {
+    font-family: Slack-Circular-Pro,"Helvetica Neue",Helvetica,"Segoe UI",Tahoma,Arial,sans-serif;
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+}
 
-
-#profile-icon {
-    
+#logo-title {
+    font-family: Slack-Circular-Pro, "Helvetica Neue", Helvetica, "Segoe UI", Tahoma, Arial, sans-serif;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 1.75rem;
 }

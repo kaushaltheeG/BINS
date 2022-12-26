@@ -11,7 +11,7 @@ function App() {
       <TopNavigation />
       <Switch>
         <Route path='/' exact>  
-          <h2>Welcome to BINS: Sign In or Sign Up</h2>
+          {/* <h2>Welcome to BINS: Sign In or Sign Up</h2> */}
         </Route>
         <Route path='/client/workareas'>
           <h2>These display your workareas</h2>
