@@ -11,6 +11,7 @@ class Api::UsersController < ApplicationController
     render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity 
   end
 
+
   private 
   def user_params 
     params.require(:user).permit(:email, :name, :password)
