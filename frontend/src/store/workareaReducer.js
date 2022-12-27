@@ -40,7 +40,7 @@ export const fetchWorkarea = (workareaId) => async dispatch => {
 
 let workareaStructure = {
     currentWorkarea: {},
-    workareas: []
+    allWorkareas: []
 }
 
 const workareaReducer = (state=null, action ) => {
@@ -49,7 +49,7 @@ const workareaReducer = (state=null, action ) => {
     const nextState = {...state}
     switch(action.type) {
         case RETRIEVE_WORKAREAS:
-            nextState.workareas = Object.values(action.workareas);
+            nextState.allWorkareas = Object.values(action.workareas);
             return nextState
         case SET_CURRENT_WORKAREA:
             nextState.currentWorkarea = action.currentWorkarea

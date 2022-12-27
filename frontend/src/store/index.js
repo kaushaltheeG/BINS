@@ -7,7 +7,7 @@ import {entities} from './entities';
 
 
 let enhancer;
-console.log(entities)
+
 export const rootReducer = combineReducers({
     workarea: workareaReducer,
     session,
