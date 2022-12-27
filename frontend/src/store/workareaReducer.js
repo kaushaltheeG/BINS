@@ -35,6 +35,7 @@ export const fetchWorkarea = (workareaId) => async dispatch => {
         return currentWorkarea
     } else {
         console.log("failed workarea fetch");
+        return null; 
     }
 }
 

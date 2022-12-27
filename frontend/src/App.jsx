@@ -1,9 +1,10 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import CreateNewPage from './components/CreateNewPage';
 import SigninFormPage from './components/SigninFormPage';
 import TopNavigation from './components/TopNavigation';
 import WorkAreaSelectionPage from './components/WorkAreaSelectionPage';
+import DisplayWorkAreaPage from './components/DisplayWorkAreaPage';
 
 function App() {
   // const user = useSelector(state => Object.values(state.session))
@@ -14,7 +15,10 @@ function App() {
         <Route path='/' exact>  
           {/* <h2>Welcome to BINS: Sign In or Sign Up</h2> */}
         </Route>
-        <Route path='/client/workareas'>
+        <Route path={`/client/workareas/:workareaId`} extact>
+          <DisplayWorkAreaPage />
+        </Route>
+        <Route path='/client/workareas' extact>
           <WorkAreaSelectionPage />
         </Route>
         <Route path="/signin">
@@ -23,6 +27,7 @@ function App() {
         <Route path="/createnew">
           <CreateNewPage />
         </Route>
+        <Redirect to="/404" />
       </Switch>
     </>
   );
