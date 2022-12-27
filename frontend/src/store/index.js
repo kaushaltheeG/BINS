@@ -2,11 +2,14 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import session from './session'
 import modalReducer from './modalReducer';
+import workareaReducer from './workareaReducer';
+import {entities} from './entities';
 
 
 let enhancer;
+console.log(entities)
 export const rootReducer = combineReducers({
-    entities: null,
+    workarea: workareaReducer,
     session,
     errors: {},
     ui: {
