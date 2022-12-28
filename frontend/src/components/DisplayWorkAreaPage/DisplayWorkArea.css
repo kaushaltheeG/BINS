@@ -1,0 +1,6 @@
+.primary-display {
+    max-height: calc(100vh - 44px);
+    border: 1px solid black;
+    width: 1260px;
+    margin-left: 20px;
+}

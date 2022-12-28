@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom"
 import { fetchWorkarea } from "../../store/workareaReducer";
+import "./DisplayWorkArea.css"
+import MessageList from "./MessageList";
 
 
 const DisplayWorkAreaPage = () => {
@@ -18,6 +20,7 @@ const DisplayWorkAreaPage = () => {
     return (
         <>
             {workarea.name}
+            <MessageList />
         </>
     )
 

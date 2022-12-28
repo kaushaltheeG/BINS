@@ -8,6 +8,7 @@ import {entities} from './entities';
 
 let enhancer;
 
+//need to add entities as a key 
 export const rootReducer = combineReducers({
     workarea: workareaReducer,
     session,

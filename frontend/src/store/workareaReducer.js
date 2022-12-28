@@ -3,6 +3,11 @@ import csrfFetch from "./csrf";
 export const RETRIEVE_WORKAREAS = 'workareas/getWorkareas';
 export const SET_CURRENT_WORKAREA = 'workareas/setWorkarea';
 
+export const getCurrentWorkAreaMessage = (state) => {
+    if (!Object.keys(state.workarea.currentWorkarea).length) return [];
+    return Object.values(state.workarea.currentWorkarea.messages)
+}
+
 export const getWorkareas = (workareas) => {
     return {
         type: RETRIEVE_WORKAREAS,
