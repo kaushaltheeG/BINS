@@ -22,7 +22,7 @@
         'workarea_name current_messenger_name'
         'message_toggle message_control';
     grid-template-columns: 180px 1fr;
-    grid-template-rows: 150px 100vh;
+    grid-template-rows: 50px 100vh;
     height: 100vh;
         
     

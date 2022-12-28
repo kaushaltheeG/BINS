@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom"
 import { fetchWorkarea } from "../../store/workareaReducer";
 import "./DisplayWorkArea.css"
+import MessageInput from "./MessageInput";
 import MessageList from "./MessageList";
 
 
@@ -31,7 +32,7 @@ const DisplayWorkAreaPage = () => {
                 </div>
                 <div className="grid-message-control">
                     <MessageList />
-                    <input type="text" />
+                    <MessageInput />
                 </div>
             </div>
         </>
