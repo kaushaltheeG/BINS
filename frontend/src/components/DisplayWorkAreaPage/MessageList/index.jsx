@@ -15,6 +15,7 @@ const MessageList = () => {
     }, [dispatch, workareaId])
     return (
         <>
+            
             {messages?.map(message => (
                 <div>
                     <MessageElement message={message} key={message.id} />

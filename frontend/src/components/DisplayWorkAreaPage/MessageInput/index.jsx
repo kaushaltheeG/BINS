@@ -1,10 +1,13 @@
-
+import "./MessageInput.css"
 const MessageInput = () => {
 
     return (
-        <>
-            <input type="text" />
-        </>
+        <div className="message-input">
+        
+            <div className="flex-msg-input">
+                <input type="text" id="msg-input-tag" placeholder="Message Pod Name"/>
+            </div>
+        </div>
     )
 }
 

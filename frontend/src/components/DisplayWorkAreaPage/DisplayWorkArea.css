@@ -14,6 +14,9 @@
 
 .grid-message-control{
     grid-area: message_control;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .primary-display-grid {
@@ -22,7 +25,8 @@
         'workarea_name current_messenger_name'
         'message_toggle message_control';
     grid-template-columns: 180px 1fr;
-    grid-template-rows: 50px 100vh;
-    height: 100vh;
+    grid-template-rows: 50px 90vh;
+    /* height: 100vh; */
         
 }
+

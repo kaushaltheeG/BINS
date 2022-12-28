@@ -31,8 +31,12 @@ const DisplayWorkAreaPage = () => {
                     <p>Pod/DM/GC name</p>
                 </div>
                 <div className="grid-message-control">
-                    <MessageList />
-                    <MessageInput />
+                    
+                        <div className="MessageList">
+                            <MessageList />
+                        </div>
+                            <MessageInput />
+                    
                 </div>
             </div>
         </>

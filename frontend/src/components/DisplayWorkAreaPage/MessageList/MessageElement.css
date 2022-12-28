@@ -51,4 +51,5 @@
     font-family: Slack-Lato, Slack-Fractions, appleLogo, sans-serif;
     display: flex;
     max-width: none;
+    padding-bottom: 3px;
 }
