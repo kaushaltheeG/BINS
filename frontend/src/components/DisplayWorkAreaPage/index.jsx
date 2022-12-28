@@ -19,8 +19,21 @@ const DisplayWorkAreaPage = () => {
 
     return (
         <>
-            {workarea.name}
-            <MessageList />
+            <div className="primary-display-grid">
+                <div className="grid-area-workarea_name">
+                    {workarea.name}
+                </div>
+                <div className="grid-select-message-toggle">
+                    <h6>Message Toggle</h6>
+                </div>
+                <div className="grid-current-messenger-name">
+                    <p>Pod/DM/GC name</p>
+                </div>
+                <div className="grid-message-control">
+                    <MessageList />
+                    <input type="text" />
+                </div>
+            </div>
         </>
     )
 

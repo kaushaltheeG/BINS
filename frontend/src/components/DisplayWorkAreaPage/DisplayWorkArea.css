@@ -1,6 +1,29 @@
-.primary-display {
-    max-height: calc(100vh - 44px);
-    border: 1px solid black;
-    width: 1260px;
-    margin-left: 20px;
+
+
+.grid-area-workarea_name {
+    grid-area: workarea_name;
+}
+
+.grid-select-message-toggle {
+    grid-area: message_toggle;
+}
+
+.grid-current-messenger-name {
+    grid-area: current_messenger_name;
+}
+
+.grid-message-control{
+    grid-area: message_control;
+}
+
+.primary-display-grid {
+    display: grid;
+    grid-template-areas: 
+        'workarea_name current_messenger_name'
+        'message_toggle message_control';
+    grid-template-columns: 180px 1fr;
+    grid-template-rows: 150px 100vh;
+    height: 100vh;
+        
+    
 }
