@@ -4,6 +4,8 @@ const WorkAreasListEle = ({workarea}) => {
     const history = useHistory();
 
 
+    console.log('workarea', workarea)
+
     const handleClick = (e) => {
         e.preventDefault();
         history.push(`/client/workareas/${workarea.id}`)

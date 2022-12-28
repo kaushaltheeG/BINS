@@ -8,6 +8,11 @@ export const getCurrentWorkAreaMessage = (state) => {
     return Object.values(state.workarea.currentWorkarea.messages)
 }
 
+export const getCurrentWorkArea= (state) => {
+    if (!Object.keys(state.workarea.currentWorkarea).length) return {};
+    return Object.values(state.workarea.currentWorkarea)
+}
+
 export const getWorkareas = (workareas) => {
     return {
         type: RETRIEVE_WORKAREAS,

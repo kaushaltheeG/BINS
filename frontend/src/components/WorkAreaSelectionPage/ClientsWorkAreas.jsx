@@ -5,7 +5,7 @@ import WorkAreasListEle from './WorkAreasListEle';
 const ClientWorkAreas = () => {
     const sessionUser = useSelector(state => state.session.user);
     const workareas = Object.values(sessionUser.memberships.workareas);
-
+    console.log(workareas)
 
     return (
         <>

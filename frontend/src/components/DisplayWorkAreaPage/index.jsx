@@ -13,7 +13,7 @@ const DisplayWorkAreaPage = () => {
     console.log(workareaId)
     const workarea = useSelector(state => state.workarea.currentWorkarea);
     const dispatch = useDispatch();
-    console.log(workarea)
+    // console.log(workarea)
     useEffect(() => {
         dispatch(fetchWorkarea(workareaId))
     }, [dispatch, workareaId])

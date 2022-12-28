@@ -9,6 +9,7 @@ import configureStore from './store';
 import csrfFetch, { restoreCSRF } from './store/csrf';
 import * as sessionActions from './store/session';
 import * as workareaActions from './store/workareaReducer'
+import * as messageActions from './store/messageReducer';
 
 
 
@@ -19,6 +20,7 @@ if (process.env.NODE_ENV !== 'production') {
   window.csrfFetch = csrfFetch;
   window.sessionActions = sessionActions;
   window.workareaActions = workareaActions;
+  window.messageActions = messageActions;
 }
 
 function Root() {

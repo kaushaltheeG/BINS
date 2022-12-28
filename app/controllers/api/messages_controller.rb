@@ -10,9 +10,12 @@ class Api::MessagesController < ApplicationController
             return 
         end 
         render json: { erorr: ["Failed to create message"] }, status: :unauthorized
-        
+    end 
 
-
+    def index 
+        @workarea = Workarea.find_by(id: params[:workarea_id]);
+        @messages = @workarea.messages 
+        render :index 
     end 
 
     private 

@@ -4,6 +4,7 @@ import session from './session'
 import modalReducer from './modalReducer';
 import workareaReducer from './workareaReducer';
 import {entities} from './entities';
+import messageReducer from './messageReducer';
 
 
 let enhancer;
@@ -11,6 +12,7 @@ let enhancer;
 //need to add entities as a key 
 export const rootReducer = combineReducers({
     workarea: workareaReducer,
+    messages: messageReducer,
     session,
     errors: {},
     ui: {
