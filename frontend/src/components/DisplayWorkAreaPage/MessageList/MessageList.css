@@ -1,0 +1,27 @@
+.MessageList {
+    flex: 0.75;
+    flex-grow: 0.75;
+}
+.message-list {
+    /* overflow: scroll; */
+    /* height: 1000px; */
+    background-color: aqua;
+    
+    overflow-y: auto;
+    /* margin-top: 60px; */
+    overflow-x: hidden;
+    position:-webkit-sticky;
+    /* bottom: 100px; */
+    /* min-height: 550px; */
+    /* height: 65vh; */
+    max-height: 70vh;
+    /* padding-block-end: 10px; */
+    /* max-height: fit-content; */
+    
+}
+
+
+#message-bottom {
+    padding-bottom: 20px;
+}
+
