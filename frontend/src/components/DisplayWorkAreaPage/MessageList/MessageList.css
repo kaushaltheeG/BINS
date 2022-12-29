@@ -16,10 +16,13 @@
     /* height: 65vh; */
     max-height: 70vh;
     /* padding-block-end: 10px; */
-    /* max-height: fit-content; */
-    
+    /* max-height: fit-content; */    
 }
 
+/* .message-list::-webkit-scrollbar-thumb {
+    background: red;
+        
+} */
 
 #message-bottom {
     padding-bottom: 20px;

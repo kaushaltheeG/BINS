@@ -15,58 +15,20 @@ const MessageList = () => {
     const dispatch = useDispatch();
     const [counter, setCounter] = useState(0);
     const history = useHistory()
-    
 
     const msgRef = useRef(null);
-    const activeMessageRef = useRef(null);
-    const messageUlRef = useRef(null);
-    const prevRoom = useRef(null);
-    const numMessages = useRef(0);
 
-    const activeMessageId = parseInt(history.location.hash.slice(1));
-
-    // Scroll to message selected from mentions menu
-    useEffect(() => {
-        if (activeMessageRef.current) scrollToMessage();
-    }, [activeMessageId]);
-
-      // Effect to run when entering a room
-    useEffect(() => {
-        if (workareaId === prevRoom.current && numMessages.current < messages.length) {
-            // Remove any hash values from the URL
-            if (history.location.hash)
-                history.push(history.location.pathname);
-            scrollToBottom();
-        }
-        numMessages.current = messages.length;
-    }, [messages, workareaId, history]);
-
-    const scrollToMessage = () => {
-        activeMessageRef.current.focus();
-        activeMessageRef.current.scrollIntoView();
-    };
-
-    const scrollToBottom = () => {
-        messageUlRef.current.scrollTop = messageUlRef.current.scrollHeight;
-    };
 
     useEffect(()=> {
         msgRef?.current?.scrollIntoView({
             behavior: "smooth"
         });
-    }, [workareaId, messages])
+    }, [workareaId, messages.length])
 
 
     useEffect(() => {
         dispatch(fetchMessages(workareaId))
-        .then(()=> {
-            if (activeMessageRef.current) {
-                scrollToMessage();
-            } else {
-                scrollToBottom();
-            }
-            prevRoom.current = workareaId;
-        })
+        
     }, [dispatch, workareaId])
 
     //websocket connection 
@@ -92,13 +54,10 @@ const MessageList = () => {
     return (
         <>
             
-            <div className="message-list" ref={messageUlRef}>
+            <div className="message-list">
                 {messages?.map(message => (
-                    <div key={message.id}
-                        ref={activeMessageId === message.id ? activeMessageRef : null}
-                        tabIndex={-1}
-                    >
-                        <MessageElement message={message} key={message.id} />
+                    <div >
+                        <MessageElement message={message} key={message.id}  />
                     </div>
                 ))}
                 <div id="message-bottom" ref={msgRef} />
