@@ -2,6 +2,9 @@ import "./SideBarHeader.css";
 import { useModal } from 'react-hooks-use-modal';
 import { useRef } from "react";
 import WorkAreaProfile from "./WorkAreaProfile";
+import CreateWorkArea from "./CreateWorkArea";
+import ToggleWorkArea from "./ToogleWorkArea";
+import LeaveWorkArea from "./LeaveWorkArea";
 
 
 const SideBarHeader = ({ workarea }) => {
@@ -27,7 +30,18 @@ const SideBarHeader = ({ workarea }) => {
                 <Modal ref={anchor}>
                     <div className="header-name-modal-container">
                         <WorkAreaProfile  workarea={workarea}/>
-                        <p>Create</p>
+                        <div className="line-separator-modal">
+                            <hr id="modal-wa-hr" />
+                        </div>
+                        <CreateWorkArea />
+                        <div className="line-separator-modal">
+                            <hr id="modal-wa-hr" />
+                        </div>
+                        <ToggleWorkArea />
+                        <div className="line-separator-modal">
+                            <hr id="modal-wa-hr" />
+                        </div>
+                        <LeaveWorkArea name={workarea.name} />
                     </div>
                 </Modal>
 

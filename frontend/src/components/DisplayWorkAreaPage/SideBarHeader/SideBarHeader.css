@@ -41,6 +41,14 @@
     justify-content: center;
 }
 
+.line-separator-modal {
+    line-height: 24px;
+    list-style-type: none;
+    margin: 0;
+    padding: 8px 0;
+     --saf-0: rgba(var(--sk_foreground_low, 29, 28, 29), 0.13);
+}
+
 .header-name-modal-container {
     background-color: white;
     position: fixed;
@@ -74,6 +82,46 @@
 
 .workarea-profile-info-modal {
     margin-left: 10px;
+}
+
+.create-wa-modal {
+    /* line-height: 28px; */
+    /* list-style-type: none;
+        margin: 0;
+        padding: 0; */
+        font-size: 15px;
+}
+
+.wa-modal-menu-item {
+        font-size: 15px;
+        align-items: center;
+        background: none;
+        background: #0000;
+        border: 0;
+        border-radius: 0;
+        color: inherit;
+        color: rgba(var(--sk_primary_foreground, 29, 28, 29), 1);
+        cursor: pointer;
+        display: flex;
+        font: inherit;
+        line-height: normal;
+        min-height: 28px;
+        overflow: visible;
+        overflow-x: hidden;
+        padding: 0 24px;
+        text-align: left;
+        text-decoration: none;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 100%;
+}
+
+
+#modal-wa-hr {
+    clear: both;
+    border-bottom: 0;
+    border-top: 1px solid rgba(var(--sk_foreground_low, 29, 28, 29), .13);
+    margin: 0;
 }
 #owner-name {
     font-size: 13px;
