@@ -3,9 +3,6 @@
     flex-grow: 0.75;
 }
 .message-list {
-    /* overflow: scroll; */
-    /* height: 1000px; */
-    background-color: aqua;
     
     overflow-y: auto;
     /* margin-top: 60px; */

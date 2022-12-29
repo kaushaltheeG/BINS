@@ -10,7 +10,8 @@ const MessageElement = ({ message }) => {
         let mins = date.getUTCMinutes();
         const isPm = hours > 12 ? 'AM' : 'PM';
         const adjustedHours = !(hours+4) % 12 ? 12 : (hours+4) % 12
-        return `${adjustedHours}:${mins} ${isPm}`
+        const adjustedMins = mins < 10 ? `0${mins}` : mins
+        return `${adjustedHours}:${adjustedMins} ${isPm}`
     }
     // console.log(message)
     return (

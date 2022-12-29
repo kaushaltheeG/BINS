@@ -1,0 +1,55 @@
+.sideHeaderContainer {
+    display: flex;
+    color: white;
+    justify-content: space-evenly;
+    flex: 0.3;
+    border-top: 1px solid #49274b;
+    max-width: 260px;
+    /* margin-top: 60px; */
+    height: 100%;
+    
+}
+.icon-div-container  {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.icon-container{
+    font-size: 18px;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 1px 3px #00000014;
+    height: 30px;
+    transition-duration: 80ms;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.side-bar-wa-name {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    width: 50%;
+    cursor: pointer;
+}
+
+#create-icon {
+    text-align: center;
+    /* margin-left: 5px;
+    margin-top: 5px; */
+}
+
+#side-bar-header-name {
+    display: block;
+        font-weight: 900;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-family: Slack-Lato,Slack-Fractions,appleLogo,sans-serif;
+        font-size: 18px;
+        align-items: center;
+}
