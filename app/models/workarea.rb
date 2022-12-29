@@ -11,7 +11,7 @@
 #
 class Workarea < ApplicationRecord
     validates :name, :owner_id, :image_url, presence: true
-    validates :owner_id, uniqueness: true 
+    # validates :owner_id, uniqueness: true #was preventing from creating a new workarea
 
 
     belongs_to :owner,
