@@ -8,6 +8,15 @@ class ApplicationController < ActionController::API
     
     before_action :snake_case_params, :attach_authenticity_token
 
+    #helper method which renders Jbuilder template by returning a Ruby Hash 
+=begin 
+  ApplicationController::render, which is similar to the instance method of the same name. 
+  Instead of actually sending a response to the user, though, it merely returns a string of the response body.
+=end 
+  def from_template(template, locals={}) 
+    JSON.parse(self.class.render(:json, template: template, locals: locals ))
+  end 
+
 
     #CRRLLL 
 

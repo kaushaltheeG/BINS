@@ -16,7 +16,7 @@ const MessageInput = () => {
             body,
             author_id: currentUser.id,
         }
-        dispatch(createMessage(message, workareaId)) 
+        createMessage(message, workareaId)
         setBody('')
     }
 

@@ -4,6 +4,7 @@ import { getCurrentWorkArea } from "./workareaReducer";
 
 const GET_ALL_MESSAGE = 'messages/FETCH_ALL_MESSAGES';
 const CREATE_MESSAGE = 'messages/CREATE_MESSAGE';
+const RECEIVE_MESSAGE = 'message/RECEIVE'
 
 export const getMessages = (messages) => {
     return {
@@ -19,6 +20,13 @@ export const newMessage = (message) => {
     }
 } 
 
+export const receiveMessage = (message) => {
+    return {
+        type: RECEIVE_MESSAGE,
+        message
+    }
+}
+
 export const fetchMessages = (workareaId) => async dispatch => {
     console.log(workareaId)
     const res = await csrfFetch(`/api/workareas/${workareaId}/messages`);
@@ -32,19 +40,20 @@ export const fetchMessages = (workareaId) => async dispatch => {
     }
 }
 
-export const createMessage = (payload, workareaId) => async dispatch => {
-    const res = await csrfFetch(`/api/workareas/${workareaId}/messages`, {
+export const createMessage =  (payload, workareaId) => {
+    csrfFetch(`/api/workareas/${workareaId}/messages`, {
         method: 'POST',
         body: JSON.stringify(payload)
     });
+    
 
-    if (res.ok) {
-        const message = await res.json();
-        dispatch(newMessage(message))
-        return message
-    } else {
-        console.log(`Could not create new msg for ${workareaId}`)
-    }
+    // if (res.ok) {
+    //     const message = await res.json();
+    //     // dispatch(newMessage(message))
+    //     return message
+    // } else {
+    //     console.log(`Could not create new msg for ${workareaId}`)
+    // }
 }
 
 let messageStructure = {
@@ -60,6 +69,9 @@ const messageReducer = (state=null, action) => {
             nextState.currentLocation = Object.values(action.messages).pop()
             return nextState
         case CREATE_MESSAGE:
+            nextState.currentLocation.push(action.message);
+            return nextState
+        case RECEIVE_MESSAGE:
             nextState.currentLocation.push(action.message);
             return nextState
         default: 

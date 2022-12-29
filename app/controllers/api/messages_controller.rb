@@ -6,7 +6,10 @@ class Api::MessagesController < ApplicationController
         # @message = Message.new(message_params)
         if @workarea.messages.create!(message_params) 
             @message = @workarea.messages.last 
-            render :show 
+            WorkareaChannel.broadcast_to(@workarea, 
+            from_template('api/messages/show', message: @message))
+            render json: nil, status: :ok 
+
             return 
         end 
         render json: { erorr: ["Failed to create message"] }, status: :unauthorized
