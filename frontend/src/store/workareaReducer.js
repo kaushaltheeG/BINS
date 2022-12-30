@@ -2,6 +2,7 @@ import csrfFetch from "./csrf";
 
 export const RETRIEVE_WORKAREAS = 'workareas/getWorkareas';
 export const SET_CURRENT_WORKAREA = 'workareas/setWorkarea';
+export const CREATE_WORKAREA = 'workareas/createWorkarea'
 
 export const getCurrentWorkAreaMessage = (state) => {
     if (!Object.keys(state.workarea.currentWorkarea).length) return [];
@@ -24,6 +25,31 @@ export const setCurrentWorkarea = (currentWorkarea) => {
         type: SET_CURRENT_WORKAREA,
         currentWorkarea
     }
+}
+
+export const newWorkArea = (workarea) => {
+    return {
+        type: CREATE_WORKAREA,
+        workarea
+    }
+}
+
+export  const createWorkarea = ({name, user_id}) => async dispatch => {
+    const res = await csrfFetch(`/api/users/${user_id}/workareas`, {
+        method: 'POST',
+        body: JSON.stringify({
+            name
+        })
+    });
+
+    if (res.ok) {
+        const workarea = await res.json();
+        dispatch(newWorkArea(workarea));
+        return workarea
+    }
+    console.log('cannot create new workarea');
+    return 
+
 }
 
 export const fetchWorkareas = () => async dispatch => {

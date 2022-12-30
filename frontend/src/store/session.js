@@ -1,4 +1,5 @@
 import csrfFetch, { storeCSRFToken } from './csrf';
+import { CREATE_WORKAREA } from './workareaReducer';
 
 const SET_CURRENT_USER = 'session/setCurrentUser';
 const REMOVE_CURRENT_USER = 'session/removeCurrentUser';
@@ -83,6 +84,10 @@ const sessionReducer = (state = initialState, action) => {
             return { ...state, user: action.payload };
         case REMOVE_CURRENT_USER:
             return { ...state, user: null };
+        case CREATE_WORKAREA:
+            const nextState = {...state};
+            nextState.user.memberships.workareas[action.workarea.id] = action.workarea;
+            return nextState
         default:
             return state;
     }
