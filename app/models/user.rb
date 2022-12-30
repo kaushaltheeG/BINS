@@ -21,11 +21,16 @@ class User < ApplicationRecord
 
    before_validation :ensure_session_token 
 
-    has_many :owned_workareas, 
-      foreign_key: :owner_id,
-      class_name: :Workarea,
-      dependent: :destroy 
-
+   has_many :owned_workareas, 
+   foreign_key: :owner_id,
+   class_name: :Workarea,
+   dependent: :destroy 
+   
+   has_many :pods_as_admin,
+     foreign_key: :admin_id,
+     class_name: :Pod,
+     dependent: :destroy 
+   
     has_many :messages, 
       foreign_key: :author_id,
       class_name: :Message,
@@ -47,6 +52,11 @@ class User < ApplicationRecord
       through: :memberships,
       source: :membershipable,
       source_type: 'Workarea'
+
+    has_many :pods, 
+      through: :memberships,
+      source: :membershipable,
+      source_type: 'Pod'
 
 
     #S.P.I.R.E, has_secure_password gives us a password=

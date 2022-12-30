@@ -18,13 +18,18 @@ class Workarea < ApplicationRecord
         foreign_key: :owner_id,
         class_name: :User 
 
+    has_many :pods, 
+        foreign_key: :workarea_id,
+        class_name: :Pod,
+        dependent: :destroy
+
     has_many :memberships, 
         as: :membershipable,
         dependent: :destroy
 
-    has_many :messages, #this association with be removed and added into pods, direct_mssages, and group_chat 
-        as: :messageable, 
-        dependent: :destroy 
+    # has_many :messages, #this association with be removed and added into pods, direct_mssages, and group_chat 
+    #     as: :messageable, 
+    #     dependent: :destroy 
 
 
     has_many :members, 

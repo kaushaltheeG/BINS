@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_27_012536) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_30_215128) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,7 +20,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_27_012536) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "membershipable_type"
-    t.bigint "membershipable_id" 
+    t.bigint "membershipable_id"
     t.index ["membershipable_type", "membershipable_id"], name: "membershipable_id_and_membershipable_type"
   end
 
@@ -33,6 +33,20 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_27_012536) do
     t.bigint "messageable_id"
     t.index ["author_id"], name: "index_messages_on_author_id"
     t.index ["messageable_type", "messageable_id"], name: "messageable_id_and_messageable_type"
+  end
+
+  create_table "pods", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "description", null: false
+    t.bigint "workarea_id", null: false
+    t.bigint "admin_id", null: false
+    t.boolean "private", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["admin_id"], name: "index_pods_on_admin_id"
+    t.index ["name"], name: "index_pods_on_name"
+    t.index ["workarea_id", "name"], name: "index_pods_on_workarea_id_and_name", unique: true
+    t.index ["workarea_id"], name: "index_pods_on_workarea_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -57,5 +71,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_27_012536) do
 
   add_foreign_key "memberships", "users"
   add_foreign_key "messages", "users", column: "author_id"
+  add_foreign_key "pods", "users", column: "admin_id"
+  add_foreign_key "pods", "workareas"
   add_foreign_key "workareas", "users", column: "owner_id"
 end
