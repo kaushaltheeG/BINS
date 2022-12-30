@@ -6,34 +6,13 @@ import { createWorkarea } from '../../../../store/workareaReducer';
 import './CreateWorkAreaForm.css'
 
 const CreateWorkArea = () => {
-    // const [Modal, open, close, isOpen] = useModal('root', {
-    //     preventScroll: true,
-    //     focusTrapOptions: {
-    //         clickOutsideDeactivates: true
-    //     },
-    //     components: {
-    //         Overlay: () => {
-    //             return (
-    //                 <div
-    //                     style={{
-    //                         position: 'fixed',
-    //                         top: 0,
-    //                         left: 0,
-    //                         bottom: 0,
-    //                         right: 0,
-    //                         backgroundColor: 'rgba(0, 0, 0, 0)',
-    //                     }}
-    //                 />  
-    //             );
-    //         }
-    //     }
-        
-    // })
+
     const [open, setOpen] = useState(false)
     const [name, setName] = useState('');
     const [sent, setSent] = useState(false);
     const user = useSelector(state => state.session.user)
-    const lastWa = Object.values(user.memberships.workareas).pop();
+    const lastWa = useSelector(state => Object.values(state.session.user.memberships.workareas).pop());
+    // const lastWa = Object.values(user.memberships.workareas).pop();
     // console.log(Object.values(user.memberships.workareas))
     const dispatch = useDispatch();
     const history = useHistory();
@@ -59,9 +38,10 @@ const CreateWorkArea = () => {
                 user_id: user.id
             }
             dispatch(createWorkarea(data))
-            setSent(!sent);
-            console.log(sent)
-            return
+            // .then(() => history.push(`/client/workareas/${lastWa.id}`))
+            // console.log(sent)
+            // setSent(!sent)
+            return 
         }
         console.log('Unable to create or toggle work area viz form')
     }
@@ -72,7 +52,7 @@ const CreateWorkArea = () => {
             history.push(`/client/workareas/${lastWa.id}`)
         }
         setSent(false)
-    },[sent])
+    },[sent, lastWa])
 
     const openForm = (e) => {
        e.preventDefault()
@@ -81,7 +61,6 @@ const CreateWorkArea = () => {
 
     const handleChange = (e) => {
         e.stopPropagation()
-        console.log(e)
         setName(e.target.value)
     }
 
@@ -107,25 +86,6 @@ const CreateWorkArea = () => {
                     </div>
                 </form>
             }
-
-                {/* <Modal >
-                    <div className="wa-form-container">
-                        <form action="" onSubmit={e => e.preventDefault()} className="wa-form-inner-container">
-                            <div className="create-input-container" >
-                                <input type="text" placeholder='Enter Name'  value={name}className="create-input" onChange={e => setName(e.target.value)}/>
-                            </div>
-                            <div className="create-wa-buttons">
-                                <div className='create-wa-btn btn-spacing'>
-                                    <p className='btn-style' onClick={handleCreate}>Create</p>
-                                </div>
-                                <div className="create-and-switch-btn btn-spacing">
-                                    <p className='btn-style' onClick={handleCreateThenSwitch}>Create & Switch</p>
-                                </div>
-
-                            </div>
-                        </form>
-                    </div>
-                </Modal> */}
 
            
         </div>

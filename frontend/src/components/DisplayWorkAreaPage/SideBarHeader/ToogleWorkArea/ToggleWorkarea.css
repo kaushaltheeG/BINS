@@ -1,0 +1,22 @@
+.toggleContainer {
+    /* background-color: aquamarine; */
+    height: 150px;
+    overflow-y: auto;
+    overflow-x: none;
+    /* width:min-content; */
+    display: flex;
+    flex-direction: column;
+}
+
+.wa-toggle-name {
+    padding: 15px 10px;
+    border: none;
+    color: rgb(116, 42, 185);
+    font-weight: 500;
+}
+
+.wa-toggle-name:hover{
+    cursor: pointer;
+    background-color: rgb(116, 42, 185);
+    color: white;
+}

@@ -50,7 +50,8 @@ export  const createWorkarea = ({name, user_id}) => async dispatch => {
         const user = await res2.json();
         dispatch(newWorkArea(workarea));
         dispatch(getNewMembership(user))
-        return [workarea, user]
+        return workarea;
+
     }
     console.log('cannot create new workarea');
     return 
