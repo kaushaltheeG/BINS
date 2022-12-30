@@ -3,6 +3,7 @@ import { CREATE_WORKAREA } from './workareaReducer';
 
 const SET_CURRENT_USER = 'session/setCurrentUser';
 const REMOVE_CURRENT_USER = 'session/removeCurrentUser';
+const GET_NEW_MEMBERSHIP = 'session/newSessionShow';
 
 
 const setCurrentUser = (user) => {
@@ -17,6 +18,13 @@ const removeCurrentUser = () => {
         type: REMOVE_CURRENT_USER
     };
 };
+
+export const getNewMembership = (user) => {
+    return {
+        type: GET_NEW_MEMBERSHIP,
+        user
+    }
+}
 
 
 const storeCurrentUser = user => {
@@ -38,6 +46,8 @@ export const login = ({email, password}) => async (dispatch) => {
     dispatch(setCurrentUser(data.user));
     return response;
 };
+
+
 
 export const logout = () => async (dispatch) => {
     const response = await csrfFetch('/api/session', {
@@ -74,20 +84,30 @@ export const restoreSession = () => async dispatch => {
     return response;
 };
 
+export const retriveNewMembership = () => async dispatch => {
+    const res = await csrfFetch(`/api/session`);
+    if (res.ok) {
+        const user = await res.json();
+        dispatch(getNewMembership(user))
+        return user 
+    }
+    console.log('Could not get new Memberships')
+}
+
 const initialState = {
     user: JSON.parse(sessionStorage.getItem("currentUser"))
 };
 
 const sessionReducer = (state = initialState, action) => {
+    const nextState = {...state};
     switch (action.type) {
         case SET_CURRENT_USER:
             return { ...state, user: action.payload };
         case REMOVE_CURRENT_USER:
             return { ...state, user: null };
-        case CREATE_WORKAREA:
-            const nextState = {...state};
-            nextState.user.memberships.workareas[action.workarea.id] = action.workarea;
-            return nextState
+        case GET_NEW_MEMBERSHIP:
+            // nextState
+            return {...state, ...action.user}
         default:
             return state;
     }

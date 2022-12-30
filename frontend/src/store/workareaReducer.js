@@ -1,4 +1,5 @@
 import csrfFetch from "./csrf";
+import { getNewMembership } from "./session"
 
 export const RETRIEVE_WORKAREAS = 'workareas/getWorkareas';
 export const SET_CURRENT_WORKAREA = 'workareas/setWorkarea';
@@ -42,10 +43,14 @@ export  const createWorkarea = ({name, user_id}) => async dispatch => {
         })
     });
 
+    const res2 = await csrfFetch(`/api/session`);
+    
     if (res.ok) {
         const workarea = await res.json();
+        const user = await res2.json();
         dispatch(newWorkArea(workarea));
-        return workarea
+        dispatch(getNewMembership(user))
+        return [workarea, user]
     }
     console.log('cannot create new workarea');
     return 
@@ -91,6 +96,9 @@ const workareaReducer = (state=null, action ) => {
         case SET_CURRENT_WORKAREA:
             nextState.currentWorkarea = action.currentWorkarea
             return nextState;
+        case CREATE_WORKAREA:
+            nextState.allWorkareas = [...nextState.allWorkareas, action.workarea]
+            return nextState
         default: 
             return state;
     }
