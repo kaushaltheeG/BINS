@@ -30,8 +30,8 @@
 
 .create-input {
     border: none;
-    background-color: rgba(0, 0, 0, 0.3);
-    color: white;
+    background-color: rgba(97, 95, 95, 0.3);
+    color: rgb(98, 2, 103);
     
     padding: 3px 5px;
         /* margin: 8px 0; */
@@ -48,7 +48,7 @@
 
 .btn-style {
     font-size:larger;
-    color: rgb(250, 250, 250);
+    color: rgb(64, 61, 61);
 }
 
 .btn-style:hover {

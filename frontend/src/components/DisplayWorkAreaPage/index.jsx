@@ -7,6 +7,7 @@ import "./DisplayWorkArea.css"
 import MessageInput from "./MessageInput";
 import MessageList from "./MessageList";
 import SideBarHeader from "./SideBarHeader";
+import { retriveNewMembership } from '../../store/session'
 
 
 const DisplayWorkAreaPage = () => {
@@ -19,7 +20,7 @@ const DisplayWorkAreaPage = () => {
     // console.log(workarea)
 
     useEffect(() => {
-
+        dispatch(retriveNewMembership())
         dispatch(fetchWorkarea(workareaId))
 
     }, [dispatch, workareaId])
