@@ -8,26 +8,25 @@ import LeaveWorkArea from "./LeaveWorkArea";
 
 
 const SideBarHeader = ({ workarea }) => {
-    const anchor = useRef(null);
     const [Modal, open, close, isOpen] = useModal('root', {
         preventScroll: true, 
         focusTrapOptions: {
             clickOutsideDeactivates: true
         }
     })
-    // ref = { anchor }
+    
 
     return (
         <div className='sideHeaderContainer'>
             
             <div className="side-bar-wa-name">
-                <div className="horizontal-name-and-down-icon" onClick={open} ref={anchor}>
+                <div className="horizontal-name-and-down-icon" onClick={open} >
                     <span id="side-bar-header-name" >{workarea.name} 
                         <i className="fa fa-sort-desc" aria-hidden="true"></i>
                     </span>
                     <i className="fa fa-sort-desc" aria-hidden="true"></i>
                 </div>
-                <Modal ref={anchor}>
+                <Modal >
                     <div className="header-name-modal-container">
                         <WorkAreaProfile  workarea={workarea}/>
                         <div className="line-separator-modal">
