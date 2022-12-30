@@ -16,17 +16,20 @@ const CreateWorkArea = () => {
     // console.log(Object.values(user.memberships.workareas))
     const dispatch = useDispatch();
     const history = useHistory();
-
+    const [errors, setErrors] = useState([])
     const handleCreate = (e) => {
         e.preventDefault();
+        setErrors([])
         if (name) {
             const data = {
                 name,
                 user_id: user.id
             }
+            
             dispatch(createWorkarea(data))
-            return 
+               
         }
+        setErrors(["Work Area name must include characters"])
         console.log('Unable to create work area viz form')
     }
 
@@ -37,12 +40,16 @@ const CreateWorkArea = () => {
                 name,
                 user_id: user.id
             }
-            dispatch(createWorkarea(data))
+            return dispatch(createWorkarea(data)).then(() => {
+                setSent(!sent)
+            })
+                
             // .then(() => history.push(`/client/workareas/${lastWa.id}`))
             // console.log(sent)
             // setSent(!sent)
             return 
         }
+        // setErrors(["Work Area name must include characters"])
         console.log('Unable to create or toggle work area viz form')
     }
 
@@ -74,6 +81,9 @@ const CreateWorkArea = () => {
                 <form action="" onSubmit={e => e.preventDefault()} onClick={e => e.stopPropagation()}className="wa-form-inner-container">
                     <div className="create-input-container" >
                         <input type="text" placeholder='Enter Name' value={name} className="create-input" onChange={handleChange } />
+                        {errors?.map((error)=> (
+                            <p className='form-error'>{error}</p>
+                        ))}
                     </div>
                     <div className="create-wa-buttons">
                         <div className='create-wa-btn btn-spacing'>
