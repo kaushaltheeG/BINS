@@ -60,7 +60,7 @@ const workareaReducer = (state=null, action ) => {
     const nextState = {...state}
     switch(action.type) {
         case RETRIEVE_WORKAREAS:
-            nextState.allWorkareas = Object.values(action.workareas);
+            nextState.allWorkareas = action.workareas;
             return nextState
         case SET_CURRENT_WORKAREA:
             nextState.currentWorkarea = action.currentWorkarea
