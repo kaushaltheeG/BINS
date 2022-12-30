@@ -7,7 +7,6 @@ const LeaveWorkArea = ({name}) => {
     const history = useHistory();
 
     const handleClick = (e) => {
-        console.log(e)
         e.preventDefault();
         setOpen(!open)
     }
