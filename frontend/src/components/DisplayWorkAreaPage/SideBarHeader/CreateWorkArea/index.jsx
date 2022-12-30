@@ -3,17 +3,15 @@ import { useModal } from 'react-hooks-use-modal';
 import {useDispatch, useSelector} from 'react-redux';
 import {useHistory} from 'react-router-dom';
 import { createWorkarea } from '../../../../store/workareaReducer';
+
 import './CreateWorkAreaForm.css'
 
 const CreateWorkArea = () => {
 
     const [open, setOpen] = useState(false)
     const [name, setName] = useState('');
-    const [sent, setSent] = useState(false);
     const user = useSelector(state => state.session.user)
-    const lastWa = useSelector(state => Object.values(state.session.user.memberships.workareas).pop());
-    // const lastWa = Object.values(user.memberships.workareas).pop();
-    // console.log(Object.values(user.memberships.workareas))
+
     const dispatch = useDispatch();
     const history = useHistory();
     const [errors, setErrors] = useState([])
@@ -25,9 +23,7 @@ const CreateWorkArea = () => {
                 name,
                 user_id: user.id
             }
-            
             dispatch(createWorkarea(data))
-               
         }
         setErrors(["Work Area name must include characters"])
         console.log('Unable to create work area viz form')
@@ -40,27 +36,15 @@ const CreateWorkArea = () => {
                 name,
                 user_id: user.id
             }
-            return dispatch(createWorkarea(data)).then(() => {
-                setSent(!sent)
+            dispatch(createWorkarea(data)).then( res => {
+                history.push(`/client/workareas/${res.id}`)
             })
-                
-            // .then(() => history.push(`/client/workareas/${lastWa.id}`))
-            // console.log(sent)
-            // setSent(!sent)
             return 
         }
-        // setErrors(["Work Area name must include characters"])
-        console.log('Unable to create or toggle work area viz form')
+        setErrors(["Work Area name must include characters"])
     }
 
-    useEffect(() => {
-        if (sent) {
-            console.log('last workarea', lastWa)
-            history.push(`/client/workareas/${lastWa.id}`)
-        }
-        setSent(false)
-    },[sent, lastWa])
-
+   
     const openForm = (e) => {
        e.preventDefault()
        setOpen(!open)
@@ -96,8 +80,6 @@ const CreateWorkArea = () => {
                     </div>
                 </form>
             }
-
-           
         </div>
     )
 }
