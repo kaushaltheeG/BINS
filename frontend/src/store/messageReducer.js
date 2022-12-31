@@ -27,9 +27,9 @@ export const receiveMessage = (message) => {
     }
 }
 
-export const fetchMessages = (workareaId) => async dispatch => {
+export const fetchMessages = (workareaId, podId) => async dispatch => {
     console.log(workareaId)
-    const res = await csrfFetch(`/api/workareas/${workareaId}/messages`);
+    const res = await csrfFetch(`/api/workareas/${workareaId}/pods/${podId}/messages`);
 
     if (res.ok) {
         const messages = await res.json();
