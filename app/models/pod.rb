@@ -12,15 +12,15 @@
 #  updated_at  :datetime         not null
 #
 class Pod < ApplicationRecord
-    validates :name, :presence: true, uniqueness: {scope: :workarea_id}
+    validates :name, presence: true, uniqueness: {scope: :workarea_id}
     validates :description, presence: true, allow_blank: true 
     validates :private, inclusion: { in: [true, false]}
 
     belongs_to :admin,
-        foreign_key: :admin_id 
+        foreign_key: :admin_id,
         class_name: :User 
 
-    blongs_to :workarea,
+    belongs_to :workarea,
         foreign_key: :workarea_id,
         class_name: :Workarea
 
@@ -31,7 +31,7 @@ class Pod < ApplicationRecord
     has_many :members, 
         through: :memberships,
         source: :user 
-        
+
     has_many :messages, #this association with be removed and added into pods, direct_mssages, and group_chat 
         as: :messageable, 
         dependent: :destroy 

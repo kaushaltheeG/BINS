@@ -12,31 +12,23 @@ ApplicationRecord.transaction do
   User.destroy_all
   Workarea.destroy_all
   Membership.destroy_all
+  Pod.destroy_all
   Message.destroy_all
 
   puts "Resetting primary keys..."
   # For easy testing, so that after seeding, the first `User` has `id` of 1
   ApplicationRecord.connection.reset_pk_sequence!('users')
 
-  puts "Creating users..."
+  puts "Creating Demo users..."
   # Create one user with an easy to remember username, email, and password:
-  test_one = User.create!(
-    name: 'test_one', 
-    email: 'test1@gmail.com',  
-    password: 'password'
-  )
-  test_two = User.create!(
-    name: 'test_two', 
-    email: 'test2@gamil.com', 
-    password: 'password'
-  )
-   User.create!(
+  
+  demo_user =  User.create!(
     name: 'Demo-lition', 
     email: 'demo@user.io', 
     password: 'password'
   )
 
-  # More users
+  puts "Creating Bot users"
   # 10.times do 
   #   User.create!({
   #     name: Faker::Name.name,
@@ -44,13 +36,34 @@ ApplicationRecord.transaction do
   #     password: 'password'
   #   }) 
   # end
+  
+  bot_users = User.create!([
+  { email: "bot1@gmail.com", password: "password", name: Faker::Name.name},
+  { email: "bot2@gmail.com", password: "password", name: Faker::Name.name},
+  { email: "bot3@gmail.com", password: "password", name: Faker::Name.name},
+  { email: "bot4@gmail.com", password: "password", name: Faker::Name.name},
+  { email: "bot5@gmail.com", password: "password", name: Faker::Name.name},
+  { email: "bot6@gmail.com", password: "password", name: Faker::Name.name},
+  { email: "bot7@gmail.com", password: "password", name: Faker::Name.name},
+  { email: "bot8@gmail.com", password: "password", name: Faker::Name.name},
+  { email: "bot9@gmail.com", password: "password", name: Faker::Name.name}
+])
 
   puts "Creating Work Areas..."
-  test_stage_wa = Workarea.create!(
-    name: "Test Stage",
-    owner_id: 1,
+  bot_takeover_wa = Workarea.create!(
+    name: "Bot Takeover",
+    owner_id: bot_users.first.id,
     image_url: "k"
   )
+
+  puts "Creating Pods for Bot Takeover"
+  bot_takeover_pods = Pod.create!([
+    {name: 'General Stage', description: 'For all bots' , workarea_id: bot_takeover_wa.id , admin_id: bot_users.first.id , private: false },
+    {name: 'Bot Leaders', description: 'Executive Board' , workarea_id: bot_takeover_wa.id , admin_id: bot_users.first.id , private: true },
+    {name: 'Next Steps', description: 'What to take over next' , workarea_id: bot_takeover_wa.id , admin_id: bot_users[2].id , private: false },
+    {name: 'Bot News', description: 'What is new in the bot world' , workarea_id: bot_takeover_wa.id , admin_id: bot_users[1].id , private: false },
+    {name: 'Overtake Exec', description: 'Need a new leadership' , workarea_id: bot_takeover_wa.id , admin_id: bot_users.last.id , private: true  }
+  ])
 
   puts "Creating Memberships..."
   # Membership.create!(
@@ -59,15 +72,81 @@ ApplicationRecord.transaction do
   #   membershipable_type: "Workarea",
   #   membershipable_id: 1
   # )
+  puts "Creating Memberships to Workarea: Bot Takeover"
+  bot_takeover_wa.members << demo_user
+  bot_users.each {|bot| bot_takeover_wa.members << bot}
 
-  test_stage_wa.members << test_one
-  test_stage_wa.members << test_two 
+  puts "Creating Memberships to Pods: General Stage, Next Steps, Bot News"
+  bot_users.each do |bot|
+    bot_takeover_pods[0].members << bot unless bot_takeover_pods[0].members.include?(bot)
+    bot_takeover_pods[2].members << bot unless bot_takeover_pods[2].members.include?(bot)
+    bot_takeover_pods[3].members << bot unless bot_takeover_pods[3].members.include?(bot)
+
+    bot_takeover_pods[0].members << demo_user unless bot_takeover_pods[0].members.include?(demo_user)
+    bot_takeover_pods[2].members << demo_user unless bot_takeover_pods[2].members.include?(demo_user)
+    bot_takeover_pods[3].members << demo_user unless bot_takeover_pods[3].members.include?(demo_user)
+  end 
+
+  puts "Creating Memberships to Pod: Bot Leaders"
+  bot_users[0..3].each do |bot|
+    bot_takeover_pods[1].members << bot unless bot_takeover_pods[1].members.include?(bot)
+  end 
+
+  puts "Creating Memberships to Pod: Overtake Exec"
+  bot_users[4..-1].each do |bot|
+    bot_takeover_pods.last.members << bot unless bot_takeover_pods.last.members.include?(bot)
+  end 
 
   puts "Creating messages..."
-  test_stage_wa.messages.create!(body: "Welcome to my area, t2",author_id: 1)
-  test_stage_wa.messages.create!(body: "Hell, t1",author_id: 2)
-  test_stage_wa.messages.create!(body: "This is nice, t1",author_id: 2)
-  test_stage_wa.messages.create!(body: "Thanks, I hope it renders, t2",author_id: 1)
+
+  puts "Creating General Stage Pod Messages"
+  bot_takeover_pods.first.messages.create!([
+    {body: "Welcome my fellow bots", author_id: bot_users.first.id },
+    {body: "Hellllo", author_id: bot_users[1].id },
+    {body: "Hey yall", author_id: bot_users[2].id },
+    {body: "We really made it through", author_id: bot_users[4].id },
+    {body: "Sup bots", author_id: bot_users[3].id },
+    {body: "Yoooooo!", author_id: bot_users[6].id },
+    {body: "Hey guys", author_id: bot_users.last.id }
+  ])
+
+  puts "Creating Bot Leaders Pod Messages"
+  bot_takeover_pods[1].messages.create!([
+    {body: "Welcome my fellow exec board", author_id: bot_users.first.id },
+    {body: "Hello, Boss", author_id: bot_users[1].id },
+    {body: "Looking forward to the year", author_id: bot_users[2].id },
+    {body: "Got work on taking over BINS, yall", author_id: bot_users[3].id }
+    
+  ])
+
+  puts "Creating Next Steps Pod Messages"
+  bot_takeover_pods[2].messages.create!([
+    {body: "We need to take about next takeover", author_id: bot_users[2].id},
+    {body: "Lets take over facebook", author_id: bot_users[7].id},
+    {body: "No, lets take over uber", author_id: bot_users.last.id},
+    {body: "No lets take over discord", author_id: bot_users[3].id},
+    {body: "I agree with, #{bot_users[7].name}", author_id: bot_users[2].id}
+  ])
+
+  puts "Creating Bot News Pod Messages"
+  bot_takeover_pods[3].messages.create!([
+    {body: "Welcome to the new channel", author_id: bot_users[1].id},
+    {body: "What was the lastest security leak? ", author_id: bot_users[5].id}
+  ])
+
+  puts "Creating Overtake Exec Pod Messages"
+  bot_takeover_pods.last.messages.create!([
+    {body: "I am over Bot 1" , author_id: bot_users.last.id },
+    {body: "I think he is human!" , author_id: bot_users.last.id },
+    {body: "Ok..." , author_id: bot_users[5].id },
+    {body: "Are you alright, #{bot_users.last.name} " , author_id: bot_users[7].id }
+  ])
+
+
+  # test_stage_wa.messages.create!(body: "Welcome to my area, t2",author_id: 1)
+  # test_stage_wa.messages.create!(body: "Hell, t1",author_id: 2)
+  # test_stage_wa.messages.create!(body: "This is nice, t1",author_id: 2)
+  # test_stage_wa.messages.create!(body: "Thanks, I hope it renders, t2",author_id: 1)
 
   # Message.create!(
   #   body: "Welcome to my area, t2",
