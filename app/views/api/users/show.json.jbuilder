@@ -8,5 +8,12 @@ json.user do
                 end 
             end
         end
+        json.pods do 
+            @user.pods.each do |pod| 
+                json.set! pod.id do 
+                    json.extract! pod, :id, :name, :workarea_id, :admin_id, :created_at
+                end 
+            end 
+        end 
     end 
 end 
