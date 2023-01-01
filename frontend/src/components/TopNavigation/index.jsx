@@ -43,7 +43,7 @@ const TopNavigation = () => {
 
 
     let sessionLinks;
-    if (sessionUser && location.pathname === `/client/workareas/${currentWorkarea.id}/pods/`) {
+    if (sessionUser && location.pathname !== '/client/workareas') {
         sessionLinks = (
             <>
                 <div className='inside-workarea'>
