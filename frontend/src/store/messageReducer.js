@@ -40,8 +40,8 @@ export const fetchMessages = (workareaId, podId) => async dispatch => {
     }
 }
 
-export const createMessage =  (payload, workareaId) => {
-    csrfFetch(`/api/workareas/${workareaId}/messages`, {
+export const createMessage =  (payload, workareaId, podId) => {
+    csrfFetch(`/api/workareas/${workareaId}/pods/${podId}/messages`, {
         method: 'POST',
         body: JSON.stringify(payload)
     });

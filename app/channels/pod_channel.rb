@@ -1,9 +1,10 @@
 class PodChannel < ApplicationCable::Channel 
 
     def subscribed
-        # @workarea = Workarea.find_by(id: params[:id])
-        # @pod = @workarea.pods.find_by(id: params[:id]);
-        # stream_for @pod
+        p params
+        @workarea = Workarea.find_by(id: params[:workareaId])
+        @pod = @workarea.pods.find_by(id: params[:podId]);
+        stream_for @pod
     end 
 
     

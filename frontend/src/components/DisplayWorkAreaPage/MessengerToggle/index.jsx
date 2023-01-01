@@ -15,7 +15,7 @@ const MessengerToggle = () => {
     const pods = useSelector(state => state.pods);
     const dispatch = useDispatch();
     const { workareaId, podId } = useParams();
-    const currentPod = pods.pods[parseInt(podId)]
+    const currentPod = Object.keys(pods).length ? pods.pods[parseInt(podId)] : null;
     const [showPods, setShowPods] = useState(true);
     useEffect(()=> {
         dispatch(fetchUserPods(workareaId))

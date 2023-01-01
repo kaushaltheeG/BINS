@@ -38,7 +38,7 @@ const MessageList = () => {
     useEffect(()=> {
 
         const subscription = consumer.subscriptions.create(
-            {channel: 'WorkareaChannel', id: workareaId},
+            {channel: 'PodChannel', workareaId: workareaId, podId: podId},
             {
                 connected: () => {
                     console.log('connected to work area')
@@ -52,7 +52,7 @@ const MessageList = () => {
         )
 
         return () => subscription?.unsubscribe();
-    }, [dispatch, workareaId])
+    }, [dispatch, workareaId, podId])
 
     return (
         <>

@@ -7,7 +7,7 @@ const MessageInput = () => {
     const [body, setBody] = useState('');
     const currentUser = useSelector(state => state.session.user);
     const dispatch = useDispatch();
-    const { workareaId } = useParams();
+    const { workareaId, podId } = useParams();
 
 
     const handleSubmit = e => {
@@ -16,7 +16,7 @@ const MessageInput = () => {
             body,
             author_id: currentUser.id,
         }
-        createMessage(message, workareaId)
+        createMessage(message, workareaId, podId)
         setBody('')
     }
 
