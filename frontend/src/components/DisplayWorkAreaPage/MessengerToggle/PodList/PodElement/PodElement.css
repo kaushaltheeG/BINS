@@ -1,0 +1,25 @@
+.pod-span-ele-active {
+    background-color: #1164A3;
+}
+.pod-element{
+    margin-right: 0;
+    opacity: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    top: 234px;
+    height: 28px;
+    width: 100%;
+    padding: 0 16px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+#pod-span-ele:hover {
+    cursor: pointer;
+}
+
+#lock-hash-icon{
+    height: 0.73em;
+}

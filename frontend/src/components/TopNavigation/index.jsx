@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import ProfileModal from './ProfileModal';
@@ -12,7 +12,6 @@ const TopNavigation = () => {
     const sessionUser = useSelector(state => state.session.user);
     const location = useLocation(); //might new a useEffect but do need since useSelectior will cause the render 
     const currentWorkarea = useSelector(state => state.workarea.currentWorkarea);
-
     const [showProfile, setShowProfile] = useState(false);
 
     const openProfile = () => {
@@ -44,7 +43,7 @@ const TopNavigation = () => {
 
 
     let sessionLinks;
-    if (sessionUser && location.pathname === `/client/workareas/${currentWorkarea.id}`) {
+    if (sessionUser && location.pathname === `/client/workareas/${currentWorkarea.id}/pods/`) {
         sessionLinks = (
             <>
                 <div className='inside-workarea'>

@@ -1,9 +1,49 @@
-
+import { useHistory, useParams } from "react-router-dom";
+import {useState, useEffect} from 'react';
+import "./PodElement.css"
+import TagIcon from '@mui/icons-material/Tag';
+import LockIcon from '@mui/icons-material/Lock';
 
 const PodElement = ({pod}) => {
-    const { name } = pod 
+    const { id, name } = pod 
+
+    const { workareaId, podId } = useParams();
+    const [selected, setSelected] = useState(false);
+    console.log(`private: ${pod.private}`)
+    useEffect(() => {
+        setSelected(true)
+    },[])
+    
+    const history = useHistory();
+    const handleSwitch = (e) => {
+        e.preventDefault();
+        history.push(`/client/workareas/${workareaId}/pods/${pod.id}`)
+    }
     return (
-        <p>{name}</p>
+        < > 
+            { id == podId && 
+                <div className="pod-element pod-span-ele-active"  >
+                    {pod.private && 
+                        <LockIcon id="lock-hash-icon" />
+                    }
+                    {!pod.private && 
+                        <TagIcon id="lock-hash-icon" />
+                    }
+                    <span onClick={handleSwitch} id="pod-span-ele">{name}</span>
+                </div>
+            }
+            { id != podId &&
+                <div className="pod-element" >
+                    {pod.private &&
+                        <LockIcon id="lock-hash-icon" />
+                    }
+                    {!pod.private &&
+                        <TagIcon id="lock-hash-icon" />
+                    }
+                    <span onClick={handleSwitch} id="pod-span-ele">{name}</span>
+                </div>
+            }
+        </ >
     )
 }
 

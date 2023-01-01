@@ -13,7 +13,7 @@ const PodList = ({pods}) => {
     return (
         <div className="pod-list">
             { podsArr?.map(pod => (
-                <PodElement pod={pod} />
+                <PodElement pod={pod} key={pod.id}/>
             )) 
 
             }
