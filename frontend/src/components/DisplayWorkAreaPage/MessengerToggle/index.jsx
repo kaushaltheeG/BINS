@@ -7,6 +7,7 @@ import './MessengerToggle.css'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import TagIcon from '@mui/icons-material/Tag';
 import LockIcon from '@mui/icons-material/Lock';
+import CreatePod from "./PodList/CreatePod";
 
 
 
@@ -15,7 +16,6 @@ const MessengerToggle = () => {
     const dispatch = useDispatch();
     const { workareaId, podId } = useParams();
     const currentPod = pods.pods[parseInt(podId)]
-    console.log('curr', currentPod)
     const [showPods, setShowPods] = useState(true);
     useEffect(()=> {
         dispatch(fetchUserPods(workareaId))
@@ -39,7 +39,10 @@ const MessengerToggle = () => {
                 <div id="pod-name-header">Pods</div>
             </div>
             {showPods && 
+             <>
                 <PodList pods={pods} /> 
+                <CreatePod />
+             </>
             } 
             {!showPods && 
                 <div className="pod-element pod-span-ele-active"  >

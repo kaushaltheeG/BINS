@@ -9,7 +9,6 @@ const PodElement = ({pod}) => {
 
     const { workareaId, podId } = useParams();
     const [selected, setSelected] = useState(false);
-    console.log(`private: ${pod.private}`)
     useEffect(() => {
         setSelected(true)
     },[])
