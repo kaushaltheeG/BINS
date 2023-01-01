@@ -5,13 +5,17 @@ import PodList from "./PodList"
 import { fetchUserPods } from "../../../store/podReducer";
 import './MessengerToggle.css'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import TagIcon from '@mui/icons-material/Tag';
+import LockIcon from '@mui/icons-material/Lock';
 
 
 
 const MessengerToggle = () => {
     const pods = useSelector(state => state.pods);
     const dispatch = useDispatch();
-    const { workareaId } = useParams();
+    const { workareaId, podId } = useParams();
+    const currentPod = pods.pods[parseInt(podId)]
+    console.log('curr', currentPod)
     const [showPods, setShowPods] = useState(true);
     useEffect(()=> {
         dispatch(fetchUserPods(workareaId))
@@ -36,7 +40,19 @@ const MessengerToggle = () => {
             </div>
             {showPods && 
                 <PodList pods={pods} /> 
+            } 
+            {!showPods && 
+                <div className="pod-element pod-span-ele-active"  >
+                    {currentPod.private &&
+                        <LockIcon id="lock-hash-icon" />
+                    }
+                    {!currentPod.private &&
+                        <TagIcon id="lock-hash-icon" />
+                    }
+                    <span id="pod-span-ele">{currentPod.name}</span>
+                </div>
             }
+            
         </div>
     )
 }
