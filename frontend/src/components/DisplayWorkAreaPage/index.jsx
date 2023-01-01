@@ -8,22 +8,23 @@ import MessageInput from "./MessageInput";
 import MessageList from "./MessageList";
 import SideBarHeader from "./SideBarHeader";
 import { retriveNewMembership } from '../../store/session'
+import MessengerToggle from "./MessengerToggle";
 
 
 const DisplayWorkAreaPage = () => {
-    const { workareaId } = useParams();
+    const { workareaId, podId } = useParams();
     /* if workareaId is NOT within the list of allWorkareas redirect to 404*/
-    console.log(workareaId)
     const workarea = useSelector(state => state.workarea.currentWorkarea);
     const sessionUser = useSelector(state => state.session.user)
     const dispatch = useDispatch();
-    // console.log(workarea)
+    console.log('workarea id')
+    console.log(workareaId, workarea)
 
     useEffect(() => {
         dispatch(retriveNewMembership())
         dispatch(fetchWorkarea(workareaId))
 
-    }, [dispatch, workareaId])
+    }, [dispatch, workareaId, podId])
 
     return (
         <>
@@ -32,7 +33,7 @@ const DisplayWorkAreaPage = () => {
                     <SideBarHeader workarea={workarea} />
                 </div>
                 <div className="grid-select-message-toggle side-bar">
-                    <h6>Message Toggle</h6>
+                    <MessengerToggle workarea={workarea} />
                 </div>
                 <div className="grid-current-messenger-name">
                     <p>Pod/DM/GC name</p>

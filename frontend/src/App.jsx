@@ -15,7 +15,7 @@ function App() {
         <Route path='/' exact>  
           {/* <h2>Welcome to BINS: Sign In or Sign Up</h2> */}
         </Route>
-        <Route path={`/client/workareas/:workareaId`} extact>
+        <Route path={`/client/workareas/:workareaId/pods/:podId`} extact>
           <DisplayWorkAreaPage />
         </Route>
         <Route path='/client/workareas' extact>

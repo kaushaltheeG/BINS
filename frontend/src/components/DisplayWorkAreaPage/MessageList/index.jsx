@@ -11,12 +11,15 @@ import "./MessageList.css"
 const MessageList = () => {
     const messages = useSelector(state => state.messages.currentLocation)
     console.log(messages)
-    const { workareaId } = useParams();
+    const { workareaId, podId } = useParams();
     const dispatch = useDispatch();
     const [counter, setCounter] = useState(0);
     const history = useHistory()
+    
 
     const msgRef = useRef(null);
+
+
 
 
     useEffect(()=> {
@@ -27,9 +30,9 @@ const MessageList = () => {
 
 
     useEffect(() => {
-        dispatch(fetchMessages(workareaId))
+        dispatch(fetchMessages(workareaId, podId))
         
-    }, [dispatch, workareaId])
+    }, [dispatch, workareaId, podId])
 
     //websocket connection 
     useEffect(()=> {

@@ -8,7 +8,7 @@ const WorkAreasListEle = ({workarea}) => {
 
     const handleClick = (e) => {
         e.preventDefault();
-        history.push(`/client/workareas/${workarea.id}`)
+        history.push(`/client/workareas/${workarea.id}/pods/1`)
     }
 
     return (

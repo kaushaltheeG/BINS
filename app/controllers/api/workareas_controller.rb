@@ -7,7 +7,7 @@ class Api::WorkareasController < ApplicationController
 
     def show 
         @workarea = Workarea.find_by(id: params[:id])
-
+        
         if @workarea
             render :show
             return 
