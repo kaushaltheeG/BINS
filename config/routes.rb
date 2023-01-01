@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json} do 
     resources :users, only: [:create] do 
       resources :workareas, only: [:create] 
+      # resources :pods, only: [:index, :create]
     end 
     resource :session, only: [:create, :show, :destroy]
     resources :workareas, only: [:index, :show] do 

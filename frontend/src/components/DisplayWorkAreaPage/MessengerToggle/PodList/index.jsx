@@ -1,14 +1,18 @@
 import PodElement from "./PodElement"
 
 
-const PodList = ({workarea}) => {
+const PodList = ({pods}) => {
     console.log('hit')
-    console.log('workarea', workarea)
-    let pods = !Object.keys(workarea).length ? null : Object.values(workarea.pods)
-    console.log('pods', pods)
+    console.log('workarea', pods)
+    let podsArr;
+    let podsLvl = Object.values(pods)
+    console.log('lvl', podsLvl);
+    if (!podsLvl.length) podsArr = null 
+    else  podsArr = Object.values(podsLvl.pop())
+    console.log('pods arr', podsArr)
     return (
         <div className="pod-list">
-            { pods?.map(pod => (
+            { podsArr?.map(pod => (
                 <PodElement pod={pod} />
             )) 
 

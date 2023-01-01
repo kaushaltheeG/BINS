@@ -5,6 +5,7 @@ import modalReducer from './modalReducer';
 import workareaReducer from './workareaReducer';
 import {entities} from './entities';
 import messageReducer from './messageReducer';
+import podReducer from './podReducer';
 
 
 let enhancer;
@@ -13,6 +14,7 @@ let enhancer;
 export const rootReducer = combineReducers({
     workarea: workareaReducer,
     messages: messageReducer,
+    pods: podReducer,
     session,
     errors: {},
     ui: {

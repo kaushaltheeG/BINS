@@ -15,6 +15,7 @@ const DisplayWorkAreaPage = () => {
     const { workareaId, podId } = useParams();
     /* if workareaId is NOT within the list of allWorkareas redirect to 404*/
     const workarea = useSelector(state => state.workarea.currentWorkarea);
+    const pods = useSelector(state => state.pods)
     const sessionUser = useSelector(state => state.session.user)
     const dispatch = useDispatch();
     console.log('workarea id')
@@ -23,8 +24,7 @@ const DisplayWorkAreaPage = () => {
     useEffect(() => {
         dispatch(retriveNewMembership())
         dispatch(fetchWorkarea(workareaId))
-
-    }, [dispatch, workareaId, podId])
+    }, [dispatch, workareaId])
 
     return (
         <>
@@ -33,7 +33,7 @@ const DisplayWorkAreaPage = () => {
                     <SideBarHeader workarea={workarea} />
                 </div>
                 <div className="grid-select-message-toggle side-bar">
-                    <MessengerToggle workarea={workarea} />
+                    <MessengerToggle  />
                 </div>
                 <div className="grid-current-messenger-name">
                     <p>Pod/DM/GC name</p>
