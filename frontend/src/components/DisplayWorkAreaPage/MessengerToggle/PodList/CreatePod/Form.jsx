@@ -2,10 +2,11 @@ import { useModal } from 'react-hooks-use-modal';
 import { useState, useRef, useEffect, useMemo } from 'react';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import "./CreatePod.css"
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getWorkareaMemebers } from '../../../../../store/workareaReducer';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { getCurrentUser } from '../../../../../store/session';
+import { createPod } from '../../../../../store/podReducer';
 
 
 const Form = () => {
@@ -13,7 +14,6 @@ const Form = () => {
 
     const waMembers = useSelector(getWorkareaMemebers)
     const currentUser = useSelector(getCurrentUser);
-    console.log('current', currentUser)
     const [openModal, setOpenModal] = useState(false);
     const wasOpenModal = useRef(false)
     const {workareaId, podId } = useParams()
@@ -21,7 +21,11 @@ const Form = () => {
     const [description, setDescription] = useState("");
     const [isPrivate, setIsPrivate] = useState(false)
     const [members, setMembers] = useState([]);
+    const [errors, setErrors] = useState([]);
     const [submit, setSubmit] = useState(false);
+    const dispatch = useDispatch();
+    const history = useHistory();
+
 
 
     const selectedPrivate = (e) => {
@@ -36,7 +40,6 @@ const Form = () => {
 
     const handlePodName = (e) => {
         e.preventDefault()
-        e.stopPropagation();
         setName(e.target.value)
     }
 
@@ -46,32 +49,36 @@ const Form = () => {
     }
 
     const handlePodMembers = (e) => {
-        e.stopPropagation();
-
         setMembers(oldArr => [...oldArr, e.target.value])
     }
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const pod = {
-            name, 
-            description, 
-            workareaId,
-            admin_id: currentUser.id,
-            private: isPrivate,
-            members: members
-        }        
-        console.log(pod)
-
-
-
-        // e.stopPropagation();
+        setErrors([])
+        if (name && description) {
+            let allMembers; 
+            
+            allMembers = (!isPrivate) ?  waMembers.map(mem => mem.id) : members
+            const pod = {
+                name, 
+                description, 
+                workareaId,
+                admin_id: currentUser.id,
+                private: isPrivate,
+                members: allMembers
+            }        
+            dispatch(createPod(pod)).then((pod) => (
+                history.push(`/client/workareas/${pod.workareaId}/pods/${pod.id}`)
+            ))
+            return 
+        } 
+        setErrors(["Name and Description are required"])
     }
 
     return (
         <form className="create-pod-form-container" onSubmit={handleSubmit}>
-            <div className="form-item-padding">
+            <div className="form-item-padding ">
                 <span id="create-pod-name">Create A Pod</span>
             </div>
             <div className="form-item-padding">
@@ -86,7 +93,7 @@ const Form = () => {
 
 
                 <div className="private-name-container" onClick={selectedPrivate}>
-                    <span>Private</span>
+                    <span className="hover">Private</span>
                 </div>
                 {isPrivate &&
 
@@ -97,7 +104,7 @@ const Form = () => {
                     <ArrowForwardIosIcon />
                 }
                 <div className="public-name-container " id="selected-pod-type" onClick={selectedPublic} >
-                    <span>Public</span>
+                    <span className="hover">Public</span>
                 </div>
 
 
@@ -105,15 +112,18 @@ const Form = () => {
             { isPrivate && 
                 <div className="form-item-padding user-selection-container">
                     {waMembers?.map(member => (
-                        <div className="user-name" key={member.id}>
-                            <input type="checkbox" id="member-name" value={member.id} onClick={handlePodMembers} />
-                            <label htmlFor="member-name">{member.name.slice(0, 8)}</label>
+                        <div className="user-name" key={member.id} value={member.id} >
+                            <input type="checkbox" id="member-name" className="remove-border " value={member.id} onClick={handlePodMembers} />
+                            <label htmlFor="member-name" id="member-name-lable" className="member-name-label" ><span>{member.name.slice(0, 8)}</span></label>
                         </div>
                     ))
                     }
                 </div>
             }
-            <button className="form-item-padding" onClick={handleSubmit}>Create Pod: </button>
+            <button className="form-item-padding create-pod-btn" onClick={handleSubmit}>Create Pod</button>
+            {errors?.map(error => (
+                <span className="form-item-padding form-error">{error}</span>
+            ))}
         </form>
     )
 

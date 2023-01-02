@@ -24,6 +24,7 @@ const CreateWorkArea = () => {
                 user_id: user.id
             }
             dispatch(createWorkarea(data))
+            return 
         }
         setErrors(["Work Area name must include characters"])
         console.log('Unable to create work area viz form')

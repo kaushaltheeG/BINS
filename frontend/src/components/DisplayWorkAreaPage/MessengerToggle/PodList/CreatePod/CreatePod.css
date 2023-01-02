@@ -51,8 +51,27 @@
     justify-content: space-evenly;
 }
 
+
+.hover{
+    cursor: pointer;
+}
+
+.create-pod-btn{
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgb(168, 100, 232);
+    margin-bottom: 5px;
+}
+
+.create-pod-btn:active{
+    box-shadow: 0 0 10px rgb(144, 113, 173);
+    color: #FFFF;
+    background-color: rgb(168, 100, 232);
+}
+
 .user-selection-container {
-    height: 100px;
+    height: 200px;
 }
 
 .user-selection-container{
@@ -69,13 +88,45 @@
 .user-name{
     display: flex;
     font-size: 10px;
-    width: 100px;
-    height: 50px;
+    width: 100%;
     text-align: center;
-    justify-content: space-between;
-    padding: 20px 10px;
+    justify-content: left;
+    padding: 0px 4px;
+    margin-top: 2px;
     text-align: center;
+    border-radius: 4px;
+    border: 1px solid rgb(146, 77, 152);
 }
+
+
+
+
+input.member-name-checked {
+    /* display: none; */
+}
+/* input.member-name-checked:checked {
+    
+    border: 1px solid rgb(51, 8, 46);
+    border-radius: 3px;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    position: relative;
+
+}
+.member-name-checked input[type="checkbox"]:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 12px;
+    height: 12px;
+    background-color: blue;
+    border-radius: 3px;
+    transition: 0.3s;
+} */
 
 #create-pod-name{
     font-size: x-large;
@@ -116,5 +167,16 @@
     color: rgb(125, 194, 102);
 }
 
+#member-name{
+    height: 50px;
+    /* display: none; */
+}
 
-
+#member-name-lable{
+    width: 100%;
+    text-align: left;
+    font-family: Slack-Lato, Slack-Fractions, appleLogo, sans-serif;
+    font-size: 15px;
+    margin-top: 14px;
+    padding: 0 4px;
+}

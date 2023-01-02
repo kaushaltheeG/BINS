@@ -50,6 +50,9 @@ const podReducer = (state={}, action) => {
     switch(action.type) {
         case GET_MEMBERSHIP_PODS:
             return {...state, ...action.pods.pods}
+
+        case CREATE_POD:
+            return {...state, [action.pod.id]: action.pod}
         default:
             return state;
     }
