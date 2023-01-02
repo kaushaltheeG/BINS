@@ -6,7 +6,7 @@
     left: 0;
     margin-top: 50px;
     margin-left: 200px;
-    width: 250px;
+    width: 300px;
     border-radius: 10px;
 }
 
@@ -22,6 +22,11 @@
     height: 100%;
     width: 100%;
     text-align: start;
+}
+
+.edit-form{
+    width: 100%;
+    height: 25px;
 }
 
 .pod-name-maybe-edit-and-delete{
