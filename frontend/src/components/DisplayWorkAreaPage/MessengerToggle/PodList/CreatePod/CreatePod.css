@@ -1,0 +1,120 @@
+.create-pod-form-container{
+    background-color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+    border-radius: 10px;
+}
+
+.form-item-padding{
+    /* width: 100%; */
+    padding: 10px 14px;
+    font-family: Slack-Lato, Slack-Fractions, appleLogo, sans-serif;
+}
+
+.create-input-style{
+    /* background-color: ; */
+    border: none;
+    background-color: rgb(177, 184, 190);
+    border-radius: 10px;
+        opacity: 0.5;
+}
+
+.create-input-style::placeholder{
+    color: rgb(51, 49, 49);
+    padding-left: 3px;
+}
+
+.create-input-style:focus{
+    /* outline: rgb(160, 79, 236); */
+    outline: none !important;
+        border: 1px solid rgb(160, 79, 236);
+        box-shadow: 0 0 10px rgb(168, 100, 232);
+}
+
+.description-container{
+    display: flex;
+    height: 100px;
+    width: 100%;
+}
+
+.description-child-container{
+    width: 100%;
+}
+
+.private-and-public-container {
+    font-size: 15px;
+    color: rgb(160, 79, 236);
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.user-selection-container {
+    height: 100px;
+}
+
+.user-selection-container{
+    display: flex;
+    width: 100%;
+    /* align-items: ; */
+    flex-direction: column;
+    align-items: center;
+    justify-content: left;
+    /* flex-wrap: wrap; */
+    overflow-y: auto;
+}
+
+.user-name{
+    display: flex;
+    font-size: 10px;
+    width: 100px;
+    height: 50px;
+    text-align: center;
+    justify-content: space-between;
+    padding: 20px 10px;
+    text-align: center;
+}
+
+#create-pod-name{
+    font-size: x-large;
+    font-size: bold;
+    color: rgb(160, 79, 236);
+}
+
+#description-style{
+    /* height: 10px; */
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+    word-break: break-all;
+    overflow-wrap: break-word;
+}
+
+#rotate-arrow-to-private{
+        transform: rotate(180deg) translateY(0);
+}
+
+#private {
+    display: none;
+}
+
+#private:checked + label{
+    /* text-decoration: underline; */
+    text-shadow: 0 0 10px rgb(160, 79, 236);
+    color: rgb(125, 194, 102);
+}
+
+#public {
+    display: none;
+}
+
+#public:checked+label {
+    /* text-decoration: underline; */
+    text-shadow: 0 0 10px rgb(160, 79, 236);
+    color: rgb(125, 194, 102);
+}
+
+
+

@@ -25,7 +25,7 @@ const MessageInput = () => {
         <div className="message-input">
         
             <div className="flex-msg-input">
-                <input 
+                <textarea 
                     type="text" id="msg-input-tag" 
                     placeholder="Message Pod Name"
                     value={body}

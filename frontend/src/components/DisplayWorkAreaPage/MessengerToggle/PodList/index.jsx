@@ -5,10 +5,10 @@ const PodList = ({pods}) => {
     console.log('hit')
     console.log('workarea', pods)
     let podsArr;
-    let podsLvl = Object.values(pods)
-    console.log('lvl', podsLvl);
-    if (!podsLvl.length) podsArr = null 
-    else  podsArr = Object.values(podsLvl.pop())
+   
+
+    if (!Object.keys(pods).length) podsArr = null;
+    else podsArr = Object.values(pods);
     console.log('pods arr', podsArr)
     return (
         <div className="pod-list">
