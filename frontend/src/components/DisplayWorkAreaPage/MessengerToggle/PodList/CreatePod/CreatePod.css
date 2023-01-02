@@ -1,5 +1,6 @@
 .create-pod-form-container{
-    background-color: aliceblue;
+    background-color: #FFFF;
+    border-color: #454245;;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -56,12 +57,18 @@
     cursor: pointer;
 }
 
+.member-name-label:checked{
+    color: #FFFF;
+    background-color: rgb(168, 100, 232);
+}
+
 .create-pod-btn{
     cursor: pointer;
     border: none;
     border-radius: 10px;
     box-shadow: 0 0 10px rgb(168, 100, 232);
     margin-bottom: 5px;
+    opacity: 0.75;
 }
 
 .create-pod-btn:active{
@@ -101,9 +108,7 @@
 
 
 
-input.member-name-checked {
-    /* display: none; */
-}
+
 /* input.member-name-checked:checked {
     
     border: 1px solid rgb(51, 8, 46);

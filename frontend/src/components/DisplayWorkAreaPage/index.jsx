@@ -9,6 +9,7 @@ import MessageList from "./MessageList";
 import SideBarHeader from "./SideBarHeader";
 import { retriveNewMembership } from '../../store/session'
 import MessengerToggle from "./MessengerToggle";
+import MessengerHeader from "./MessengerHeader";
 
 
 const DisplayWorkAreaPage = () => {
@@ -36,7 +37,7 @@ const DisplayWorkAreaPage = () => {
                     <MessengerToggle  />
                 </div>
                 <div className="grid-current-messenger-name">
-                    <p>Pod/DM/GC name</p>
+                    <MessengerHeader />
                 </div>
                 <div className="grid-message-control">
                     

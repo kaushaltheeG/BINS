@@ -1,0 +1,94 @@
+.messenger-main-header-container {
+        --saf-0: rgba(var(--sk_foreground_low, 29, 28, 29), 0.13);
+            align-items: center;
+            box-shadow: 0 1px 0 0 var(--saf-0);
+            display: flex;
+            flex-shrink: 0;
+            height: 49px;
+            padding: 0 16px 0 20px;
+            z-index: 3;
+}
+
+.messenger-test-info-container{
+    align-items: baseline;
+        display: flex;
+        font-size: 18px;
+        font-weight: 900;
+        line-height: 1.33334;
+
+    cursor: pointer;
+    /* justify-content: center; */
+        
+}
+
+.messenger-test-info-container {
+    align-items: baseline;
+        display: flex;
+        flex: 1 1 0;
+        min-width: 0;
+}
+
+.users-within-messenger{
+    align-items: center;
+        background: rgba(var(--sk_primary_background, 255, 255, 255), 1);
+        display: flex;
+        flex: 0 0 auto;
+        margin-left: auto;
+        z-index: 0;
+}
+
+.autoclog-messenger-header{
+    display: contents;
+}
+
+.profile-messenger-header-stack-container{
+    --saf-0: rgba(var(--sk_foreground_low_solid, 221, 221, 221), 1);
+        align-items: center;
+        border: 1px solid var(--saf-0);
+        border-radius: 5px;
+        display: flex;
+}
+
+.profile-messenger-header-inner-stack{
+    display: flex;
+    border-right: 1px solid rgba(var(--sk_foreground_low_solid, 221, 221, 221), 1);
+}
+
+.member-count{
+     box-shadow: none;
+     height: auto;
+      
+       
+    background-color: initial;
+        color: inherit;
+        font-size: 15px;
+        line-height: 22px;
+        padding: 0 5px 0 5px;
+        
+}
+
+.add-new-member{
+        padding: 3px 3px 0 5px;
+    cursor: pointer;
+}
+    
+#add-person-icon{
+    font-size: 20px;
+}
+
+#arrow-header-icon{
+    font-size: 17px;
+    height: 1em;
+}
+
+#lock-tag-header-icon{
+    display: inline-block;
+        vertical-align: -0.125em;
+        height: 1em;
+        width: 1em;
+        font-weight: 900;
+            line-height: 1.33334;
+        font-size: 20px;
+        bottom: 0;
+}
+

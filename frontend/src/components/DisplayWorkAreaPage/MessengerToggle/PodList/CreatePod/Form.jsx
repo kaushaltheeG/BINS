@@ -49,6 +49,8 @@ const Form = () => {
     }
 
     const handlePodMembers = (e) => {
+        e.stopPropagation()
+
         setMembers(oldArr => [...oldArr, e.target.value])
     }
 
