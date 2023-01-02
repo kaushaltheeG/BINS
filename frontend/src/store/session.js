@@ -5,6 +5,11 @@ const SET_CURRENT_USER = 'session/setCurrentUser';
 const REMOVE_CURRENT_USER = 'session/removeCurrentUser';
 const GET_NEW_MEMBERSHIP = 'session/newSessionShow';
 
+export const getCurrentUser = (store) => {
+    if (!Object.keys(store.session).length) return null 
+    else return store.session.user
+}
+
 
 const setCurrentUser = (user) => {
     return {
