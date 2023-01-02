@@ -3,17 +3,29 @@ import { useParams } from "react-router-dom"
 import TagIcon from '@mui/icons-material/Tag';
 import LockIcon from '@mui/icons-material/Lock';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import "./MessengerHeader.css"
+import AddUserToPod from "./AddUserToPod";
+import { useModal } from 'react-hooks-use-modal';
+import AboutPodForm from "./AboutPodForm";
+
 
 const MessengerHeader = () => {
     const { podId } = useParams();
     const pods = useSelector(state => state.pods);
     const currentPod = pods[parseInt(podId)]
 
+    const [Modal, open, close, isOpen] = useModal('root', {
+        preventScroll: true,
+        focusTrapOptions: {
+            clickOutsideDeactivates: true
+        }
+    })
+
+    
+
     return (
         <div className="messenger-main-header-container">
-            <div className="messenger-test-info-container">
+            <div className="messenger-test-info-container" onClick={open}>
                 <div className="icon-container-header">
                     
                     {currentPod?.private &&
@@ -31,20 +43,11 @@ const MessengerHeader = () => {
                         <KeyboardArrowDownIcon id="arrow-header-icon" />
                 </div>
             </div>
-            <div className='users-within-messenger'>
-                <div className="autoclog-messenger-header">
-                    <div className="profile-messenger-header-stack-container">
-                        <div className="profile-messenger-header-inner-stack">
-                                <div className="member-count">
-                                    {currentPod?.members.length}
-                                </div>
-                        </div>
-                        <div className="add-new-member">
-                            <PersonAddAltIcon id="add-person-icon"/>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <AddUserToPod pod={currentPod}/>
+            <Modal>
+                <AboutPodForm pod={currentPod}/>
+            </Modal>
+            
         </div>
     )
 }
