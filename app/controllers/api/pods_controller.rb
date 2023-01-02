@@ -22,6 +22,27 @@ class Api::PodsController < ApplicationController
 
     end 
 
+    def update 
+        @workarea = Workarea.find_by(id: params[:workarea_id])
+        @pod = @workarea.pods.find_by(id: params[:id]);
+
+        if @pod.update(pod_params)
+            render :show 
+            return 
+        end 
+        render json: {errors: [@pod.errors.full_messages]}, status: :unauthorized
+    end 
+
+    def destroy 
+        @workarea = Workarea.find_by(id: params[:workarea_id])
+        @pod = @workarea.pods.find_by(id: params[:id]);
+        if @pod.destroy
+            render :show
+            return 
+        end 
+            render json: {errors: [@pod.errors.full_messages]}, status: :unauthorized
+    end 
+
     def index 
         @workarea = Workarea.find_by(id: params[:workarea_id])
         if current_user.workareas.include?(@workarea)
@@ -37,6 +58,23 @@ class Api::PodsController < ApplicationController
         @workarea = Workarea.find_by(id: params[:workarea_id])
         @pod = @workarea.pods.find_by(id: params[:id]);
         render :show 
+    end 
+
+
+    def demember
+        @workarea = Workarea.find_by(id: params[:workarea_id])
+        @pod = @workarea.pods.find_by(id: params[:id]);
+        p current_user
+        @membership = current_user.memberships.where("membershipable_type = 'Pod' and membershipable_id = :id", id: params[:pod_id]).first
+
+        if @membership
+            @membership.destroy
+            render json: { message: 'success'} 
+            return 
+        end 
+        p @membership
+        render json: ["membership is not found"], status: :unauthorized
+
     end 
 
     private 

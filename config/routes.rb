@@ -14,7 +14,8 @@ Rails.application.routes.draw do
     resource :session, only: [:create, :show, :destroy]
     resources :workareas, only: [:index, :show] do 
       # resources :messages, only: [:create, :index]
-      resources :pods, only: [:index, :show, :create] do 
+      resources :pods, only: [:index, :show, :create, :update, :destroy] do 
+        post :demember, to: 'pods#demember', as: 'demember'
         resources :messages, only: [:create, :index]
 
       end 
