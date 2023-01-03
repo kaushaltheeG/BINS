@@ -2,6 +2,7 @@ import csrfFetch from "./csrf";
 
 const GET_MEMBERSHIP_PODS = 'get/UserPods';
 const CREATE_POD = 'create/Pod';
+const DELETE_POD = 'delete/POD';
 
 export const getUserPods = (pods) => {
     return {
@@ -14,6 +15,13 @@ export const setNewPod = (pod) => {
     return {
         type: CREATE_POD,
         pod 
+    }
+}
+
+export const removePod = (podId) => {
+    return {
+        type: DELETE_POD,
+        podId
     }
 }
 
@@ -42,6 +50,36 @@ export const createPod = (payload) => async dispatch => {
     }
 }
 
+export const updatePod = (payload) => async dispatch => {
+    const res = await csrfFetch(`/api/workareas/${payload.workareaId}/pods/${payload.id}`, {
+        method: 'PATCH',
+        body: JSON.stringify(payload)
+    });
+
+    if (res.ok) {
+        const pod = await res.json();
+        dispatch(setNewPod(pod));
+        return pod 
+    }
+    console.log('could not update pod ')
+}
+
+export const deletePod = (workareaId, podId) => async dispatch => {
+    await csrfFetch(`/api/workareas/${workareaId}/pods/${podId}`, {
+        method: 'DELETE'
+    });
+    dispatch(removePod(podId))
+    return podId 
+}
+
+export const dememberFromPod = (workareaId, podId) => async dispatch => {
+    await csrfFetch(`/api/workareas/${workareaId}/pods/${ podId }/demember`, {
+        method: 'POST'
+    });
+    dispatch(removePod(podId));
+    return podId
+}
+
 
 
 const podReducer = (state={}, action) => {
@@ -53,6 +91,10 @@ const podReducer = (state={}, action) => {
 
         case CREATE_POD:
             return {...state, [action.pod.id]: action.pod}
+        case DELETE_POD:
+            const nextState = {...state};
+            delete nextState[action.podId];
+            return {...nextState}
         default:
             return state;
     }

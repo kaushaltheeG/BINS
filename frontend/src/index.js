@@ -10,6 +10,7 @@ import csrfFetch, { restoreCSRF } from './store/csrf';
 import * as sessionActions from './store/session';
 import * as workareaActions from './store/workareaReducer'
 import * as messageActions from './store/messageReducer';
+import * as podActions from './store/podReducer';
 
 
 
@@ -21,6 +22,7 @@ if (process.env.NODE_ENV !== 'production') {
   window.sessionActions = sessionActions;
   window.workareaActions = workareaActions;
   window.messageActions = messageActions;
+  window.podActions = podActions;
 }
 
 function Root() {
