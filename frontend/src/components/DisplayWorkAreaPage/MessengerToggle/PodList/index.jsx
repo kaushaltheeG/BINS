@@ -9,7 +9,7 @@ const PodList = ({pods}) => {
 
     if (!Object.keys(pods).length) podsArr = null;
     else podsArr = Object.values(pods);
-    console.log('pods arr', podsArr)
+    
     return (
         <div className="pod-list">
             { podsArr?.map(pod => (

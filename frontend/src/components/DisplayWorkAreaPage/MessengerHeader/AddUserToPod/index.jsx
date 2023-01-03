@@ -1,7 +1,17 @@
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
+import { useModal } from 'react-hooks-use-modal';
+import UserSearchAndAdd from './UserSearchAndAdd';
 
 
 const AddUserToPod = ({pod}) => {
+
+
+    const [Modal, open, close, isOpen] = useModal('root', {
+        preventScroll: true,
+        focusTrapOptions: {
+            clickOutsideDeactivates: true
+        }
+    })
 
     return (
         <div className='users-within-messenger'>
@@ -12,11 +22,14 @@ const AddUserToPod = ({pod}) => {
                             {pod?.members.length}
                         </div>
                     </div>
-                    <div className="add-new-member">
+                    <div className="add-new-member" onClick={open}>
                         <PersonAddAltIcon id="add-person-icon" />
                     </div>
                 </div>
             </div>
+            <Modal>
+                <UserSearchAndAdd />
+            </Modal>
         </div>
     )
 }
