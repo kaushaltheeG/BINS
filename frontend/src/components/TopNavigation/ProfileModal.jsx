@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import * as sessionActions from '../../store/session';
 import './ProfileModal.css'
 
 function ProfileModal({ user }) {
     const dispatch = useDispatch();
     const [showMenu, setShowMenu] = useState(false);
+    const history = useHistory();
 
     const openMenu = () => {
         if (showMenu) return;
@@ -27,8 +28,9 @@ function ProfileModal({ user }) {
 
     const logout = (e) => {
         e.preventDefault();
-        dispatch(sessionActions.logout());
-        // <Redirect to="/signin" />
+        dispatch(sessionActions.logout()).then(() => (
+            history.push('/signin')
+        ));
     };
 
     return (
