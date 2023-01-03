@@ -114,10 +114,11 @@ const Form = () => {
             { isPrivate && 
                 <div className="form-item-padding user-selection-container">
                     {waMembers?.map(member => (
-                        <div className="user-name" key={member.id} value={member.id} >
-                            <input type="checkbox" id="member-name" className="remove-border " value={member.id} onClick={handlePodMembers} />
-                            <label htmlFor="member-name" id="member-name-lable" className="member-name-label" ><span>{member.name.slice(0, 8)}</span></label>
-                        </div>
+                        member.id !== currentUser.id && 
+                            <div className="user-name" key={member.id} value={member.id} >
+                                <input type="checkbox" id="member-name" className="remove-border " value={member.id} onClick={handlePodMembers} />
+                                <label htmlFor="member-name" id="member-name-lable" className="member-name-label" ><span>{member.name.slice(0, 8)}</span></label>
+                            </div>
                     ))
                     }
                 </div>

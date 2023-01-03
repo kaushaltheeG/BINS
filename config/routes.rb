@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     resources :workareas, only: [:index, :show] do 
       # resources :messages, only: [:create, :index]
       resources :pods, only: [:index, :show, :create, :update, :destroy] do 
+        post :addmembers, to: 'pods#add_members', as: 'add_members'
         post :demember, to: 'pods#demember', as: 'demember'
         resources :messages, only: [:create, :index]
 

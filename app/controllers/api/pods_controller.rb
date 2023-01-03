@@ -2,10 +2,7 @@ class Api::PodsController < ApplicationController
 
     def create
         @workarea = Workarea.find_by(id: params[:workarea_id])
-        # name = params[:pod][:name]
-        # description = params[:pod][:description]
-        # admin_id = params[:pod][:admin_id]
-        # is_private = params[:pod][:private]
+     
         members = params[:members]
         
         @pod = Pod.new(pod_params);
@@ -39,7 +36,7 @@ class Api::PodsController < ApplicationController
         if @pod.destroy
             pods = @workarea.pods.select {|pod| pod.workarea_id == @workarea.id && current_user.pods.include?(pod)}
             @pod = pods.first
-            p @pod 
+           
             render :show
             return 
         end 
@@ -63,11 +60,28 @@ class Api::PodsController < ApplicationController
         render :show 
     end 
 
+    def add_members
+        members = params[:members]
+        @workarea = Workarea.find_by(id: params[:workarea_id])
+        @pod = @workarea.pods.find_by(id: params[:pod_id]);
+
+        members.each do |member|
+            user = User.find_by(id: member[:id])
+            @pod.members << user unless @pod.members.include?(user);
+        end 
+
+        if @pod.save 
+            render :show 
+            return 
+        end 
+        render json: {errors: [@pod.errors.full_messages]}, status: :unauthorized
+    end 
+
 
     def demember
         @workarea = Workarea.find_by(id: params[:workarea_id])
         @pod = @workarea.pods.find_by(id: params[:id]);
-        p current_user
+     
         @membership = current_user.memberships.where("membershipable_type = 'Pod' and membershipable_id = :id", id: params[:pod_id]).first
 
         if @membership
@@ -75,7 +89,7 @@ class Api::PodsController < ApplicationController
             render json: { message: 'success'} 
             return 
         end 
-        p @membership
+      
         render json: ["membership is not found"], status: :unauthorized
 
     end 

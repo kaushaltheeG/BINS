@@ -11,7 +11,7 @@ export const getUserPods = (pods) => {
     }
 }
 
-export const setNewPod = (pod) => {
+export const setPod = (pod) => {
     return {
         type: CREATE_POD,
         pod 
@@ -45,7 +45,7 @@ export const createPod = (payload) => async dispatch => {
 
     if (res.ok) {
         const pod = await res.json();
-        dispatch(setNewPod(pod))
+        dispatch(setPod(pod))
         return pod 
     }
 }
@@ -58,12 +58,26 @@ export const updatePod = (payload) => async dispatch => {
 
     if (res.ok) {
         const pod = await res.json();
-        dispatch(setNewPod(pod));
+        dispatch(setPod(pod));
         console.log(pod)
 
         return pod 
     }
     console.log('could not update pod ')
+}
+
+export const newPodMembers = (payload) => async dispatch => {
+    const res = await csrfFetch(`/api/workareas/${payload.workareaId}/pods/${payload.podId}/addmembers`, {
+        method: 'POST',
+        body: JSON.stringify(payload)
+    })
+
+    if (res.ok) {
+        const pod = await res.json();
+        dispatch(setPod(pod));
+        return pod 
+    }
+    console.log('could not add new members to pod')
 }
 
 export const deletePod = (workareaId, podId) => async dispatch => {
@@ -90,7 +104,6 @@ const podReducer = (state={}, action) => {
     switch(action.type) {
         case GET_MEMBERSHIP_PODS:
             return {...state, ...action.pods.pods}
-
         case CREATE_POD:
             return {...state, [action.pod.id]: action.pod}
         case DELETE_POD:

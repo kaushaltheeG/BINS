@@ -1,14 +1,15 @@
 import "./SearchAndAdd.css";
-import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory, useParams } from "react-router-dom"
 import { useState} from 'react';
 import TagIcon from '@mui/icons-material/Tag';
 import LockIcon from '@mui/icons-material/Lock';
 import { getCurrentWorkArea } from "../../../../../store/workareaReducer";
+import { newPodMembers } from "../../../../../store/podReducer";
 
 const UserSearchAndAdd = () => {
 
-    const { podId } = useParams();
+    const { workareaId, podId } = useParams();
     const pods = useSelector(state => state.pods);
     const currentPod = pods[parseInt(podId)]
     const currentWa = useSelector(getCurrentWorkArea);
@@ -17,6 +18,8 @@ const UserSearchAndAdd = () => {
     const waMembers = currentWa ? Object.values(currentWa.users) : null; 
     const members = currentPod ? Object.values(currentPod.members) : null;
     const memberNames = members ? members.map(user => user.name) : null;
+    const dispatch = useDispatch();
+    const history = useHistory();
 
 
     let nonMembers;
@@ -57,6 +60,20 @@ const UserSearchAndAdd = () => {
         setWithinSelected(newIds)
         setSelectedUsers(newSelected)
         console.log(newIds)
+    }
+
+    const handleAddUsers = (e) => {
+        e.preventDefault();
+        if (selectedUsers.length) {
+            const payload = {
+                workareaId,
+                podId,
+                members: selectedUsers
+            }
+            dispatch(newPodMembers(payload)).then((pod) => (
+                history.push(`/client/workareas/${pod.workareaId}/pods/${pod.id}`)
+            ))
+        }
     }
 
     return (
@@ -100,7 +117,7 @@ const UserSearchAndAdd = () => {
                             </div>
                         ))}
                     </div>
-                    <button id="Add-user-btn">Add</button>
+                    <button id="Add-user-btn" onClick={handleAddUsers}>Add</button>
                 </div>
             </div>
             <div></div>
