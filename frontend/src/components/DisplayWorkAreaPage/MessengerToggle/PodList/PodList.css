@@ -1,6 +1,7 @@
 .pod-list{
     overflow-y: auto;
-    height: 300px;
+    min-height: auto;
+    max-height: 300px;
 }
 
 .pod-list::-webkit-scrollbar-track{
