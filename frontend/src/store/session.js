@@ -5,9 +5,15 @@ const SET_CURRENT_USER = 'session/setCurrentUser';
 const REMOVE_CURRENT_USER = 'session/removeCurrentUser';
 const GET_NEW_MEMBERSHIP = 'session/newSessionShow';
 
-export const getCurrentUser = (store) => {
-    if (!Object.keys(store.session).length) return null 
-    else return store.session.user
+export const getCurrentUser = (state) => {
+    if (!Object.keys(state.session).length) return null 
+    else return state.session.user
+}
+
+export const getUserWorkareas = (state) => {
+    if (!Object.keys(state.session).length) return null
+    else if(!state.session.user.memberships) return null 
+    else return Object.values(state.session.user.memberships.workareas)
 }
 
 

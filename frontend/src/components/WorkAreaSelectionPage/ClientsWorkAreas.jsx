@@ -1,7 +1,7 @@
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { useEffect } from "react";
 import WorkAreasListEle from './WorkAreasListEle';
-import { retriveNewMembership } from '../../store/session';
+import { getUserWorkareas, retriveNewMembership } from '../../store/session';
 
 
 
@@ -9,11 +9,13 @@ const ClientWorkAreas = () => {
     console.log('rendered')
     const dispatch = useDispatch()
     const sessionUser = useSelector(state => state.session.user );
-    const workareaKey = useSelector(state => state.session.user.memberships.workareas );
-    let workareas;
-    if (workareaKey) {
-         workareas = Object.values(workareaKey);
-    }
+    const workareas = useSelector(getUserWorkareas);
+    // let workareas;
+    // if (workareaKey) {
+    //      workareas = Object.values(workareaKey);
+    // } else {
+    //     workareas = null; 
+    // }
 
     useEffect(() => {
         dispatch(retriveNewMembership())
