@@ -10,6 +10,10 @@ const UserSearchAndAdd = () => {
     const pods = useSelector(state => state.pods);
     const currentPod = pods[parseInt(podId)]
 
+    const members = currentPod ? Object.values(currentPod.members) : null;
+    console.log(members)
+
+
     return (
         <div className="search-and-add-container">
             <div className="search-add-header">
@@ -28,7 +32,7 @@ const UserSearchAndAdd = () => {
                 </div>
             </div>
             <div className="search-user-input">
-                <div contenteditable="true" className="input-div" ><span>a</span><span>k</span></div >
+                <div contentEditable="true" className="input-div" ><span>a</span><span>k</span></div >
             </div>
             <div className="add-user-to-pod-btn">
                 <div className="inner-btn-container">

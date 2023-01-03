@@ -69,11 +69,17 @@
 
 .add-new-member{
         padding: 3px 3px 0 5px;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
     
 #add-person-icon{
     font-size: 20px;
+    cursor: pointer;
+}
+
+#no-pointer-add-user{
+    font-size: 20px;
+    cursor:auto;
 }
 
 #arrow-header-icon{

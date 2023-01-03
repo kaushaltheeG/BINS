@@ -5,13 +5,30 @@ import UserSearchAndAdd from './UserSearchAndAdd';
 
 const AddUserToPod = ({pod}) => {
 
-
     const [Modal, open, close, isOpen] = useModal('root', {
         preventScroll: true,
         focusTrapOptions: {
             clickOutsideDeactivates: true
         }
     })
+    
+
+
+    let canAdd;
+    if (pod?.private) {
+        canAdd = (
+            <div className="add-new-member" onClick={open}>
+                <PersonAddAltIcon id="add-person-icon" />
+            </div>
+        )
+    } else {
+        canAdd = (
+            <div className="add-new-member" >
+                <PersonAddAltIcon id="no-pointer-add-user" />
+            </div>
+        )
+    }
+   
 
     return (
         <div className='users-within-messenger'>
@@ -22,9 +39,7 @@ const AddUserToPod = ({pod}) => {
                             {pod?.members.length}
                         </div>
                     </div>
-                    <div className="add-new-member" onClick={open}>
-                        <PersonAddAltIcon id="add-person-icon" />
-                    </div>
+                    {canAdd}
                 </div>
             </div>
             <Modal>
