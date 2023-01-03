@@ -16,6 +16,7 @@ class Pod < ApplicationRecord
     validates :description, presence: true, allow_blank: true 
     validates :private, inclusion: { in: [true, false]}
 
+    #test 
     belongs_to :admin,
         foreign_key: :admin_id,
         class_name: :User 
