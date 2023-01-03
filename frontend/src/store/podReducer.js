@@ -59,6 +59,8 @@ export const updatePod = (payload) => async dispatch => {
     if (res.ok) {
         const pod = await res.json();
         dispatch(setNewPod(pod));
+        console.log(pod)
+
         return pod 
     }
     console.log('could not update pod ')

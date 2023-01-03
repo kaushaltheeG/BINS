@@ -1,5 +1,5 @@
 import PodElement from "./PodElement"
-
+import "./PodList.css"
 
 const PodList = ({pods}) => {
     console.log('hit')
