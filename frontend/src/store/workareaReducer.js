@@ -11,8 +11,8 @@ export const getCurrentWorkAreaMessage = (state) => {
 }
 
 export const getCurrentWorkArea= (state) => {
-    if (!Object.keys(state.workarea.currentWorkarea).length) return {};
-    return Object.values(state.workarea.currentWorkarea)
+    if (!Object.keys(state.workarea.currentWorkarea).length) return null;
+    return state.workarea.currentWorkarea
 }
 
 export const getWorkareaMemebers = (state) => {

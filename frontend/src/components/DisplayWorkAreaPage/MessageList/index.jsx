@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory, useParams } from "react-router-dom"
 import { fetchMessages, receiveMessage } from "../../../store/messageReducer"
-import { fetchWorkarea, getCurrentWorkArea } from "../../../store/workareaReducer"
+// import { fetchWorkarea, getCurrentWorkArea } from "../../../store/workareaReducer"
 import MessageElement from "./MessageElement"
 import consumer from '../../../consumer';
 import "./MessageList.css"

@@ -1,5 +1,6 @@
 .search-and-add-container{
-    height: 200px;
+    height: auto;
+    max-height: 300px;
     width: 520px;
     max-width: 520px;
     background-color: #FFFF;
@@ -27,7 +28,9 @@
     display: flex;
 
 }
-
+.padding-top-bottom{
+    padding: 10px 0;
+}
 .pod-name-for-add-user span {
     font-size: 13px;
     padding-left: 2px;
@@ -40,9 +43,11 @@
 
 .search-user-input{
     padding: 0 28px;
+    width: 100%;
 }
 
 .input-div{
+    width: 100%;
     max-height: 200px;
     -saf-0: rgba(var(--sk_primary_foreground, 29, 28, 29), 0.3);
         background-color: rgba(var(--sk_primary_background, 255, 255, 255), 1);
@@ -56,6 +61,8 @@
         padding: 0 4px 4px;
         position: relative;
         transition: border 80ms ease-out, box-shadow 80ms ease-out;
+
+    display: flex;
 }
 
 .input-div:active{
@@ -66,8 +73,79 @@
     display: flex;
     width: 100%;
     /* align-items: flex-end; */
-    justify-content: right;
+    justify-content: space-between;
     padding: 0 28px;
+}
+.selecter-user-container{
+    height: inherit;
+}
+.selecter-for-non-members{
+    height: 100%;
+}
+
+.client-search-result{
+    height: auto;
+    max-height: 100px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border: none;
+    border-radius: 4px;
+    padding: 0 28px;
+}
+
+.user-select-list{
+    width: 80%;
+    height: 50px;
+    overflow-y: hidden;
+    overflow-x: none;
+    display: flex;
+}
+
+.user-cell-container{
+    /* width: 10px;*/
+    height: 25px; 
+    display: flex;
+    border-radius: 4px;
+    background-color: rgb(118, 51, 118);
+    color: white;
+    padding: 0 10px;
+    margin-left: 5px;
+}
+
+.select-user-span{
+    font-size: 15px;
+    text-overflow: clip;
+    /* text-align: center; */
+    margin-top: 1px;
+}
+
+
+.cancel-user-selected{
+    border: none;
+    width: 25px;
+    height: 25px;
+    font-size: 15px;
+    color: white;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+#hover-cancel:hover{
+    /* box-shadow: 0 0 10px rgb(218, 48, 65); */
+    color: #FFFF;
+    background-color: rgb(218, 45, 45);
+}
+
+.user-options{
+    width: 100%;
+    background-color: rgb(143, 207, 143);
+    border: none;
+    border-radius: 4px;
+    color: rgb(76, 73, 73);
+    padding: 5px 20px;
+    /* margin-bottom: 3px; */
+    margin: 3px 0;
+    cursor: pointer;
 }
 
 #Add-user-btn{
