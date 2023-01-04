@@ -1,0 +1,7 @@
+json.direct_messages do 
+    @direct_messages.each do |direct_message|
+        json.set! direct_message.id do 
+            json.partial! 'direct_message', direct_message: direct_message
+        end 
+    end 
+end 

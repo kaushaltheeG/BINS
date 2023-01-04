@@ -22,6 +22,10 @@ class DirectMessage < ApplicationRecord
         as: :membershipable,
         dependent: :destroy
 
+    has_many :members, 
+        through: :memberships,
+        source: :user 
+
     belongs_to :workarea,
         foreign_key: :workarea_id,
         class_name: :Workarea
@@ -29,6 +33,7 @@ class DirectMessage < ApplicationRecord
     belongs_to :creator, 
         foreign_key: :creator_id, 
         class_name: :User 
+
 
 
 

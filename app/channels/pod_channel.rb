@@ -7,7 +7,5 @@ class PodChannel < ApplicationCable::Channel
         stream_for @pod
     end 
 
-    
-
 
 end 

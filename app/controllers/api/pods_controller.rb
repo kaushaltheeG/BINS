@@ -1,4 +1,4 @@
-class Api::PodsController < ApplicationController
+    class Api::PodsController < ApplicationController
 
     def create
         @workarea = Workarea.find_by(id: params[:workarea_id])
