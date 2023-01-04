@@ -7,7 +7,7 @@ import LockIcon from '@mui/icons-material/Lock';
 const PodElement = ({pod}) => {
     const { id, name } = pod 
 
-    const { workareaId, podId } = useParams();
+    const { workareaId, typeId } = useParams();
     const [selected, setSelected] = useState(false);
     useEffect(() => {
         setSelected(true)
@@ -20,7 +20,7 @@ const PodElement = ({pod}) => {
     }
     return (
         < > 
-            { id == podId && 
+            { id == typeId && 
                 <div className="pod-element pod-span-ele-active"  >
                     {pod.private && 
                         <LockIcon id="lock-hash-icon" />
@@ -31,7 +31,7 @@ const PodElement = ({pod}) => {
                     <span onClick={handleSwitch} id="pod-span-ele">{name}</span>
                 </div>
             }
-            { id != podId &&
+            { id != typeId &&
                 <div className="pod-element" >
                     {pod.private &&
                         <LockIcon id="lock-hash-icon" />

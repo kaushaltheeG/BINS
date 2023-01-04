@@ -10,9 +10,9 @@ import AboutPodForm from "./AboutPodForm";
 
 
 const MessengerHeader = () => {
-    const { podId } = useParams();
+    const { typeId } = useParams();
     const pods = useSelector(state => state.pods);
-    const currentPod = pods[parseInt(podId)]
+    const currentPod = pods[parseInt(typeId)]
 
     const [Modal, open, close, isOpen] = useModal('root', {
         preventScroll: true,

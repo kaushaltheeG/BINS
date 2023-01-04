@@ -9,9 +9,9 @@ import { newPodMembers } from "../../../../../store/podReducer";
 
 const UserSearchAndAdd = () => {
 
-    const { workareaId, podId } = useParams();
+    const { workareaId, typeId } = useParams();
     const pods = useSelector(state => state.pods);
-    const currentPod = pods[parseInt(podId)]
+    const currentPod = pods[parseInt(typeId)]
     const currentWa = useSelector(getCurrentWorkArea);
     const [open, setOpen] = useState(false)
     // console.log('currentWa',currentWa)
@@ -67,7 +67,7 @@ const UserSearchAndAdd = () => {
         if (selectedUsers.length) {
             const payload = {
                 workareaId,
-                podId,
+                typeId,
                 members: selectedUsers
             }
             dispatch(newPodMembers(payload)).then((pod) => (

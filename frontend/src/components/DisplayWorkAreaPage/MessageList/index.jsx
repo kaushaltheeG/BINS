@@ -11,7 +11,7 @@ import "./MessageList.css"
 const MessageList = () => {
     const messages = useSelector(state => state.messages.currentLocation)
     console.log(messages)
-    const { workareaId, podId } = useParams();
+    const { workareaId, typeId } = useParams();
     const dispatch = useDispatch();
     const [counter, setCounter] = useState(0);
     const history = useHistory()
@@ -30,15 +30,15 @@ const MessageList = () => {
 
 
     useEffect(() => {
-        dispatch(fetchMessages(workareaId, podId))
+        dispatch(fetchMessages(workareaId, typeId))
         
-    }, [dispatch, workareaId, podId])
+    }, [dispatch, workareaId, typeId])
 
     //websocket connection 
     useEffect(()=> {
 
         const subscription = consumer.subscriptions.create(
-            {channel: 'PodChannel', workareaId: workareaId, podId: podId},
+            {channel: 'PodChannel', workareaId: workareaId, podId: typeId},
             {
                 connected: () => {
                     console.log('connected to work area')
@@ -52,7 +52,7 @@ const MessageList = () => {
         )
 
         return () => subscription?.unsubscribe();
-    }, [dispatch, workareaId, podId])
+    }, [dispatch, workareaId, typeId])
 
     return (
         <>

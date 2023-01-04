@@ -10,7 +10,7 @@ const AboutPodForm = ({pod}) => {
     const currentUser = useSelector(getCurrentUser);
     const [edit, setEdit] = useState(false);
     const [destroy, setDestroy] = useState(false);
-    const { podId } = useParams();
+    const { typeId } = useParams();
     const [name, setName] = useState(pod ? pod.name : null);
     const [description, setDescription] = useState(pod ? pod.description : null );
     const type = !edit && destroy ? 'Delete Pod' : edit && !destroy ? 'Edit Pod' : 'Leave Pod'

@@ -16,7 +16,7 @@ const Form = () => {
     const currentUser = useSelector(getCurrentUser);
     const [openModal, setOpenModal] = useState(false);
     const wasOpenModal = useRef(false)
-    const {workareaId, podId } = useParams()
+    const {workareaId, typeId } = useParams()
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [isPrivate, setIsPrivate] = useState(false)

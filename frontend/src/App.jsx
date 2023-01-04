@@ -15,10 +15,13 @@ function App() {
         <Route path='/' exact>  
           {/* <h2>Welcome to BINS: Sign In or Sign Up</h2> */}
         </Route>
-        <Route path={`/client/workareas/:workareaId/pods/:podId`} extact>
+        <Route path={`/client/workareas/:workareaId/:type/:typeId`} exact>
           <DisplayWorkAreaPage />
         </Route>
-        <Route path='/client/workareas' extact>
+        {/* <Route path={`/client/workareas/:workareaId/dm/:dmId`} exact>
+          <DisplayWorkAreaPage />
+        </Route> */}
+        <Route path='/client/workareas' exact>
           <WorkAreaSelectionPage />
         </Route>
         <Route path="/signin">

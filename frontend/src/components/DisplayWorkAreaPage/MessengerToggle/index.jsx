@@ -14,8 +14,8 @@ import CreatePod from "./PodList/CreatePod";
 const MessengerToggle = () => {
     const pods = useSelector(state => state.pods);
     const dispatch = useDispatch();
-    const { workareaId, podId } = useParams();
-    const currentPod = Object.keys(pods).length ? pods[parseInt(podId)] : null;
+    const { workareaId, typeId } = useParams();
+    const currentPod = Object.keys(pods).length ? pods[parseInt(typeId)] : null;
     const [showPods, setShowPods] = useState(true);
     useEffect(()=> {
         dispatch(fetchUserPods(workareaId))

@@ -13,7 +13,7 @@ import MessengerHeader from "./MessengerHeader";
 
 
 const DisplayWorkAreaPage = () => {
-    const { workareaId, podId } = useParams();
+    const { workareaId, typeId } = useParams();
     /* if workareaId is NOT within the list of allWorkareas redirect to 404*/
     const workarea = useSelector(state => state.workarea.currentWorkarea);
     const pods = useSelector(state => state.pods)
