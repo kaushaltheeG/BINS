@@ -17,7 +17,8 @@ Rails.application.routes.draw do
     end 
 
     resource :session, only: [:create, :show, :destroy] #added 
-    resources :messages, only: [:update, :destroy] 
+
+    resources :messages, only: [:update, :destroy] #!!!!!!!!!not there 
 
     resources :workareas, only: [:index, :show] do #added both 
       post :addmembers, to: 'workareas#add_members', as: 'add_members' #added 
@@ -30,15 +31,15 @@ Rails.application.routes.draw do
         # get :allmessages, to: 'pods#all_messages', as: 'all_messages' | show fecthes all messages 
       end 
 
-      resources :direct_messages, only: [:index, :show, :create] do 
-        post :addmembers, to: 'direct_messages#add_members', as: 'add_members'
-        post :demember, to: 'direct_messages#demember', as: 'demember'
-        post :newmessage, to: 'direct_messages#create_message', as: 'new_message'
+      resources :direct_messages, only: [:index, :show, :create] do #added 
+        post :addmembers, to: 'direct_messages#add_members', as: 'add_members' #added 
+        post :demember, to: 'direct_messages#demember', as: 'demember' #added 
+        post :newmessage, to: 'direct_messages#create_message', as: 'new_message' #added 
         # get :allmessages, to: 'direct_messages#all_messages', as: 'all_messages' | show fecthes all messages 
       end 
     end 
 
-    resources :messages, only: [:create, :index]
+    
   end
   mount ActionCable.server => '/cable'
 end

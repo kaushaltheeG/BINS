@@ -16,7 +16,7 @@ class Api::DirectMessagesController < ApplicationController
     def show 
         #retives specific  direct messages and its messages 
         @workarea = current_user.workareas.find_by(id: params[:workarea_id])
-        @direct_message = current_user.direct_messages.find_by(id : params[:id])
+        @direct_message = current_user.direct_messages.find_by(id: params[:id])
         isWithin = @workarea.direct_messages.include?(@direct_message)
 
         if isWithin 
@@ -33,9 +33,11 @@ class Api::DirectMessagesController < ApplicationController
             #if there is an existing one, will retive its and render show 
             #if there isn't one, will create and render show 
         user_ids = (params[:direct_message][:user_ids]).map(&:to_i) #retirivng all user_ids and converting it into integers
-        workarea_id = params[:direct_message][:workarea_id]
-        @direct_message = DirectMessage.direct_message_exists(workarea_id, [*user_ids, current_user.id].uniq)
-
+        workarea_id = params[:workarea_id]
+        final_arr =  user_ids.push(current_user.id)
+       
+        @direct_message = DirectMessage.direct_message_exists(workarea_id, final_arr.uniq)
+       
         #if chat has been found
         if @direct_message 
             #if user creates a new message 
@@ -50,12 +52,13 @@ class Api::DirectMessagesController < ApplicationController
             render :show 
         else 
             #drect message has not been found 
-            @direct_message = DirectMessage.new(direct_message_params) # takes in workarea_id and user ids 
+            @direct_message = DirectMessage.new(user_ids: params[:direct_message][:user_ids]) # takes in workarea_id and user ids 
             @direct_message.creator_id = current_user.id #adding creator id 
+            @direct_message.workarea_id = params[:workarea_id]
 
             #if user creates a new message while creating a new direct message  
             if (params[:direct_message][:body])
-                message = @direct_message.messages.new(direct_message_new_message_params)
+                message = @direct_message.messages.new(body: params[:direct_message][:body])
                 message.author_id = current_user.id 
                 message.save! 
             end 
@@ -86,9 +89,9 @@ class Api::DirectMessagesController < ApplicationController
             return 
         end 
 
-        members.each do |member|
+        members.each do |member_id|
             #using retrived user-ids via params to find and add the user/s to the direct message 
-            user = User.find_by(id: member[:id])
+            user = User.find_by(id: member_id)
             @direct_message.members << user unless @direct_message.members.include?(user);
         end 
 
@@ -105,8 +108,8 @@ class Api::DirectMessagesController < ApplicationController
         @direct_message = @workarea.direct_messages.find_by(id: params[:direct_message_id])
 
         
-        if @direct_message.is_group
-            #checks if direct message is a group
+        if @direct_message.is_group && @direct_message.members.length > 3 
+            #checks if direct message is a group and if the memebrs list is greater than 3
             @membership = current_user.memberships.where("membershipable_type = 'DirectMessage' and membershipable_id = :id", id: params[:direct_message_id]).first
             if @membership
                 #if membership exists
@@ -117,7 +120,7 @@ class Api::DirectMessagesController < ApplicationController
                 render json: ["membership is not found"], status: :unauthorized
             end 
         else 
-            render json: { errors: ['Can only demember if it is a group chat']}
+            render json: { errors: ['Can only demember if it is a group chat or if there more than 3 members']}
         end 
 
     end 
@@ -127,16 +130,17 @@ class Api::DirectMessagesController < ApplicationController
         @workarea = current_user.workareas.find_by(id: params[:workarea_id])
         #find direct message via current user 
         @direct_message = current_user.direct_messages.find_by(id: params[:direct_message_id])
-
+        p current_user.direct_messages
         #checks if the foudn workarea includes the direct message 
         if @workarea.direct_messages.include?(@direct_message)
             #creates a new message using the strong params and setting author id 
-            @message = @direct_message.message.new(direct_message_new_message_params)
-            @message.author_id = current_user.id 
+            @message = @direct_message.messages.new(body: params[:direct_message][:body])
+            @message.author_id ||= current_user.id 
 
             if @message.save 
                 #broad cast message via action cable 
                 DirectMessageChannel.broadcast_to(@direct_message, from_template('api/messages/show', message: @message))
+                # render 'api/messages/show'
                 render json: nil, status: :ok 
             else 
                 #render error message for failing to create a message 
@@ -150,7 +154,7 @@ class Api::DirectMessagesController < ApplicationController
     private 
 
     def direct_message_params 
-        params.require(:direct_message).permit(:workarea_id, :user_ids: [])
+        params.require(:direct_message).permit(:body, user_ids: [])
     end 
 
     def direct_message_new_message_params 

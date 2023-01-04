@@ -71,9 +71,8 @@ class DirectMessage < ApplicationRecord
             .where(memberships: {user_id: ids}) #finds all the memberships for dm based on the user ids 
             .where(workarea_id: workarea_id) #finds the dm where the workarea id matchs the argument 
             .group(:id) #groups all 'found' dms based on id 
-            .having('count(direct_messages.id) = :ids_length', ids_length: ids.length) #group conditional to cound all the found dms match the length of the user ids array 
-            .select('direct_messages.*') #retrive the ones the has direct_message. as the prefix 
-
+            
+        
         sorted_ids = ids.sort 
         query.each do |dm| 
             dmIds = dm.members.map { |member| member.id }.sort 

@@ -93,11 +93,11 @@
         @workarea = Workarea.find_by(id: params[:workarea_id])
         @pod = @workarea.pods.find_by(id: params[:pod_id]);
         @message = @pod.messages.new(message_params)
-
+        @message.author_id ||= current_user.id 
         if @message.save! 
             PodChannel.broadcast_to(@pod,from_template('api/messages/show', message: @message))
+            # render 'api/messages/show'
             render json: nil, status: :ok 
-
         else 
             render json: { erorr: ["Failed to create message"] }, status: :unauthorized
         end 
@@ -111,7 +111,7 @@
     end 
 
     def message_params
-        params.require(:message).permit(:author_id, :body)
+        params.require(:pod).permit(:author_id, :body)
     end 
 
 end 
