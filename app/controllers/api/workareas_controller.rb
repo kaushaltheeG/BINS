@@ -28,9 +28,38 @@ class Api::WorkareasController < ApplicationController
             render :show 
             return 
         end 
-        p @workarea
+        
         render json: { errors: [@workarea.errors.full_messages] }, status: :unauthorized
     end 
+
+    def add_members 
+        member_ids = params[:user_ids]
+        @workarea = Workarea.find_by(id: params[:workarea_id])
+        if @workarea
+            member_ids.each do |id|
+                @user = User.find_by(id: id)
+                @workarea.members << @user unless @workarea.members.include?(@user)
+            end 
+            
+            render :show 
+        else 
+            render json: {errors: ['Could not find workarea']}, status: :unauthorized
+        end 
+    end 
+
+    def demember 
+        @membership = current_user.memberships.where("membershipable_type = 'Workarea' and membershipable_id = :id", id: params[:workarea_id]).first
+
+        if @membership
+            @membership.destroy
+            render json: { message: 'success'} 
+            return 
+        else 
+            render json: {errors: ['Cannot find user membership to this work area']}
+        end 
+    end 
+
+
 
     private 
 

@@ -23,6 +23,13 @@ class Workarea < ApplicationRecord
         class_name: :Pod,
         dependent: :destroy
 
+    has_many :direct_messages,
+        foreign_key: :workarea_id,
+        class_name: :DirectMessage,
+        dependent: :destroy
+
+    
+
     has_many :memberships, 
         as: :membershipable,
         dependent: :destroy

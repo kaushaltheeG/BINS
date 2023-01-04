@@ -19,17 +19,22 @@ class User < ApplicationRecord
     validates :password, length: {in: 6..255}, allow_nil: true 
 
 
-   before_validation :ensure_session_token 
+    before_validation :ensure_session_token 
 
-   has_many :owned_workareas, 
-   foreign_key: :owner_id,
-   class_name: :Workarea,
-   dependent: :destroy 
-   
-   has_many :pods_as_admin,
-     foreign_key: :admin_id,
-     class_name: :Pod,
-     dependent: :destroy 
+    has_many :owned_workareas, 
+    foreign_key: :owner_id,
+    class_name: :Workarea,
+    dependent: :destroy 
+    
+    has_many :pods_as_admin,
+      foreign_key: :admin_id,
+      class_name: :Pod,
+      dependent: :destroy 
+
+    has_many :created_directmessages,
+      foreign_key: :creator_id,
+      class_name: :DirectMessage,
+      dependent: :destroy
    
     has_many :messages, 
       foreign_key: :author_id,
@@ -58,6 +63,10 @@ class User < ApplicationRecord
       source: :membershipable,
       source_type: 'Pod'
 
+    has_many :direct_messages,
+      through: :memberships,
+      source: :membershipable,
+      source_type: 'DirectMessage'
 
     #S.P.I.R.E, has_secure_password gives us a password=
 

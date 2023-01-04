@@ -10,9 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_30_215128) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_03_192245) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "direct_messages", force: :cascade do |t|
+    t.string "name"
+    t.bigint "workarea_id", null: false
+    t.bigint "creator_id", null: false
+    t.boolean "is_group", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["creator_id"], name: "index_direct_messages_on_creator_id"
+    t.index ["workarea_id"], name: "index_direct_messages_on_workarea_id"
+  end
 
   create_table "memberships", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -69,6 +80,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_30_215128) do
     t.index ["owner_id"], name: "index_workareas_on_owner_id"
   end
 
+  add_foreign_key "direct_messages", "users", column: "creator_id"
+  add_foreign_key "direct_messages", "workareas"
   add_foreign_key "memberships", "users"
   add_foreign_key "messages", "users", column: "author_id"
   add_foreign_key "pods", "users", column: "admin_id"

@@ -79,9 +79,6 @@ class Api::PodsController < ApplicationController
 
 
     def demember
-        @workarea = Workarea.find_by(id: params[:workarea_id])
-        @pod = @workarea.pods.find_by(id: params[:id]);
-     
         @membership = current_user.memberships.where("membershipable_type = 'Pod' and membershipable_id = :id", id: params[:pod_id]).first
 
         if @membership
@@ -89,14 +86,32 @@ class Api::PodsController < ApplicationController
             render json: { message: 'success'} 
             return 
         end 
-      
         render json: ["membership is not found"], status: :unauthorized
+    end 
+
+    def create_message 
+        @workarea = Workarea.find_by(id: params[:workarea_id])
+        @pod = @workarea.pods.find_by(id: params[:pod_id]);
+        @message = @pod.messages.new(message_params)
+
+        if @message.save! 
+            PodChannel.broadcast_to(@pod,from_template('api/messages/show', message: @message))
+            render json: nil, status: :ok 
+
+        else 
+            render json: { erorr: ["Failed to create message"] }, status: :unauthorized
+        end 
+
 
     end 
 
     private 
     def pod_params 
         params.require(:pod).permit(:name, :description, :admin_id, :private)
+    end 
+
+    def message_params
+        params.require(:message).permit(:author_id, :body)
     end 
 
 end 
