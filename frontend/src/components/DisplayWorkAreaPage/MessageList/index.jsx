@@ -11,10 +11,11 @@ import "./MessageList.css"
 const MessageList = () => {
     const messages = useSelector(state => state.messages.currentLocation)
     console.log(messages)
-    const { workareaId, typeId } = useParams();
+    const { workareaId, typeId, type} = useParams();
     const dispatch = useDispatch();
     const [counter, setCounter] = useState(0);
     const history = useHistory()
+
     
 
     const msgRef = useRef(null);

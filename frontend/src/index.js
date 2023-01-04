@@ -11,6 +11,7 @@ import * as sessionActions from './store/session';
 import * as workareaActions from './store/workareaReducer'
 import * as messageActions from './store/messageReducer';
 import * as podActions from './store/podReducer';
+import * as directMessagesActions from './store/directMessageReducer';
 
 
 
@@ -23,6 +24,7 @@ if (process.env.NODE_ENV !== 'production') {
   window.workareaActions = workareaActions;
   window.messageActions = messageActions;
   window.podActions = podActions;
+  window.directMessagesActions = directMessagesActions;
 }
 
 function Root() {
