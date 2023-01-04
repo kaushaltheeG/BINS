@@ -14,10 +14,17 @@ ApplicationRecord.transaction do
   Membership.destroy_all
   Pod.destroy_all
   Message.destroy_all
+  DirectMessage.destroy_all 
 
   puts "Resetting primary keys..."
   # For easy testing, so that after seeding, the first `User` has `id` of 1
   ApplicationRecord.connection.reset_pk_sequence!('users')
+  ApplicationRecord.connection.reset_pk_sequence!('workareas')
+  ApplicationRecord.connection.reset_pk_sequence!('memberships')
+  ApplicationRecord.connection.reset_pk_sequence!('direct_messages')
+  ApplicationRecord.connection.reset_pk_sequence!('messages')
+  ApplicationRecord.connection.reset_pk_sequence!('pods')
+
 
   puts "Creating Demo users..."
   # Create one user with an easy to remember username, email, and password:
@@ -96,6 +103,50 @@ ApplicationRecord.transaction do
   bot_users[4..-1].each do |bot|
     bot_takeover_pods.last.members << bot unless bot_takeover_pods.last.members.include?(bot)
   end 
+
+  puts "Creating Direct Messages..."
+  bot_takeover_dm = DirectMessage.create!([
+    {workarea_id: bot_takeover_wa.id, user_ids: [bot_users[0].id, bot_users[1].id], creator_id: bot_users[0].id },
+    {workarea_id: bot_takeover_wa.id, user_ids: [bot_users[0].id], creator_id: bot_users[5].id },
+    {workarea_id: bot_takeover_wa.id, user_ids: [bot_users[7].id, bot_users[6].id], creator_id: bot_users[0].id },
+    {workarea_id: bot_takeover_wa.id, user_ids: [bot_users[0].id, bot_users[4].id, bot_users[3].id], creator_id: bot_users[2].id }
+  ])
+
+  puts "Creating Messages for DM: between bot 1 and bot 2"
+  bot_takeover_dm.first.messages.create!([
+    {body: "Hey there, #{bot_users[1].name}", author_id: bot_users[0].id},
+    {body: "Hey there, #{bot_users[0].name}", author_id: bot_users[1].id},
+    {body: "How are you doing?", author_id: bot_users[1].id},
+    {body: "I am doing well; how are you?", author_id: bot_users[0].id},
+    {body: "We need to take about #{bot_users.last.name}", author_id: bot_users[1].id},
+    {body: "I was just about to say that", author_id: bot_users[0].id}
+  ])
+
+  puts "Creating Messages for DM: between bot 6 and bot 1"
+  bot_takeover_dm[1].messages.create!([
+    {body: "Hey there, Boss", author_id: bot_users[5].id},
+    {body: "Hey there, #{bot_users[5].name}", author_id: bot_users[0].id},
+    {body: "How are you doing?", author_id: bot_users[0].id},
+    {body: "I am doing well; how are you?", author_id: bot_users[5].id},
+    {body: "I don't think was can hold down BINS for that long", author_id: bot_users[5].id},
+    {body: "...", author_id: bot_users[0].id}
+  ])
+
+  puts "Creating Messages for DM ~ GC: amoung bot 1, 7, and 8"
+  bot_takeover_dm[2].messages.create!([
+    {body: "Welcome squad, #{bot_users[7].name} and #{bot_users[6].name}", author_id: bot_users[0].id},
+    {body: "squad squad squad", author_id: bot_users[7].id},
+    {body: "squaaaaaddddd!!!", author_id: bot_users[6].id}
+  ])
+
+  puts "Creating Messages for DM ~ GC: amoung bot 1, 3, 4, and 5"
+  bot_takeover_dm.last.messages.create!([
+    {body: "Welcome yall", author_id: bot_users[2].id},
+    {body: "Planning to make some changes to the news pod", author_id: bot_users[2].id},
+    {body: "What do you have in mind,#{bot_users[2].name}?", author_id: bot_users[4].id},
+    {body: "Yeah, what are your ideas,#{bot_users[2].name}?", author_id: bot_users[3].id}
+  ])
+
 
   puts "Creating messages..."
 

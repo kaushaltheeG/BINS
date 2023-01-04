@@ -37,19 +37,22 @@ class DirectMessage < ApplicationRecord
 
 
 
-    before_save :add_creator_as_member, :add_members, :check_if_group, if: :new_record?
-    attr_reader :user_ids 
-
-    def user_ids=(user_ids)
+    before_save :add_creator, :add_members, :check_if_group, if: :new_record?
+    attr_reader :user_ids #getter for user_ids since column does not exists 
+    
+    def user_ids=(user_ids) 
+        #setter for user_ids since column does not exists 
         @user_ids = user_ids.instance_of?(String) ? JSON.parse(user_ids) : user_ids
     end 
 
     def add_creator 
+        #adds the creator asa memeber if isnt included into the user_ids array 
         self.members << self.creator unless self.members.include?(self.creator)
     end 
 
 
-    def add_members 
+    def add_members  
+        #loops through user ids, finds the user, and adds the person as a member 
         @user_ids.each do |user_id| 
             user = User.find_by(id: user_id)
             self.members << user unless self.members.include?(user)
@@ -57,18 +60,19 @@ class DirectMessage < ApplicationRecord
     end 
 
     def check_if_group 
+        #if a newly created direct message is a group or not 
         if self.members.length > 2 
             self.is_group = true 
         end 
     end 
 
     def self.direct_message_exists(workarea_id, ids) #take in workarea and and array of user ids
-        query = self.joins(:memberships)
-            .where(memberships: {user_id: ids})
-            .where(workarea_id: workarea_id)
-            .group(:id)
-            .having('count(direct_messages.id) = :ids_length', ids_length: ids.length)
-            .select('direct_messages.*')
+        query = self.joins(:memberships) #joins direct messages table to memberships 
+            .where(memberships: {user_id: ids}) #finds all the memberships for dm based on the user ids 
+            .where(workarea_id: workarea_id) #finds the dm where the workarea id matchs the argument 
+            .group(:id) #groups all 'found' dms based on id 
+            .having('count(direct_messages.id) = :ids_length', ids_length: ids.length) #group conditional to cound all the found dms match the length of the user ids array 
+            .select('direct_messages.*') #retrive the ones the has direct_message. as the prefix 
 
         sorted_ids = ids.sort 
         query.each do |dm| 
