@@ -10,6 +10,7 @@
     width: 36px;
     border: none;
     margin-right: 5px;
+    border-radius: 4px;
 }
 
 .author-time-body {

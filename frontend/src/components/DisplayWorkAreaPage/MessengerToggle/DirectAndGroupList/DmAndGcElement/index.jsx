@@ -12,7 +12,8 @@ export const DmAndElement = ({ dm }) => {
     const currentUser = useSelector(getCurrentUser)
     const history = useHistory();
     const [concatted, setConcatted] = useState('')
-    const {workareaId} = useParams();
+    const {workareaId, type, typeId} = useParams();
+
 
 
     useEffect(() => {
@@ -30,25 +31,49 @@ export const DmAndElement = ({ dm }) => {
     }
 
     return (
-        <div className="pod-element">
-            {isGroup && 
-                <>
-                    <Diversity3Icon id="group-icon" />
-                    <span id="pod-span-ele" onClick={handleSwitch}>{concatted}</span>
-                </>
+        <>
+            {(id == typeId && type === "dms") &&
+                <div className="pod-element pod-span-ele-active" id="extra-btm-marign" >
+                    {isGroup &&
+                        <>
+                            <Diversity3Icon id="group-icon" />
+                            <span id="pod-span-ele" onClick={handleSwitch}>{concatted}</span>
+                        </>
+                    }
+                    {!isGroup &&
+                        <>
+                            <div>
+                                <button className="profile-icon" id='size-override'>{concatted[0]?.toUpperCase()}</button>
+                            </div>
+                            <span id="pod-span-ele" onClick={handleSwitch}>{concatted}</span>
+                        </>
+                    }
+                </div>
             }
-            {!isGroup && 
-                <>
-                    <div>
-                        <button className="profile-icon" id='size-override'>{concatted[0]?.toUpperCase()}</button>
-                    </div>
-                    <span id="pod-span-ele" onClick={handleSwitch}>{concatted}</span>
-                </>
+            {(id != typeId || type === "pods") && 
+                <div className="pod-element" id="extra-btm-marign">
+                    {isGroup &&
+                        <>
+                            <Diversity3Icon id="group-icon" />
+                            <span id="pod-span-ele" onClick={handleSwitch}>{concatted}</span>
+                        </>
+                    }
+                    {!isGroup &&
+                        <>
+                            <div>
+                                <button className="profile-icon" id='size-override'>{concatted[0]?.toUpperCase()}</button>
+                            </div>
+                            <span id="pod-span-ele" onClick={handleSwitch}>{concatted}</span>
+                        </>
 
+                    }
+                </div>
+            
             }
-
-
-        </div>
+        
+        </>
+        
+       
     )
 }
 

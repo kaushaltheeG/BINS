@@ -5,6 +5,7 @@ import PodList from "./PodList"
 import { fetchUserPods } from "../../../store/podReducer";
 import './MessengerToggle.css'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import Diversity3Icon from '@mui/icons-material/Diversity3';
 import TagIcon from '@mui/icons-material/Tag';
 import LockIcon from '@mui/icons-material/Lock';
 import CreatePod from "./PodList/CreatePod";
@@ -15,19 +16,24 @@ import { fetchAllUserDirectMessages } from "../../../store/directMessageReducer"
 
 const MessengerToggle = () => {
     const pods = useSelector(state => state.pods);
+    const dms = useSelector(state => state.directMessages)
     const directMessages = useSelector(state => state.directMessages)
     const dispatch = useDispatch();
-    const { workareaId, typeId } = useParams();
-    
+    const { workareaId, typeId, type} = useParams();
+    console.log(dms)
     const currentPod = Object.keys(pods).length ? pods[parseInt(typeId)] : null;
-
+    const currentDm = Object.keys(dms).length ? dms[parseInt(typeId)] : null;
+    console.log(currentDm, 'crrName')
+    const currentDmName = currentDm ? Object.values(currentDm.members).map(mem => mem.name)
+        .toString() : []
+    
     const [showPods, setShowPods] = useState(true);
     const [showDms, setShowDms] = useState(true);
 
     useEffect(()=> {
         dispatch(fetchUserPods(workareaId))
         dispatch(fetchAllUserDirectMessages(workareaId))
-    }, [dispatch, workareaId])
+    }, [dispatch, workareaId, typeId, type])
 
     const togglePodsDisplay = (e) => {
         e.preventDefault()
@@ -56,7 +62,7 @@ const MessengerToggle = () => {
                 <CreatePod />
              </>
             } 
-            {!showPods && 
+            {(!showPods && type === "pods") && 
                 <div className="pod-element pod-span-ele-active"  >
                     {currentPod.private &&
                         <LockIcon id="lock-hash-icon" />
@@ -77,8 +83,26 @@ const MessengerToggle = () => {
                 }
                 <div id="pod-name-header">Direct Messages</div>
             </div>
-            {
+            { showDms &&
                 <DirectAndGroupList directMessages={directMessages} />
+            }
+            { (!showDms && type === "dms") && 
+                <div className="pod-element pod-span-ele-active">
+                    {currentDm?.isGroup &&
+                        <>
+                            <Diversity3Icon id="group-icon" />
+                            <span id="pod-span-ele">{currentDmName}</span>
+                        </>
+                    }
+                    {!currentDm?.isGroup &&
+                        <>
+                            <div>
+                            <button className="profile-icon" id='size-override'>{currentDmName[0]?.toUpperCase()}</button>
+                            </div>
+                            <span id="pod-span-ele" >{currentDmName}</span>
+                        </>
+                    }
+                </div>
             }
             
             
