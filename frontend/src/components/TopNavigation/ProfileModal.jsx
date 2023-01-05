@@ -28,9 +28,10 @@ function ProfileModal({ user }) {
 
     const logout = (e) => {
         e.preventDefault();
-        dispatch(sessionActions.logout()).then(() => (
+        dispatch(sessionActions.logout()).then(() => {
+            console.log('hit logouted')
             history.push('/signin')
-        ));
+        });
     };
 
     return (

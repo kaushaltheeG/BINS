@@ -11,7 +11,7 @@ const ToggleWorkArea = () => {
     const workareas = useSelector(state => Object.values(state.session.user.memberships.workareas));
     const handleToggle = ({id}) => (e) => {
         e.stopPropagation();
-        history.push(`/client/workareas/${id}`)
+        history.push(`/client/workareas/${id}/pods/1`)
     }   
     const openToggle = (e) => {
         e.stopPropagation();

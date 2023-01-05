@@ -5,6 +5,8 @@ import WorkAreaProfile from "./WorkAreaProfile";
 import CreateWorkArea from "./CreateWorkArea";
 import ToggleWorkArea from "./ToogleWorkArea";
 import LeaveWorkArea from "./LeaveWorkArea";
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import BorderColorRoundedIcon from '@mui/icons-material/BorderColorRounded';
 
 
 const SideBarHeader = ({ workarea }) => {
@@ -22,9 +24,9 @@ const SideBarHeader = ({ workarea }) => {
             <div className="side-bar-wa-name">
                 <div className="horizontal-name-and-down-icon" onClick={open} >
                     <span id="side-bar-header-name" >{workarea.name} 
-                        <i className="fa fa-sort-desc" aria-hidden="true"></i>
+                        {/* <i className="fa fa-sort-desc" aria-hidden="true"></i> */}
                     </span>
-                    <i className="fa fa-sort-desc" aria-hidden="true"></i>
+                    <ArrowDropDownIcon />
                 </div>
                 <Modal >
                     <div className="header-name-modal-container">
@@ -48,7 +50,8 @@ const SideBarHeader = ({ workarea }) => {
             
             <div className="icon-div-container">
                 <button className="icon-container">
-                    <i className="fa fa-pencil-square-o" aria-hidden="true" id='create-icon'></i>
+                    {/* <i className="fa fa-pencil-square-o" aria-hidden="true" id='create-icon'></i> */}
+                    <BorderColorRoundedIcon id='create-dm-icon-btn'/>
                 </button>
             </div>
             

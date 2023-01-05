@@ -10,14 +10,10 @@ import "./MessageList.css"
 
 const MessageList = () => {
     const messages = useSelector(getMessages)
-    console.log(messages)
+   
     const { workareaId, typeId, type} = useParams();
     const dispatch = useDispatch();
-    const [counter, setCounter] = useState(0);
     const history = useHistory()
-
-    console.log(type)
-
     const msgRef = useRef(null);
 
 
@@ -52,7 +48,7 @@ const MessageList = () => {
                     received: message => {
                         console.log('Received message: ', message)
                         dispatch(receiveMessage(message))
-                        setCounter(prev => prev + 1)
+                        
                     }
                 }
             )
@@ -73,7 +69,7 @@ const MessageList = () => {
                     received: message => {
                         console.log('Received message: ', message)
                         dispatch(receiveMessage(message))
-                        setCounter(prev => prev + 1)
+                        
                     }
                 }
             )
