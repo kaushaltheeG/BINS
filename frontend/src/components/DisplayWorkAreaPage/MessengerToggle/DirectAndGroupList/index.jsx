@@ -14,7 +14,7 @@ const DirectAndGroupList = ({directMessages}) => {
             ))
 
             }
-
+    
         </div>
     )
 }

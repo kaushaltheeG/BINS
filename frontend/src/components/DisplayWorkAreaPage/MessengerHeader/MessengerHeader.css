@@ -71,6 +71,16 @@
         padding: 3px 3px 0 5px;
     /* cursor: pointer; */
 }
+
+#current-messenger-name{
+    width: auto;
+    max-width: 200px;
+    height: 24px;
+    overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        margin-left: 3px;
+}
     
 #add-person-icon{
     font-size: 20px;

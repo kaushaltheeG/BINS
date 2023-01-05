@@ -11,12 +11,14 @@ import LockIcon from '@mui/icons-material/Lock';
 import CreatePod from "./PodList/CreatePod";
 import DirectAndGroupList from "./DirectAndGroupList";
 import { fetchAllUserDirectMessages } from "../../../store/directMessageReducer";
+import { getCurrentUser } from "../../../store/session";
 
 
 
 const MessengerToggle = () => {
     const pods = useSelector(state => state.pods);
     const dms = useSelector(state => state.directMessages)
+    const currentUser = useSelector(getCurrentUser);
     const directMessages = useSelector(state => state.directMessages)
     const dispatch = useDispatch();
     const { workareaId, typeId, type} = useParams();
@@ -24,7 +26,8 @@ const MessengerToggle = () => {
     const currentPod = Object.keys(pods).length ? pods[parseInt(typeId)] : null;
     const currentDm = Object.keys(dms).length ? dms[parseInt(typeId)] : null;
     console.log(currentDm, 'crrName')
-    const currentDmName = currentDm ? Object.values(currentDm.members).map(mem => mem.name)
+    const currentDmName = currentDm ? Object.values(currentDm.members).filter((member) => member.id !== currentUser.id)
+        .map(mem => mem.name)
         .toString() : []
     
     const [showPods, setShowPods] = useState(true);
@@ -97,7 +100,7 @@ const MessengerToggle = () => {
                     {!currentDm?.isGroup &&
                         <>
                             <div>
-                            <button className="profile-icon" id='size-override'>{currentDmName[0]?.toUpperCase()}</button>
+                                <button className="profile-icon" id='size-override'>{currentDmName[0]?.toUpperCase()}</button>
                             </div>
                             <span id="pod-span-ele" >{currentDmName}</span>
                         </>
