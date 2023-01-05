@@ -109,14 +109,21 @@ const MessengerHeader = () => {
             </div>
 
             {type === 'pods' && 
-                <AddUserToPod currentMessenger={currentPod?.members.length} />
+                <AddUserToPod currentMessengerLength={currentPod?.members.length} />
             }
             { (type === 'dms' && currentDm?.isGroup) && 
-                <AddUserToPod currentMessenger={currentDm ? Object.values(currentDm.members).length : null } />
+                <AddUserToPod currentMessengerLength={currentDm ? Object.values(currentDm.members).length : null } />
 
             }
             <Modal>
-                <AboutPodForm pod={currentMessenger}/>
+                {type === 'pods' &&
+                    <AboutPodForm currentMessenger={currentPod} />
+                }
+                {(type === 'dms' && currentDm?.isGroup) &&
+                    <AboutPodForm currentMessenger={currentDm} />
+
+                }
+                
             </Modal>
             
         </div>

@@ -6,14 +6,29 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentUser } from '../../../../store/session';
 import { deletePod, dememberFromPod, updatePod } from '../../../../store/podReducer';
 import { useHistory, useParams } from 'react-router-dom';
-const AboutPodForm = ({pod}) => {
+
+
+const AboutPodForm = ({ currentMessenger }) => {
+    console.log(currentMessenger)
     const currentUser = useSelector(getCurrentUser);
     const [edit, setEdit] = useState(false);
     const [destroy, setDestroy] = useState(false);
-    const { typeId } = useParams();
+    const { typeId, type } = useParams();
+
+    let pod, dm; 
+    if (type === 'pods' ) {
+        pod = Object.keys(currentMessenger).length ? currentMessenger : null;
+        dm = null; 
+    } else if (type === 'dms') {
+        pod = null; 
+        dm = Object.keys(currentMessenger).length ? currentMessenger : null;
+    }
+    console.log(dm, 'dm about form')
+    const currentDmName = dm ? Object.values(dm.members).filter((member) => member.id !== currentUser.id).map(mem => mem.name) : null 
     const [name, setName] = useState(pod ? pod.name : null);
     const [description, setDescription] = useState(pod ? pod.description : null );
-    const type = !edit && destroy ? 'Delete Pod' : edit && !destroy ? 'Edit Pod' : 'Leave Pod'
+    const [gcNames, setGcNames] = useState(dm ? currentDmName : null)
+    const formType = !edit && destroy ? 'Delete Pod' : edit && !destroy ? 'Edit Pod' : 'Leave Pod'
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -41,15 +56,15 @@ const AboutPodForm = ({pod}) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (type === 'Leave Pod') {
-            console.log('leaving')
+        if (formType === 'Leave Pod') {
+            
             dispatch(dememberFromPod(pod.workareaId, pod.id))
             history.push(`/client/workareas/${firstPod.workareaId}/pods/${firstPod.id}`)
-        } else if (type === 'Delete Pod') {
+        } else if (formType === 'Delete Pod') {
             dispatch(deletePod(pod.workareaId, pod.id))
             history.push(`/client/workareas/${firstPod.workareaId}/pods/${firstPod.id}`)
-        } else if (type === 'Edit Pod') {
-            console.log(name, description);
+        } else if (formType === 'Edit Pod') {
+            
             const patchedPod = {
                 id: pod.id, 
                 name,
@@ -67,33 +82,57 @@ const AboutPodForm = ({pod}) => {
 
     return (
         <div className="about-pod-container">
-            <div className="pod-name-maybe-edit-and-delete form-item-padding">
-                { edit && 
-                    <input value={name} className="create-input-style" onChange={handleChangeName}></input>
-                }
-                { !edit && 
-                    <span>{name}</span>
-                }
-                {currentUser.id === pod.adminId && 
-                    <div className="edit-delete-about-icon-conatainer">
-                        <ModeEditIcon id="edit-delete-about-icon" onClick={toggleToEdit}/>
-                        <DeleteIcon id="edit-delete-about-icon" onClick={toggleToDestroy}/>
+            { type === 'pods' && 
+                <>
+                    <div className="pod-name-maybe-edit-and-delete form-item-padding">
+                        
+                        { edit && 
+                            <input value={name} className="create-input-style" onChange={handleChangeName}></input>
+                        }
+                        { !edit && 
+                            <span>{name}</span>
+                        }
+                        {currentUser.id === pod?.adminId && 
+                            <div className="edit-delete-about-icon-conatainer">
+                                <ModeEditIcon id="edit-delete-about-icon" onClick={toggleToEdit}/>
+                                <DeleteIcon id="edit-delete-about-icon" onClick={toggleToDestroy}/>
+                            </div>
+                        }
                     </div>
-                }
-            </div>
+                </>
+            
+            }
             <div className="pod-about-description form-item-padding">
-                <span>Description</span>
-                <div className="description-container-about">
-                    {!edit && 
-                        <p>{description}</p>
-                    }
-                    {edit &&
-                        <textarea value={description} className="create-input-style edit-form" id="description-style" onChange={(e) => setDescription(e.target.value)} />
-                    }
-                </div>
+                { type === 'pods' && 
+                    <>
+                        <span>Description</span>
+                        <div className="description-container-about">
+                            {!edit && 
+                                <p>{description}</p>
+                            }
+                            {edit &&
+                                <textarea value={description} className="create-input-style edit-form" id="description-style" onChange={(e) => setDescription(e.target.value)} />
+                            }
+                        </div>
+                    
+                    </>
+                }
+                { type === 'dms' && 
+                    <>
+                        <span id="about-member-override-font">Members</span>
+                        <div className="description-container-about-gc-name">
+                            {gcNames?.map((name) => (
+                                <span className="name-ele-about-form">
+                                    {name}
+                                </span>
+                            ))}
+                        </div>
+                    </>
+
+                }
             </div>
             <div className="about-pod-form-btns form-item-padding">
-                <button onClick={handleSubmit}>{type}</button>
+                <button onClick={handleSubmit}>{formType}</button>
             </div>
         </div>
     )

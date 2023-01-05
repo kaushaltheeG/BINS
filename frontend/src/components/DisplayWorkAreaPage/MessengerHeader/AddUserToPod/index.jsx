@@ -9,8 +9,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getWorkareaMemebers } from '../../../../store/workareaReducer';
 
 
-const AddUserToPod = ({ currentMessenger }) => {
-
+const AddUserToPod = ({ currentMessengerLength }) => {
+    console.log(currentMessengerLength)
     const allUsers = useSelector(getWorkareaMemebers)
     
     const {workareaId, type, typeId} = useParams();
@@ -26,7 +26,7 @@ const AddUserToPod = ({ currentMessenger }) => {
     let shouldAdd;
 
     if (type === 'pods') {
-        if (currentMessenger < allUsers?.length) {
+        if (currentMessengerLength < allUsers?.length) {
             shouldAdd = (
                 <div className="add-new-member" onClick={open}>
                     <PersonAddAltIcon id="add-person-icon" />
@@ -65,7 +65,7 @@ const AddUserToPod = ({ currentMessenger }) => {
                                 </>
 
                             } */}
-                            {currentMessenger}
+                            {currentMessengerLength}
                         </div>
                     </div>
                     {shouldAdd}
