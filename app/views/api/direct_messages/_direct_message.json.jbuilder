@@ -4,6 +4,7 @@ json.members do
         json.set! member.id do 
             json.id member.id 
             json.name member.name 
+            json.email member.email
         end 
     end 
 end 

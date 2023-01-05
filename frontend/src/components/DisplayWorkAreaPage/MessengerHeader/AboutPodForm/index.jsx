@@ -25,6 +25,8 @@ const AboutPodForm = ({ currentMessenger }) => {
     }
     console.log(dm, 'dm about form')
     const currentDmName = dm ? Object.values(dm.members).filter((member) => member.id !== currentUser.id).map(mem => mem.name) : null 
+    const otherUserEmail = dm ? Object.values(dm.members).filter((mem) => mem.id !== currentUser.id).at(0).email: null 
+    console.log(otherUserEmail)
     const [name, setName] = useState(pod ? pod.name : null);
     const [description, setDescription] = useState(pod ? pod.description : null );
     const [gcNames, setGcNames] = useState(dm ? currentDmName : null)
@@ -105,6 +107,7 @@ const AboutPodForm = ({ currentMessenger }) => {
             <div className="pod-about-description form-item-padding">
                 { type === 'pods' && 
                     <>
+                        
                         <span>Description</span>
                         <div className="description-container-about">
                             {!edit && 
@@ -119,21 +122,38 @@ const AboutPodForm = ({ currentMessenger }) => {
                 }
                 { type === 'dms' && 
                     <>
-                        <span id="about-member-override-font">Members</span>
-                        <div className="description-container-about-gc-name">
-                            {gcNames?.map((name) => (
-                                <span className="name-ele-about-form">
-                                    {name}
-                                </span>
-                            ))}
-                        </div>
+                    {currentMessenger?.isGroup && 
+                        <>
+                            <span id="about-member-override-font">Members</span>
+                            <div className="description-container-about-gc-name">
+                                {gcNames?.map((name) => (
+                                    <span className="name-ele-about-form">
+                                        {name}
+                                    </span>
+                                ))}
+                            </div>
+                        
+                        </>
+                    }
+                    {!currentMessenger.isGroup && 
+                        <>
+                            <span id="about-member-override-font">{gcNames?.at(0)}</span>
+                            <div className="description-container-about-gc-name">
+                                    <span className="name-ele-about-form">
+                                        {otherUserEmail}
+                                    </span>
+                            </div>
+                        </>
+                    }
                     </>
 
                 }
             </div>
-            <div className="about-pod-form-btns form-item-padding">
-                <button onClick={handleSubmit}>{formType}</button>
-            </div>
+            { ((type === 'dms' && currentMessenger?.isGroup) || type === 'pods') && 
+                <div className="about-pod-form-btns form-item-padding">
+                    <button onClick={handleSubmit}>{formType}</button>
+                </div>
+            }
         </div>
     )
 }

@@ -119,7 +119,7 @@ const MessengerHeader = () => {
                 {type === 'pods' &&
                     <AboutPodForm currentMessenger={currentPod} />
                 }
-                {(type === 'dms' && currentDm?.isGroup) &&
+                {(type === 'dms') &&
                     <AboutPodForm currentMessenger={currentDm} />
 
                 }
