@@ -1,15 +1,21 @@
-import { useSelector } from "react-redux";
 import csrfFetch from "./csrf";
-import { getCurrentWorkArea } from "./workareaReducer";
 
 const GET_ALL_MESSAGE = 'messages/FETCH_ALL_MESSAGES';
 const CREATE_MESSAGE = 'messages/CREATE_MESSAGE';
 const RECEIVE_MESSAGE = 'message/RECEIVE'
 
-export const getMessages = (messages) => {
+export const getMessages = (state) => {
+    console.log(Object.keys(state.messages.data))
+    if (!Object.keys(state.messages.data).length) return null 
+    else return Object.values(state.messages.data)
+}
+
+
+
+export const retriveMessages = (payload) => {
     return {
         type: GET_ALL_MESSAGE,
-        messages
+        payload
     }
 }
 
@@ -28,7 +34,7 @@ export const receiveMessage = (message) => {
 }
 
 export const fetchMessages = (workareaId, podId) => async dispatch => {
-    console.log(workareaId)
+    
     const res = await csrfFetch(`/api/workareas/${workareaId}/pods/${podId}/messages`);
 
     if (res.ok) {
@@ -39,6 +45,33 @@ export const fetchMessages = (workareaId, podId) => async dispatch => {
         console.log(`failed getting all messages for ${workareaId}` )
     }
 }
+
+export const fetchPodMessages = (workareaId, podId) => async dispatch => {
+    const res = await csrfFetch(`/api/workareas/${workareaId}/pods/${podId}`);
+
+    if (res.ok) {
+        const payload = await res.json();
+        console.log(payload)
+        dispatch(retriveMessages(payload));
+        return payload
+    } else {
+        console.log(`failed getting all messages for ${workareaId}`)
+    }
+}
+
+export const fetchDmMessages = (workareaId, dmId) => async dispatch => {
+    const res = await csrfFetch(`/api/workareas/${workareaId}/direct_messages/${dmId}`);
+
+    if (res.ok) {
+        const payload = await res.json();
+        dispatch(retriveMessages(payload));
+        return payload
+    } else {
+        console.log(`failed getting all messages for ${workareaId}`)
+    }
+}
+
+
 
 export const createMessage =  (payload, workareaId, podId) => {
     csrfFetch(`/api/workareas/${workareaId}/pods/${podId}/messages`, {
@@ -57,7 +90,8 @@ export const createMessage =  (payload, workareaId, podId) => {
 }
 
 let messageStructure = {
-    currentLocation: []
+    location: 0,
+    data: {}
 }
 
 const messageReducer = (state=null, action) => {
@@ -66,8 +100,18 @@ const messageReducer = (state=null, action) => {
     let nextState = {...state}
     switch(action.type) {
         case GET_ALL_MESSAGE:
-            nextState.currentLocation = Object.values(action.messages).pop()
+            console.log(action)
+            if (action.payload.name) {
+                //0 means pod 
+                nextState.location = 0;
+                nextState.data = {...action.payload.messages}
+            } else {
+                //1 means dm 
+                nextState.location = 1;
+                nextState.data = { ...action.payload.messages }
+            }
             return nextState
+
         case CREATE_MESSAGE:
             nextState.currentLocation.push(action.message);
             return nextState

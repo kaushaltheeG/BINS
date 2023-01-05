@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory, useParams } from "react-router-dom"
-import { fetchMessages, receiveMessage } from "../../../store/messageReducer"
+import { fetchPodMessages, fetchDmMessages, receiveMessage, getMessages } from "../../../store/messageReducer"
 // import { fetchWorkarea, getCurrentWorkArea } from "../../../store/workareaReducer"
 import MessageElement from "./MessageElement"
 import consumer from '../../../consumer';
@@ -9,14 +9,14 @@ import "./MessageList.css"
 
 
 const MessageList = () => {
-    const messages = useSelector(state => state.messages.currentLocation)
+    const messages = useSelector(getMessages)
     console.log(messages)
     const { workareaId, typeId, type} = useParams();
     const dispatch = useDispatch();
     const [counter, setCounter] = useState(0);
     const history = useHistory()
 
-    
+    console.log(type)
 
     const msgRef = useRef(null);
 
@@ -27,11 +27,15 @@ const MessageList = () => {
         msgRef?.current?.scrollIntoView({
             behavior: "smooth"
         });
-    }, [workareaId, messages.length])
+    }, [workareaId, messages?.length])
 
 
     useEffect(() => {
-        dispatch(fetchMessages(workareaId, typeId))
+        if (type === "pods") {
+            dispatch(fetchPodMessages(workareaId, typeId))
+        } else if (type === "dms") {
+            dispatch(fetchDmMessages(workareaId, typeId))
+        }
         
     }, [dispatch, workareaId, typeId])
 
