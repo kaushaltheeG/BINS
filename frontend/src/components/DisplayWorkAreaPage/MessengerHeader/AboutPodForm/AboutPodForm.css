@@ -45,7 +45,9 @@
 .pod-name-maybe-edit-and-delete span {
     font-size: 20px;
     font-weight: bold;
-   
+    overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
 }
 
 .pod-about-description span {

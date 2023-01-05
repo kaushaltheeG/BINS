@@ -20,6 +20,12 @@
     cursor: pointer;
 }
 
+#pod-span-ele {
+    overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+}
+
 #lock-hash-icon{
     height: 0.73em;
 }

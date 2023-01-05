@@ -5,7 +5,7 @@ const CREATE_MESSAGE = 'messages/CREATE_MESSAGE';
 const RECEIVE_MESSAGE = 'message/RECEIVE'
 
 export const getMessages = (state) => {
-    console.log(Object.keys(state.messages.data))
+    
     if (!Object.keys(state.messages.data).length) return null 
     else return Object.values(state.messages.data)
 }

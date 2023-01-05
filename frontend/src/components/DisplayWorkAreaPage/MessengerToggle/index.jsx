@@ -8,22 +8,34 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import TagIcon from '@mui/icons-material/Tag';
 import LockIcon from '@mui/icons-material/Lock';
 import CreatePod from "./PodList/CreatePod";
+import DirectAndGroupList from "./DirectAndGroupList";
+import { fetchAllUserDirectMessages } from "../../../store/directMessageReducer";
 
 
 
 const MessengerToggle = () => {
     const pods = useSelector(state => state.pods);
+    const directMessages = useSelector(state => state.directMessages)
     const dispatch = useDispatch();
     const { workareaId, typeId } = useParams();
+    
     const currentPod = Object.keys(pods).length ? pods[parseInt(typeId)] : null;
+
     const [showPods, setShowPods] = useState(true);
+    const [showDms, setShowDms] = useState(true);
+
     useEffect(()=> {
         dispatch(fetchUserPods(workareaId))
+        dispatch(fetchAllUserDirectMessages(workareaId))
     }, [dispatch, workareaId])
 
     const togglePodsDisplay = (e) => {
         e.preventDefault()
         setShowPods(oldVal => !oldVal);
+    }
+    const toggleDmsDisplay = (e) => {
+        e.preventDefault();
+        setShowDms(oldVal => !oldVal)
     }
 
     return (
@@ -55,6 +67,20 @@ const MessengerToggle = () => {
                     <span id="pod-span-ele">{currentPod.name}</span>
                 </div>
             }
+            <div className="pod-dm-spacer" ></div>
+            <div className="pod-title-container" onClick={toggleDmsDisplay}>
+                {showDms &&
+                    <ArrowDropDownIcon id="down-arrow-icon" />
+                }
+                {!showDms &&
+                    <ArrowDropDownIcon id="side-arrow-icon" />
+                }
+                <div id="pod-name-header">Direct Messages</div>
+            </div>
+            {
+                <DirectAndGroupList directMessages={directMessages} />
+            }
+            
             
         </div>
     )

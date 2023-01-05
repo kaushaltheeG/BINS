@@ -13,6 +13,11 @@
     height: 5px;
 }
 
+.pod-dm-spacer{
+    width: 100%;
+    height: 10px;
+}
+
 .pod-title-container {
     top: 202px;
     display: flex;

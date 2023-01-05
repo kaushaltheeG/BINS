@@ -20,7 +20,7 @@ const MessageElement = ({ message }) => {
                 {message && 
                 <>
                     <div className="profile-icon">
-                        <button className="profile-icon"  onClick='#'>{authorName[0].toUpperCase()}</button>
+                        <button className="profile-icon" >{authorName[0].toUpperCase()}</button>
                     </div>
                     
                     <div className="author-time-body">

@@ -103,7 +103,7 @@ const podReducer = (state={}, action) => {
     Object.freeze(state);
     switch(action.type) {
         case GET_MEMBERSHIP_PODS:
-            return {...state, ...action.pods.pods}
+            return {...state, ...action.pods}
         case CREATE_POD:
             return {...state, [action.pod.id]: action.pod}
         case DELETE_POD:
