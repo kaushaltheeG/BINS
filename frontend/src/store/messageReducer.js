@@ -89,6 +89,20 @@ export const createMessage =  (payload, workareaId, podId) => {
     // }
 }
 
+export const createPodMessage = (payload, workareaId, podId) => {
+    csrfFetch(`/api/workareas/${workareaId}/pods/${podId}/newmessage`, {
+        method: 'POST',
+        body: JSON.stringify({pod: payload})
+    })
+}
+
+export const createDmMessage = (payload, workareaId, dmId) => {
+    csrfFetch(`/api/workareas/${workareaId}/direct_messages/${dmId}/newmessage`, {
+        method: 'POST',
+        body: JSON.stringify({directMessage: payload})
+    })
+}
+
 let messageStructure = {
     location: 0,
     data: {}
@@ -116,7 +130,7 @@ const messageReducer = (state=null, action) => {
             nextState.currentLocation.push(action.message);
             return nextState
         case RECEIVE_MESSAGE:
-            nextState.currentLocation.push(action.message);
+            nextState.data = {...nextState.data, [action.message.id]: action.message}
             return nextState
         default: 
             return state

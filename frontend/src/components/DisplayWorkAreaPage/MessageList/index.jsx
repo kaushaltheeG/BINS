@@ -41,23 +41,46 @@ const MessageList = () => {
 
     //websocket connection 
     useEffect(()=> {
-
-        const subscription = consumer.subscriptions.create(
-            {channel: 'PodChannel', workareaId: workareaId, podId: typeId},
-            {
-                connected: () => {
-                    console.log('connected to work area')
-                },
-                received: message => {
-                    console.log('Received message: ', message)
-                    dispatch(receiveMessage(message))
-                    setCounter(prev => prev + 1)
+        let subscription;
+        if (type === 'pods') {
+            subscription = consumer.subscriptions.create(
+                {channel: 'PodChannel', workareaId: workareaId, podId: typeId},
+                {
+                    connected: () => {
+                        console.log('connected to work area')
+                    },
+                    received: message => {
+                        console.log('Received message: ', message)
+                        dispatch(receiveMessage(message))
+                        setCounter(prev => prev + 1)
+                    }
                 }
-            }
-        )
+            )
+        }
 
         return () => subscription?.unsubscribe();
-    }, [dispatch, workareaId, typeId])
+    }, [dispatch, workareaId, typeId, type])
+
+    useEffect(() => {
+        let subscription; 
+        if (type === 'dms') {
+            subscription = consumer.subscriptions.create(
+                { channel: 'DirectMessageChannel', workareaId: workareaId, dmId: typeId },
+                {
+                    connected: () => {
+                        console.log('connected to work area')
+                    },
+                    received: message => {
+                        console.log('Received message: ', message)
+                        dispatch(receiveMessage(message))
+                        setCounter(prev => prev + 1)
+                    }
+                }
+            )
+
+        }
+
+    }, [dispatch, workareaId, typeId, type])
 
     return (
         <>

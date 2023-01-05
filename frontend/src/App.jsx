@@ -15,6 +15,9 @@ function App() {
         <Route path='/' exact>  
           {/* <h2>Welcome to BINS: Sign In or Sign Up</h2> */}
         </Route>
+        <Route path="/signin">
+          <SigninFormPage />
+        </Route>
         <Route path={`/client/workareas/:workareaId/:type/:typeId`} exact>
           <DisplayWorkAreaPage />
         </Route>
@@ -23,9 +26,6 @@ function App() {
         </Route> */}
         <Route path='/client/workareas' exact>
           <WorkAreaSelectionPage />
-        </Route>
-        <Route path="/signin">
-          <SigninFormPage />
         </Route>
         <Route path="/createnew">
           <CreateNewPage />

@@ -1,13 +1,13 @@
 import { useState } from "react"
 import { useParams } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
-import { createMessage } from "../../../store/messageReducer";
+import { createDmMessage, createPodMessage } from "../../../store/messageReducer";
 import "./MessageInput.css"
 const MessageInput = () => {
     const [body, setBody] = useState('');
     const currentUser = useSelector(state => state.session.user);
     const dispatch = useDispatch();
-    const { workareaId, typeId } = useParams();
+    const { workareaId, typeId, type } = useParams();
 
 
     const handleSubmit = e => {
@@ -16,7 +16,11 @@ const MessageInput = () => {
             body,
             author_id: currentUser.id,
         }
-        createMessage(message, workareaId, typeId)
+        if (type === 'pods') {
+            createPodMessage(message, workareaId, typeId)
+        } else {
+            createDmMessage(message, workareaId, typeId)
+        }
         setBody('')
     }
 
