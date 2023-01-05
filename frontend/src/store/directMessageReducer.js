@@ -11,7 +11,7 @@ export const getUserDirectMessages = (directMessages) => {
     }
 }
 
-export const getSelectedDirectMessage = (directMessage) => {
+export const setDirectMessage = (directMessage) => {
     return {
         type: GET_SELECTED_DIRECT_MESSAGE,
         directMessage
@@ -30,6 +30,19 @@ export const fetchAllUserDirectMessages = (workareaId) => async dispatch => {
     console.log('failed to get all user messages');
 }
 
+export const newGcMember = (payload) => async dispatch => {
+    const res = await csrfFetch(`/api/workareas/${payload.workareaId}/direct_messages/${payload.id}/addmembers`, {
+        method: 'POST', 
+        body: JSON.stringify(payload)
+    })
+
+    if (res.ok) {
+        const directMessage = await res.json();
+        dispatch(setDirectMessage(directMessage))
+        return directMessage
+    }
+}
+
 
 const directMessageReducer = (state={}, action) => {
     Object.freeze(state);
@@ -37,6 +50,8 @@ const directMessageReducer = (state={}, action) => {
     switch (action.type) {
         case GET_ALL_USER_DIRECT_MESSAGES: 
             return {...state, ...action.directMessages}
+        case GET_SELECTED_DIRECT_MESSAGE:
+            return {...state, [action.directMessage.id]: action.directMessage}
         default: 
             return state 
     }

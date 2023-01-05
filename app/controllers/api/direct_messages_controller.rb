@@ -82,16 +82,17 @@ class Api::DirectMessagesController < ApplicationController
         members = params[:members]
         @workarea = Workarea.find_by(id: params[:workarea_id]);
         @direct_message = @workarea.direct_messages.find_by(id: params[:direct_message_id])
-
+        p @direct_message
         if !@direct_message.is_group
             #checks if the direct message is gorup chat or not; if it is, renders an error and exits function 
             render json: { errors: ['Can only add users if it is a group chat']}
             return 
         end 
 
-        members.each do |member_id|
+        members.each do |member|
             #using retrived user-ids via params to find and add the user/s to the direct message 
-            user = User.find_by(id: member_id)
+         
+            user = User.find_by(id: member[:id])
             @direct_message.members << user unless @direct_message.members.include?(user);
         end 
 

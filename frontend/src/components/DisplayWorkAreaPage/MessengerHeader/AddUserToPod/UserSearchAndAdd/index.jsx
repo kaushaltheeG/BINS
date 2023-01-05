@@ -4,44 +4,57 @@ import { useHistory, useParams } from "react-router-dom"
 import { useState} from 'react';
 import TagIcon from '@mui/icons-material/Tag';
 import LockIcon from '@mui/icons-material/Lock';
+import Diversity3Icon from '@mui/icons-material/Diversity3';
+
 import { getCurrentWorkArea } from "../../../../../store/workareaReducer";
 import { newPodMembers } from "../../../../../store/podReducer";
+import { getCurrentUser } from "../../../../../store/session";
+import { newGcMember } from "../../../../../store/directMessageReducer";
 
 const UserSearchAndAdd = () => {
 
-    const { workareaId, typeId } = useParams();
+    const { workareaId, typeId, type } = useParams();
     const pods = useSelector(state => state.pods);
-    const currentPod = pods[parseInt(typeId)]
+    const dms = useSelector(state => state.directMessages)
+
+    const currentUser = useSelector(getCurrentUser)
     const currentWa = useSelector(getCurrentWorkArea);
+    const currentPod = pods[parseInt(typeId)];
+    const currentDm = Object.keys(dms).length ? dms[parseInt(typeId)] : null;
+    const currentDmName = currentDm ? Object.values(currentDm.members).filter((member) => member.id !== currentUser.id)
+        .map(mem => mem.name)
+        .toString() : []
+
     const [open, setOpen] = useState(false)
     // console.log('currentWa',currentWa)
     const waMembers = currentWa ? Object.values(currentWa.users) : null; 
-    const members = currentPod ? Object.values(currentPod.members) : null;
+    const members = (currentPod && type === 'pods') ? Object.values(currentPod.members) : (currentDm && type === 'dms') ? Object.values(currentDm.members) : null;
     const memberNames = members ? members.map(user => user.name) : null;
     const dispatch = useDispatch();
     const history = useHistory();
 
+    
 
     let nonMembers;
     if (waMembers && members) {
-        nonMembers = waMembers.filter((member) => !memberNames.includes(member.name));
+        nonMembers = waMembers.filter((member) => !memberNames.includes(member?.name));
     } else {
         nonMembers = null 
     }
 
-    console.log('non members', nonMembers)
+    
     const [toBeAdded, setToBeAdded] = useState([])
     const [selectedUsers, setSelectedUsers] = useState([])
     const [withinSelected, setWithinSelected] = useState([])
     const handleSearch = (e) => {
         e.preventDefault()
-        console.log(e)
-        nonMembers = nonMembers.filter(member => member.name.includes(e.target.value))
+        
+        nonMembers = nonMembers.filter(member => member.name.toLowerCase().includes(e.target.value) || member.name.includes(e.target.value) )
         setToBeAdded(nonMembers)
         if (e.target.value === "") {
             setToBeAdded([])
         }
-        console.log('to be added', toBeAdded)
+       
     }
 
     const handleSelected = (e) => {
@@ -59,7 +72,7 @@ const UserSearchAndAdd = () => {
         const newSelected = selectedUsers.filter(user => user.id !== parseInt(e.target.value))
         setWithinSelected(newIds)
         setSelectedUsers(newSelected)
-        console.log(newIds)
+       
     }
 
     const handleAddUsers = (e) => {
@@ -67,12 +80,18 @@ const UserSearchAndAdd = () => {
         if (selectedUsers.length) {
             const payload = {
                 workareaId,
-                typeId,
+                id: typeId,
                 members: selectedUsers
             }
-            dispatch(newPodMembers(payload)).then((pod) => (
-                history.push(`/client/workareas/${pod.workareaId}/pods/${pod.id}`)
-            ))
+            if (type === 'pods') {
+                dispatch(newPodMembers(payload)).then((pod) => (
+                    history.push(`/client/workareas/${pod.workareaId}/pods/${pod.id}`)
+                ))
+            } else if (type === 'dms') {
+                dispatch(newGcMember(payload)).then((dm) => (
+                    history.push(`/client/workareas/${dm.workareaId}/dms/${dm.id}`)
+                ))
+            }
         }
     }
 
@@ -82,13 +101,25 @@ const UserSearchAndAdd = () => {
                 <div className="add-user-title-and-pod-name">
                     <span id="add-people-title">Add People</span>
                     <div className="pod-name-for-add-user">
-                        {currentPod?.private &&
-                            <LockIcon id="lock-tag-header-icon-add-form" />
+                        {type === 'pods' && 
+                            <>
+                                {currentPod?.private &&
+                                    <LockIcon id="lock-tag-header-icon-add-form" />
+                                }
+                                {!currentPod?.private &&
+                                    <TagIcon id="lock-tag-header-icon-add-form" />
+                                }
+                                <span>{currentPod.name}</span>
+                            
+                            </>
+            
                         }
-                        {!currentPod?.private &&
-                            <TagIcon id="lock-tag-header-icon-add-form" />
+                        { type === 'dms' && 
+                            <>
+                                <Diversity3Icon id="lock-tag-header-icon-add-form" />
+                            <span id="current-messenger-name">{currentDmName}</span>
+                            </>
                         }
-                        <span>{currentPod.name}</span>
 
                     </div>
                 </div>
