@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentUser } from '../../../../store/session';
 import { deletePod, dememberFromPod, updatePod } from '../../../../store/podReducer';
 import { useHistory, useParams } from 'react-router-dom';
+import { demeberGroupChat } from '../../../../store/directMessageReducer';
 
 
 const AboutPodForm = ({ currentMessenger }) => {
@@ -30,12 +31,12 @@ const AboutPodForm = ({ currentMessenger }) => {
     const [name, setName] = useState(pod ? pod.name : null);
     const [description, setDescription] = useState(pod ? pod.description : null );
     const [gcNames, setGcNames] = useState(dm ? currentDmName : null)
-    const formType = !edit && destroy ? 'Delete Pod' : edit && !destroy ? 'Edit Pod' : 'Leave Pod'
+    const formType = !edit && destroy ? 'Delete Pod' : edit && !destroy ? 'Edit Pod' :  type === 'pods' ? 'Leave Pod' : 'Leave Chat'
     const dispatch = useDispatch();
     const history = useHistory();
 
     const firstPod = currentUser ? Object.values(currentUser.memberships.pods)[0] : null; 
-
+    const firstDm = currentUser ? Object.values(currentUser.memberships.directMessages)[0] : null; 
 
     const toggleToEdit = (e) => {
         e.preventDefault();
@@ -75,6 +76,10 @@ const AboutPodForm = ({ currentMessenger }) => {
                 workareaId: pod.workareaId
             }
             dispatch(updatePod(patchedPod))
+        } else if (formType == 'Leave Chat') {
+            console.log('within Leave chat ')
+            dispatch(demeberGroupChat(dm.workareaId, dm.id));
+            history.push(`/client/workareas/${firstDm.workareaId}/dms/${firstDm.id}`)
         }
     }
 

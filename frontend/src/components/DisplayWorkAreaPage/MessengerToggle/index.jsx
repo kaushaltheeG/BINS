@@ -26,7 +26,7 @@ const MessengerToggle = () => {
     const currentPod = Object.keys(pods).length ? pods[parseInt(typeId)] : null;
     const currentDm = Object.keys(dms).length ? dms[parseInt(typeId)] : null;
     console.log(currentDm, 'crrName')
-    const currentDmName = currentDm ? Object.values(currentDm.members).filter((member) => member.id !== currentUser.id)
+    const currentDmName = currentDm ? Object.values(currentDm.members).filter((member) => member?.id !== currentUser?.id)
         .map(mem => mem.name)
         .toString() : []
     
