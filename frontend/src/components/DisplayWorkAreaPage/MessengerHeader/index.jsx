@@ -30,22 +30,20 @@ const MessengerHeader = () => {
         .map(mem => mem.name)
         .toString() : []
 
-    
-    useEffect(() => {
-        dispatch(fetchUserPods(workareaId))
-        dispatch(fetchAllUserDirectMessages(workareaId))
-    }, [dispatch, workareaId, typeId, type])
 
     useEffect(()=> {
+   
+        dispatch(fetchUserPods(workareaId))
+        dispatch(fetchAllUserDirectMessages(workareaId))
+
         if (type === 'pods') {
-            
             setCurrentMessenger(oldVal => !currentPod ? oldVal : currentPod)
             setCurrentName(currentPod?.name)
         } else if (type === 'dms') {
-            
             setCurrentMessenger(oldVal => !currentDm ? oldVal : currentDm)
             setCurrentName(currentDmName)
         }
+
 
     }, [dispatch, workareaId, type, typeId])
 
@@ -92,15 +90,30 @@ const MessengerHeader = () => {
                     
                 </div>
                 <span id="current-messenger-name">
-                        {currentName}
+                    {type === 'pods' && 
+                        <>
+                            {currentPod?.name}
+                        </>
+                    }
+                    {  type === 'dms' && 
+                        <>
+                            {currentDmName}
+                        </>
+
+                    }
                 </span>
                
                 <div className="icon-container-header">
                         <KeyboardArrowDownIcon id="arrow-header-icon" />
                 </div>
             </div>
-            { ( Object.keys(currentMessenger).length && (type === 'pods' || currentMessenger.isGroup) ) && 
-                <AddUserToPod currentMessenger={currentMessenger}/>
+
+            {type === 'pods' && 
+                <AddUserToPod currentMessenger={currentPod?.members.length} />
+            }
+            { (type === 'dms' && currentDm?.isGroup) && 
+                <AddUserToPod currentMessenger={currentDm ? Object.values(currentDm.members).length : null } />
+
             }
             <Modal>
                 <AboutPodForm pod={currentMessenger}/>

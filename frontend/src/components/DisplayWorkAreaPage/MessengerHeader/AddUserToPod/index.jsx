@@ -6,22 +6,14 @@ import UserSearchAndAdd from './UserSearchAndAdd';
 import { fetchAllUserDirectMessages } from "../../../../store/directMessageReducer";
 import { fetchUserPods } from "../../../../store/podReducer";
 import { useDispatch, useSelector } from 'react-redux';
+import { getWorkareaMemebers } from '../../../../store/workareaReducer';
 
 
 const AddUserToPod = ({ currentMessenger }) => {
-    console.log(currentMessenger, 'current messenger')
-    const pods = useSelector(state => state.pods);
-    const dms = useSelector(state => state.directMessages)
+
+    const allUsers = useSelector(getWorkareaMemebers)
     
     const {workareaId, type, typeId} = useParams();
-    const [canAdd, setCanAdd] = useState();
-    const [members, setMembers] = useState(null);
-    const dispatch = useDispatch();
-
-    const currentPod = Object.keys(pods).length ? pods[parseInt(typeId)] : null;
-    const currentDm = Object.keys(dms).length ? dms[parseInt(typeId)] : null;
-
-
 
     const [Modal, open, close, isOpen] = useModal('root', {
         preventScroll: true,
@@ -30,41 +22,31 @@ const AddUserToPod = ({ currentMessenger }) => {
         }
     })
 
-    useEffect(() => {
-        dispatch(fetchUserPods(workareaId))
-        dispatch(fetchAllUserDirectMessages(workareaId))
-    }, [dispatch, workareaId, typeId, type])
 
-    useEffect(()=> {
-        let shouldAdd;
-        if (type === 'pods') {
-            if (currentMessenger?.private) {
-                shouldAdd = (
-                    <div className="add-new-member" onClick={open}>
-                        <PersonAddAltIcon id="add-person-icon" />
-                    </div>
-                )
-            } else {
-                shouldAdd = (
-                    <div className="add-new-member" >
-                        <PersonAddAltIcon id="no-pointer-add-user" />
-                    </div>
-                )
-            }
-            setMembers(currentMessenger?.members)
-        } else if (type === 'dms') {
+    let shouldAdd;
+
+    if (type === 'pods') {
+        if (currentMessenger < allUsers?.length) {
             shouldAdd = (
                 <div className="add-new-member" onClick={open}>
                     <PersonAddAltIcon id="add-person-icon" />
                 </div>
             )
-            let memberArr = Object.keys(currentMessenger).length ? Object.values(currentMessenger.members) : null 
-            setMembers(memberArr)
+        } else {
+            shouldAdd = (
+                <div className="add-new-member" >
+                    <PersonAddAltIcon id="no-pointer-add-user" />
+                </div>
+            )
         }
-        setCanAdd(shouldAdd)
-    }, [type, typeId, dispatch])
-    
-   
+    } else if (type === 'dms') {
+        shouldAdd = (
+            <div className="add-new-member" onClick={open}>
+                <PersonAddAltIcon id="add-person-icon" />
+            </div>
+        )
+    }
+ 
 
     return (
         <div className='users-within-messenger'>
@@ -74,19 +56,19 @@ const AddUserToPod = ({ currentMessenger }) => {
                         <div className="member-count">
                             {/* {(type === 'pods' && currentMessenger) && 
                                 <>
-                                    {currentPod?.members.length}
+                                    {currentMessenger}
                                 </>
                             } */}
                             {/* {(type === 'dms' && currentMessenger) && 
                                 <>
-                                    {members?.length}
+                                    {memberArr?.length}
                                 </>
 
                             } */}
-                            {members?.length}
+                            {currentMessenger}
                         </div>
                     </div>
-                    {canAdd}
+                    {shouldAdd}
                 </div>
             </div>
             <Modal>
