@@ -14,9 +14,7 @@ import { useSelector } from "react-redux";
 const SideBarHeader = ({ workarea }) => {
     const history = useHistory()
     const {workareaId, type, typeId} = useParams();
-    const [currentPlace, setCurrentPlace] = useState();
-    const pods = useSelector(state => state.pods)
-    const dms = useSelector(state => state.directMessages)
+
 
 
     const [Modal, open, close, isOpen] = useModal('root', {
@@ -26,23 +24,14 @@ const SideBarHeader = ({ workarea }) => {
         }
     })
 
-    useEffect(() => {
-        if (type === 'pods') {  
-            let currentPod =  pods[parseInt(typeId)]; 
-            setCurrentPlace(currentPod)
-        } else if (type === 'dms'){
-            let currentDm = Object.keys(dms).length ? dms[parseInt(typeId)] : null;
-            setCurrentPlace(currentDm)
-        }
-
-    }, [workareaId, type, typeId])
+   
 
 
 
     const handleNewMessage = (e) => {
         e.preventDefault();
-        console.log('current place', currentPlace)
-        history.push(`/client/workareas/${currentPlace.workareaId}/${type}/${currentPlace.id}/newmessage`)
+        
+        history.push(`/client/workareas/${workareaId}/${type}/${typeId}/newmessage`)
     }
     
 
