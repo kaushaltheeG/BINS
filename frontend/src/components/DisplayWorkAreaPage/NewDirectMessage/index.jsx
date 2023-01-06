@@ -3,19 +3,20 @@ import { useSelector } from 'react-redux'
 import { getCurrentUser } from '../../../store/session';
 import { getCurrentWorkArea } from '../../../store/workareaReducer'
 import './NewDm.css'
-import PersonIcon from '@mui/icons-material/Person';
+
 
 const NewDirectMessage = () => {
     const currentWa = useSelector(getCurrentWorkArea);
     const currentUser = useSelector(getCurrentUser);
     const [selectedUsers, setSelectedUsers] = useState([]);
-    const [withinSelected, setWithinSelected] = useState([])
-    const [toBeAdded, setToBeAdded] = useState([])
-    const [query, setQuery] = useState("")
+    const [withinSelected, setWithinSelected] = useState([]);
+    const [toBeAdded, setToBeAdded] = useState([]);
+    const [errors, setErrors] = useState([]);
+    const [query, setQuery] = useState("");
     const inputFoucs = useRef(null);
 
     const waMembers = currentWa ? Object.values(currentWa.users).filter(user => user.id !== currentUser.id): [];
-    // console.log(waMembers)
+    
 
     const handleSearch = (e) => {
         e.preventDefault()
@@ -39,10 +40,12 @@ const NewDirectMessage = () => {
             setToBeAdded([])
             setQuery("")
         }
-        console.log(selectedUsers)
+        
+        if (withinSelected.length > 6) {
+            setErrors(["Only 8 people can be in a group chat."])
+        }
+     
     }
-
-
 
     const removeSelected = (e) => {
         e.preventDefault();
@@ -51,10 +54,13 @@ const NewDirectMessage = () => {
         setWithinSelected(newIds)
         setSelectedUsers(newSelected)
 
+        if (withinSelected.length < 9) {
+            setErrors([])
+        }
     }
 
     useEffect(()=>{
-        inputFoucs.current.focus();
+        if (!errors.length) inputFoucs.current.focus();
     },[selectedUsers.length])
 
     return (
@@ -64,32 +70,49 @@ const NewDirectMessage = () => {
                     <span className='to-new-dm'>To:</span>
                 </div>
                 <div className="new-dm-search-container">
-                        <span className='user-search-spacer-span'></span>
-                        {selectedUsers.map((user) => (
-                            <>
-                               
-                                <div className="user-profile-dm-search-container marign-top-adjustment cancel-user-query">
-                                    <div>
-                                        <button className="profile-icon color-div-icon" id='size-override'>{user?.name[0]?.toUpperCase()}</button>
-                                    </div>
-                                    <span className='font-align'>{user?.name}</span>
-                                    <div className="cancel-x-container" >
-                                        <button className='font-align cancel-small-x' value={user.id} onClick={removeSelected}>X</button>
-                                    </div>
-                                </div>
-                                <span className='user-search-spacer-span'></span>
-                            </>
-                        ))}
-                        <div className="user-query-container marign-top-adjustment">
-                            <input ref={inputFoucs}className='user-query-input' onChange={handleSearch} value={query}></input>
-                        </div>
 
+                        <span className='user-search-spacer-span'></span>
+                        <>
+                            {selectedUsers.map((user) => (
+                                <>
+                                
+                                    <div className="user-profile-dm-search-container marign-top-adjustment cancel-user-query">
+                                        <div>
+                                            <button className="profile-icon color-div-icon" id='size-override'>{user?.name[0]?.toUpperCase()}</button>
+                                        </div>
+                                        <span className='font-align'>{user?.name}</span>
+                                        <div className="cancel-x-container" >
+                                            <button className='font-align cancel-small-x' value={user.id} onClick={removeSelected}>X</button>
+                                        </div>
+                                    </div>
+                                    <span className='user-search-spacer-span'></span>
+                                </>
+                            ))}
+                        
+                        </>
+                        <>
+                        
+                            { errors?.map((error) => (
+                                <div className='error-query-container' key={1}>
+                                    <span>
+                                        {error}
+                                    </span>
+                                </div>
+
+                                
+                            ))}
+                            {!errors.length && 
+                                <div className="user-query-container marign-top-adjustment">
+                                    <input ref={inputFoucs}className='user-query-input' onChange={handleSearch} value={query}></input>
+                                </div>
+                
+                            }
+                        </>
                 </div>
             </div>
             <div className="search-results-parent-container">
                 <div className="result-container">
                     {toBeAdded?.map(mem => (
-                       
                         <div className="profile-container-user-search-dm" key={mem.id} >
                                 <option className="profile-icon marign-add-new-dm-search color-div-icon" value={mem.id} onClick={handleSelected} >
                                     {mem?.name[0]?.toUpperCase()}
@@ -97,13 +120,10 @@ const NewDirectMessage = () => {
                                 </option>
                                 <option id="user-newdm-searc-name-font" value={mem.id} onClick={handleSelected} >{mem?.name}</option>
                         </div>
-
-                        
                     ))}
 
                 </div>
             </div>
-        
         </>
     )
 }

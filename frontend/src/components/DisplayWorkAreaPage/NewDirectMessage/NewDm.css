@@ -65,7 +65,7 @@
 
 .new-dm-search-container{
     width: 100%;
-    max-height: 130px;
+    max-height: 250px;
     align-content: flex-start;
         align-items: center;
         display: flex;
@@ -76,19 +76,40 @@
     padding: 0 4px 4px;
 }
 
+.error-query-container{
+    width: 100%;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.38461538;
+    border: 1px solid #e8912d66;
+    border-radius: 4px;
+    background-color: #E8912D1A;
+    color: #1d1C1d;
+    padding: 8px 16px;
+    word-break: break-word;
+        flex-basis: 100%;
+        margin: 8px 0 0 5px;
+}
+
 .user-search-spacer-span{
     font-size: 0;
     -webkit-user-select: none;
     user-select: none;
     width: 0;
-    padding: 0 5px;
+    padding: 0 3px;
 }
 .user-query-container{
     height: auto;
 }
 .user-query-input{
+    font-family: Slack-Lato, Slack-Fractions, appleLogo, sans-serif;
+    font-size: 15px;
     border: none;
     height: 80%;
+}
+
+.user-query-input:focus{
+    outline: none;
 }
 
 .search-results-parent-container{
