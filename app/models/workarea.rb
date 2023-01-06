@@ -44,4 +44,13 @@ class Workarea < ApplicationRecord
         source: :user 
 
     #any user can join a workarea but channels can be made private or public 
+    after_save :ensure_general_pod
+    def ensure_general_pod 
+        if self.pods.length == 0 
+            @pod = Pod.create!({name: 'General Stage', description: 'General room for everyone', workarea_id: self.id, admin_id: self.owner_id })
+            user = User.find_by(id: self.owner_id)
+            @pod.members << user 
+            self.pods << @pod 
+        end 
+    end 
 end

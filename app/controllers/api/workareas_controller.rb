@@ -22,8 +22,9 @@ class Api::WorkareasController < ApplicationController
         @workarea.owner_id = params[:user_id]
         @workarea.image_url = "k"
         @owner = User.find_by(id: @workarea.owner_id)
-        p @owner
         if @workarea.save!
+            # @pod = Pod.create!({name: 'General Stage', description: 'General room for everyone', workarea_id: @workarea.id, admin_id: @workarea.owner_id })
+            # @workarea.pods << @pod
             @workarea.members << @owner
             render :show 
             return 

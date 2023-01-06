@@ -38,7 +38,7 @@ const CreateWorkArea = () => {
                 user_id: user.id
             }
             dispatch(createWorkarea(data)).then( res => {
-                history.push(`/client/workareas/${res.id}/pods/1`)
+                history.push(`/client/workareas/${res.id}/pods/${res.firstPod.id}`)
             })
             return 
         }

@@ -6,6 +6,7 @@ json.users do
         end 
     end 
 end 
+json.first_pod @workarea.pods.first
 # json.pods do 
 #     @workarea.pods.each do |pod|
 #         json.set! pod.id do 
