@@ -5,6 +5,7 @@ json.user do
             @user.workareas.each do |workarea|
                 json.set! workarea.id do 
                     json.extract! workarea, :id, :name, :owner_id, :created_at
+                    json.first_pod workarea.pods.select{|pod| pod.members.include?(@user)}.first
                 end 
             end
         end

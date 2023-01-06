@@ -11,6 +11,8 @@ import { retriveNewMembership } from '../../store/session'
 import MessengerToggle from "./MessengerToggle";
 import MessengerHeader from "./MessengerHeader";
 import NewDirectMessage from "./NewDirectMessage";
+import { fetchAllUserDirectMessages } from "../../store/directMessageReducer";
+import { fetchUserPods } from "../../store/podReducer";
 
 
 const DisplayWorkAreaPage = () => {
@@ -20,12 +22,12 @@ const DisplayWorkAreaPage = () => {
     const pods = useSelector(state => state.pods)
     const sessionUser = useSelector(state => state.session.user)
     const dispatch = useDispatch();
-    console.log('newmsg')
-    console.log(newMsg)
-
+   
     useEffect(() => {
         dispatch(retriveNewMembership())
         dispatch(fetchWorkarea(workareaId))
+        dispatch(fetchAllUserDirectMessages(workareaId))
+        dispatch(fetchUserPods(workareaId))
     }, [dispatch, workareaId])
 
     return (

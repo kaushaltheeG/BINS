@@ -1,4 +1,5 @@
 import csrfFetch from "./csrf";
+import { SET_CURRENT_WORKAREA } from "./workareaReducer";
 
 export const GET_ALL_USER_DIRECT_MESSAGES = 'user_all_get/DIRECT_MESSAGES';
 export const GET_SELECTED_DIRECT_MESSAGE = 'selected_fetch/DIRECT_MESSAGE';
@@ -88,10 +89,11 @@ const directMessageReducer = (state={}, action) => {
             return {...state, [action.directMessage.id]: action.directMessage}
         case REMOVE_CHAT: 
             const nextState = {... state}
-            console.log(action, 'dm reducer')
             delete nextState[action.dmId]
             return nextState
             return 
+        case SET_CURRENT_WORKAREA:
+            return {}
         default: 
             return state 
     }

@@ -1,5 +1,5 @@
 import csrfFetch from "./csrf";
-
+import { SET_CURRENT_WORKAREA } from "./workareaReducer";
 const GET_MEMBERSHIP_PODS = 'get/UserPods';
 const CREATE_POD = 'create/Pod';
 const DELETE_POD = 'delete/POD';
@@ -110,6 +110,8 @@ const podReducer = (state={}, action) => {
             const nextState = {...state};
             delete nextState[action.podId];
             return {...nextState}
+        case SET_CURRENT_WORKAREA:
+            return {}
         default:
             return state;
     }

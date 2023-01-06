@@ -67,13 +67,13 @@ const MessengerToggle = () => {
             } 
             {(!showPods && type === "pods") && 
                 <div className="pod-element pod-span-ele-active"  >
-                    {currentPod.private &&
+                    {currentPod?.private &&
                         <LockIcon id="lock-hash-icon" />
                     }
-                    {!currentPod.private &&
+                    {!currentPod?.private &&
                         <TagIcon id="lock-hash-icon" />
                     }
-                    <span id="pod-span-ele">{currentPod.name}</span>
+                    <span id="pod-span-ele">{currentPod?.name}</span>
                 </div>
             }
             <div className="pod-dm-spacer" ></div>

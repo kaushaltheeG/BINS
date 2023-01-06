@@ -1,12 +1,11 @@
 import csrfFetch from "./csrf";
-
+import { SET_CURRENT_WORKAREA } from "./workareaReducer";
 const GET_ALL_MESSAGE = 'messages/FETCH_ALL_MESSAGES';
 const CREATE_MESSAGE = 'messages/CREATE_MESSAGE';
 const RECEIVE_MESSAGE = 'message/RECEIVE'
 
 export const getMessages = (state) => {
-   
-    if (!Object.keys(state.messages.data).length) return null 
+    if (!state.messages) return null 
     else return Object.values(state.messages.data)
 }
 
@@ -132,6 +131,8 @@ const messageReducer = (state=null, action) => {
         case RECEIVE_MESSAGE:
             nextState.data = {...nextState.data, [action.message.id]: action.message}
             return nextState
+        case SET_CURRENT_WORKAREA:
+            return null
         default: 
             return state
     }
