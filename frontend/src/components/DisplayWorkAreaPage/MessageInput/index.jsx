@@ -3,8 +3,8 @@ import { useParams } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
 import { createDmMessage, createPodMessage } from "../../../store/messageReducer";
 import "./MessageInput.css"
-const MessageInput = () => {
-    const [body, setBody] = useState('');
+const MessageInput = ({body, setBody}) => {
+    // const [body, setBody] = useState('');
     const currentUser = useSelector(state => state.session.user);
     const dispatch = useDispatch();
     const { workareaId, typeId, type } = useParams();

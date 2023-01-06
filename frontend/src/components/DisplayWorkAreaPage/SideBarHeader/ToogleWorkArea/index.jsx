@@ -12,10 +12,8 @@ const ToggleWorkArea = () => {
     const history = useHistory();
     const userWorkareas = useSelector(state => state.session.user.memberships.workareas)
     const dispatch = useDispatch();
-    const workareas =   userWorkareas ? Object.values(userWorkareas) : null //useSelector(state => Object.values(state.session.user.memberships.workareas));
+    const workareas = userWorkareas ? Object.values(userWorkareas) : null //useSelector(state => Object.values(state.session.user.memberships.workareas));
 
-    // const firstPod = allWorkareas ? Object.values(allWorkareas).at(0) : null 
-    // console.log(allWorkareas)
     const handleToggle = ({id}) => (e) => {
         e.stopPropagation();
         let firstPod = userWorkareas[id].firstPod

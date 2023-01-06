@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Redirect } from "react-router-dom"
 import { fetchWorkarea } from "../../store/workareaReducer";
@@ -22,6 +22,8 @@ const DisplayWorkAreaPage = () => {
     const pods = useSelector(state => state.pods)
     const sessionUser = useSelector(state => state.session.user)
     const dispatch = useDispatch();
+    const [body, setBody] = useState('');
+    console.log('body', body)
    
     useEffect(() => {
         dispatch(retriveNewMembership())
@@ -44,7 +46,7 @@ const DisplayWorkAreaPage = () => {
                 </div>
                 <div className="grid-message-control">
                         {newMsg === 'newmessage' && 
-                            <NewDirectMessage />
+                        <NewDirectMessage body={body} setBody={setBody} />
                         }
                         { !newMsg && 
                             <div className="MessageList">
@@ -52,7 +54,7 @@ const DisplayWorkAreaPage = () => {
                             </div>
 
                         }
-                            <MessageInput />
+                            <MessageInput body={body} setBody={setBody}/>
                     
                 </div>
             </div>

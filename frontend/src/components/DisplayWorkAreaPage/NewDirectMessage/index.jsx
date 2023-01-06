@@ -7,7 +7,7 @@ import { getCurrentWorkArea } from '../../../store/workareaReducer'
 import './NewDm.css'
 
 
-const NewDirectMessage = () => {
+const NewDirectMessage = ({body, setBody}) => {
     const currentWa = useSelector(getCurrentWorkArea);
     const currentUser = useSelector(getCurrentUser);
     const [selectedUsers, setSelectedUsers] = useState([]);
@@ -68,12 +68,21 @@ const NewDirectMessage = () => {
     const handleDmSearch = (e) => {
         e.preventDefault();
         if (!query.length && withinSelected.length) {
-            let payload = {
-                userIds: withinSelected
+            let payload;
+            if (body.length) {
+                payload = {
+                    body,
+                    userIds: withinSelected
+                }
+            } else {
+                payload = {
+                    userIds: withinSelected
+                }
             }
             dispatch(createDirectMessage(workareaId, payload)).then((dm) => {
                 history.push(`/client/workareas/${dm.workareaId}/dms/${dm.id}`)
             })
+            setBody("")
         }
     }
 
