@@ -11,14 +11,14 @@ const NewDirectMessage = () => {
     const [withinSelected, setWithinSelected] = useState([])
     const [toBeAdded, setToBeAdded] = useState([])
 
-    const waMembers = currentWa ? Object.values(currentWa.users).filter(user => user.id !== currentUser.id).map(user => user.name) : [];
+    const waMembers = currentWa ? Object.values(currentWa.users).filter(user => user.id !== currentUser.id): [];
     
 
     const handleSearch = (e) => {
         e.preventDefault()
-
-        waMembers = waMembers.filter(member => member.name.toLowerCase().includes(e.target.value) || member.name.includes(e.target.value))
-        setToBeAdded(waMembers)
+        
+        let filteredNames = waMembers.filter(member => member.name.toLowerCase().includes(e.target.value) || member.name.includes(e.target.value))
+        setToBeAdded(filteredNames)
         if (e.target.value === "") {
             setToBeAdded([])
         }
@@ -60,12 +60,12 @@ const NewDirectMessage = () => {
             </div>
             <div className="search-results-parent-container">
                 <div className="result-container">
-                    {waMembers?.map(mem => (
-                        <div className="profile-container-user-search-dm">
+                    {toBeAdded?.map(mem => (
+                        <div className="profile-container-user-search-dm" key={mem.id} value={mem.id}>
                             <div>
-                                <button className="profile-icon marign-add-new-dm-search" id='size-override'>{mem[0]?.toUpperCase()}</button>
+                                <button className="profile-icon marign-add-new-dm-search" id='size-override'>{mem?.name[0]?.toUpperCase()}</button>
                             </div>
-                            <span id="user-newdm-searc-name-font">{mem}</span>
+                            <span id="user-newdm-searc-name-font">{mem?.name}</span>
                         </div>
                     ))}
 
