@@ -62,12 +62,21 @@ const NewDirectMessage = () => {
                         <span className='user-search-spacer-span'></span>
                         {selectedUsers.map((user) => (
                             <>
-                                <div className="user-profile-dm-search-container">{user?.name}</div>
+                               
+                                <div className="user-profile-dm-search-container marign-top-adjustment cancel-user-query">
+                                    <div>
+                                        <button className="profile-icon color-div-icon" id='size-override'>{user?.name[0]?.toUpperCase()}</button>
+                                    </div>
+                                    <span className='font-align'>{user?.name}</span>
+                                    <div className="cancel-x-container" >
+                                        <button className='font-align cancel-small-x' value={user.id} onClick={removeSelected}>X</button>
+                                    </div>
+                                </div>
                                 <span className='user-search-spacer-span'></span>
                             </>
                         ))}
-                        <div className="user-query-container">
-                            <textarea className='user-query-input' onChange={handleSearch} value={query}></textarea>
+                        <div className="user-query-container marign-top-adjustment">
+                            <input className='user-query-input' onChange={handleSearch} value={query}></input>
                         </div>
 
                 </div>
