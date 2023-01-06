@@ -23,7 +23,7 @@ const DisplayWorkAreaPage = () => {
     const sessionUser = useSelector(state => state.session.user)
     const dispatch = useDispatch();
     const [body, setBody] = useState('');
-    console.log('body', body)
+    const [withinSelected, setWithinSelected] = useState([]);
    
     useEffect(() => {
         dispatch(retriveNewMembership())
@@ -46,7 +46,11 @@ const DisplayWorkAreaPage = () => {
                 </div>
                 <div className="grid-message-control">
                         {newMsg === 'newmessage' && 
-                        <NewDirectMessage body={body} setBody={setBody} />
+                        <NewDirectMessage body={body} 
+                                        setBody={setBody} 
+                                        withinSelected={withinSelected} 
+                                        setWithinSelected={setWithinSelected} 
+                        />
                         }
                         { !newMsg && 
                             <div className="MessageList">
@@ -54,7 +58,11 @@ const DisplayWorkAreaPage = () => {
                             </div>
 
                         }
-                            <MessageInput body={body} setBody={setBody}/>
+                    <MessageInput body={body} 
+                                setBody={setBody} 
+                                withinSelected={withinSelected} 
+                                setWithinSelected={setWithinSelected} 
+                    />
                     
                 </div>
             </div>

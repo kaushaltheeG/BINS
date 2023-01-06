@@ -7,11 +7,11 @@ import { getCurrentWorkArea } from '../../../store/workareaReducer'
 import './NewDm.css'
 
 
-const NewDirectMessage = ({body, setBody}) => {
+const NewDirectMessage = ({body, setBody, withinSelected, setWithinSelected}) => {
     const currentWa = useSelector(getCurrentWorkArea);
     const currentUser = useSelector(getCurrentUser);
     const [selectedUsers, setSelectedUsers] = useState([]);
-    const [withinSelected, setWithinSelected] = useState([]);
+    // const [withinSelected, setWithinSelected] = useState([]);
     const [toBeAdded, setToBeAdded] = useState([]);
     const [errors, setErrors] = useState([]);
     const [query, setQuery] = useState("");
@@ -84,6 +84,7 @@ const NewDirectMessage = ({body, setBody}) => {
             })
             setBody("")
         }
+
     }
 
     useEffect(()=>{
