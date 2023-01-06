@@ -11,14 +11,16 @@ const NewDirectMessage = () => {
     const [selectedUsers, setSelectedUsers] = useState([]);
     const [withinSelected, setWithinSelected] = useState([])
     const [toBeAdded, setToBeAdded] = useState([])
+    const [query, setQuery] = useState("")
 
     const waMembers = currentWa ? Object.values(currentWa.users).filter(user => user.id !== currentUser.id): [];
     // console.log(waMembers)
 
     const handleSearch = (e) => {
         e.preventDefault()
-        
+        setQuery(oldVal => e.target.value)
         let filteredNames = waMembers.filter(member => member.name.toLowerCase().includes(e.target.value) || member.name.includes(e.target.value))
+                            .filter(user => !withinSelected.includes(user.id))
         setToBeAdded(filteredNames)
         if (e.target.value === "") {
             setToBeAdded([])
@@ -31,8 +33,10 @@ const NewDirectMessage = () => {
         console.log(e.target.value)
         if (!withinSelected.includes(e.target.value)) {
             const newUser = currentWa.users[parseInt(e.target.value)]
-            setWithinSelected(oldVal => [...oldVal, e.target.value])
+            setWithinSelected(oldVal => [...oldVal, parseInt(e.target.value)])
             setSelectedUsers(oldArr => [...oldArr, newUser])
+            setToBeAdded([])
+            setQuery("")
         }
         console.log(selectedUsers)
     }
@@ -63,7 +67,7 @@ const NewDirectMessage = () => {
                             </>
                         ))}
                         <div className="user-query-container">
-                            <textarea className='user-query-input' onChange={handleSearch}></textarea>
+                            <textarea className='user-query-input' onChange={handleSearch} value={query}></textarea>
                         </div>
 
                 </div>
