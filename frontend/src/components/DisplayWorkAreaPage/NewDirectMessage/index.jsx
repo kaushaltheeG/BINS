@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { getCurrentUser } from '../../../store/session';
 import { getCurrentWorkArea } from '../../../store/workareaReducer'
 import './NewDm.css'
+import PersonIcon from '@mui/icons-material/Person';
 
 const NewDirectMessage = () => {
     const currentWa = useSelector(getCurrentWorkArea);
@@ -12,7 +13,7 @@ const NewDirectMessage = () => {
     const [toBeAdded, setToBeAdded] = useState([])
 
     const waMembers = currentWa ? Object.values(currentWa.users).filter(user => user.id !== currentUser.id): [];
-    
+    // console.log(waMembers)
 
     const handleSearch = (e) => {
         e.preventDefault()
@@ -27,12 +28,16 @@ const NewDirectMessage = () => {
 
     const handleSelected = (e) => {
         e.preventDefault();
+        console.log(e.target.value)
         if (!withinSelected.includes(e.target.value)) {
             const newUser = currentWa.users[parseInt(e.target.value)]
             setWithinSelected(oldVal => [...oldVal, e.target.value])
             setSelectedUsers(oldArr => [...oldArr, newUser])
         }
+        console.log(selectedUsers)
     }
+
+
 
     const removeSelected = (e) => {
         e.preventDefault();
@@ -51,7 +56,12 @@ const NewDirectMessage = () => {
                 </div>
                 <div className="new-dm-search-container">
                         <span className='user-search-spacer-span'></span>
-                        <div className="user-profile-dm-search-container">User</div>
+                        {selectedUsers.map((user) => (
+                            <>
+                                <div className="user-profile-dm-search-container">{user?.name}</div>
+                                <span className='user-search-spacer-span'></span>
+                            </>
+                        ))}
                         <div className="user-query-container">
                             <textarea className='user-query-input' onChange={handleSearch}></textarea>
                         </div>
@@ -61,12 +71,16 @@ const NewDirectMessage = () => {
             <div className="search-results-parent-container">
                 <div className="result-container">
                     {toBeAdded?.map(mem => (
-                        <div className="profile-container-user-search-dm" key={mem.id} value={mem.id}>
-                            <div>
-                                <button className="profile-icon marign-add-new-dm-search" id='size-override'>{mem?.name[0]?.toUpperCase()}</button>
-                            </div>
-                            <span id="user-newdm-searc-name-font">{mem?.name}</span>
+                       
+                        <div className="profile-container-user-search-dm" key={mem.id} >
+                                <option className="profile-icon marign-add-new-dm-search color-div-icon" value={mem.id} onClick={handleSelected} >
+                                    {mem?.name[0]?.toUpperCase()}
+                
+                                </option>
+                                <option id="user-newdm-searc-name-font" value={mem.id} onClick={handleSelected} >{mem?.name}</option>
                         </div>
+
+                        
                     ))}
 
                 </div>
