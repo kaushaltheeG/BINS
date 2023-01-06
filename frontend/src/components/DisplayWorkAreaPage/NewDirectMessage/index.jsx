@@ -71,7 +71,6 @@ const NewDirectMessage = () => {
                 </div>
                 <div className="new-dm-search-container">
 
-                        <span className='user-search-spacer-span'></span>
                         <>
                             {selectedUsers.map((user) => (
                                 <>
