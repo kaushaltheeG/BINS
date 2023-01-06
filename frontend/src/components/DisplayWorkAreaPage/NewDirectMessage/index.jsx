@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { useHistory, useParams } from 'react-router-dom';
+import { createDirectMessage } from '../../../store/directMessageReducer';
 import { getCurrentUser } from '../../../store/session';
 import { getCurrentWorkArea } from '../../../store/workareaReducer'
 import './NewDm.css'
@@ -13,7 +15,10 @@ const NewDirectMessage = () => {
     const [toBeAdded, setToBeAdded] = useState([]);
     const [errors, setErrors] = useState([]);
     const [query, setQuery] = useState("");
+    const {workareaId} = useParams();
+    const history = useHistory();
     const inputFoucs = useRef(null);
+    const dispatch = useDispatch();
 
     const waMembers = currentWa ? Object.values(currentWa.users).filter(user => user.id !== currentUser.id): [];
     
@@ -44,8 +49,9 @@ const NewDirectMessage = () => {
         if (withinSelected.length > 6) {
             setErrors(["Only 8 people can be in a group chat."])
         }
-     
     }
+
+
 
     const removeSelected = (e) => {
         e.preventDefault();
@@ -56,6 +62,18 @@ const NewDirectMessage = () => {
 
         if (withinSelected.length < 9) {
             setErrors([])
+        }
+    }
+
+    const handleDmSearch = (e) => {
+        e.preventDefault();
+        if (!query.length && withinSelected.length) {
+            let payload = {
+                userIds: withinSelected
+            }
+            dispatch(createDirectMessage(workareaId, payload)).then((dm) => {
+                history.push(`/client/workareas/${dm.workareaId}/dms/${dm.id}`)
+            })
         }
     }
 
@@ -102,7 +120,17 @@ const NewDirectMessage = () => {
                             ))}
                             {!errors.length && 
                                 <div className="user-query-container marign-top-adjustment">
-                                    <input ref={inputFoucs}className='user-query-input' onChange={handleSearch} value={query}></input>
+                                    <input 
+                                        ref={inputFoucs}
+                                        className='user-query-input' 
+                                        onChange={handleSearch} 
+                                        value={query}
+                                        onKeyDown={e => {
+                                            if (e.code === 'Enter' && !e.shiftKey) {
+                                                handleDmSearch(e)
+                                            }
+                                        }}
+                                        ></input>
                                 </div>
                 
                             }
