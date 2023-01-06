@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux'
 import { getCurrentUser } from '../../../store/session';
 import { getCurrentWorkArea } from '../../../store/workareaReducer'
@@ -12,6 +12,7 @@ const NewDirectMessage = () => {
     const [withinSelected, setWithinSelected] = useState([])
     const [toBeAdded, setToBeAdded] = useState([])
     const [query, setQuery] = useState("")
+    const inputFoucs = useRef(null);
 
     const waMembers = currentWa ? Object.values(currentWa.users).filter(user => user.id !== currentUser.id): [];
     // console.log(waMembers)
@@ -52,6 +53,10 @@ const NewDirectMessage = () => {
 
     }
 
+    useEffect(()=>{
+        inputFoucs.current.focus();
+    },[selectedUsers.length])
+
     return (
         <>
             <div className="new-dm-form-container">
@@ -76,7 +81,7 @@ const NewDirectMessage = () => {
                             </>
                         ))}
                         <div className="user-query-container marign-top-adjustment">
-                            <input className='user-query-input' onChange={handleSearch} value={query}></input>
+                            <input ref={inputFoucs}className='user-query-input' onChange={handleSearch} value={query}></input>
                         </div>
 
                 </div>
