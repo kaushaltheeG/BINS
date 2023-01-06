@@ -21,9 +21,9 @@ function App() {
         <Route path={`/client/workareas/:workareaId/:type/:typeId`} exact>
           <DisplayWorkAreaPage />
         </Route>
-        {/* <Route path={`/client/workareas/:workareaId/dm/:dmId`} exact>
+        <Route path={`/client/workareas/:workareaId/:type/:typeId/:newMsg`} exact>
           <DisplayWorkAreaPage />
-        </Route> */}
+        </Route>
         <Route path='/client/workareas' exact>
           <WorkAreaSelectionPage />
         </Route>

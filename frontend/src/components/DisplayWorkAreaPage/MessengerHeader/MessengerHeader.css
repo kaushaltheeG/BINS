@@ -72,14 +72,25 @@
     /* cursor: pointer; */
 }
 
+#new-message-header {
+    font-weight: 1000px;
+    width: auto;
+        max-width: 200px;
+        height: 24px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        margin-left: 3px;
+}
+
 #current-messenger-name{
     width: auto;
     max-width: 200px;
     height: 24px;
     overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        margin-left: 3px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-left: 3px;
 }
     
 #add-person-icon{

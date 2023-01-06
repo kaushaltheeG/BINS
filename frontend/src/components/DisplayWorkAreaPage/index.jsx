@@ -10,17 +10,18 @@ import SideBarHeader from "./SideBarHeader";
 import { retriveNewMembership } from '../../store/session'
 import MessengerToggle from "./MessengerToggle";
 import MessengerHeader from "./MessengerHeader";
+import NewDirectMessage from "./NewDirectMessage";
 
 
 const DisplayWorkAreaPage = () => {
-    const { workareaId, typeId } = useParams();
+    const { workareaId, typeId, newMsg } = useParams();
     /* if workareaId is NOT within the list of allWorkareas redirect to 404*/
     const workarea = useSelector(state => state.workarea.currentWorkarea);
     const pods = useSelector(state => state.pods)
     const sessionUser = useSelector(state => state.session.user)
     const dispatch = useDispatch();
-    console.log('workarea id')
-    console.log(workareaId, workarea)
+    console.log('newmsg')
+    console.log(newMsg)
 
     useEffect(() => {
         dispatch(retriveNewMembership())
@@ -40,10 +41,15 @@ const DisplayWorkAreaPage = () => {
                     <MessengerHeader />
                 </div>
                 <div className="grid-message-control">
-                    
-                        <div className="MessageList">
-                            <MessageList />
-                        </div>
+                        {newMsg === 'newmessage' && 
+                            <NewDirectMessage />
+                        }
+                        { !newMsg && 
+                            <div className="MessageList">
+                                <MessageList />
+                            </div>
+
+                        }
                             <MessageInput />
                     
                 </div>

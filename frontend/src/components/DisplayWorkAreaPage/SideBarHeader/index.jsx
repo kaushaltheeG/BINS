@@ -1,21 +1,49 @@
 import "./SideBarHeader.css";
 import { useModal } from 'react-hooks-use-modal';
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import WorkAreaProfile from "./WorkAreaProfile";
 import CreateWorkArea from "./CreateWorkArea";
 import ToggleWorkArea from "./ToogleWorkArea";
 import LeaveWorkArea from "./LeaveWorkArea";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import BorderColorRoundedIcon from '@mui/icons-material/BorderColorRounded';
+import { useHistory, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 
 const SideBarHeader = ({ workarea }) => {
+    const history = useHistory()
+    const {workareaId, type, typeId} = useParams();
+    const [currentPlace, setCurrentPlace] = useState();
+    const pods = useSelector(state => state.pods)
+    const dms = useSelector(state => state.directMessages)
+
+
     const [Modal, open, close, isOpen] = useModal('root', {
         preventScroll: true, 
         focusTrapOptions: {
             clickOutsideDeactivates: true
         }
     })
+
+    useEffect(() => {
+        if (type === 'pods') {  
+            let currentPod =  pods[parseInt(typeId)]; 
+            setCurrentPlace(currentPod)
+        } else if (type === 'dms'){
+            let currentDm = Object.keys(dms).length ? dms[parseInt(typeId)] : null;
+            setCurrentPlace(currentDm)
+        }
+
+    }, [workareaId, type, typeId])
+
+
+
+    const handleNewMessage = (e) => {
+        e.preventDefault();
+        console.log('current place', currentPlace)
+        history.push(`/client/workareas/${currentPlace.workareaId}/${type}/${currentPlace.id}/newmessage`)
+    }
     
 
     return (
@@ -23,9 +51,7 @@ const SideBarHeader = ({ workarea }) => {
             
             <div className="side-bar-wa-name">
                 <div className="horizontal-name-and-down-icon" onClick={open} >
-                    <span id="side-bar-header-name" >{workarea.name} 
-                        {/* <i className="fa fa-sort-desc" aria-hidden="true"></i> */}
-                    </span>
+                    <span className="workarea-name-span">{workarea?.name}</span>
                     <ArrowDropDownIcon />
                 </div>
                 <Modal >
@@ -49,8 +75,8 @@ const SideBarHeader = ({ workarea }) => {
             </div>
             
             <div className="icon-div-container">
-                <button className="icon-container">
-                    {/* <i className="fa fa-pencil-square-o" aria-hidden="true" id='create-icon'></i> */}
+                <button className="icon-container" onClick={handleNewMessage}>
+                    
                     <BorderColorRoundedIcon id='create-dm-icon-btn'/>
                 </button>
             </div>

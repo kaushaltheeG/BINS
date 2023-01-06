@@ -40,6 +40,7 @@
 .horizontal-name-and-down-icon {
     display: flex;
     justify-content: center;
+    padding-top: 20px;
 }
 
 .line-separator-modal {
@@ -80,6 +81,21 @@
 .workeara-profile-icon-model {
     width: 36px;
     font-weight: 400;
+}
+
+.workarea-name-span {
+    height: 50px;
+    width: 70px;
+    font-size: 20px;
+    font-family: Slack-Lato, Slack-Fractions, appleLogo, sans-serif;
+    display: block;
+    font-weight: 900;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+   
+
 }
 
 .workarea-profile-info-modal {
