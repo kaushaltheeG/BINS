@@ -43,7 +43,7 @@ const MessageList = () => {
                 {channel: 'PodChannel', workareaId: workareaId, podId: typeId},
                 {
                     connected: () => {
-                        console.log('connected to work area')
+                        // console.log('connected to work area')
                     },
                     received: message => {
                         
@@ -64,7 +64,7 @@ const MessageList = () => {
                 { channel: 'DirectMessageChannel', workareaId: workareaId, dmId: typeId },
                 {
                     connected: () => {
-                        console.log('connected to work area')
+                        // console.log('connected to work area')
                     },
                     received: message => {
                         
