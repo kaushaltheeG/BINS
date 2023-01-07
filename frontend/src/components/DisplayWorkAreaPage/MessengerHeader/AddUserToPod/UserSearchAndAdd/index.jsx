@@ -1,7 +1,7 @@
 import "./SearchAndAdd.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom"
-import { useState} from 'react';
+import { useEffect, useRef, useState} from 'react';
 import TagIcon from '@mui/icons-material/Tag';
 import LockIcon from '@mui/icons-material/Lock';
 import Diversity3Icon from '@mui/icons-material/Diversity3';
@@ -25,13 +25,15 @@ const UserSearchAndAdd = () => {
         .map(mem => mem.name)
         .toString() : []
 
-    const [open, setOpen] = useState(false)
-    // console.log('currentWa',currentWa)
+    const [query, setQuery] = useState("")
+  
     const waMembers = currentWa ? Object.values(currentWa.users) : null; 
     const members = (currentPod && type === 'pods') ? Object.values(currentPod.members) : (currentDm && type === 'dms') ? Object.values(currentDm.members) : null;
     const memberNames = members ? members.map(user => user.name) : null;
     const dispatch = useDispatch();
     const history = useHistory();
+    const inputFoucs = useRef(null)
+
 
     
 
@@ -48,9 +50,10 @@ const UserSearchAndAdd = () => {
     const [withinSelected, setWithinSelected] = useState([])
     const handleSearch = (e) => {
         e.preventDefault()
-        
-        nonMembers = nonMembers.filter(member => member.name.toLowerCase().includes(e.target.value) || member.name.includes(e.target.value) )
-        setToBeAdded(nonMembers)
+        setQuery(oldVal => e.target.value)
+        let filteredNames = nonMembers.filter(member => member.name.toLowerCase().includes(e.target.value) || member.name.includes(e.target.value) )
+                    .filter(user => !withinSelected.includes(user.id))
+        setToBeAdded(filteredNames)
         if (e.target.value === "") {
             setToBeAdded([])
         }
@@ -61,8 +64,10 @@ const UserSearchAndAdd = () => {
         e.preventDefault();
         if (!withinSelected.includes(e.target.value)) {
             const newUser = currentWa.users[parseInt(e.target.value)]
-            setWithinSelected(oldVal => [...oldVal, e.target.value])
+            setWithinSelected(oldVal => [...oldVal, parseInt(e.target.value)])
             setSelectedUsers( oldArr => [...oldArr, newUser])
+            setToBeAdded([])
+            setQuery("")
         }
     }
 
@@ -82,6 +87,7 @@ const UserSearchAndAdd = () => {
                 workareaId,
                 id: typeId,
                 members: selectedUsers
+                
             }
             if (type === 'pods') {
                 dispatch(newPodMembers(payload)).then((pod) => (
@@ -94,6 +100,10 @@ const UserSearchAndAdd = () => {
             }
         }
     }
+
+    useEffect(()=> {
+        inputFoucs.current.focus();
+    }, [selectedUsers.length])
 
     return (
         <div className="search-and-add-container">
@@ -125,9 +135,34 @@ const UserSearchAndAdd = () => {
                 </div>
             </div>
             <div className="search-user-input padding-top-bottom">
-                <input className="input-div" onChange={handleSearch} placeholder='Search. . .'>
-                    
-                </input >
+                <div className="input-div" >
+                    <>
+                        {selectedUsers.map((user) => (
+                            <>
+
+                                <div className="user-profile-dm-search-container marign-top-adjustment cancel-user-query">
+                                    <div>
+                                        <button className="profile-icon color-div-icon" id='size-override'>{user?.name[0]?.toUpperCase()}</button>
+                                    </div>
+                                    <span className='font-align ellipsis-ft'>{user?.name}</span>
+                                    <div className="cancel-x-container" >
+                                        <button className='font-align cancel-small-x' value={user.id} onClick={removeSelected}>X</button>
+                                    </div>
+                                </div>
+                                <span className='user-search-spacer-span'></span>
+                            </>
+                        ))}
+
+                    </>
+
+                    <input className='add-user-input user-query-input' 
+                            onChange={handleSearch} 
+                            ref={inputFoucs}
+                            value={query}
+                            placeholder='Search. . .'>
+                        
+                    </input >
+                </div>
             </div>
             <div className="client-search-result padding-top-bottom">
                 {
@@ -141,12 +176,12 @@ const UserSearchAndAdd = () => {
             <div className="add-user-to-pod-btn padding-top-bottom">
                 <div className="inner-btn-container">
                     <div className="user-select-list">
-                        {selectedUsers?.map(user => (
+                        {/* {selectedUsers?.map(user => (
                             <div className="user-cell-container " id="hover-cancel">
                                 <span className="select-user-span ">{user.name}</span>
                                 <button className="cancel-user-selected" value={user.id} onClick={removeSelected}>X</button>
                             </div>
-                        ))}
+                        ))} */}
                     </div>
                     <button id="Add-user-btn" onClick={handleAddUsers}>Add</button>
                 </div>

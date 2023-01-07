@@ -69,14 +69,14 @@
 }
 
 .workarea-profile-modal {
-        display: flex;
-        font-size: 15px;
-        font-weight: 900;
-        padding: 20px 24px 12px;
-        line-height: 1.2;
-        user-select: text;
-        /* justify-content: space-around; */
-        /* background-color: #8e6290; */
+    display: flex;
+    font-size: 15px;
+    font-weight: 900;
+    padding: 20px 24px 12px;
+    line-height: 1.2;
+    user-select: text;
+    /* justify-content: space-around; */
+    /* background-color: #8e6290; */
 }
 .workeara-profile-icon-model {
     width: 36px;

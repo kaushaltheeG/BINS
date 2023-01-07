@@ -63,8 +63,8 @@
     def add_members
         members = params[:members]
         @workarea = Workarea.find_by(id: params[:workarea_id])
-        @pod = @workarea.pods.find_by(id: params[:pod_id]);
-
+        @pod = @workarea.pods.find_by(id: params[:pod][:id]);
+        p @pod 
         members.each do |member|
             user = User.find_by(id: member[:id])
             @pod.members << user unless @pod.members.include?(user);

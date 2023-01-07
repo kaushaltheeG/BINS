@@ -37,7 +37,7 @@ const NewDirectMessage = ({body, setBody, withinSelected, setWithinSelected}) =>
 
     const handleSelected = (e) => {
         e.preventDefault();
-        console.log(e.target.value)
+        
         if (!withinSelected.includes(e.target.value)) {
             const newUser = currentWa.users[parseInt(e.target.value)]
             setWithinSelected(oldVal => [...oldVal, parseInt(e.target.value)])
@@ -133,6 +133,7 @@ const NewDirectMessage = ({body, setBody, withinSelected, setWithinSelected}) =>
                                     <input 
                                         ref={inputFoucs}
                                         className='user-query-input' 
+                                        placeholder='Start a direct message or group chat'
                                         onChange={handleSearch} 
                                         value={query}
                                         onKeyDown={e => {

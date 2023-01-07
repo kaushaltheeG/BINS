@@ -67,11 +67,11 @@
     width: 100%;
     max-height: 600px;
     align-content: flex-start;
-        align-items: center;
-        display: flex;
-        flex-flow: row wrap;
-        justify-content: flex-start;
-        outline: none;
+    align-items: center;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    outline: none;
     /* background-color: aqua; */
     padding: 0 4px 4px;
 }

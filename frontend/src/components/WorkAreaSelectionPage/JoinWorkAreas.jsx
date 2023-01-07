@@ -8,6 +8,8 @@ const JoinWorkAreas = () => {
     const dispatch = useDispatch();
     console.log(allWorkareas)
 
+    //be able to join and redirect to first workarea pod 
+
     useEffect(()=> {
         dispatch(fetchWorkareas())
     }, [dispatch])
