@@ -83,6 +83,7 @@ const NewDirectMessage = ({body, setBody, withinSelected, setWithinSelected}) =>
                 history.push(`/client/workareas/${dm.workareaId}/dms/${dm.id}`)
             })
             setBody("")
+            setWithinSelected([])
         }
 
     }

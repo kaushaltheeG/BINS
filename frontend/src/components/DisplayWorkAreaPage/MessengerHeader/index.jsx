@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom"
+import { Redirect, useParams } from "react-router-dom"
 import TagIcon from '@mui/icons-material/Tag';
 import LockIcon from '@mui/icons-material/Lock';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -27,7 +27,7 @@ const MessengerHeader = () => {
     const currentPod = Object.keys(pods).length ? pods[parseInt(typeId)] : null; 
     const currentDm = Object.keys(dms).length ? dms[parseInt(typeId)] : null;
     
-    const currentDmName = currentDm ? Object.values(currentDm.members).filter((member) => member.id !== currentUser.id)
+    const currentDmName = currentDm ? Object.values(currentDm.members).filter((member) => member.id !== currentUser?.id)
         .map(mem => mem.name)
         .toString() : []
 
@@ -57,7 +57,7 @@ const MessengerHeader = () => {
 
     
 
-    
+    if (!currentUser) <Redirect to={'/signin'}/>
 
     return (
         <div className="messenger-main-header-container">

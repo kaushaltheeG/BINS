@@ -65,7 +65,6 @@ ApplicationRecord.transaction do
 
   puts "Creating Pods for Bot Takeover"
   bot_takeover_pods = Pod.create!([
-    {name: 'General Stage', description: 'For all bots' , workarea_id: bot_takeover_wa.id , admin_id: bot_users.first.id , private: false },
     {name: 'Bot Leaders', description: 'Executive Board' , workarea_id: bot_takeover_wa.id , admin_id: bot_users.first.id , private: true },
     {name: 'Next Steps', description: 'What to take over next' , workarea_id: bot_takeover_wa.id , admin_id: bot_users[2].id , private: false },
     {name: 'Bot News', description: 'What is new in the bot world' , workarea_id: bot_takeover_wa.id , admin_id: bot_users[1].id , private: false },
@@ -85,18 +84,18 @@ ApplicationRecord.transaction do
 
   puts "Creating Memberships to Pods: General Stage, Next Steps, Bot News"
   bot_users.each do |bot|
-    bot_takeover_pods[0].members << bot unless bot_takeover_pods[0].members.include?(bot)
-    bot_takeover_pods[2].members << bot unless bot_takeover_pods[2].members.include?(bot)
-    bot_takeover_pods[3].members << bot unless bot_takeover_pods[3].members.include?(bot)
+   bot_takeover_wa.pods[0].members << bot unless bot_takeover_wa.pods[0].members.include?(bot)
+   bot_takeover_pods[1].members << bot unless bot_takeover_pods[1].members.include?(bot)
+   bot_takeover_pods[2].members << bot unless bot_takeover_pods[2].members.include?(bot)
 
-    bot_takeover_pods[0].members << demo_user unless bot_takeover_pods[0].members.include?(demo_user)
-    bot_takeover_pods[2].members << demo_user unless bot_takeover_pods[2].members.include?(demo_user)
-    bot_takeover_pods[3].members << demo_user unless bot_takeover_pods[3].members.include?(demo_user)
+   bot_takeover_pods[0].members << demo_user unless bot_takeover_pods[0].members.include?(demo_user)
+   bot_takeover_pods[1].members << demo_user unless bot_takeover_pods[1].members.include?(demo_user)
+   bot_takeover_pods[2].members << demo_user unless bot_takeover_pods[2].members.include?(demo_user)
   end 
 
   puts "Creating Memberships to Pod: Bot Leaders"
   bot_users[0..3].each do |bot|
-    bot_takeover_pods[1].members << bot unless bot_takeover_pods[1].members.include?(bot)
+    bot_takeover_pods[0].members << bot unless bot_takeover_pods[0].members.include?(bot)
   end 
 
   puts "Creating Memberships to Pod: Overtake Exec"

@@ -33,7 +33,7 @@ const MessageInput = ({ body, setBody, withinSelected, setWithinSelected }) => {
                 createDmMessage(message, workareaId, typeId)
             }
             setBody('')
-
+            setWithinSelected([])
         }
     }
 

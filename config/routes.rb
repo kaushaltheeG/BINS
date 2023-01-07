@@ -41,5 +41,7 @@ Rails.application.routes.draw do
 
     
   end
+
   mount ActionCable.server => '/cable'
+  get '*path', to: "static_pages#frontend_index"
 end
