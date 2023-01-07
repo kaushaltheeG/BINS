@@ -46,7 +46,7 @@ const MessageList = () => {
                         console.log('connected to work area')
                     },
                     received: message => {
-                        console.log('Received message: ', message)
+                        
                         dispatch(receiveMessage(message))
                         
                     }
@@ -67,7 +67,7 @@ const MessageList = () => {
                         console.log('connected to work area')
                     },
                     received: message => {
-                        console.log('Received message: ', message)
+                        
                         dispatch(receiveMessage(message))
                         
                     }

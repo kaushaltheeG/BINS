@@ -6,7 +6,7 @@ import { getUserWorkareas, retriveNewMembership } from '../../store/session';
 
 
 const ClientWorkAreas = () => {
-    console.log('rendered')
+   
     const dispatch = useDispatch()
     const sessionUser = useSelector(state => state.session.user );
     const workareas = useSelector(getUserWorkareas);
@@ -21,7 +21,7 @@ const ClientWorkAreas = () => {
         dispatch(retriveNewMembership())
     },[dispatch])
 
-    console.log('Users workareas', workareas)
+  
 
     return (
         <>

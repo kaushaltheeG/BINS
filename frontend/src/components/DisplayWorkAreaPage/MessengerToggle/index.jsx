@@ -22,10 +22,10 @@ const MessengerToggle = () => {
     const directMessages = useSelector(state => state.directMessages)
     const dispatch = useDispatch();
     const { workareaId, typeId, type} = useParams();
-    console.log(dms)
+   
     const currentPod = Object.keys(pods).length ? pods[parseInt(typeId)] : null;
     const currentDm = Object.keys(dms).length ? dms[parseInt(typeId)] : null;
-    console.log(currentDm, 'crrName')
+
     const currentDmName = currentDm ? Object.values(currentDm.members).filter((member) => member?.id !== currentUser?.id)
         .map(mem => mem.name)
         .toString() : []

@@ -58,14 +58,14 @@ export const fetchPodMessages = (workareaId, podId) => async dispatch => {
 
     if (res.ok) {
         const payload = await res.json();
-        console.log(payload)
+    
         dispatch(retriveMessages(payload));
         return payload
     } else {
         dispatch(messageReqFailed({ res }))
     }
 }
-    
+
 export const fetchDmMessages = (workareaId, dmId) => async dispatch => {
     const res = await csrfFetch(`/api/workareas/${workareaId}/direct_messages/${dmId}`);
 
@@ -114,7 +114,7 @@ const messageReducer = (state=null, action) => {
     let nextState = {...state}
     switch(action.type) {
         case GET_ALL_MESSAGE:
-            console.log(action)
+            
             if (action.payload.name) {
                 //0 means pod 
                 nextState.location = 0;

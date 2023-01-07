@@ -41,7 +41,7 @@ export const dmRquestFailed = (payload) => {
 export const fetchAllUserDirectMessages = (workareaId) => async dispatch => {
     const res = await csrfFetch(`/api/workareas/${workareaId}/direct_messages`);
     
-    console.log('respone fail', res)
+  
     if (res.ok) {
         const directMessages = await res.json();
         dispatch(getUserDirectMessages(directMessages));

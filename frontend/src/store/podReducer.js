@@ -70,7 +70,7 @@ export const updatePod = (payload) => async dispatch => {
     if (res.ok) {
         const pod = await res.json();
         dispatch(setPod(pod));
-        console.log(pod)
+
         return pod 
     } else {
         dispatch(podReqFailed({ res }))

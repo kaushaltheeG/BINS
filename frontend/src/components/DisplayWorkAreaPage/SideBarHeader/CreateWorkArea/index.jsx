@@ -27,7 +27,7 @@ const CreateWorkArea = () => {
             return 
         }
         setErrors(["Work Area name must include characters"])
-        console.log('Unable to create work area viz form')
+       
     }
 
     const handleCreateThenSwitch = (e) => {

@@ -10,7 +10,7 @@ import { demeberGroupChat } from '../../../../store/directMessageReducer';
 
 
 const AboutPodForm = ({ currentMessenger }) => {
-    console.log(currentMessenger)
+   
     const currentUser = useSelector(getCurrentUser);
     const [edit, setEdit] = useState(false);
     const [destroy, setDestroy] = useState(false);
@@ -24,10 +24,11 @@ const AboutPodForm = ({ currentMessenger }) => {
         pod = null; 
         dm = Object.keys(currentMessenger).length ? currentMessenger : null;
     }
-    console.log(dm, 'dm about form')
+   
     const currentDmName = dm ? Object.values(dm.members).filter((member) => member.id !== currentUser.id).map(mem => mem.name) : null 
     const otherUserEmail = dm ? Object.values(dm.members).filter((mem) => mem.id !== currentUser.id).at(0).email: null 
-    console.log(otherUserEmail)
+  
+
     const [name, setName] = useState(pod ? pod.name : null);
     const [description, setDescription] = useState(pod ? pod.description : null );
     const [gcNames, setGcNames] = useState(dm ? currentDmName : null)
@@ -52,7 +53,7 @@ const AboutPodForm = ({ currentMessenger }) => {
 
     const handleChangeName = (e) => {
         e.preventDefault();
-        console.log(e.target.value)
+      
         setName(e.target.value)
     }
 
@@ -77,7 +78,7 @@ const AboutPodForm = ({ currentMessenger }) => {
             }
             dispatch(updatePod(patchedPod))
         } else if (formType == 'Leave Chat') {
-            console.log('within Leave chat ')
+           
             dispatch(demeberGroupChat(dm.workareaId, dm.id));
             history.push(`/client/workareas/${firstDm.workareaId}/dms/${firstDm.id}`)
         }

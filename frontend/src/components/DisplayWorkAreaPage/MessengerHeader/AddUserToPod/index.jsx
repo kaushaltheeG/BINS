@@ -10,7 +10,7 @@ import { getWorkareaMemebers } from '../../../../store/workareaReducer';
 
 
 const AddUserToPod = ({ currentMessengerLength }) => {
-    console.log(currentMessengerLength)
+   
     const allUsers = useSelector(getWorkareaMemebers)
     
     const {workareaId, type, typeId} = useParams();

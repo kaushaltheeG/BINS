@@ -6,14 +6,14 @@ import { fetchWorkareas } from "../../store/workareaReducer";
 const JoinWorkAreas = () => {
     const allWorkareas = useSelector(state => state.workarea.allWorkareas)
     const dispatch = useDispatch();
-    console.log(allWorkareas)
+    
 
     //be able to join and redirect to first workarea pod 
 
     useEffect(()=> {
         dispatch(fetchWorkareas())
     }, [dispatch])
-    //     console.log('running')
+   
     return (
         <>
             <h1>Join a Work area you aren't a memeber of</h1>
