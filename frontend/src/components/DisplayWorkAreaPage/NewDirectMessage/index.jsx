@@ -133,7 +133,7 @@ const NewDirectMessage = ({body, setBody, withinSelected, setWithinSelected}) =>
                                     <input 
                                         ref={inputFoucs}
                                         className='user-query-input' 
-                                        placeholder='Start a direct message or group chat'
+                                        // placeholder=''
                                         onChange={handleSearch} 
                                         value={query}
                                         onKeyDown={e => {

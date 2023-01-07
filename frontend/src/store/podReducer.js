@@ -3,6 +3,7 @@ import { SET_CURRENT_WORKAREA } from "./workareaReducer";
 const GET_MEMBERSHIP_PODS = 'get/UserPods';
 const CREATE_POD = 'create/Pod';
 const DELETE_POD = 'delete/POD';
+export const ERROR_IN_POD = 'failed/apiPodReq';
 
 export const getUserPods = (pods) => {
     return {
@@ -25,6 +26,13 @@ export const removePod = (podId) => {
     }
 }
 
+export const podReqFailed = (payload) => {
+    return {
+        type: ERROR_IN_POD,
+        payload
+    }
+}
+
 export const fetchUserPods = (workareaId) => async dispatch => {
     const res = await csrfFetch(`/api/workareas/${workareaId}/pods`);
 
@@ -32,8 +40,9 @@ export const fetchUserPods = (workareaId) => async dispatch => {
         const pods = await res.json();
         dispatch(getUserPods(pods));
         return pods
-    } 
-    console.log('Could not retirve users pods');
+    } else {
+        dispatch(podReqFailed({res}))
+    }
 
 } 
 
@@ -47,6 +56,8 @@ export const createPod = (payload) => async dispatch => {
         const pod = await res.json();
         dispatch(setPod(pod))
         return pod 
+    } else {
+        dispatch(podReqFailed({ res }))
     }
 }
 
@@ -60,10 +71,10 @@ export const updatePod = (payload) => async dispatch => {
         const pod = await res.json();
         dispatch(setPod(pod));
         console.log(pod)
-
         return pod 
+    } else {
+        dispatch(podReqFailed({ res }))
     }
-    console.log('could not update pod ')
 }
 
 export const newPodMembers = (payload) => async dispatch => {
@@ -76,24 +87,33 @@ export const newPodMembers = (payload) => async dispatch => {
         const pod = await res.json();
         dispatch(setPod(pod));
         return pod 
+    } else {
+        dispatch(podReqFailed({ res }))
     }
-    console.log('could not add new members to pod')
 }
 
 export const deletePod = (workareaId, podId) => async dispatch => {
-    await csrfFetch(`/api/workareas/${workareaId}/pods/${podId}`, {
+    const res = await csrfFetch(`/api/workareas/${workareaId}/pods/${podId}`, {
         method: 'DELETE'
     });
-    dispatch(removePod(podId))
-    return podId 
+    if (res.ok) {
+        dispatch(removePod(podId))
+        return podId 
+    } else {
+        dispatch(podReqFailed({ res }))
+    }
 }
 
 export const dememberFromPod = (workareaId, podId) => async dispatch => {
-    await csrfFetch(`/api/workareas/${workareaId}/pods/${ podId }/demember`, {
+    const res = await csrfFetch(`/api/workareas/${workareaId}/pods/${ podId }/demember`, {
         method: 'POST'
     });
-    dispatch(removePod(podId));
-    return podId
+    if (res.ok) {
+        dispatch(removePod(podId));
+        return podId
+    } else {
+        dispatch(podReqFailed({ res }))
+    }
 }
 
 

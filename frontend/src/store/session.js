@@ -4,6 +4,7 @@ import { CREATE_WORKAREA } from './workareaReducer';
 const SET_CURRENT_USER = 'session/setCurrentUser';
 const REMOVE_CURRENT_USER = 'session/removeCurrentUser';
 const GET_NEW_MEMBERSHIP = 'session/newSessionShow';
+export const ERROR_IN_SESSION = 'failed/apiSessionReq';
 
 export const getCurrentUser = (state) => {
     if (!Object.keys(state.session).length) return null 
@@ -34,6 +35,13 @@ export const getNewMembership = (user) => {
     return {
         type: GET_NEW_MEMBERSHIP,
         user
+    }
+}
+
+export const sessionReqFailed = (payload) => {
+    return {
+        type: ERROR_IN_SESSION,
+        payload
     }
 }
 
@@ -83,6 +91,8 @@ export const signup = ({name, email, password}) => async (dispatch) => {
         storeCurrentUser(data.user);
         dispatch(setCurrentUser(data.user));
         return response
+    } else {
+        dispatch(sessionReqFailed({res: response}))
     }
 }
 
@@ -101,8 +111,9 @@ export const retriveNewMembership = () => async dispatch => {
         const user = await res.json();
         dispatch(getNewMembership(user))
         return user 
+    } else {
+        dispatch(sessionReqFailed({ res }))
     }
-    console.log('Could not get new Memberships')
 }
 
 const initialState = {

@@ -7,6 +7,7 @@ import {entities} from './entities';
 import messageReducer from './messageReducer';
 import podReducer from './podReducer';
 import directMessageReducer from './directMessageReducer';
+import errorReducer from './errorReducer';
 
 
 let enhancer;
@@ -18,7 +19,7 @@ export const rootReducer = combineReducers({
     pods: podReducer,
     directMessages: directMessageReducer,
     session,
-    errors: {},
+    errors: errorReducer,
     ui: {
         filters:{},
         modal: modalReducer

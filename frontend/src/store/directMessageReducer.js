@@ -5,6 +5,7 @@ export const GET_ALL_USER_DIRECT_MESSAGES = 'user_all_get/DIRECT_MESSAGES';
 export const GET_SELECTED_DIRECT_MESSAGE = 'selected_fetch/DIRECT_MESSAGE';
 export const REMOVE_CHAT = 'deleteGC/DIRECT_MESSAGE';
 export const CREATE_DM = 'newOrNot/createDM';
+export const ERROR_IN_DM = 'failed/DMApiReq';
 
 
 export const getUserDirectMessages = (directMessages) => {
@@ -28,17 +29,27 @@ export const removeGroupChat = (dmId) => {
     }
 }
 
+export const dmRquestFailed = (payload) => {
+    return {
+        type: ERROR_IN_DM,
+        payload
+    }
+}
+
 
 
 export const fetchAllUserDirectMessages = (workareaId) => async dispatch => {
     const res = await csrfFetch(`/api/workareas/${workareaId}/direct_messages`);
-
+    
+    console.log('respone fail', res)
     if (res.ok) {
         const directMessages = await res.json();
         dispatch(getUserDirectMessages(directMessages));
         return directMessages;
+    } else {
+        dispatch(dmRquestFailed({ res }))
     }
-    console.log('failed to get all user messages');
+    
 }
 
 export const newGcMember = (payload) => async dispatch => {
@@ -51,6 +62,8 @@ export const newGcMember = (payload) => async dispatch => {
         const directMessage = await res.json();
         dispatch(setDirectMessage(directMessage))
         return directMessage
+    } else {
+        dispatch(dmRquestFailed({ res }))
     }
 }
 
@@ -62,6 +75,8 @@ export const demeberGroupChat = (workareaId, dmId) => async dispatch => {
     if (res.ok) {
         dispatch(removeGroupChat(dmId))
         return dmId 
+    } else {
+        dispatch(dmRquestFailed({ res }))
     }
 }
 
@@ -75,6 +90,8 @@ export const createDirectMessage = (workareaId, payload) => async dispatch => {
         const directMessage = await res.json();
         dispatch(setDirectMessage(directMessage));
         return directMessage
+    } else {
+        dispatch(dmRquestFailed({ res }))
     }
 }
 

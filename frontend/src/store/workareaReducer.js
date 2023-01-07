@@ -4,6 +4,7 @@ import { getNewMembership } from "./session"
 export const RETRIEVE_WORKAREAS = 'workareas/getWorkareas';
 export const SET_CURRENT_WORKAREA = 'workareas/setWorkarea';
 export const CREATE_WORKAREA = 'workareas/createWorkarea'
+export const ERROR_IN_WA = 'failed/WorkareaApiEq';
 
 export const getCurrentWorkAreaMessage = (state) => {
     if (!Object.keys(state.workarea.currentWorkarea).length) return [];
@@ -40,6 +41,13 @@ export const newWorkArea = (workarea) => {
     }
 }
 
+export const workareaReqFailed = (payload) => {
+    return {
+        type: ERROR_IN_WA,
+        payload
+    }
+}
+
 export  const createWorkarea = ({name, user_id}) => async dispatch => {
     const res = await csrfFetch(`/api/users/${user_id}/workareas`, {
         method: 'POST',
@@ -57,8 +65,11 @@ export  const createWorkarea = ({name, user_id}) => async dispatch => {
         dispatch(getNewMembership(user))
         return workarea;
 
+    } else if (!res.ok) {
+        dispatch(workareaReqFailed({res}))
+    } else if (!res2.ok) {
+        dispatch(workareaReqFailed({res: res2}))
     }
-    console.log('cannot create new workarea');
     return 
 
 }
@@ -69,7 +80,7 @@ export const fetchWorkareas = () => async dispatch => {
         const workareas = await res.json();
         dispatch(getWorkareas(workareas))
     } else {
-        console.log("failed getting all the workareas")
+        dispatch(workareaReqFailed({ res }))
     }
 }
 
@@ -81,7 +92,7 @@ export const fetchWorkarea = (workareaId) => async dispatch => {
         dispatch(setCurrentWorkarea(currentWorkarea)); 
         return currentWorkarea
     } else {
-        console.log("failed workarea fetch");
+        dispatch(workareaReqFailed({ res }))
         return null; 
     }
 }

@@ -3,6 +3,7 @@ import { SET_CURRENT_WORKAREA } from "./workareaReducer";
 const GET_ALL_MESSAGE = 'messages/FETCH_ALL_MESSAGES';
 const CREATE_MESSAGE = 'messages/CREATE_MESSAGE';
 const RECEIVE_MESSAGE = 'message/RECEIVE'
+export const ERROR_IN_MESSAGE = 'failed/messageRequest';
 
 export const getMessages = (state) => {
     if (!state.messages) return null 
@@ -32,6 +33,13 @@ export const receiveMessage = (message) => {
     }
 }
 
+export const messageReqFailed = (payload) => {
+    return {
+        type: ERROR_IN_MESSAGE,
+        payload
+    }
+}
+
 export const fetchMessages = (workareaId, podId) => async dispatch => {
     
     const res = await csrfFetch(`/api/workareas/${workareaId}/pods/${podId}/messages`);
@@ -41,7 +49,7 @@ export const fetchMessages = (workareaId, podId) => async dispatch => {
         dispatch(getMessages(messages));
         return messages
     } else {
-        console.log(`failed getting all messages for ${workareaId}` )
+        dispatch(messageReqFailed({res}))
     }
 }
 
@@ -54,10 +62,10 @@ export const fetchPodMessages = (workareaId, podId) => async dispatch => {
         dispatch(retriveMessages(payload));
         return payload
     } else {
-        console.log(`failed getting all messages for ${workareaId}`)
+        dispatch(messageReqFailed({ res }))
     }
 }
-
+    
 export const fetchDmMessages = (workareaId, dmId) => async dispatch => {
     const res = await csrfFetch(`/api/workareas/${workareaId}/direct_messages/${dmId}`);
 
@@ -66,26 +74,19 @@ export const fetchDmMessages = (workareaId, dmId) => async dispatch => {
         dispatch(retriveMessages(payload));
         return payload
     } else {
-        console.log(`failed getting all messages for ${workareaId}`)
+        dispatch(messageReqFailed({ res }))
     }
 }
 
 
 
 export const createMessage =  (payload, workareaId, podId) => {
+    //old post req; route no longer exists  
     csrfFetch(`/api/workareas/${workareaId}/pods/${podId}/messages`, {
         method: 'POST',
         body: JSON.stringify(payload)
     });
-    
 
-    // if (res.ok) {
-    //     const message = await res.json();
-    //     // dispatch(newMessage(message))
-    //     return message
-    // } else {
-    //     console.log(`Could not create new msg for ${workareaId}`)
-    // }
 }
 
 export const createPodMessage = (payload, workareaId, podId) => {
