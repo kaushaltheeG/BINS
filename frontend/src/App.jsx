@@ -30,7 +30,7 @@ function App() {
         <Route path="/createnew">
           <CreateNewPage />
         </Route>
-        <Redirect to="/404" />
+        <Redirect to="/" />
       </Switch>
     </>
   );
