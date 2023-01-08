@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import PodList from "./PodList"
-import { fetchUserPods } from "../../../store/podReducer";
+import { fetchUserPods, removePod, setPod } from "../../../store/podReducer";
 import './MessengerToggle.css'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import Diversity3Icon from '@mui/icons-material/Diversity3';
@@ -10,8 +10,11 @@ import TagIcon from '@mui/icons-material/Tag';
 import LockIcon from '@mui/icons-material/Lock';
 import CreatePod from "./PodList/CreatePod";
 import DirectAndGroupList from "./DirectAndGroupList";
-import { fetchAllUserDirectMessages } from "../../../store/directMessageReducer";
+import { fetchAllUserDirectMessages, setDirectMessage } from "../../../store/directMessageReducer";
 import { getCurrentUser } from "../../../store/session";
+import consumer from "../../../consumer";
+
+
 
 
 
@@ -22,6 +25,7 @@ const MessengerToggle = () => {
     const directMessages = useSelector(state => state.directMessages)
     const dispatch = useDispatch();
     const { workareaId, typeId, type} = useParams();
+    const history = useHistory();
    
     const currentPod = Object.keys(pods).length ? pods[parseInt(typeId)] : null;
     const currentDm = Object.keys(dms).length ? dms[parseInt(typeId)] : null;
@@ -36,6 +40,32 @@ const MessengerToggle = () => {
     useEffect(()=> {
         dispatch(fetchUserPods(workareaId))
         dispatch(fetchAllUserDirectMessages(workareaId))
+        const subscription = consumer.subscriptions.create(
+            {channel: 'WorkareaChannel', id: workareaId}, 
+            {
+                received: (workareaObj) => {
+                    switch(workareaObj.type) {
+                        case 'RECEIVE_POD':
+                            console.log(workareaObj)
+                            dispatch(setPod(workareaObj))
+                            if (currentUser.id === workareaObj.adminId) {
+                                history.push(`/client/workareas/${workareaObj.workareaId}/pods/${workareaObj.id}`)
+                            }
+                            break;
+                        case 'REMOVE_POD':
+                            dispatch(removePod(typeId))
+
+                            break;
+                        case 'RECEIVE_DM': 
+                            dispatch(setDirectMessage(workareaObj))
+                            break; 
+                        default:
+                            console.log('unable to broadcast to', workareaObj.type)
+                            break;
+                    }
+                }
+            }
+        )
     }, [dispatch, workareaId, typeId, type])
 
     const togglePodsDisplay = (e) => {

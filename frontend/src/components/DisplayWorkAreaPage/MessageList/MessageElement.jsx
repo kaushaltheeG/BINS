@@ -14,9 +14,9 @@ import { destroyMessage, updateMessage } from "../../../store/messageReducer";
 
 
 const MessageElement = ({ message }) => {
-    const { id, body, createdAt, updatedAt, authorName } = message; //might need createdAt & modifiedAt
+    const { id, body, createdAt, updatedAt, authorName, authorId } = message; //might need createdAt & modifiedAt
     const {typeId} = useParams();
-    const [hoverRef, isHovered] = useHover();
+    // const [hoverRef, isHovered] = useHover();
     const [isHovering, setIsHovering] = useState(false);
     const currentUser = useSelector(getCurrentUser);
     const [currentBody, setCurentBody] = useState(body);
@@ -25,15 +25,18 @@ const MessageElement = ({ message }) => {
     const textareFoucs = useRef(null)
 
     const handleMouseOver = (e) => {
-        // e.stopPropogation()
+       
         e.preventDefault();
-        setIsHovering(true);
+        if (currentUser.id === authorId) {
+            setIsHovering(true);
+        }
     };
 
     const handleMouseOut = (e) => {
         e.preventDefault();
-        // e.stopPropogation()
-        setIsHovering(false);
+        if (currentUser.id === authorId) {
+            setIsHovering(false);
+        }
     };
    
 
@@ -49,14 +52,9 @@ const MessageElement = ({ message }) => {
         return `${adjustedHours}:${adjustedMins} ${isPm}`
     }
 
-    const ownedByCurrent = message?.authorId == currentUser?.id ? hoverRef : null
-
-
-
 
     const openEdit = (e) => {
         e.preventDefault();
-        // e.stopPropogation()
         console.log(e)
         setEdit(oldVal => true);
         setRemove(oldVal => false);
@@ -105,7 +103,7 @@ const MessageElement = ({ message }) => {
   
     return (
         <>
-            <div className={ classNames("message-container", edit && 'edit-background-color')} ref={ownedByCurrent}>
+            <div className={classNames("message-container", edit && 'edit-background-color')} onMouseEnter={handleMouseOver} onMouseLeave={handleMouseOut}>
                 {message && 
                 <>
                     <div className="profile-icon">
@@ -117,10 +115,10 @@ const MessageElement = ({ message }) => {
                                 <textarea ref={textareFoucs} className="edit-message-textarea" value={currentBody} onChange={handleEditMessage} />
                                 <div className="edit-cancel-msg-btns">
                                         <div className="cancel-edit-btn container">
-                                            <button id='cancel-msg-btn' onClick={handleCancel}>Cancel</button>
+                                    <button id='cancel-msg-btn' onClick={handleCancel} onMouseOver={e => e.stopPropagation()}>Cancel</button>
                                         </div>
                                         <div className="save-edit-btn container">
-                                            <button id='edit-msg-btn' onClick={handleSubmitEdit}>Save</button>
+                                    <button id='edit-msg-btn' onClick={handleSubmitEdit} onMouseOver={e => e.stopPropagation()}>Save</button>
                                         </div>
                                 </div>
                             </form>
@@ -136,16 +134,16 @@ const MessageElement = ({ message }) => {
                             </div>
                             <span className="message-body">{currentBody}</span>
                         </div>
-                        {/* {isHovered &&  */}
-                            <div className="edit-and-delete-container">
-                                <div className="edit-icon-container" onClick={openEdit}>
+                        {isHovering && 
+                            <div className="edit-and-delete-container" onMouseOver={e => e.stopPropagation()}>
+                                <div className="edit-icon-container" onClick={openEdit} onMouseOver={e => e.stopPropagation()}>
                                     <ModeEditOutlineIcon />
                                 </div>
-                                <div className="delete-icon-container" onClick={openRemove}>
+                                <div className="delete-icon-container" onClick={openRemove} onMouseOver={e => e.stopPropagation()}>
                                     <DeleteIcon /> 
                                 </div>
                             </div>
-                        {/* } */}
+                        }
                     </>
                         
                     }
@@ -160,10 +158,10 @@ const MessageElement = ({ message }) => {
                         </div>
                         <div className="edit-and-delete-container">
                             <div className="delete-check">
-                                <CheckIcon onClick={handleDeleteMessage} />
+                                <CheckIcon onClick={handleDeleteMessage} onMouseOver={e => e.stopPropagation()} />
                             </div>
                             <div className="cancel-cross">
-                                <CloseIcon onClick={handleCancel}/>
+                                <CloseIcon onClick={handleCancel} onMouseOver={e => e.stopPropagation()} />
                             </div>
                         </div>
                     </>

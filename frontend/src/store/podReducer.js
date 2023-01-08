@@ -43,7 +43,6 @@ export const fetchUserPods = (workareaId) => async dispatch => {
     } else {
         dispatch(podReqFailed({res}))
     }
-
 } 
 
 export const createPod = (payload) => async dispatch => {
@@ -52,13 +51,13 @@ export const createPod = (payload) => async dispatch => {
         body: JSON.stringify(payload)
     });
 
-    if (res.ok) {
-        const pod = await res.json();
-        dispatch(setPod(pod))
-        return pod 
-    } else {
-        dispatch(podReqFailed({ res }))
-    }
+    // if (res.ok) {
+    //     const pod = await res.json();
+    //     dispatch(setPod(pod))
+    //     return pod 
+    // } else {
+    //     dispatch(podReqFailed({ res }))
+    // }
 }
 
 export const updatePod = (payload) => async dispatch => {
@@ -83,37 +82,39 @@ export const newPodMembers = (payload) => async dispatch => {
         body: JSON.stringify(payload)
     })
 
-    if (res.ok) {
-        const pod = await res.json();
-        dispatch(setPod(pod));
-        return pod 
-    } else {
-        dispatch(podReqFailed({ res }))
-    }
+    // if (res.ok) {
+    //     const pod = await res.json();
+    //     dispatch(setPod(pod));
+    //     return pod 
+    // } else {
+    //     dispatch(podReqFailed({ res }))
+    // }
 }
 
 export const deletePod = (workareaId, podId) => async dispatch => {
     const res = await csrfFetch(`/api/workareas/${workareaId}/pods/${podId}`, {
         method: 'DELETE'
     });
-    if (res.ok) {
-        dispatch(removePod(podId))
-        return podId 
-    } else {
-        dispatch(podReqFailed({ res }))
-    }
+
+    // if (res.ok) {
+    //     dispatch(removePod(podId))
+    //     return podId 
+    // } else {
+    //     dispatch(podReqFailed({ res }))
+    // }
 }
 
 export const dememberFromPod = (workareaId, podId) => async dispatch => {
     const res = await csrfFetch(`/api/workareas/${workareaId}/pods/${ podId }/demember`, {
         method: 'POST'
     });
-    if (res.ok) {
-        dispatch(removePod(podId));
-        return podId
-    } else {
-        dispatch(podReqFailed({ res }))
-    }
+
+    // if (res.ok) {
+    //     dispatch(removePod(podId));
+    //     return podId
+    // } else {
+    //     dispatch(podReqFailed({ res }))
+    // }
 }
 
 

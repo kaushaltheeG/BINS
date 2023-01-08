@@ -46,9 +46,12 @@ class Api::DirectMessagesController < ApplicationController
                 message.author_id = current_user.id 
                 message.save! 
             end 
-            
+            @workarea = Workarea.find_by(id: params[:workarea_id])
             #action cable; to display the newly created message to the existing chat 
-
+            # WorkareaChannel.broadcast_to(@workarea, 
+            #         type: 'RECEIVE_DM',
+            #         **from_template('api/direct_messages/wbs_show', direct_message: @direct_message))
+            # render json: nil, status: :ok 
             render :show 
         else 
             #drect message has not been found 
@@ -66,6 +69,10 @@ class Api::DirectMessagesController < ApplicationController
             if @direct_message.save 
                 #if saved, display message via action cable 
                     #action cable here 
+                # WorkareaChannel.broadcast_to(@workarea, 
+                #     type: 'RECEIVE_DM',
+                #     **from_template('api/direct_messages/wbs_show', direct_message: @direct_message))
+                # render json: nil, status: :ok 
 
                 render :show 
             else 

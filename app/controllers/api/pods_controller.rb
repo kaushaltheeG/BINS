@@ -12,11 +12,15 @@
                 user = User.find_by(id: member_id)
                 @pod.members << user unless @pod.members.include?(user)
             end 
-            render :show 
+            WorkareaChannel.broadcast_to(@workarea, 
+                type: 'RECEIVE_POD',
+                payload: @pod.members, 
+                **from_template('api/pods/wbs_show', pod: @pod))
+
+            render json: nil, status: :ok 
             return 
         end 
         render json: {errors: [@pod.errors.full_messages]}, status: :unauthorized
-
     end 
 
     def update 
@@ -24,7 +28,11 @@
         @pod = @workarea.pods.find_by(id: params[:id]);
 
         if @pod.update(pod_params)
-            render :show 
+            WorkareaChannel.broadcast_to(@workarea, 
+                type: 'RECEIVE_POD',
+                **from_template('api/pods/wbs_show', pod: @pod))
+            render json: nil, status: :ok 
+            # render :show 
             return 
         end 
         render json: {errors: [@pod.errors.full_messages]}, status: :unauthorized
@@ -36,8 +44,12 @@
         if @pod.destroy
             pods = @workarea.pods.select {|pod| pod.workarea_id == @workarea.id && current_user.pods.include?(pod)}
             @pod = pods.first
+            WorkareaChannel.broadcast_to(@workarea, 
+                type: 'REMOVE_POD',
+                **from_template('api/pods/wbs_show', pod: @pod))
+            render json: nil, status: :ok 
            
-            render :show
+            # render :show
             return 
         end 
             render json: {errors: [@pod.errors.full_messages]}, status: :unauthorized
@@ -57,6 +69,7 @@
     def show 
         @workarea = Workarea.find_by(id: params[:workarea_id])
         @pod = @workarea.pods.find_by(id: params[:id]);
+        # from_template('api/pods/show', pod: @pod)
         render :show 
     end 
 
@@ -71,7 +84,11 @@
         end 
 
         if @pod.save 
-            render :show 
+            WorkareaChannel.broadcast_to(@workarea, 
+                type: 'RECEIVE_POD',
+                **from_template('api/pods/wbs_show', pod: @pod))
+            render json: nil, status: :ok 
+            # render :show 
             return 
         end 
         render json: {errors: [@pod.errors.full_messages]}, status: :unauthorized
@@ -80,11 +97,19 @@
 
     def demember
         @membership = current_user.memberships.where("membershipable_type = 'Pod' and membershipable_id = :id", id: params[:pod_id]).first
-
         if @membership
-            @membership.destroy
-            render json: { message: 'success'} 
-            return 
+           if @membership.destroy
+                @workarea = Workarea.find_by(id: params[:workarea_id])
+                @pod = @workarea.pods.find_by(id: params[:pod_id])
+                WorkareaChannel.broadcast_to(@workarea, 
+                    type: 'REMOVE_POD',
+                    **from_template('api/pods/wbs_show', pod: @pod))
+            
+                render json: { message: 'success'} 
+                return 
+           end 
+           render json: ["failed to destroy membership"], status: :unauthorized
+           return 
         end 
         render json: ["membership is not found"], status: :unauthorized
     end 

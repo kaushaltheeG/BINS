@@ -61,14 +61,16 @@
     /* margin-right: 20px; */
     /* display: none; */
     cursor: pointer;
+    display: flex;
+    padding: 2px 4px;
+    border: none; 
+    border-radius: 4px;
+    box-shadow: 1px 1px 1px 1px rgb(172, 48, 189);
 }
 
 .edit-msg-form{
     width: 100%;
     background-color: white;
-}
-.edit-and-delete-container:hover {
-    display: block;
 }
 
 
