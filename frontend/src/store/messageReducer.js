@@ -97,9 +97,9 @@ export const createDmMessage = (payload, workareaId, dmId) => {
     })
 }
 
-export const updateMessage = (payload) => {
+export const updateMessage = (payload, messageId) => {
     // debugger 
-    csrfFetch(`/api/messages/${payload.id}`, {
+    csrfFetch(`/api/messages/${messageId}`, {
         method: 'PATCH', 
         body: JSON.stringify({message: payload})
     })

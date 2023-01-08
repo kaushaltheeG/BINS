@@ -2,6 +2,8 @@
     display: flex;
     align-items: center;
     padding: 8px 20px;
+    font-family: Slack-Lato, Slack-Fractions, appleLogo, sans-serif;
+ 
 }
 
 .profile-icon {
@@ -53,4 +55,93 @@
     display: flex;
     max-width: none;
     padding-bottom: 3px;
+}
+
+.edit-and-delete-container {
+    /* margin-right: 20px; */
+    /* display: none; */
+    cursor: pointer;
+}
+
+.edit-msg-form{
+    width: 100%;
+    background-color: white;
+}
+.edit-and-delete-container:hover {
+    display: block;
+}
+
+.edit-icon-container{
+
+}
+
+.edit-background-color{
+    background-color: #f2c74433;
+}
+
+.edit-message-textarea{
+    width: 100%;
+    border: none;
+    padding: 10px;
+}
+.edit-message-textarea:focus{
+    outline: 0;
+}
+.edit-cancel-msg-btns{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    padding: 0 10px 5px 0;
+}
+
+.save-edit-btn{
+    padding-left: 10px;
+}
+
+.save-edit-btn{
+    border-radius: 4px;
+}
+
+.remove-message-style{
+    text-decoration: line-through;
+}
+
+.delete-check:hover{
+    color: green;
+    
+}
+.cancel-cross:hover{
+    color: red;
+}
+#edit-msg-btn  {
+    cursor: pointer;
+    border-radius: 4px;
+    border: none;
+    background: #007a5a;
+    box-shadow: none;
+    color: #fff;
+    font-weight: 700;
+    transition: all 80ms linear;
+    font-size: 13px;
+    height: 28px;
+    min-width: 56px;
+    padding: 0 12px 1px;
+    -webkit-tap-highlight-color: transparent;
+}
+
+#cancel-msg-btn{
+    cursor: pointer;
+    border-radius: 4px;
+    --saf-0: rgba(var(--sk_primary_foreground, 29, 28, 29), 0.3);
+    background: rgba(var(--sk_primary_background, 255, 255, 255), 1);
+    background-clip: padding-box;
+    border: 1px solid var(--saf-0);
+    font-weight: 700;
+    transition: all 80ms linear;
+
+    font-size: 13px;
+    height: 28px;
+    min-width: 56px;
+    padding: 0 12px 1px;
 }
