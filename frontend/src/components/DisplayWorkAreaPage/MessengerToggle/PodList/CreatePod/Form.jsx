@@ -70,9 +70,10 @@ const Form = () => {
                 private: isPrivate,
                 members: allMembers
             }        
-            dispatch(createPod(pod)).then((pod) => (
-                history.push(`/client/workareas/${pod.workareaId}/pods/${pod.id}`)
-            ))
+            dispatch(createPod(pod))
+            // .then((pod) => (
+            //     // history.push(`/client/workareas/${pod.workareaId}/pods/${pod.id}`)
+            // ))
             return 
         } 
         setErrors(["Name and Description are required"])

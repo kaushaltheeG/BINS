@@ -47,7 +47,9 @@ const MessengerToggle = () => {
                     switch(workareaObj.type) {
                         case 'RECEIVE_POD':
                             console.log(workareaObj)
-                            dispatch(setPod(workareaObj))
+                            if (workareaObj.payload.includes(currentUser.id)) {
+                                dispatch(setPod(workareaObj))
+                            }
                             if (currentUser.id === workareaObj.adminId) {
                                 history.push(`/client/workareas/${workareaObj.workareaId}/pods/${workareaObj.id}`)
                             }

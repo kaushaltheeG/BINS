@@ -8,13 +8,14 @@
         @pod = Pod.new(pod_params);
         @pod.workarea_id = @workarea.id 
         if @pod.save 
+            @pod.members << current_user unless @pod.members.include?(current_user)
             members.each do |member_id|
                 user = User.find_by(id: member_id)
                 @pod.members << user unless @pod.members.include?(user)
             end 
             WorkareaChannel.broadcast_to(@workarea, 
                 type: 'RECEIVE_POD',
-                payload: @pod.members, 
+                payload: @pod.members.map {|mem| mem.id}, 
                 **from_template('api/pods/wbs_show', pod: @pod))
 
             render json: nil, status: :ok 
@@ -30,6 +31,7 @@
         if @pod.update(pod_params)
             WorkareaChannel.broadcast_to(@workarea, 
                 type: 'RECEIVE_POD',
+                payload: @pod.members.map {|mem| mem.id}, 
                 **from_template('api/pods/wbs_show', pod: @pod))
             render json: nil, status: :ok 
             # render :show 
