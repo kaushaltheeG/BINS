@@ -140,7 +140,9 @@ class Api::DirectMessagesController < ApplicationController
 
             if @message.save 
                 #broad cast message via action cable 
-                DirectMessageChannel.broadcast_to(@direct_message, from_template('api/messages/show', message: @message))
+                DirectMessageChannel.broadcast_to(@direct_message,
+                    type: 'RECEIVE_MESSAGE',
+                    **from_template('api/messages/show', message: @message))
                 # render 'api/messages/show'
                 render json: nil, status: :ok 
             else 

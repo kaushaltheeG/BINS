@@ -13,10 +13,11 @@ import MessengerHeader from "./MessengerHeader";
 import NewDirectMessage from "./NewDirectMessage";
 import { fetchAllUserDirectMessages } from "../../store/directMessageReducer";
 import { fetchUserPods } from "../../store/podReducer";
+import { fetchDmMessages, fetchPodMessages } from "../../store/messageReducer";
 
 
 const DisplayWorkAreaPage = () => {
-    const { workareaId, typeId, newMsg } = useParams();
+    const { workareaId, type,  typeId, newMsg } = useParams();
     /* if workareaId is NOT within the list of allWorkareas redirect to 404*/
     const workarea = useSelector(state => state.workarea.currentWorkarea);
     const pods = useSelector(state => state.pods)
@@ -30,6 +31,11 @@ const DisplayWorkAreaPage = () => {
         dispatch(fetchWorkarea(workareaId))
         dispatch(fetchAllUserDirectMessages(workareaId))
         dispatch(fetchUserPods(workareaId))
+        if (type === 'pods') {
+            dispatch(fetchPodMessages(workareaId, typeId))
+        } else if (type === 'dms') {
+            dispatch(fetchDmMessages(workareaId, typeId))
+        }
     }, [dispatch, workareaId])
 
     return (

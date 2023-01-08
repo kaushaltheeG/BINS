@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory, useParams } from "react-router-dom"
-import { fetchPodMessages, fetchDmMessages, receiveMessage, getMessages } from "../../../store/messageReducer"
+import { fetchPodMessages, fetchDmMessages, receiveMessage, getMessages, deleteMessage } from "../../../store/messageReducer"
 // import { fetchWorkarea, getCurrentWorkArea } from "../../../store/workareaReducer"
 import MessageElement from "./MessageElement"
 import consumer from '../../../consumer';
@@ -43,11 +43,25 @@ const MessageList = () => {
                 {channel: 'PodChannel', workareaId: workareaId, podId: typeId},
                 {
                     connected: () => {
-                        // console.log('connected to work area')
+                        console.log('connected to pod')
                     },
-                    received: message => {
-                        
-                        dispatch(receiveMessage(message))
+                    received: (message) => {
+                        console.log(message, 'msg')
+                        debugger
+                        switch (message.type) {
+                            case 'RECEIVE_MESSAGE':
+                                dispatch(receiveMessage(message))
+                                break;
+                            case 'UPDATE_MESSAGE':
+                                dispatch(receiveMessage(message))
+                                break;
+                            case 'DELETE_MESSAGE':
+                                dispatch(deleteMessage(message.id))
+                                break;
+                            default:
+                                console.log('failed to brodcast ', message.type)
+                                break;
+                        }
                         
                     }
                 }
@@ -64,18 +78,31 @@ const MessageList = () => {
                 { channel: 'DirectMessageChannel', workareaId: workareaId, dmId: typeId },
                 {
                     connected: () => {
-                        // console.log('connected to work area')
+                        console.log('connected to dm')
                     },
-                    received: message => {
-                        
-                        dispatch(receiveMessage(message))
+                    received: (message) => {
+                        console.log(message, 'msg')
+                        switch (message.type) {
+                            case 'RECEIVE_MESSAGE': 
+                                dispatch(receiveMessage(message))
+                                break; 
+                            case 'UPDATE_MESSAGE':
+                                dispatch(receiveMessage(message))
+                                break; 
+                            case 'DELETE_MESSAGE':
+                                dispatch(deleteMessage(message.id))
+                                break;
+                            default:
+                                console.log('failed to brodcast ', message.type)
+                                break; 
+                        }
                         
                     }
                 }
             )
 
         }
-
+        return () => subscription?.unsubscribe();
     }, [dispatch, workareaId, typeId, type])
 
     return (

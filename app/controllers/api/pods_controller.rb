@@ -95,7 +95,9 @@
         @message = @pod.messages.new(message_params)
         @message.author_id ||= current_user.id 
         if @message.save! 
-            PodChannel.broadcast_to(@pod,from_template('api/messages/show', message: @message))
+            PodChannel.broadcast_to(@pod,
+                type: 'RECEIVE_MESSAGE',
+                **from_template('api/messages/show', message: @message))
             # render 'api/messages/show'
             render json: nil, status: :ok 
         else 

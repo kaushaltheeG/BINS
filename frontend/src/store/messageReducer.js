@@ -3,6 +3,7 @@ import { SET_CURRENT_WORKAREA } from "./workareaReducer";
 const GET_ALL_MESSAGE = 'messages/FETCH_ALL_MESSAGES';
 const CREATE_MESSAGE = 'messages/CREATE_MESSAGE';
 const RECEIVE_MESSAGE = 'message/RECEIVE'
+const DELETE_MESSAGE = 'message/DELETE';
 export const ERROR_IN_MESSAGE = 'failed/messageRequest';
 
 export const getMessages = (state) => {
@@ -33,26 +34,19 @@ export const receiveMessage = (message) => {
     }
 }
 
+export const deleteMessage = (messageId) => {
+    return {
+        type: DELETE_MESSAGE,
+        messageId
+    }
+}
+
 export const messageReqFailed = (payload) => {
     return {
         type: ERROR_IN_MESSAGE,
         payload
     }
 }
-
-export const fetchMessages = (workareaId, podId) => async dispatch => {
-    
-    const res = await csrfFetch(`/api/workareas/${workareaId}/pods/${podId}/messages`);
-
-    if (res.ok) {
-        const messages = await res.json();
-        dispatch(getMessages(messages));
-        return messages
-    } else {
-        dispatch(messageReqFailed({res}))
-    }
-}
-
 export const fetchPodMessages = (workareaId, podId) => async dispatch => {
     const res = await csrfFetch(`/api/workareas/${workareaId}/pods/${podId}`);
 
@@ -103,6 +97,21 @@ export const createDmMessage = (payload, workareaId, dmId) => {
     })
 }
 
+export const updateMessage = (payload) => {
+    // debugger 
+    csrfFetch(`/api/messages/${payload.id}`, {
+        method: 'PATCH', 
+        body: JSON.stringify({message: payload})
+    })
+}
+
+export const destroyMessage = (messageId, platformId) => {
+    csrfFetch(`/api/messages/${messageId}`, {
+        method: 'DELETE',
+        body: JSON.stringify({message: {platformId}})
+    })
+}
+
 let messageStructure = {
     location: 0,
     data: {}
@@ -131,6 +140,9 @@ const messageReducer = (state=null, action) => {
             return nextState
         case RECEIVE_MESSAGE:
             nextState.data = {...nextState.data, [action.message.id]: action.message}
+            return nextState
+        case DELETE_MESSAGE:
+            delete nextState.data[action.messageId]
             return nextState
         case SET_CURRENT_WORKAREA:
             return null
