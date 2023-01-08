@@ -9,9 +9,9 @@
     overflow-x: hidden;
     position:-webkit-sticky;
     /* bottom: 100px; */
-    /* min-height: 550px; */
-    height: 80vh;
-    max-height: 100vh;
+    min-height: 60px;
+    /* height: 80vh; */
+    max-height: 70vh;
     /* padding-block-end: 10px; */
     /* max-height: fit-content; */    
 }
@@ -25,3 +25,32 @@
     padding-bottom: 20px;
 }
 
+
+.date-hr-container{
+    display: flex;
+    align-items: center;
+
+}
+
+.date-container{
+
+}
+
+.date-msg{
+    border:none;
+    --saf-0: rgba(var(--sk_foreground_low, 29, 28, 29), 0.13);
+    box-shadow: 0 0 0 1px var(--saf-0), 0 1px 3px 0 #00000014;
+    font-size: 13px;
+    height: 28px;
+    line-height: 27px;
+    padding: 0 16px;
+    pointer-events: all;
+    z-index: 2;
+    background: rgba(var(--sk_primary_background, 255, 255, 255), 1);
+    border-radius: 24px;
+    display: inline-block;
+    font-family: Slack-Lato, Slack-Fractions, appleLogo, sans-serif;
+    font-weight: bold;
+    color: #1D1C1D;
+    margin-top: 3px;
+}

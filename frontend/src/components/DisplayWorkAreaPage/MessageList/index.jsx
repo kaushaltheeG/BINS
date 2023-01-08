@@ -15,6 +15,22 @@ const MessageList = () => {
     const dispatch = useDispatch();
     const history = useHistory()
     const msgRef = useRef(null);
+    // const [newDate]
+    const dateSet = new Set();
+
+    const fullDate = (date) => {
+        let formated = new Date(date)
+        formated = formated.toDateString()
+        dateSet.add(formated)
+        console.log(dateSet)
+        return formated
+    }
+
+    const dateSetCheck = (date) => {
+        let formated = new Date(date)
+        return formated.toDateString()
+        
+    }
 
 
 
@@ -47,7 +63,7 @@ const MessageList = () => {
                     },
                     received: (message) => {
                         console.log(message, 'msg')
-                        debugger
+                        
                         switch (message.type) {
                             case 'RECEIVE_MESSAGE':
                                 dispatch(receiveMessage(message))
@@ -109,8 +125,17 @@ const MessageList = () => {
         <>
             
             <div className="message-list">
-                {messages?.map(message => (
-                    <div >
+                {messages?.map((message, i) => (
+                    <div key={i}>
+                        {!dateSet.has(dateSetCheck(message.createdAt)) && 
+                            <div className="date-hr-container">
+                                <hr className=" general-hr left-hr" />
+                                <div className="date-container">
+                                    <button className="date-msg">{fullDate(message.createdAt)}</button>
+                                </div>
+                                <hr className="general-hr right-hr" />
+                            </div>
+                        }
                         <MessageElement message={message} key={message.id}  />
                     </div>
                 ))}
