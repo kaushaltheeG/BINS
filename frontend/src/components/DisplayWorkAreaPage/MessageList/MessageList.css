@@ -10,8 +10,8 @@
     position:-webkit-sticky;
     /* bottom: 100px; */
     /* min-height: 550px; */
-    /* height: 65vh; */
-    max-height: 70vh;
+    height: 80vh;
+    max-height: 100vh;
     /* padding-block-end: 10px; */
     /* max-height: fit-content; */    
 }
