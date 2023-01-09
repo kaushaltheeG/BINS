@@ -42,7 +42,7 @@ export const DmAndElement = ({ dm }) => {
                     }
                     {!isGroup &&
                         <>
-                            <div>
+                            <div className="extra-padding">
                                 <button className="profile-icon" id='size-override'>{concatted[0]?.toUpperCase()}</button>
                             </div>
                             <span id="pod-span-ele" onClick={handleSwitch}>{concatted}</span>

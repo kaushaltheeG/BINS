@@ -133,6 +133,7 @@ const MessengerToggle = () => {
                 </div>
             }
             <div className="pod-dm-spacer" ></div>
+            <div className="spacer"></div>
             <div className="pod-title-container" onClick={toggleDmsDisplay}>
                 {showDms &&
                     <ArrowDropDownIcon id="down-arrow-icon" />

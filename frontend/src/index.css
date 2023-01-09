@@ -1,1 +1,12 @@
 /* TODO Add site wide styles */
+/* body::-webkit-scrollbar {
+    width: 12px;
+    width of the entire scrollbar */
+
+/* body::-webkit-scrollbar{
+    background: orange;
+    color of the tracking area */
+ 
+/* body {
+    -webkit-font-smoothing: antialiased;
+} */

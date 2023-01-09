@@ -1,10 +1,6 @@
-.pod-list{
+/* .pod-list{
     overflow-y: auto;
     min-height: auto;
     max-height: 300px;
-}
+} */
 
-.pod-list::-webkit-scrollbar-track{
-    scrollbar-width: thin;
-    background: var(--scrollbarBG);
-}

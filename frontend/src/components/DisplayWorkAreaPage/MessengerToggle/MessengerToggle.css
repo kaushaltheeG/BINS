@@ -5,6 +5,30 @@
     color: #FFFFFFB3;
     font-size: 15px;
     overflow-y: auto;
+    height: 100%;
+}
+
+.messenger-toggle::-webkit-scrollbar {
+    scrollbar-width: thin;
+    background: none;
+    width: 10px;
+    height: 40px;
+}
+
+.messenger-toggle::-webkit-scrollbar-thumb {
+    background: rgba(132, 72, 145, 0.45);
+    border-radius: 10px;
+    cursor: default;
+    left: 0;
+    opacity: 0;
+    outline: none;
+    position: absolute;
+    top: 0;
+    width: 10px;
+    will-change: transform;
+    z-index: 1;
+
+    transform: translateY(111px);
 }
 .spacer {
     width: 100%;

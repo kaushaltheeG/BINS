@@ -8,7 +8,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     top: 234px;
-    height: 28px;
+    height: 30px;
     width: 100%;
     padding: 0 16px;
     display: flex;
@@ -28,4 +28,12 @@
 
 #lock-hash-icon{
     height: 0.73em;
+    
+    /* width: 1em;
+        height: 1em; */
+}
+
+#hash-icon-only{
+    height: 0.73em;
+    font-style: italic;
 }

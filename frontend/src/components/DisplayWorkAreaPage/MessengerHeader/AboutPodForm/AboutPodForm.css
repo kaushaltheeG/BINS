@@ -36,6 +36,29 @@
     overflow-y: auto;
 }
 
+.description-container-about-gc-name::-webkit-scrollbar {
+    scrollbar-width: thin;
+    background: none;
+    width: 10px;
+    height: 40px;
+}
+
+.description-container-about-gc-name::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.45);
+    border-radius: 10px;
+    cursor: default;
+    left: 0;
+    opacity: 0;
+    outline: none;
+    position: absolute;
+    top: 0;
+    width: 10px;
+    will-change: transform;
+    z-index: 1;
+
+    transform: translateY(111px);
+}
+
 .edit-form{
     width: 100%;
     height: 25px;

@@ -8,6 +8,32 @@
     flex-direction: column;
 }
 
+.toggleContainer::-webkit-scrollbar {
+    scrollbar-width: thin;
+    background: none;
+    width: 10px;
+    height: 40px;
+}
+
+.toggleContainer::-webkit-scrollbar-thumb {
+    background: #1d1c1d85;
+    border-radius: 10px;
+    cursor: default;
+    left: 0;
+    opacity: 0;
+    outline: none;
+    position: absolute;
+    top: 0;
+    width: 10px;
+    will-change: transform;
+    z-index: 1;
+    height: 106.605px;
+    transform: translateY(167px);
+
+
+    transform: translateY(111px);
+}
+
 .wa-toggle-name {
     padding: 15px 10px;
     border: none;

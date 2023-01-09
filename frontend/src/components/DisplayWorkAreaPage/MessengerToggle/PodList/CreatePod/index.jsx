@@ -18,7 +18,7 @@ const CreatePod = () => {
         <>
             <div className="pod-element"  onClick={open}>
                 <AddCircleOutlineIcon id="lock-hash-icon" />
-                <span id="pod-span-ele">Create Pod</span>
+                <span id="pod-span-ele">Create A Pod</span>
             </div>
             <Modal >
                 <Form />
