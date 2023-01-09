@@ -8,6 +8,7 @@ import consumer from '../../../consumer';
 import "./MessageList.css"
 
 
+
 const MessageList = () => {
     const messages = useSelector(getMessages)
    
@@ -37,7 +38,9 @@ const MessageList = () => {
 
     useEffect(()=> {
         msgRef?.current?.scrollIntoView({
-            behavior: "smooth"
+            behavior: "smooth",
+            block: "nearest",
+            inline: "start",
         });
     }, [workareaId, messages?.length])
 
@@ -139,7 +142,7 @@ const MessageList = () => {
                         <MessageElement message={message} key={message.id}  />
                     </div>
                 ))}
-                <div id="message-bottom" ref={msgRef} />
+                <div id="message-bottom" ref={msgRef} onScroll={e => {e.preventDefault()}}/>
             </div>
 
         </>

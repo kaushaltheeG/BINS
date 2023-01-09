@@ -7,6 +7,7 @@ import ProfileModal from './ProfileModal';
 import './TopNav.css';
 import SearchBar from './SearchBar';
 import slackLogo from '../.././utils/images/slack-logo-thumb.png'
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
 
 const TopNavigation = () => {
     const sessionUser = useSelector(state => state.session.user);
@@ -47,17 +48,24 @@ const TopNavigation = () => {
         sessionLinks = (
             <>
                 <div className='inside-workarea'>
-                    <div></div>
-                    {/* <div className='search-and-profile'> */}
+                    
+                    <div className='clock-icon-container'>
+                        <AccessTimeIcon className='clock-styles'/>
+                    </div>
+                    <div className="main-search-bar-container">
                         <SearchBar />
-                        {/* <ProfileButton user={sessionUser} /> */}
+
+                    </div>
+                    <div className="profile-container">
                         <div className='profile-icon-container'>
                             <div id="profile-icon">
                                 <button onClick={openProfile}>{sessionUser.name[0].toUpperCase()}
-                                    <i className="fa-solid fa-user-circle" />
+                                
                                 </button>
                             </div>
                         </div>
+                    </div>
+                     
                         
 
                     {/* </div> */}

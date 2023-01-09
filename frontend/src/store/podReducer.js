@@ -50,8 +50,8 @@ export const fetchUserPods = (workareaId) => async dispatch => {
     }
 } 
 
-export const createPod = (payload) => async dispatch => {
-    const res = await csrfFetch(`/api/workareas/${payload.workareaId}/pods`, {
+export const createPod = (payload) => {
+    const res =  csrfFetch(`/api/workareas/${payload.workareaId}/pods`, {
         method: 'POST',
         body: JSON.stringify(payload)
     });
@@ -81,8 +81,8 @@ export const updatePod = (payload) => async dispatch => {
     }
 }
 
-export const newPodMembers = (payload) => async dispatch => {
-    const res = await csrfFetch(`/api/workareas/${payload.workareaId}/pods/${payload.podId}/addmembers`, {
+export const newPodMembers = (payload) => {
+        csrfFetch(`/api/workareas/${payload.workareaId}/pods/${payload.podId}/addmembers`, {
         method: 'POST',
         body: JSON.stringify(payload)
     })
@@ -96,8 +96,8 @@ export const newPodMembers = (payload) => async dispatch => {
     // }
 }
 
-export const deletePod = (workareaId, podId) => async dispatch => {
-    const res = await csrfFetch(`/api/workareas/${workareaId}/pods/${podId}`, {
+export const deletePod = (workareaId, podId) => {
+    csrfFetch(`/api/workareas/${workareaId}/pods/${podId}`, {
         method: 'DELETE'
     });
 
@@ -109,8 +109,8 @@ export const deletePod = (workareaId, podId) => async dispatch => {
     // }
 }
 
-export const dememberFromPod = (workareaId, podId) => async dispatch => {
-    const res = await csrfFetch(`/api/workareas/${workareaId}/pods/${ podId }/demember`, {
+export const dememberFromPod = (workareaId, podId) => {
+    csrfFetch(`/api/workareas/${workareaId}/pods/${ podId }/demember`, {
         method: 'POST'
     });
 

@@ -8,12 +8,13 @@
     position: relative;
     min-width: 0;
     z-index: 203;
+    padding: 10px 0;
 
-    grid-area: p-top_nav;
+    /* grid-area: p-top_nav;
         grid-row-start: p-top_nav;
         grid-column-start: p-top_nav;
         grid-row-end: p-top_nav;
-        grid-column-end: p-top_nav;
+        grid-column-end: p-top_nav; */
     
 }
 
@@ -25,6 +26,11 @@
     position: relative;
 }
 
+.clock-styles{
+    color: white; 
+    /* margin-right: 10px; */
+}
+
 .outside-workarea {
     height: 80px;
     /* background-color: transparent; */
@@ -34,6 +40,17 @@
     top: 0;
     position: absolute;
     width: 100%;
+}
+
+.main-search-bar-container{
+    display: flex;
+        flex: 2;
+        max-width: 732px;
+        min-width: 0;
+        position: relative;
+        align-items: center;
+        justify-content: space-between;
+    /* padding-left: 20px; */
 }
 
 .outside-container {
@@ -58,11 +75,37 @@
 
 }
 
+.clock-icon-container{
+    /* padding-right: 25px; */
+    /* position:fixed;
+    left: 67vh; */
+    align-items: center;
+    display: flex;
+    /* flex: 1; */
+    justify-content: flex-end;
+    /* min-width: 128px; */
+    padding-left: 16px;
+    padding-right: 20px;
+}
+
 .binslogo {
     display: flex;
     align-items: center;
     justify-content: center;
     text-decoration: none;
+}
+
+.profile-container{
+    /* flex: 2; */
+    /* min-width: 0px;
+    max-width: 500px; */
+    
+    /* display: flex;
+    align-items: center;
+    justify-content: right; */
+    position: absolute;
+    right: 0;
+    margin-right: 15px;
 }
 
 #logo-img {
@@ -73,11 +116,7 @@
 
 
 #top-searchbar{
-    display: flex;
-    flex: 2;
-    max-width: 732px;
-    min-width: 0;
-    position: relative;
+   width: 100%;
 }
 
 #search-input {

@@ -46,9 +46,9 @@ const MessengerToggle = () => {
             {channel: 'WorkareaChannel', id: workareaId}, 
             {
                 received: (workareaObj) => {
+                    console.log(workareaObj.type)
                     switch(workareaObj.type) {
                         case 'RECEIVE_POD':
-                            console.log(workareaObj)
                             if (workareaObj.payload.includes(currentUser.id)) {
                                 dispatch(setPod(workareaObj))
                             }

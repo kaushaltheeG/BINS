@@ -79,9 +79,10 @@ const NewDirectMessage = ({body, setBody, withinSelected, setWithinSelected}) =>
                     userIds: withinSelected
                 }
             }
-            dispatch(createDirectMessage(workareaId, payload)).then((dm) => {
-                history.push(`/client/workareas/${dm.workareaId}/dms/${dm.id}`)
-            })
+            dispatch(createDirectMessage(workareaId, payload))
+            // .then((dm) => {
+            //     history.push(`/client/workareas/${dm.workareaId}/dms/${dm.id}`)
+            // })
             setBody("")
             setWithinSelected([])
         }

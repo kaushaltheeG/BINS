@@ -100,6 +100,7 @@
 
 
     def demember
+        debugger
         @membership = current_user.memberships.where("membershipable_type = 'Pod' and membershipable_id = :id", id: params[:pod_id]).first
         if @membership
            if @membership.destroy
