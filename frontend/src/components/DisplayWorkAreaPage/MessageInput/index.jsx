@@ -4,13 +4,27 @@ import { useDispatch, useSelector } from "react-redux";
 import { createDmMessage, createPodMessage } from "../../../store/messageReducer";
 import "./MessageInput.css"
 import { createDirectMessage } from "../../../store/directMessageReducer";
-const MessageInput = ({ body, setBody, withinSelected, setWithinSelected }) => {
+const MessageInput = ({ body, setBody, withinSelected, setWithinSelected, dms, pods }) => {
     // const [body, setBody] = useState('');
     const currentUser = useSelector(state => state.session.user);
     const dispatch = useDispatch();
     const history = useHistory();
     const { workareaId, typeId, type, newMsg } = useParams();
+    let currentName;
+    if (type === 'pods' && !newMsg) {
+        currentName = `Pod ${pods[typeId]?.name} `
 
+    } else if ( type === 'dms' && !newMsg) {
+        if (dms[typeId]?.isGroup) {
+            currentName = 'Group Chat'
+        } else {
+            currentName = dms[typeId] ? Object.values(dms[typeId]?.members).filter(mem => mem.id !== currentUser?.id)?.at(0)?.name : "" 
+            console.log(currentName)
+
+        }
+    } else if (newMsg) {
+        currentName = 'New Person'
+    }
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -44,7 +58,7 @@ const MessageInput = ({ body, setBody, withinSelected, setWithinSelected }) => {
             <div className="flex-msg-input">
                 <textarea 
                     type="text" id="msg-input-tag" 
-                    placeholder="Message Pod Name"
+                    placeholder={`Message ${currentName}`}
                     value={body}
                     onChange={e => setBody(e.target.value)}
                     onKeyDown={e => {
