@@ -8,12 +8,72 @@ import './TopNav.css';
 import SearchBar from './SearchBar';
 import slackLogo from '../.././utils/images/slack-logo-thumb.png'
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import { useModal } from 'react-hooks-use-modal';
+
 
 const TopNavigation = () => {
     const sessionUser = useSelector(state => state.session.user);
     const location = useLocation(); //might new a useEffect but do need since useSelectior will cause the render 
     const currentWorkarea = useSelector(state => state.workarea.currentWorkarea);
     const [showProfile, setShowProfile] = useState(false);
+
+    const [Modal, open, close, isOpen] = useModal('root', {
+        preventScroll: true,
+        focusTrapOptions: {
+            clickOutsideDeactivates: true
+        }, 
+        components: {
+            Modal: ({ title, description, children }) => {
+                return (
+                    <div
+                        style={{
+                            borderRadius: '10px'
+                        }}
+                    >
+                        {title && <h1>{title}</h1>}
+                        {description && <p>{description}</p>}
+                        {children}
+                    </div>
+                );
+            },
+            Overlay: () => {
+                return (
+                    <div
+                        style={{
+                            position: 'fixed',
+                            top: 0,
+                            left: 0,
+                            bottom: 0,
+                            right: 0,
+                            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                        }}
+                    />
+                );
+            },
+            Wrapper: ({ children }) => {
+                return (
+                    <div
+                        style={{
+                            position: 'fixed',
+                            top: '50px',
+                            right: 0,
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            zIndex: 1000
+                        }}
+                    >
+                        {children}
+                    </div>
+                );
+            },
+        },
+    })
+
+    
+
+
+
 
     const openProfile = () => {
         if (showProfile) return;
@@ -58,8 +118,8 @@ const TopNavigation = () => {
                     </div>
                     <div className="profile-container">
                         <div className='profile-icon-container'>
-                            <div id="profile-icon">
-                                <button onClick={openProfile}>{sessionUser.name[0].toUpperCase()}
+                            <div >
+                                <button id="profile-icon" onClick={open}>{sessionUser.name[0].toUpperCase()}
                                 
                                 </button>
                             </div>
@@ -71,9 +131,10 @@ const TopNavigation = () => {
                     {/* </div> */}
                     
                 </div>
-                    { showProfile && 
-                        <ProfileModal user={sessionUser} />
-                    }
+                    <Modal>
+                        <ProfileModal user={sessionUser} workarea={currentWorkarea}/>
+                    </Modal>
+                    
             </>
         );
     } else if (location.pathname === "/") {

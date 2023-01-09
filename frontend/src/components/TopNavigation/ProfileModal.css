@@ -1,30 +1,33 @@
 .profile-modal-background {
     /* background-color: red; */
-
-    position: absolute;
-    left: 1100px;
-    top: 42px;
+    height: inherit;
+    /* position: sticky;
+    top: 50px; */
+    /* right: 600px; */
+    left: 1130px;
+    /* bottom: 325px; */
     outline: none;
 
     --saf-0: rgba(var(--sk_foreground_low, 29, 28, 29), 0.13);
     background-color: rgba(var(--sk_foreground_min_solid, 248, 248, 248), 1);
     border-radius: 6px;
     box-shadow: 0 0 0 1px var(--saf-0), 0 4px 12px 0 #0000001f;
-    max-height: calc(100vh - 62px);
+    /* max-height: calc(100vh - 62px);
     max-width: 360px;
-    min-width: 200px;
+    min-width: 200px; */
     overflow-y: auto;
     padding: 0.1px 0;
     -webkit-user-select: none;
     user-select: none;
-    width: 300px;
+    width: 200px;
+    overflow-x: hidden;
 }
 
 .profile-modal-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items:flex-start;
+    /* justify-content: center; */
 }
 
 .profile-model-seperator_li {
@@ -42,6 +45,20 @@
         sans-serif;
 }
 
+.profile-model-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 5px 10px;
+    flex: 1 1 auto;
+    overflow: hidden;
+    position: relative;
+    text-overflow: ellipsis;
+    top: -1px;
+    color: rgba(var(--sk_primary_foreground, 29, 28, 29), 1);
+}
+
 .profile-model-seperator_hr {
     border-bottom: 0;
     border-top: 1px solid rgba(var(--sk_foreground_low, 29, 28, 29), .13);
@@ -50,9 +67,45 @@
     clear: both;
 }
 
+.font-bold{
+    display: block;
+        font-weight: 900;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    
+}
+
 #signout {
     cursor: pointer;
 }
+
+#profile-icon {
+    cursor: pointer;
+    width: 26px;
+    border: none;
+    border-radius: 4px;
+    /* padding: 4px; */
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    color: #ffff;
+    flex-shrink: 0;
+    position: relative;
+    text-align: center;
+}
+
+#profile-icon-modal {
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 4px;
+    background-color: #5f315f;
+    color: #ffff;
+    margin-right: 8px;
+
+}
+
+
 /* hr {
     display: block;
         unicode-bidi: isolate;

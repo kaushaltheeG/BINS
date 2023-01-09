@@ -8,8 +8,8 @@
     position: relative;
     min-width: 0;
     z-index: 203;
-    padding: 10px 0;
-
+    padding: 5px 0;
+    font-family: Slack-Circular-Pro, "Helvetica Neue", Helvetica, "Segoe UI", Tahoma, Arial, sans-serif;
     /* grid-area: p-top_nav;
         grid-row-start: p-top_nav;
         grid-column-start: p-top_nav;
@@ -41,6 +41,8 @@
     position: absolute;
     width: 100%;
 }
+
+
 
 .main-search-bar-container{
     display: flex;
@@ -75,6 +77,21 @@
 
 }
 
+.search-wa-btn-text{
+    display: block;
+        font-size: 13px;
+        font-weight: 400;
+        line-height: 1.38463;
+        /* margin-right: auto; */
+        overflow: hidden;
+        /* padding-right: 12px; */
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    margin-right: 0;
+        padding-left: 8px;
+        padding-right: 44px;
+}
+
 .clock-icon-container{
     /* padding-right: 25px; */
     /* position:fixed;
@@ -106,7 +123,10 @@
     position: absolute;
     right: 0;
     margin-right: 15px;
+
 }
+
+
 
 #logo-img {
     height: 3rem;
@@ -117,6 +137,7 @@
 
 #top-searchbar{
    width: 100%;
+   height: 100%;
 }
 
 #search-input {
@@ -137,3 +158,29 @@
     font-weight: bold;
     font-size: 1.75rem;
 }
+
+#search-input-btn{
+    cursor: pointer;
+    width: 100%;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFF;
+    border: none;
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.1);
+    flex: 5;
+    max-width: 732px;
+    min-width: 0;
+    padding: 0 8px;
+        box-shadow: 0 0 0 1px var(--saf-0), 0 1px 3px 0 #00000014;
+        -webkit-app-region: no-drag;
+}
+
+#search-input-btn:hover{
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+
+

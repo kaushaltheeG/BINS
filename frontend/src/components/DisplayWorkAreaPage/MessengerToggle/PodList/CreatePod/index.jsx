@@ -10,6 +10,7 @@ const CreatePod = () => {
         focusTrapOptions: {
             clickOutsideDeactivates: true
         }
+        
     })
 
 
