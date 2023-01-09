@@ -127,7 +127,7 @@ const MessengerToggle = () => {
                         <LockIcon id="lock-hash-icon" />
                     }
                     {!currentPod?.private &&
-                        <TagIcon id="lock-hash-icon" />
+                        <TagIcon id="lock-hash-icon" sx={{ mr: "5px", transform: "skew(-10deg)", opacity: "0.6" }} />
                     }
                     <span id="pod-span-ele">{currentPod?.name}</span>
                 </div>

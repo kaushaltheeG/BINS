@@ -26,7 +26,7 @@ const PodElement = ({pod}) => {
                         <LockIcon id="lock-hash-icon" />
                     }
                     {!pod.private && 
-                        <TagIcon id="hash-icon-only" />
+                        <TagIcon id="hash-icon-only" sx={{ mr: "5px", transform: "skew(-10deg)", opacity: "0.6" }} />
                     }
                     <span onClick={handleSwitch} id="pod-span-ele">{name}</span>
                 </div>
@@ -37,7 +37,7 @@ const PodElement = ({pod}) => {
                         <LockIcon id="lock-hash-icon" />
                     }
                     {!pod.private &&
-                        <TagIcon id="hash-icon-only" />
+                        <TagIcon id="hash-icon-only" sx={{ mr: "5px", transform: "skew(-10deg)", opacity: "0.6" }} />
                     }
                     <span onClick={handleSwitch} id="pod-span-ele">{name}</span>
                 </div>

@@ -75,14 +75,17 @@ const MessageElement = ({ message }) => {
     }
 
     const handleSubmitEdit = (e) => {
+        e.preventDefault();
         if (body.length) {
             let payload = {
                 body: currentBody,
                 platformId: typeId
             }
             updateMessage(payload, id)
+            setEdit(false)
         }
     }
+    
 
     const handleCancel = (e) => {
         e.preventDefault()

@@ -74,7 +74,7 @@ const MessengerHeader = () => {
                                         <LockIcon id="lock-tag-header-icon" />
                                     }
                                     {!currentPod?.private &&
-                                        <TagIcon id="lock-tag-header-icon" />
+                                <TagIcon id="lock-tag-header-icon" sx={{ mr: "5px", transform: "skew(-10deg)", opacity: "0.6" }} />
                                     }
                                 
                                 </>

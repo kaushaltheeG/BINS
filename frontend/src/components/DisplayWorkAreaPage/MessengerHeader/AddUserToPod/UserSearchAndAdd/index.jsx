@@ -117,7 +117,7 @@ const UserSearchAndAdd = () => {
                                     <LockIcon id="lock-tag-header-icon-add-form" />
                                 }
                                 {!currentPod?.private &&
-                                    <TagIcon id="lock-tag-header-icon-add-form" />
+                                <TagIcon id="lock-tag-header-icon-add-form" sx={{ mr: "5px", transform: "skew(-10deg)", opacity: "0.6" }} />
                                 }
                                 <span>{currentPod.name}</span>
                             
