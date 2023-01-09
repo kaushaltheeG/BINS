@@ -5,6 +5,11 @@ const CREATE_POD = 'create/Pod';
 const DELETE_POD = 'delete/POD';
 export const ERROR_IN_POD = 'failed/apiPodReq';
 
+export const getGeneralStagePod = (store) => {
+    if (!Object.keys(store.pods).length) return null;
+    else return Object.values(store.pods)[0]
+}
+
 export const getUserPods = (pods) => {
     return {
         type: GET_MEMBERSHIP_PODS,

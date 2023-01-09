@@ -44,10 +44,11 @@
         @workarea = Workarea.find_by(id: params[:workarea_id])
         @pod = @workarea.pods.find_by(id: params[:id]);
         if @pod.destroy
-            pods = @workarea.pods.select {|pod| pod.workarea_id == @workarea.id && current_user.pods.include?(pod)}
-            @pod = pods.first
+            # pods = @workarea.pods.select {|pod| pod.workarea_id == @workarea.id && current_user.pods.include?(pod)}
+            # @pod = pods.first
             WorkareaChannel.broadcast_to(@workarea, 
                 type: 'REMOVE_POD',
+                payload: @pod.members.map {|mem| mem.id},
                 **from_template('api/pods/wbs_show', pod: @pod))
             render json: nil, status: :ok 
            
@@ -79,7 +80,7 @@
         members = params[:members]
         @workarea = Workarea.find_by(id: params[:workarea_id])
         @pod = @workarea.pods.find_by(id: params[:pod][:id]);
-        p @pod 
+       
         members.each do |member|
             user = User.find_by(id: member[:id])
             @pod.members << user unless @pod.members.include?(user);
@@ -88,6 +89,7 @@
         if @pod.save 
             WorkareaChannel.broadcast_to(@workarea, 
                 type: 'RECEIVE_POD',
+                payload: @pod.members.map {|mem| mem.id},
                 **from_template('api/pods/wbs_show', pod: @pod))
             render json: nil, status: :ok 
             # render :show 
@@ -104,7 +106,8 @@
                 @workarea = Workarea.find_by(id: params[:workarea_id])
                 @pod = @workarea.pods.find_by(id: params[:pod_id])
                 WorkareaChannel.broadcast_to(@workarea, 
-                    type: 'REMOVE_POD',
+                    type: 'LEAVE_POD',
+                    payload: @pod.members.map {|mem| mem.id},
                     **from_template('api/pods/wbs_show', pod: @pod))
             
                 render json: { message: 'success'} 

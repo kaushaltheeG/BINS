@@ -4,7 +4,7 @@ import "./AboutPodForm.css"
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentUser } from '../../../../store/session';
-import { deletePod, dememberFromPod, updatePod } from '../../../../store/podReducer';
+import { deletePod, dememberFromPod, getGeneralStagePod, updatePod } from '../../../../store/podReducer';
 import { useHistory, useParams } from 'react-router-dom';
 import { demeberGroupChat } from '../../../../store/directMessageReducer';
 
@@ -35,6 +35,7 @@ const AboutPodForm = ({ currentMessenger }) => {
     const formType = !edit && destroy ? 'Delete Pod' : edit && !destroy ? 'Edit Pod' :  type === 'pods' ? 'Leave Pod' : 'Leave Chat'
     const dispatch = useDispatch();
     const history = useHistory();
+    const generalStagePod = useSelector(getGeneralStagePod);
 
     const firstPod = currentUser ? Object.values(currentUser.memberships.pods)[0] : null; 
     const firstDm = currentUser ? Object.values(currentUser.memberships.directMessages)[0] : null; 
@@ -60,11 +61,11 @@ const AboutPodForm = ({ currentMessenger }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (formType === 'Leave Pod') {
+        if (formType === 'Leave Pod' && pod.id !== firstPod.id) {
             
             dispatch(dememberFromPod(pod.workareaId, pod.id))
-            history.push(`/client/workareas/${firstPod.workareaId}/pods/${firstPod.id}`)
-        } else if (formType === 'Delete Pod') {
+            history.push(`/client/workareas/${generalStagePod?.workareaId}/pods/${generalStagePod?.id}`)
+        } else if (formType === 'Delete Pod' && pod.id !== firstPod.id) {
             dispatch(deletePod(pod.workareaId, pod.id))
             history.push(`/client/workareas/${firstPod.workareaId}/pods/${firstPod.id}`)
         } else if (formType === 'Edit Pod') {
@@ -80,7 +81,7 @@ const AboutPodForm = ({ currentMessenger }) => {
         } else if (formType == 'Leave Chat') {
            
             dispatch(demeberGroupChat(dm.workareaId, dm.id));
-            history.push(`/client/workareas/${firstDm.workareaId}/dms/${firstDm.id}`)
+            // history.push(`/client/workareas/${firstDm.workareaId}/dms/${firstDm.id}`)
         }
     }
 

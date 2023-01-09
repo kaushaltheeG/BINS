@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { useHistory, useParams } from "react-router-dom";
+import { Redirect, useHistory, useParams } from "react-router-dom";
 import PodList from "./PodList"
-import { fetchUserPods, removePod, setPod } from "../../../store/podReducer";
+import { fetchUserPods, getGeneralStagePod, removePod, setPod } from "../../../store/podReducer";
 import './MessengerToggle.css'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import Diversity3Icon from '@mui/icons-material/Diversity3';
@@ -22,11 +22,13 @@ const MessengerToggle = () => {
     const pods = useSelector(state => state.pods);
     const dms = useSelector(state => state.directMessages)
     const currentUser = useSelector(getCurrentUser);
+    const generalStagePod = useSelector(getGeneralStagePod);
     const directMessages = useSelector(state => state.directMessages)
     const dispatch = useDispatch();
     const { workareaId, typeId, type} = useParams();
     const history = useHistory();
    
+
     const currentPod = Object.keys(pods).length ? pods[parseInt(typeId)] : null;
     const currentDm = Object.keys(dms).length ? dms[parseInt(typeId)] : null;
 
@@ -55,8 +57,23 @@ const MessengerToggle = () => {
                             }
                             break;
                         case 'REMOVE_POD':
+                            
                             dispatch(removePod(typeId))
-
+                            if (workareaObj.payload.includes(currentUser.id)) {
+                                console.log('hittt remove pod dispatch');
+                            }
+                            if (type == 'pods' && typeId == workareaObj.id) {
+                                history.push(`/client/workareas/${generalStagePod.workareaId}/pods/${generalStagePod.id}`)
+                            }
+                            break;
+                        case 'LEAVE_POD':
+                          
+                            if (!workareaObj.payload.includes(currentUser.id)) {
+                                dispatch(removePod(typeId))
+                                // history.push(`/client/workareas/${generalStagePod.workareaId}/pods/${generalStagePod.id}`)
+                                console.log('hittt remove pod dispatch');
+                            }
+                            
                             break;
                         case 'RECEIVE_DM': 
                             dispatch(setDirectMessage(workareaObj))
@@ -77,6 +94,13 @@ const MessengerToggle = () => {
     const toggleDmsDisplay = (e) => {
         e.preventDefault();
         setShowDms(oldVal => !oldVal)
+    }
+
+    if (type === 'pods' && !Object.hasOwn(pods, typeId) ) {
+       
+        <Redirect
+            to={`/client/workareas/${generalStagePod?.workareaId}/pods/${generalStagePod?.id}`}
+        />
     }
 
     return (
