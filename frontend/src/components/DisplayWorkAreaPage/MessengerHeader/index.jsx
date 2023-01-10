@@ -57,7 +57,7 @@ const MessengerHeader = () => {
 
     
 
-    if (!currentUser) <Redirect to={'/signin'}/>
+    if (!currentUser) return <Redirect to={'/signin'}/>
 
     return (
         <div className="messenger-main-header-container">
