@@ -96,7 +96,7 @@ class Api::DirectMessagesController < ApplicationController
                     **from_template('api/direct_messages/wbs_show', direct_message: @direct_message))
                 render json: nil, status: :ok 
 
-                render :show 
+                # render :show 
             else 
 
                 #direct message fails to be created 
@@ -131,8 +131,8 @@ class Api::DirectMessagesController < ApplicationController
                     payload: @direct_message.members.map {|mem| mem.id},
                     requestUser: current_user.id,
                     **from_template('api/direct_messages/wbs_show', direct_message: @direct_message))
-                render json: nil, status: :ok 
-            render :show 
+            render json: nil, status: :ok 
+            # render :show 
             return 
         end 
         render json: {errors: [@direct_message.errors.full_messages]}, status: :unauthorized
