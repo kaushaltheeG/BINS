@@ -55,7 +55,7 @@ const MessageElement = ({ message }) => {
 
     const openEdit = (e) => {
         e.preventDefault();
-        console.log(e)
+        
         setEdit(oldVal => true);
         setRemove(oldVal => false);
         
@@ -115,7 +115,15 @@ const MessageElement = ({ message }) => {
                     { (edit && !remove) && 
                         <>
                             <form onSubmit={handleSubmitEdit} className="edit-msg-form">
-                                <textarea ref={textareFoucs} className="edit-message-textarea" value={currentBody} onChange={handleEditMessage} />
+                                <textarea ref={textareFoucs} className="edit-message-textarea" 
+                                        value={currentBody} 
+                                        onChange={handleEditMessage} 
+                                        onKeyDown={e => {
+                                            if (e.code === 'Enter' && !e.shiftKey) {
+                                                handleSubmitEdit(e);
+                                            }
+                                        }}
+                                />
                                 <div className="edit-cancel-msg-btns">
                                         <div className="cancel-edit-btn container">
                                     <button id='cancel-msg-btn' onClick={handleCancel} onMouseOver={e => e.stopPropagation()}>Cancel</button>
