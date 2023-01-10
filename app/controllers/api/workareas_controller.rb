@@ -34,13 +34,12 @@ class Api::WorkareasController < ApplicationController
     end 
 
     def add_members 
-        member_ids = params[:user_ids]
+        
         @workarea = Workarea.find_by(id: params[:workarea_id])
-        if @workarea
-            member_ids.each do |id|
-                @user = User.find_by(id: id)
-                @workarea.members << @user unless @workarea.members.include?(@user)
-            end 
+        @user = User.find_by(id: params[:user_id])
+        if @workarea && @user
+            @workarea.members << @user unless @workarea.members.include?(@user)
+            @workarea.add_new_user_to_all_general_pods(@user)
             
             render :show 
         else 

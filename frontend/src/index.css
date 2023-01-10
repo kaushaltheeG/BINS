@@ -22,6 +22,11 @@
 }
 
 @font-face {
+    font-family: "Slack-Lato-bold";
+    src: url("./utils/fonts/lato-bold-4b1dc11.woff2");
+}
+
+@font-face {
     font-family: "Slack-Larsseit";
     src: url(./utils/fonts/lato-black-b64f5e4.woff2);
 }

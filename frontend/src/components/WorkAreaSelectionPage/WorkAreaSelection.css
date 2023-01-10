@@ -1,0 +1,17 @@
+.wa-selection-container{
+    position: fixed;
+    left: 50%;
+    top: 30%;
+    transform: translate(-50%, -50%);
+    /* background-color: aliceblue; */
+    height: auto;
+    border: none;
+    border: 0.5px solid rgb(159, 135, 159);
+    border-radius: 4px;
+    /* background-color: rgb(129, 53, 129); */
+    font-family: Slack-Lato,Slack-Fractions,appleLogo,sans-serif;
+    font-size: 15px;
+    color: #1d1c1d;
+        font-variant-ligatures: common-ligatures;
+}
+

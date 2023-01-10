@@ -55,4 +55,10 @@ class Workarea < ApplicationRecord
             self.pods << @pod 
         end 
     end 
+
+    #finds that wa's general pods and adds the user
+    def add_new_user_to_all_general_pods(user)
+        general_pods = self.pods.select {|pod| !pod.private }
+        general_pods.each {|pod| pod.members << user}
+    end 
 end

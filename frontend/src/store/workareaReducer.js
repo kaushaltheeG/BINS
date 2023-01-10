@@ -1,3 +1,4 @@
+
 import csrfFetch from "./csrf";
 import { getNewMembership } from "./session"
 
@@ -94,6 +95,22 @@ export const fetchWorkarea = (workareaId) => async dispatch => {
     } else {
         dispatch(workareaReqFailed({ res }))
         return null; 
+    }
+}
+
+export const joinWorkarea = (payload) => async dispatch => {
+    const res = await csrfFetch(`/api/workareas/${payload.workareaId}/addmembers`, {
+        method: 'POST', 
+        body: JSON.stringify(payload)
+    })
+
+    if (res.ok) {
+        const currentWorkarea = await res.json();
+        dispatch(setCurrentWorkarea(currentWorkarea));
+        return currentWorkarea
+    } else {
+        dispatch(workareaReqFailed({ res }))
+        return null;
     }
 }
 
