@@ -9,6 +9,7 @@ import { Redirect } from 'react-router-dom';
 const WorkAreaSelectionPage = () => {
     const sessionUser = useSelector(state => state.session.user);
     if (!sessionUser) return <Redirect to="/" />
+    //here 
     return (
         <>
             
