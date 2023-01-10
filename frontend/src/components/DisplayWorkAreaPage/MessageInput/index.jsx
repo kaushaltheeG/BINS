@@ -40,9 +40,11 @@ const MessageInput = ({ body, setBody, withinSelected, setWithinSelected, dms, p
                     body,
                     userIds: withinSelected
                 }
-                dispatch(createDirectMessage(workareaId, payload)).then((dm) => {
-                    history.push(`/client/workareas/${dm.workareaId}/dms/${dm.id}`)
-                })
+                
+                dispatch(createDirectMessage(workareaId, payload))
+                // .then((dm) => {
+                //     history.push(`/client/workareas/${dm.workareaId}/dms/${dm.id}`)
+                // })
             } else if (type === 'dms' && !newMsg) {
                 createDmMessage(message, workareaId, typeId)
             }

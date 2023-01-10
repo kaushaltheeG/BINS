@@ -6,6 +6,7 @@
     font-size: 15px;
     overflow-y: auto;
     height: 100%;
+    padding-bottom: 10px;
 }
 
 .messenger-toggle::-webkit-scrollbar {
@@ -13,6 +14,10 @@
     background: none;
     width: 10px;
     height: 40px;
+}
+
+.icon-font-slack{
+    font-family: Slack-icon, Slack-Lato, sans-serif;
 }
 
 .messenger-toggle::-webkit-scrollbar-thumb {

@@ -16,14 +16,14 @@ const MessageList = () => {
     const dispatch = useDispatch();
     const history = useHistory()
     const msgRef = useRef(null);
-    // const [newDate]
+  
     const dateSet = new Set();
 
     const fullDate = (date) => {
         let formated = new Date(date)
         formated = formated.toDateString()
         dateSet.add(formated)
-        console.log(dateSet)
+        
         return formated
     }
 

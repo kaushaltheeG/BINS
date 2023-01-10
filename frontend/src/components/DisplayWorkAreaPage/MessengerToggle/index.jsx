@@ -10,9 +10,10 @@ import TagIcon from '@mui/icons-material/Tag';
 import LockIcon from '@mui/icons-material/Lock';
 import CreatePod from "./PodList/CreatePod";
 import DirectAndGroupList from "./DirectAndGroupList";
-import { fetchAllUserDirectMessages, setDirectMessage } from "../../../store/directMessageReducer";
+import { fetchAllUserDirectMessages, setDirectMessage, removeGroupChat } from "../../../store/directMessageReducer";
 import { getCurrentUser } from "../../../store/session";
 import consumer from "../../../consumer";
+import {receiveMessage} from "../../../store/messageReducer";
 
 
 
@@ -28,7 +29,7 @@ const MessengerToggle = () => {
     const { workareaId, typeId, type} = useParams();
     const history = useHistory();
    
-
+    console.log(generalStagePod)
     const currentPod = Object.keys(pods).length ? pods[parseInt(typeId)] : null;
     const currentDm = Object.keys(dms).length ? dms[parseInt(typeId)] : null;
 
@@ -46,7 +47,6 @@ const MessengerToggle = () => {
             {channel: 'WorkareaChannel', id: workareaId}, 
             {
                 received: (workareaObj) => {
-                    console.log(workareaObj.type)
                     switch(workareaObj.type) {
                         case 'RECEIVE_POD':
                             if (workareaObj.payload.includes(currentUser.id)) {
@@ -57,8 +57,9 @@ const MessengerToggle = () => {
                             }
                             break;
                         case 'REMOVE_POD':
-                            
-                            dispatch(removePod(typeId))
+                           
+                            dispatch(removePod(workareaObj.id))
+
                             if (workareaObj.payload.includes(currentUser.id)) {
                                 console.log('hittt remove pod dispatch');
                             }
@@ -69,15 +70,30 @@ const MessengerToggle = () => {
                         case 'LEAVE_POD':
                           
                             if (!workareaObj.payload.includes(currentUser.id)) {
-                                dispatch(removePod(typeId))
-                                // history.push(`/client/workareas/${generalStagePod.workareaId}/pods/${generalStagePod.id}`)
-                                console.log('hittt remove pod dispatch');
+                                dispatch(removePod(workareaObj.id))  
                             }
                             
                             break;
                         case 'RECEIVE_DM': 
-                            dispatch(setDirectMessage(workareaObj))
+                        
+                            if (workareaObj.payload.includes(currentUser.id)) {
+                                dispatch(setDirectMessage(workareaObj))
+                            }
+                            if (currentUser.id === workareaObj.requestUser) {
+                                
+                                history.push(`/client/workareas/${workareaObj.workareaId}/dms/${workareaObj.id}`)
+                            }
+                            
                             break; 
+                        case 'ADD_USER_DM':
+                            if (workareaObj.payload.includes(currentUser.id)) {
+                                dispatch(setDirectMessage(workareaObj))
+                            }
+                            break;
+                        case 'LEAVE_DM':
+                            if (!workareaObj.payload.includes(currentUser.id)) {
+                                dispatch(removeGroupChat(workareaObj.id))
+                            }
                         default:
                             console.log('unable to broadcast to', workareaObj.type)
                             break;
@@ -96,22 +112,26 @@ const MessengerToggle = () => {
         setShowDms(oldVal => !oldVal)
     }
 
-    if (type === 'pods' && !Object.hasOwn(pods, typeId) ) {
+    // if (type === 'pods' && !Object.hasOwn(pods, typeId) ) {
        
-        <Redirect
-            to={`/client/workareas/${generalStagePod?.workareaId}/pods/${generalStagePod?.id}`}
-        />
-    }
+    //     return <Redirect
+    //         to={`/client/workareas/${generalStagePod?.workareaId}/pods/${generalStagePod?.id}`}
+    //     />
+    // } else if (type === 'dms' && !Object.hasOwn(dms, typeId)) {
+    //    return <Redirect
+    //         to={`/client/workareas/${generalStagePod?.workareaId}/pods/${generalStagePod?.id}`}
+    //     />
+    // }
 
     return (
         <div className="messenger-toggle">
             <div className="spacer"></div>
             <div className="pod-title-container" onClick={togglePodsDisplay}>
                 {showPods && 
-                    <ArrowDropDownIcon id="down-arrow-icon"/>
+                    <ArrowDropDownIcon id="down-arrow-icon" className="icon-font-slack"/>
                 }
                 { !showPods && 
-                    <ArrowDropDownIcon id="side-arrow-icon" />
+                    <ArrowDropDownIcon id="side-arrow-icon" className="icon-font-slack" />
                 }
                 <div id="pod-name-header">Pods</div>
             </div>
@@ -124,10 +144,10 @@ const MessengerToggle = () => {
             {(!showPods && type === "pods") && 
                 <div className="pod-element pod-span-ele-active"  >
                     {currentPod?.private &&
-                        <LockIcon id="lock-hash-icon" />
+                        <LockIcon id="lock-hash-icon" className="icon-font-slack" />
                     }
                     {!currentPod?.private &&
-                        <TagIcon id="lock-hash-icon" sx={{ mr: "5px", transform: "skew(-10deg)", opacity: "0.6" }} />
+                        <TagIcon id="lock-hash-icon" sx={{ mr: "5px", transform: "skew(-10deg)", opacity: "0.6" }} className="icon-font-slack" />
                     }
                     <span id="pod-span-ele">{currentPod?.name}</span>
                 </div>
@@ -136,10 +156,10 @@ const MessengerToggle = () => {
             <div className="spacer"></div>
             <div className="pod-title-container" onClick={toggleDmsDisplay}>
                 {showDms &&
-                    <ArrowDropDownIcon id="down-arrow-icon" />
+                    <ArrowDropDownIcon id="down-arrow-icon" className="icon-font-slack" />
                 }
                 {!showDms &&
-                    <ArrowDropDownIcon id="side-arrow-icon" />
+                    <ArrowDropDownIcon id="side-arrow-icon" className="icon-font-slack" />
                 }
                 <div id="pod-name-header">Direct Messages</div>
             </div>
@@ -150,7 +170,7 @@ const MessengerToggle = () => {
                 <div className="pod-element pod-span-ele-active">
                     {currentDm?.isGroup &&
                         <>
-                            <Diversity3Icon id="group-icon" />
+                        <Diversity3Icon id="group-icon" className="icon-font-slack"  />
                             <span id="pod-span-ele">{currentDmName}</span>
                         </>
                     }

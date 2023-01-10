@@ -58,26 +58,27 @@ export const newGcMember = (payload) => async dispatch => {
         body: JSON.stringify(payload)
     })
 
-    if (res.ok) {
-        const directMessage = await res.json();
-        dispatch(setDirectMessage(directMessage))
-        return directMessage
-    } else {
-        dispatch(dmRquestFailed({ res }))
-    }
+    // if (res.ok) {
+    //     const directMessage = await res.json();
+    //     dispatch(setDirectMessage(directMessage))
+    //     return directMessage
+    // } else {
+    //     dispatch(dmRquestFailed({ res }))
+    // }
 }
 
 export const demeberGroupChat = (workareaId, dmId) => async dispatch => {
+    
     const res = await csrfFetch(`/api/workareas/${workareaId}/direct_messages/${dmId}/demember`, {
         method: 'POST',
     })
 
-    if (res.ok) {
-        dispatch(removeGroupChat(dmId))
-        return dmId 
-    } else {
-        dispatch(dmRquestFailed({ res }))
-    }
+    // if (res.ok) {
+    //     dispatch(removeGroupChat(dmId))
+    //     return dmId 
+    // } else {
+    //     dispatch(dmRquestFailed({ res }))
+    // }
 }
 
 export const createDirectMessage = (workareaId, payload) => async dispatch => {
@@ -86,13 +87,13 @@ export const createDirectMessage = (workareaId, payload) => async dispatch => {
         body: JSON.stringify({directMessage: payload})
     })
 
-    if (res.ok) {
-        const directMessage = await res.json();
-        dispatch(setDirectMessage(directMessage));
-        return directMessage
-    } else {
-        dispatch(dmRquestFailed({ res }))
-    }
+    // if (res.ok) {
+    //     const directMessage = await res.json();
+    //     dispatch(setDirectMessage(directMessage));
+    //     return directMessage
+    // } else {
+    //     dispatch(dmRquestFailed({ res }))
+    // }
 }
 
 

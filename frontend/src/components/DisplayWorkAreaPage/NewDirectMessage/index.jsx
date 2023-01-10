@@ -79,6 +79,7 @@ const NewDirectMessage = ({body, setBody, withinSelected, setWithinSelected}) =>
                     userIds: withinSelected
                 }
             }
+            // debugger
             dispatch(createDirectMessage(workareaId, payload))
             // .then((dm) => {
             //     history.push(`/client/workareas/${dm.workareaId}/dms/${dm.id}`)

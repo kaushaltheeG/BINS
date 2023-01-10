@@ -37,42 +37,64 @@ class Api::DirectMessagesController < ApplicationController
         final_arr =  user_ids.push(current_user.id)
        
         @direct_message = DirectMessage.direct_message_exists(workarea_id, final_arr.uniq)
-       
+        # debugger
+        @workarea = Workarea.find_by(id: params[:workarea_id])
         #if chat has been found
         if @direct_message 
+            # debugger
+            
+            #sending a boolen within payload 
+            addedMsg = false 
+
             #if user creates a new message 
             if (params[:direct_message][:body])
                 message = @direct_message.messages.new(direct_message_new_message_params)
                 message.author_id = current_user.id 
                 message.save! 
+                addedMsg = true 
             end 
-            @workarea = Workarea.find_by(id: params[:workarea_id])
             #action cable; to display the newly created message to the existing chat 
-            # WorkareaChannel.broadcast_to(@workarea, 
-            #         type: 'RECEIVE_DM',
-            #         **from_template('api/direct_messages/wbs_show', direct_message: @direct_message))
-            # render json: nil, status: :ok 
-            render :show 
+           
+            #retriving members ids and sending it 
+            member_ids = @direct_message.members.map {|mem| mem.id}
+            # debugger
+
+            WorkareaChannel.broadcast_to(@workarea, 
+                    type: 'RECEIVE_DM',
+                    payload: member_ids,
+                    addedMessage: addedMsg,
+                    requestUser: current_user.id,
+                    **from_template('api/direct_messages/wbs_show', direct_message: @direct_message))
+            render json: nil, status: :ok 
+            # render :show 
         else 
             #drect message has not been found 
             @direct_message = DirectMessage.new(user_ids: params[:direct_message][:user_ids]) # takes in workarea_id and user ids 
             @direct_message.creator_id = current_user.id #adding creator id 
             @direct_message.workarea_id = params[:workarea_id]
 
+            #sending a boolen within payload 
+            addedMsg = false 
             #if user creates a new message while creating a new direct message  
             if (params[:direct_message][:body])
                 message = @direct_message.messages.new(body: params[:direct_message][:body])
                 message.author_id = current_user.id 
                 message.save! 
+                addedMsg = true 
             end 
 
+            #retriving members ids and sending it 
+             member_ids = @direct_message.members.map {|mem| mem.id}
             if @direct_message.save 
                 #if saved, display message via action cable 
                     #action cable here 
-                # WorkareaChannel.broadcast_to(@workarea, 
-                #     type: 'RECEIVE_DM',
-                #     **from_template('api/direct_messages/wbs_show', direct_message: @direct_message))
-                # render json: nil, status: :ok 
+                WorkareaChannel.broadcast_to(@workarea, 
+                    type: 'RECEIVE_DM',
+                    payload: @direct_message.members.map {|mem| mem.id},
+                    addedMessage: addedMsg,
+                    requestUser: current_user.id,
+                    **from_template('api/direct_messages/wbs_show', direct_message: @direct_message))
+                render json: nil, status: :ok 
 
                 render :show 
             else 
@@ -104,6 +126,12 @@ class Api::DirectMessagesController < ApplicationController
         end 
 
         if @direct_message.save 
+            WorkareaChannel.broadcast_to(@workarea, 
+                    type: 'ADD_USER_DM',
+                    payload: @direct_message.members.map {|mem| mem.id},
+                    requestUser: current_user.id,
+                    **from_template('api/direct_messages/wbs_show', direct_message: @direct_message))
+                render json: nil, status: :ok 
             render :show 
             return 
         end 
@@ -115,14 +143,22 @@ class Api::DirectMessagesController < ApplicationController
         @workarea = Workarea.find_by(id: params[:workarea_id]);
         @direct_message = @workarea.direct_messages.find_by(id: params[:direct_message_id])
 
-        
-        if @direct_message.is_group && @direct_message.members.length > 3 
+        # debugger 
+        if @direct_message.is_group
             #checks if direct message is a group and if the memebrs list is greater than 3
             @membership = current_user.memberships.where("membershipable_type = 'DirectMessage' and membershipable_id = :id", id: params[:direct_message_id]).first
-            if @membership
-                #if membership exists
-                @membership.destroy
-                render json: { message: 'success'} 
+            
+            #if membership exists and able to destory it 
+            if @membership&.destroy
+                
+                #bread case to workarea channel for toggle 
+                WorkareaChannel.broadcast_to(@workarea, 
+                    type: 'LEAVE_DM',
+                    payload: @direct_message.members.map {|mem| mem.id},
+                    requestUser: current_user.id,
+                    **from_template('api/direct_messages/wbs_show', direct_message: @direct_message))
+                render json: nil, status: :ok 
+               
             else 
                 #if membership is not found 
                 render json: ["membership is not found"], status: :unauthorized

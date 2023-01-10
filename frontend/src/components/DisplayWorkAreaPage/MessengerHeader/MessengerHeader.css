@@ -86,6 +86,7 @@
 #current-messenger-name{
     width: auto;
     max-width: 200px;
+    font-family: Slack-Lato, Slack-Fractions, appleLogo, sans-serif;
     height: 24px;
     overflow: hidden;
     text-overflow: ellipsis;

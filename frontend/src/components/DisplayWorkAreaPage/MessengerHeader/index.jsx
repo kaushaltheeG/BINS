@@ -71,10 +71,10 @@ const MessengerHeader = () => {
                             {type === 'pods' && 
                                 <>
                                     {currentPod?.private &&
-                                        <LockIcon id="lock-tag-header-icon" />
+                                        <LockIcon id="lock-tag-header-icon" className="icon-font-slack" />
                                     }
                                     {!currentPod?.private &&
-                                <TagIcon id="lock-tag-header-icon" sx={{ mr: "5px", transform: "skew(-10deg)", opacity: "0.6" }} />
+                                        <TagIcon className="icon-font-slack" id="lock-tag-header-icon" sx={{ mr: "5px", transform: "skew(-10deg)", opacity: "0.6" }} />
                                     }
                                 
                                 </>
@@ -87,7 +87,7 @@ const MessengerHeader = () => {
                                         </div>
                                     }
                                     {currentDm?.isGroup && 
-                                        <Diversity3Icon id="lock-tag-header-icon" />
+                                        <Diversity3Icon id="lock-tag-header-icon" className="icon-font-slack" />
                                     }
                                 
                                 </>
@@ -109,12 +109,12 @@ const MessengerHeader = () => {
                         </span>
                     
                         <div className="icon-container-header">
-                                <KeyboardArrowDownIcon id="arrow-header-icon" />
+                            <KeyboardArrowDownIcon id="arrow-header-icon" className="icon-font-slack" />
                         </div>
                     </div>
                     <>
                         {type === 'pods' && 
-                            <AddUserToPod currentMessengerLength={currentPod?.members.length} />
+                            <AddUserToPod currentMessengerLength={currentPod?.members.length}  />
                         }
                         { (type === 'dms' && currentDm?.isGroup) && 
                             <AddUserToPod currentMessengerLength={currentDm ? Object.values(currentDm.members).length : null } />

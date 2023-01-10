@@ -79,8 +79,9 @@ const AboutPodForm = ({ currentMessenger }) => {
             }
             dispatch(updatePod(patchedPod))
         } else if (formType == 'Leave Chat') {
-           
+            // debugger 
             dispatch(demeberGroupChat(dm.workareaId, dm.id));
+            history.push(`/client/workareas/${firstPod.workareaId}/pods/${firstPod.id}`)
             // history.push(`/client/workareas/${firstDm.workareaId}/dms/${firstDm.id}`)
         }
     }

@@ -10,3 +10,18 @@
 /* body {
     -webkit-font-smoothing: antialiased;
 } */
+
+@font-face {
+    font-family: "Slack-Lato";
+    src: url("./utils/fonts/lato-regular-d9ce515.woff2");
+}
+
+@font-face {
+    font-family: "Slack-icon";
+    src: url("./utils/fonts/slack-icons-v2-fe043a5.woff2");
+}
+
+@font-face {
+    font-family: "Slack-Larsseit";
+    src: url(./utils/fonts/lato-black-b64f5e4.woff2);
+}

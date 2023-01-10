@@ -216,6 +216,7 @@
 }
 
 #Add-user-btn{
+    cursor: pointer;
     border: none;
     border-radius: 4px;
     background: #007a5a;

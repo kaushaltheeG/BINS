@@ -50,7 +50,7 @@ export const fetchUserPods = (workareaId) => async dispatch => {
     }
 } 
 
-export const createPod = (payload) => {
+export const createPod = (payload) => async dispatch => {
     const res =  csrfFetch(`/api/workareas/${payload.workareaId}/pods`, {
         method: 'POST',
         body: JSON.stringify(payload)
@@ -96,7 +96,7 @@ export const newPodMembers = (payload) => {
     // }
 }
 
-export const deletePod = (workareaId, podId) => {
+export const deletePod = (workareaId, podId) => async dispatch => {
     csrfFetch(`/api/workareas/${workareaId}/pods/${podId}`, {
         method: 'DELETE'
     });
@@ -109,7 +109,7 @@ export const deletePod = (workareaId, podId) => {
     // }
 }
 
-export const dememberFromPod = (workareaId, podId) => {
+export const dememberFromPod = (workareaId, podId) => async dispatch =>{
     csrfFetch(`/api/workareas/${workareaId}/pods/${ podId }/demember`, {
         method: 'POST'
     });

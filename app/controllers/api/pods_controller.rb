@@ -42,8 +42,10 @@
 
     def destroy 
         @workarea = Workarea.find_by(id: params[:workarea_id])
-        @pod = @workarea.pods.find_by(id: params[:id]);
+        @pod = @workarea.pods.find_by(id: params[:id])
+        
         if @pod.destroy
+
             # pods = @workarea.pods.select {|pod| pod.workarea_id == @workarea.id && current_user.pods.include?(pod)}
             # @pod = pods.first
             WorkareaChannel.broadcast_to(@workarea, 
@@ -55,7 +57,7 @@
             # render :show
             return 
         end 
-            render json: {errors: [@pod.errors.full_messages]}, status: :unauthorized
+        render json: {errors: [@pod.errors.full_messages]}, status: :unauthorized
     end 
 
     def index 

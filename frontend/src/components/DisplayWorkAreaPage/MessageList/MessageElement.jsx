@@ -85,7 +85,7 @@ const MessageElement = ({ message }) => {
             setEdit(false)
         }
     }
-    
+
 
     const handleCancel = (e) => {
         e.preventDefault()
@@ -140,10 +140,10 @@ const MessageElement = ({ message }) => {
                         {isHovering && 
                             <div className="edit-and-delete-container" onMouseOver={e => e.stopPropagation()}>
                                 <div className="edit-icon-container" onClick={openEdit} onMouseOver={e => e.stopPropagation()}>
-                                    <ModeEditOutlineIcon />
+                                    <ModeEditOutlineIcon className="icon-font-slack" />
                                 </div>
                                 <div className="delete-icon-container" onClick={openRemove} onMouseOver={e => e.stopPropagation()}>
-                                    <DeleteIcon /> 
+                                    <DeleteIcon className="icon-font-slack" /> 
                                 </div>
                             </div>
                         }
@@ -161,10 +161,10 @@ const MessageElement = ({ message }) => {
                         </div>
                         <div className="edit-and-delete-container">
                             <div className="delete-check">
-                                <CheckIcon onClick={handleDeleteMessage} onMouseOver={e => e.stopPropagation()} />
+                                <CheckIcon className="icon-font-slack" onClick={handleDeleteMessage} onMouseOver={e => e.stopPropagation()} />
                             </div>
                             <div className="cancel-cross">
-                                <CloseIcon onClick={handleCancel} onMouseOver={e => e.stopPropagation()} />
+                                <CloseIcon className="icon-font-slack" onClick={handleCancel} onMouseOver={e => e.stopPropagation()} />
                             </div>
                         </div>
                     </>

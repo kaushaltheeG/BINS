@@ -175,13 +175,8 @@ const UserSearchAndAdd = () => {
             
             <div className="add-user-to-pod-btn padding-top-bottom">
                 <div className="inner-btn-container">
-                    <div className="user-select-list">
-                        {/* {selectedUsers?.map(user => (
-                            <div className="user-cell-container " id="hover-cancel">
-                                <span className="select-user-span ">{user.name}</span>
-                                <button className="cancel-user-selected" value={user.id} onClick={removeSelected}>X</button>
-                            </div>
-                        ))} */}
+                    <div className="spacer-edede">
+                        
                     </div>
                     <button id="Add-user-btn" onClick={handleAddUsers}>Add</button>
                 </div>
