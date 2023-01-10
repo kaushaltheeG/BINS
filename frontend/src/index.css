@@ -30,3 +30,8 @@
     font-family: "Slack-Larsseit";
     src: url(./utils/fonts/lato-black-b64f5e4.woff2);
 }
+
+#root{
+    height: 100vh;
+    width: 100vw;
+}

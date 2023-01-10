@@ -6,6 +6,7 @@
 
 .grid-select-message-toggle {
     grid-area: message_toggle;
+    height: 100vh;
 }
 
 .grid-current-messenger-name {

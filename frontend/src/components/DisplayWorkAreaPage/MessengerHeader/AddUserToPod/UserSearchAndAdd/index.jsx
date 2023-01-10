@@ -140,7 +140,7 @@ const UserSearchAndAdd = () => {
                         {selectedUsers.map((user) => (
                             <>
 
-                                <div className="user-profile-dm-search-container marign-top-adjustment cancel-user-query">
+                                <div className="user-profile-search-user-container marign-top-adjustment cancel-user-query">
                                     <div>
                                         <button className="profile-icon color-div-icon" id='size-override'>{user?.name[0]?.toUpperCase()}</button>
                                     </div>

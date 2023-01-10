@@ -25,7 +25,7 @@ const WorkAreaSelectionPage = () => {
     if (!currentUser) return <Redirect to="/" />
     //here 
     return (
-        <>
+        <div className="screen-container">
             <div className="selection-title">
                     <h1>{formState} a Work Area</h1>
             </div>
@@ -45,7 +45,7 @@ const WorkAreaSelectionPage = () => {
                 }
                 
             </div>
-        </>
+        </div>
     )
 }
 

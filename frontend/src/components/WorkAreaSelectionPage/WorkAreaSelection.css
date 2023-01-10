@@ -1,17 +1,37 @@
 .wa-selection-container{
-    position: fixed;
+    /* position: fixed;
     left: 50%;
-    top: 30%;
-    transform: translate(-50%, -50%);
+    top: 30%; */
+
+    /* transform: translate(-50%, -50%); */
     /* background-color: aliceblue; */
-    height: auto;
+    /* height: 100%; */
+    /* width: 100%; */
+    width: 50%;
     border: none;
     border: 0.5px solid rgb(159, 135, 159);
     border-radius: 4px;
     /* background-color: rgb(129, 53, 129); */
     font-family: Slack-Lato,Slack-Fractions,appleLogo,sans-serif;
     font-size: 15px;
+    background-color: white;
     color: #1d1c1d;
-        font-variant-ligatures: common-ligatures;
+    font-variant-ligatures: common-ligatures;
+    margin-bottom: 250px;
+}
+
+.screen-container{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #3F0E40;
+}
+
+.selection-title h1 {
+    color: white;
+    font-family: "Slack-Lato-bold";
 }
 
