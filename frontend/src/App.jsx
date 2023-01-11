@@ -14,6 +14,7 @@ function App() {
       <Switch>
         <Route path='/' exact>  
           {/* <h2>Welcome to BINS: Sign In or Sign Up</h2> */}
+          //here
         </Route>
         <Route path="/signin">
           <SigninFormPage />
