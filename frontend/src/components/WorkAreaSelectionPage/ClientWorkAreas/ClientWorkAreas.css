@@ -93,6 +93,7 @@
     align-items: center;
     flex-direction: column;
     justify-content: center;
+    width: fit-content;
 }
 
 .empty-phrase{
@@ -100,3 +101,4 @@
     font-size: 24px;
     font-weight: bold;
 }
+

@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import WorkAreasListEle from './WorkAreasListEle';
 import { getCurrentUser, getUserWorkareas } from '../../../store/session';
 import happyPeople from "../../../utils/images/happy-people-two-og-removebg.png"
+import diverseGroup from "../../../utils/images/holding-hands-removebg.png"
 import './ClientWorkAreas.css'
 
 
@@ -17,7 +18,6 @@ const ClientWorkAreas = ({formState, setFormState, currentUser}) => {
         let workareasIds = workareas ? workareas.map(wa => wa.id) : []
         workareas = allWorkareas.filter(wa => !workareasIds.includes(wa.id))
         emptyWorkArrPhrase = "Looks like you are a part of all the Work Areas";
-        workareas= []
     }
 
     const handleShowCreate = (e) => {
@@ -42,7 +42,7 @@ const ClientWorkAreas = ({formState, setFormState, currentUser}) => {
         <>
             <div className="open-join-container">
                 <div className="workarea-choices-container">
-                    { workareas?.length ? 
+                    {workareas?.length ? 
                         <>
                         {workareas?.map(workarea => (
                                 <WorkAreasListEle 
@@ -53,13 +53,18 @@ const ClientWorkAreas = ({formState, setFormState, currentUser}) => {
                             ))}
                         
                         </> : 
-                        <div className="no-more-to-join-container">
-                            <div className="gif-happy">
-                                <img src={happyPeople} alt="" />
+                        
+                            <div className="no-more-to-join-container">
+                                <div className="gif-happy">
+                                    {formState === "Join" && 
+                                        <img src={happyPeople} alt="" />
+                                    }
+                                    {formState === "Open" &&
+                                        <img src={diverseGroup}  alt="" />
+                                    }
+                                </div>  
+                                <span className='empty-phrase'>{emptyWorkArrPhrase}</span>
                             </div>
-                            
-                            <span className='empty-phrase'>{emptyWorkArrPhrase}</span>
-                        </div>
                     }
                 </div>
                 <div className="open-join-create-btns-container">

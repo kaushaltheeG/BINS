@@ -36,8 +36,29 @@
     background-color: #3F0E40;
 }
 
+.selection-title {
+    display: flex;
+    align-items: baseline;
+    justify-content: baseline;
+        
+}
+
 .selection-title h1 {
     color: white;
     font-family: "Slack-Lato-bold";
 }
 
+
+#color-gradient{
+    font-size: 50px;
+    background: linear-gradient(45deg, rgb(37, 161, 199) 25%, rgb(215, 198, 12) 50%, rgb(215, 12, 93) 80%, rgb(39, 201, 25) 130%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 100%;
+    background-repeat: repeat;
+    animation: rainbow-text-simple-animation-rev 0.75s ease forwards;
+}
+
+#margin-left{
+    margin-left: 10px;
+}
