@@ -1,5 +1,5 @@
 import "./CreateWaSelection.css"
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { createWorkarea } from "../../../store/workareaReducer";
@@ -11,7 +11,7 @@ const CreateWorkAreaSelection = ({formState, setFormState, currentUser}) => {
     const [errors, setErrors] = useState([]);
     const dispatch = useDispatch();
     const history = useHistory();
-
+    const inputFocus = useRef(null);
 
     const handleCancel =  (e) => {
         e.preventDefault();
@@ -34,11 +34,15 @@ const CreateWorkAreaSelection = ({formState, setFormState, currentUser}) => {
         setErrors(["Work Area Name Must Include Characters"])
     }
 
+    useEffect(() => {
+        inputFocus?.current?.focus();
+    }, [formState])
     
     return (
         <div className="create-container">
             <div className="input-create-wa-selection-container">
                 <input value={waName} 
+                    ref={inputFocus}
                     className="create-wa-input-selection" 
                     onChange={e => setWaName(e.target.value)}
                     placeholder="Work Area Name . . . "

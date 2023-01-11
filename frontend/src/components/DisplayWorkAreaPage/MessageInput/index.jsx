@@ -59,6 +59,7 @@ const MessageInput = ({ body, setBody, withinSelected, setWithinSelected, dms, p
         
             <div className="flex-msg-input">
                 <textarea 
+                    className="flex-msg-input"
                     type="text" id="msg-input-tag" 
                     placeholder={`Message ${currentName}`}
                     value={body}

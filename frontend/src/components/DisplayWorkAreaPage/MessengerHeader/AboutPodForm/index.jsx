@@ -115,14 +115,13 @@ const AboutPodForm = ({ currentMessenger }) => {
             <div className="pod-about-description form-item-padding">
                 { type === 'pods' && 
                     <>
-                        
-                        <span>Description</span>
+                    <span>Description</span> 
                         <div className="description-container-about">
                             {!edit && 
                                 <p>{description}</p>
                             }
                             {edit &&
-                                <textarea value={description} className="create-input-style edit-form" id="description-style" onChange={(e) => setDescription(e.target.value)} />
+                                <textarea placeHolder="Description" value={description} className="create-input-style edit-form" id="description-style" onChange={(e) => setDescription(e.target.value)} />
                             }
                         </div>
                     

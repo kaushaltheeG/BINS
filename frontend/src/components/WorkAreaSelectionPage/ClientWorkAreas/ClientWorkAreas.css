@@ -16,12 +16,35 @@
     padding: 10px;
     min-height: 0px;
     max-height: 250px;
-    max-width: 534px;
+    width: 80%;
     overflow-y: auto;
     overflow-x: hidden;
     /* background-color: azure; */
     /* border: 1px solid rgb(101, 87, 87); */
-    padding: 20px 0;
+    padding: 20px 20px;
+}
+
+.workarea-choices-container::-webkit-scrollbar {
+    scrollbar-width: thin;
+    background: none;
+    width: 5px;
+    height: 2px;
+}
+
+.workarea-choices-container::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.45);
+    border-radius: 10px;
+    cursor: default;
+    left: 0;
+    opacity: 0;
+    outline: none;
+    position: absolute;
+    top: 0;
+    width: 10px;
+    will-change: transform;
+    z-index: 1;
+
+    transform: translateY(111px);
 }
 
 .open-join-create-btns-container{
@@ -34,9 +57,9 @@
 
 
 .selection-wa-btn{
-    /* border: none; */
-        border-radius: 4px;
-        border: 1px solid rgb(190, 150, 242);
+    border: none;   
+        border-radius: 6px;
+        /* border: 1px solid rgb(190, 150, 242); */
         cursor: pointer;
         display: inline-flex;
         justify-content: center;
@@ -53,11 +76,27 @@
         min-width: 80px;
         /* padding: 0 12px 1px; */
         color: rgba(var(--sk_primary_foreground, 29, 28, 29), 1);
-        background-color: transparent;
+        background-color: #FFFF;
+        /* background-color: rgba(255, 255, 255, 0.45) */
 }
 
 .selection-wa-btn:hover{
     border: 1px solid rgb(10, 224, 24);
     background-color: rgb(87, 200, 87);
     color: #FFFF;
+}
+
+
+.no-more-to-join-container{
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.empty-phrase{
+    color: #FFFF;
+    font-size: 24px;
+    font-weight: bold;
 }

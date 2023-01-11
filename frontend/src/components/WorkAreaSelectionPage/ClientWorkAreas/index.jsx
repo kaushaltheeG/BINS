@@ -2,6 +2,7 @@ import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { useEffect } from "react";
 import WorkAreasListEle from './WorkAreasListEle';
 import { getCurrentUser, getUserWorkareas } from '../../../store/session';
+import happyPeople from "../../../utils/images/happy-people-two-og-removebg.png"
 import './ClientWorkAreas.css'
 
 
@@ -16,6 +17,7 @@ const ClientWorkAreas = ({formState, setFormState, currentUser}) => {
         let workareasIds = workareas ? workareas.map(wa => wa.id) : []
         workareas = allWorkareas.filter(wa => !workareasIds.includes(wa.id))
         emptyWorkArrPhrase = "Looks like you are a part of all the Work Areas";
+        workareas= []
     }
 
     const handleShowCreate = (e) => {
@@ -35,7 +37,6 @@ const ClientWorkAreas = ({formState, setFormState, currentUser}) => {
 
 
 
-    
 
     return (
         <>
@@ -52,8 +53,12 @@ const ClientWorkAreas = ({formState, setFormState, currentUser}) => {
                             ))}
                         
                         </> : 
-                        <div className="no-more-was-to-join">
-                            <span>{emptyWorkArrPhrase}</span>
+                        <div className="no-more-to-join-container">
+                            <div className="gif-happy">
+                                <img src={happyPeople} alt="" />
+                            </div>
+                            
+                            <span className='empty-phrase'>{emptyWorkArrPhrase}</span>
                         </div>
                     }
                 </div>

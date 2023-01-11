@@ -7,18 +7,24 @@
     /* background-color: aliceblue; */
     /* height: 100%; */
     /* width: 100%; */
-    width: 50%;
+    min-width: 500px;
+    max-width: 50%;
     border: none;
-    border: 0.5px solid rgb(159, 135, 159);
+    /* border: 0.5px solid rgb(159, 135, 159); */
     border-radius: 4px;
     /* background-color: rgb(129, 53, 129); */
     font-family: Slack-Lato,Slack-Fractions,appleLogo,sans-serif;
     font-size: 15px;
-    background-color: white;
+    /* opacity: 1; */
+    transition: transform .1s, opacity .1s;
+    /* background-color: white; */
+    background-color: transparent;
     color: #1d1c1d;
     font-variant-ligatures: common-ligatures;
     margin-bottom: 250px;
 }
+
+
 
 .screen-container{
     height: 100%;

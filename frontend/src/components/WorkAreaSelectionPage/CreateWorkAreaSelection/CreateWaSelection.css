@@ -2,8 +2,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 400px;
+    width: 100%;
     height: 150px;
+    /* padding: 0 30px; */
     justify-content: space-evenly;
 }
 
@@ -31,30 +32,39 @@
     text-align: left;
     white-space: nowrap;
     z-index: 3;
+    border: none; 
 }
+
 
 .create-wa-input-selection{
         width: 100%;
-            max-width: 100%;
+        max-width: 100%;
 
         font-size: 18px;
-            height: 44px;
-            line-height: 1.33333333;
-            padding: 11px 12px 13px;
+        height: 44px;
+        line-height: 1.33333333;
+        padding: 11px 12px 13px;
 
-            --saf-0: rgba(var(--sk_primary_foreground, 29, 28, 29), 0.3);
-                background-color: rgba(var(--sk_primary_background, 255, 255, 255), 1);
-                border: 1px solid var(--saf-0);
-                border-radius: 4px;
-                box-sizing: border-box;
-                color: rgba(var(--sk_primary_foreground, 29, 28, 29), 1);
-                font-size: 15px;
-                height: 36px;
-                line-height: 1.86666667;
-                line-height: normal;
-                /* margin: 0 0 20px; */
-                padding: 3px 12px 5px;
-                transition: border 80ms ease-out, box-shadow 80ms ease-out;
+        --saf-0: rgba(var(--sk_primary_foreground, 29, 28, 29), 0.3);
+        background-color: rgba(var(--sk_primary_background, 255, 255, 255), 1);
+        /* border: 1px solid var(--saf-0); */
+        border:none;
+        border-radius: 4px;
+        box-sizing: border-box;
+        color: rgba(var(--sk_primary_foreground, 29, 28, 29), 1);
+        font-size: 15px;
+        height: 36px;
+        line-height: 1.86666667;
+        line-height: normal;
+        /* margin: 0 0 20px; */
+        padding: 3px 12px 5px;
+        transition: border 80ms ease-out, box-shadow 80ms ease-out;
+}
+
+.create-wa-input-selection:focus{
+   outline: none;
+  
+    box-shadow: 0 0 10px rgb(224, 219, 227);
 }
 
 .cancel-and-create-wa-btns-container{

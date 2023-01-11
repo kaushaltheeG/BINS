@@ -82,9 +82,11 @@
     width: 100%;
     border: none;
     padding: 10px;
+    resize: none;
 }
 .edit-message-textarea:focus{
     outline: 0;
+    resize: none;
 }
 .edit-cancel-msg-btns{
     width: 100%;

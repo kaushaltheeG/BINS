@@ -3,12 +3,16 @@
     align-items: center;
     /* flex: 1; */
     justify-content: space-between;
-    width: 500px;
+    /* min-width: 0px; */
+    min-width: 100%;
+    max-width: 500px;
     
     padding: 10px 20px;
     border: none;
     border: 1px solid #ddd;
         border-radius: 8px;
+    background-color: #FFFF;
+    /* background-color: rgba(223, 216, 216, 0.45); */
     /* border: 1px solid black; */
     margin-bottom: 10px;
     /* background-color: rgb(72, 12, 72); */
@@ -46,9 +50,9 @@
     #wa-selection-btn{
         -webkit-tap-highlight-color: transparent;
         align-items: center;
-        background-color: #FFFF;
+        background-color: transparent;
         border: none;
-        border-radius: 4px;
+        border-radius: 6px;
         border: 1px solid rgb(190, 150, 242);
        
         cursor: pointer;
@@ -66,6 +70,7 @@
         min-width: 80px;
         padding: 0 12px 1px;
         color: rgba(var(--sk_primary_foreground, 29, 28, 29), 1);
+        background-color: rgba(255, 255, 255, 0.45);
 
 }
 

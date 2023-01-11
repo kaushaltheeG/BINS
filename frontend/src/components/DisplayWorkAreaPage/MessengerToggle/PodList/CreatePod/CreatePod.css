@@ -20,6 +20,7 @@
     background-color: rgb(177, 184, 190);
     border-radius: 10px;
         opacity: 0.5;
+        resize: none;
 }
 
 .create-input-style::placeholder{

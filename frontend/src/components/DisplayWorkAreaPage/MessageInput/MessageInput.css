@@ -15,7 +15,7 @@
 .flex-msg-input {
     /* flex: 1; */
     height: auto;
-    
+    resize: none;
 }
 
 

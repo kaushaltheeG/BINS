@@ -27,7 +27,7 @@ const WorkAreaSelectionPage = () => {
     return (
         <div className="screen-container">
             <div className="selection-title">
-                    <h1>{formState} a Work Area</h1>
+                    <h1>{formState?.toUpperCase()} a Work Area</h1>
             </div>
             <div className="wa-selection-container">
                 {(formState === 'Open' || formState === 'Join' )?
