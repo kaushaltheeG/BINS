@@ -5,8 +5,10 @@ import PageTwo from "./PageTwo"
 const Splash = () => {
     return (
         <div className="main">
-            <PageOne />
-            <PageTwo /> 
+            <div className="main-two">
+                <PageOne />
+                <PageTwo /> 
+            </div>
         </div>
     )
 }

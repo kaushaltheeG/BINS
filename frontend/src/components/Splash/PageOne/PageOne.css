@@ -1,0 +1,24 @@
+.page-one-background-color{
+    background-color: #f4ede4 !important;
+}
+
+.page-one-container-background{
+    margin: 0 auto;
+    background-color: var(--theme-bg-large);
+    padding-top: 7rem;
+    padding-bottom: 3rem;
+}
+
+@media screen and  (min-width: 48rem) {
+    .page-one-container-background {
+            padding-bottom: 2.5rem;
+        }
+} 
+
+@media screen and (min-width:48rem) {
+    .page-one-container-background {
+        padding-top: 8rem;
+        padding-bottom: 5rem;
+        max-width: none
+    }
+}

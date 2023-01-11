@@ -33,13 +33,14 @@
 
 .outside-workarea {
     height: 80px;
-    /* background-color: transparent; */
-    background-color: #4a154b;
+    background-color: transparent;
+    /* background-color: #4a154b; */
     z-index: 1000;
     border-bottom: none;
     top: 0;
     position: absolute;
     width: 100%;
+    
 }
 
 
@@ -62,6 +63,7 @@
     margin: 0 auto;
     max-width: 76.875rem;
     padding: 0;
+    
 }
 
 .entry-btns {
@@ -147,7 +149,7 @@
 #outside-font {
     font-family: Slack-Circular-Pro,"Helvetica Neue",Helvetica,"Segoe UI",Tahoma,Arial,sans-serif;
     text-decoration: none;
-    color: white;
+    color: black;
     cursor: pointer;
 }
 
@@ -157,6 +159,7 @@
     color: white;
     font-weight: bold;
     font-size: 1.75rem;
+    color: black;
 }
 
 #search-input-btn{

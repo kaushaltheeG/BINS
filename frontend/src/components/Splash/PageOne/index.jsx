@@ -5,10 +5,10 @@ import CompanyList from "./CompanyList"
 const PageOne = () => {
 
     return (
-        <div className="page-one-container-background">
+        <section className="page-one-container-background page-one-background-color">
             <Slogan />
             <CompanyList /> 
-        </div>
+        </section>
     )
 }
 

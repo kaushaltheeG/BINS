@@ -1,0 +1,199 @@
+.slogan-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.o-container{
+    margin: 0 auto;
+    padding: 0 8vw;
+}
+
+.slogan-header{
+    text-align: left;
+    width: 100%;
+}
+
+.u-margin-bottom--medium{
+    margin-bottom: 1rem !important;
+
+    padding: 0;
+    font-family: Slack-Lato-Bold, "Helvetica Neue", Helvetica, "Segoe UI", Tahoma, Arial, sans-serif;
+    font-weight: 400;
+    line-height: 1.4444;
+    letter-spacing: normal;
+    font-size: 1.125rem;
+    margin-bottom: 1rem;
+}
+
+.hero-links{
+    list-style: none;
+    display: flex;
+}
+
+.slogan-header>:last-child {
+    margin-bottom: 0;
+}
+
+.c-cta--signup {
+    width: 100%;
+    overflow: visible;
+}
+
+.c-button{
+    appearance: none;
+        background: 0 0;
+        border: none;
+        cursor: pointer;
+        border-radius: 4px;
+        text-align: center;
+        font-family: Slack-Lato-Bolc, "Helvetica Neue", Helvetica, "Segoe UI", Tahoma, Arial, sans-serif;
+        font-weight: 700;
+        line-height: 1.2857;
+        letter-spacing: .8px;
+        font-size: .875rem;
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 19px 40px 20px;
+        display: block;
+        width: 100%;
+        transition: box-shadow 420ms cubic-bezier(.165, .84, .44, 1), color 420ms cubic-bezier(.165, .84, .44, 1), background 420ms cubic-bezier(.165, .84, .44, 1);
+}
+
+.v--primary{
+    background-color: #611f69;
+    color: #fff;
+    fill: #fff;
+}
+
+.trials-hero__img {
+    min-height: 235px;
+}
+
+.c-type-headline-jumbo{
+    font-family: Slack-Lato-Bold, "Helvetica Neue", Helvetica, "Segoe UI", Tahoma, Arial, sans-serif;
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -1.5px;
+    margin-top: 0;
+    font-size: 3.125rem;
+    margin-bottom: 1rem;
+}
+
+#default-size{
+    width: 100%;
+    height: auto;
+}
+
+
+@media screen and (min-width: 48rem) {
+        .slogan-container{
+            display: grid;
+            grid-template-columns: minmax(350px, 480px) minmax(311px, 542px);
+            grid-gap: 8%;
+            grid-row-gap: 1rem;
+        }
+}
+
+@media screen and (min-width: 48rem) {
+    .slogan-container {
+        display: grid;
+        grid-column-gap: 5%;
+        grid-template-columns:40% 55%;
+        
+        align-items: center;
+        justify-items: self-end;
+    }
+}
+
+@media screen and (min-width: 48rem) {
+    .o-container {
+        padding: 0 4vw;
+    }
+}
+
+@media screen and (min-width: 48rem) {
+    .slogan-header{
+        margin-right: 5%;
+    }
+} 
+
+@media screen and (min-width: 25rem) {
+    .u-margin-bottom--medium{
+        font-size: calc(1.125rem + (0 * (100vw - 400px)/ 624));
+    }
+}
+
+@media screen and (min-width: 48rem) {
+    .slogan-header-cta {
+        min-width: 31.125rem;
+    }
+}
+
+@media screen and (min-width: 48rem) and (max-width: 1172px) {
+    .c-billboard__header__cta--v-stack-on-small-desktop {
+            display: flex;
+            flex-direction: column;
+        }
+}
+
+@supports (display:grid) and (grid-template-columns:repeat(3, 1fr)) and (grid-row-gap:1%) and (grid-gap:1%) and (grid-column-gap:1%) {
+    .slogan-header {
+            margin-right: 0;
+        }
+}
+
+@media screen and (min-width: 48rem) {
+    .c-cta-signup .c-button {
+        width: auto;
+        padding: 19px 24px 20px;
+        margin-right: 11px;
+    }
+}
+
+
+@media screen and (min-width: 0) and (max-width: 1023px) {
+    .c-cta-signup .c-button {
+            margin-top: 0;
+            width: auto;
+    }
+}
+
+@media screen and (min-width: 25rem){
+    .c-button {
+            font-size: calc(.875rem + (0 * (100vw - 400px)/ 624));
+     }
+} 
+
+@media screen and (min-width: 48rem) {
+    .c-button {
+        display: inline-block;
+        white-space: nowrap;
+        flex-basis: auto;
+        width: auto;
+    }
+} 
+
+@media screen and (min-width: 48rem) {
+    .trials-hero__img{
+        margin-top: 0;
+    }
+}
+
+@media screen and (min-width: 48rem) and (max-width: 1023px){
+    .trials-hero__img {
+        margin-top: 4 rem 
+    }
+}
+
+@media screen and (min-width: 64rem) {
+    .trials-hero__img {
+            align-self: center;
+            transform: translateY(0.9rem);
+        }
+}
+
+@media screen and (min-width: 48rem) {
+    .c-type-headline-jumbo {
+            font-size: 3.125rem;
+        }
+} 
