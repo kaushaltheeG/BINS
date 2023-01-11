@@ -6,7 +6,7 @@
 
 .grid-select-message-toggle {
     grid-area: message_toggle;
-    height: 100vh;
+    height: 100%;
 }
 
 .grid-current-messenger-name {
@@ -17,6 +17,7 @@
     grid-area: message_control;
     display: flex;
     flex-direction: column;
+    height: 100%
     /* justify-content: space-between; */
 }
 
@@ -27,7 +28,7 @@
         'message_toggle message_control';
     grid-template-columns: 180px 1fr;
     grid-template-rows: 50px 90vh;
-    /* height: 100vh; */
+    height: calc(100% - 200px);
         
 }
 
