@@ -5,6 +5,7 @@ import SigninFormPage from './components/SigninFormPage';
 import TopNavigation from './components/TopNavigation';
 import WorkAreaSelectionPage from './components/WorkAreaSelectionPage';
 import DisplayWorkAreaPage from './components/DisplayWorkAreaPage';
+import Splash from './components/Splash';
 
 function App() {
   // const user = useSelector(state => Object.values(state.session))
@@ -13,8 +14,7 @@ function App() {
       <TopNavigation />
       <Switch>
         <Route path='/' exact>  
-          {/* <h2>Welcome to BINS: Sign In or Sign Up</h2> */}
-          //here
+          <Splash />
         </Route>
         <Route path="/signin">
           <SigninFormPage />
