@@ -52,7 +52,7 @@
 #color-gradient{
     font-size: 50px;
     background: linear-gradient(45deg, rgb(37, 161, 199) 25%, rgb(215, 198, 12) 50%, rgb(215, 12, 93) 80%, rgb(39, 201, 25) 130%);
-    -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     background-size: 100%;
     background-repeat: repeat;
