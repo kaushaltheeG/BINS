@@ -139,11 +139,6 @@
         box-shadow: 0 4px 40px rgb(0 0 0 / 8%);
 }
 
-.o-nav--primary {
-    /* max-width: 81.25rem; */
-    /* background-color: #fff; */
-    /* box-shadow: 0 4px 40px rgb(0 0 0 / 8%); */
-}
 
 .c-nav__row{
     padding-right: 1rem;
@@ -153,7 +148,25 @@
     width: 100%;
     display: flex;
     align-items: center;
-    /* justify-content: center; */
+    justify-content: center;
+}
+
+.home-github-linkedin-container{
+    display: flex;
+    align-items: center;
+    width: 30%;
+    justify-content: space-evenly;
+}
+
+.icon-link{
+    height: 30px;
+    width: 30px;
+    margin-left: 10px;
+}
+
+#icon-fill{
+    height: 30px;
+    width: 30px;
 }
 
 @media screen and (min-width: 78rem) {
@@ -165,7 +178,10 @@
 
 @media screen and  (min-width: 77.8125rem) {
     .outside-workarea {
-            width: 90%;
+        width: 90%;
+    }
+    .extra-padding {
+        padding-left: 0px;
     }
     .is-fixed{
     border-radius: 50px;
@@ -173,6 +189,10 @@
         padding: 0 2.225rem;
     }
 } 
+
+@media screen {
+    
+}
 
 @media screen and (min-width: 67.8125rem) {
     .is-fixed {

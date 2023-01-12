@@ -4,8 +4,8 @@
     font-family: Slack-Lato, Slack-Fractions, appleLogo, sans-serif;
     color: #FFFFFFB3;
     font-size: 15px;
-    overflow-y: auto;
-    height: 100%;
+    overflow-y: scroll;
+    height: calc(100% - 50px);
     padding-bottom: 10px;
 }
 

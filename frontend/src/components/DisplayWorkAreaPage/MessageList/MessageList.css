@@ -4,7 +4,7 @@
 }
 .message-list {
     
-    overflow-y: auto;
+    overflow-y: scroll;
     /* margin-top: 60px; */
     overflow-x: hidden;
     position:-webkit-sticky;

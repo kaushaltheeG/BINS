@@ -89,22 +89,41 @@
     flex-direction: column;
     align-items: center;
     justify-content: left;
-    /* flex-wrap: wrap; */
-    overflow-y: auto;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+}
+
+.user-name>input[type='radio'] {
+    display: none;
+}
+
+input[type='radio']:checked~#member-name-label {
+    background-color: rgb(96, 194, 96);
+}
+
+#add-user-to-new-pod{
+    padding: 10px;
 }
 
 .user-name{
-    display: flex;
+    /* display: flex; */
     font-size: 10px;
-    width: 100%;
+    /* width: 8rem;  */
+    /* width: 2rem;
+    height: 2rem; */
     text-align: center;
     justify-content: left;
-    padding: 0px 4px;
+    /* padding: 0px 4px; */
+    /* margin-right: 10px; */
     margin-top: 2px;
     text-align: center;
-    border-radius: 4px;
-    border: 1px solid rgb(146, 77, 152);
+    /* border-radius: 4px; */
+    /* color: #FFFF; */
+    /* border: 1px solid rgb(146, 77, 152); */
+    /* background-color: rgb(146, 77, 152); */
 }
+
+
 
 
 
@@ -150,7 +169,13 @@
 }
 
 #rotate-arrow-to-private{
-        transform: rotate(180deg) translateY(0);
+    transform: rotate(180deg) translateY(0);
+    transition: transform 420ms cubic-bezier(.165, .84, .44, 1);
+}
+
+#rotate-arrow-to-public {
+    transform: rotate(360deg) translateY(0);
+    transition: transform 420ms cubic-bezier(.165, .84, .44, 1);
 }
 
 #private {
@@ -173,16 +198,23 @@
     color: rgb(125, 194, 102);
 }
 
-#member-name{
+.member-name{
     height: 50px;
     /* display: none; */
 }
 
-#member-name-lable{
-    width: 100%;
+#member-name-label{
+    width: 50%;
     text-align: left;
     font-family: Slack-Lato, Slack-Fractions, appleLogo, sans-serif;
     font-size: 15px;
-    margin-top: 14px;
+    margin: 5px 0;
     padding: 0 4px;
+   
+    background-color: rgb(167, 115, 167);
+    color: #FFFF;
+    border: none;
+    border-radius: 6px;
+
+
 }

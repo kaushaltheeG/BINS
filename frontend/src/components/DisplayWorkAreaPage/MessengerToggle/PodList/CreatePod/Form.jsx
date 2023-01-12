@@ -49,9 +49,17 @@ const Form = () => {
     }
 
     const handlePodMembers = (e) => {
-        e.stopPropagation()
+        e.stopPropagation()     
+        // e.preventDefault()
+        console.log(e.target.value)
+        if (!members.includes(e.target.value)) {
+            setMembers(oldArr => [...oldArr, e.target.value])
 
-        setMembers(oldArr => [...oldArr, e.target.value])
+        } else {
+            let idx = members.indexOf(e.target.value)
+            setMembers(oldArr => oldArr.slice(0, idx).concat(oldArr.slice(idx+1)));
+        }
+        console.log(members)
     }
 
 
@@ -104,7 +112,7 @@ const Form = () => {
                 }
                 {!isPrivate &&
 
-                    <ArrowForwardIosIcon />
+                    <ArrowForwardIosIcon id="rotate-arrow-to-public" />
                 }
                 <div className="public-name-container " id="selected-pod-type" onClick={selectedPublic} >
                     <span className="hover">Public</span>
@@ -114,11 +122,11 @@ const Form = () => {
             </div>
             { isPrivate && 
                 <div className="form-item-padding user-selection-container">
-                    {waMembers?.map(member => (
+                    {waMembers?.map((member, i) => (
                         member.id !== currentUser.id && 
-                            <div className="user-name" key={member.id} value={member.id} >
-                                <input type="checkbox" id="member-name" className="remove-border " value={member.id} onClick={handlePodMembers} />
-                                <label htmlFor="member-name" id="member-name-lable" className="member-name-label" ><span>{member.name.slice(0, 8)}</span></label>
+                            <div className="user-name" key={member.id} >
+                                <input type="radio" id={`members${i}`} className="remove-border member-name " value={member.id} onClick={handlePodMembers} onChange={()=> {}} checked={members.includes(`${member.id}`)} />
+                                <label htmlFor={`members${i}`} id="member-name-label" className="member-name-label " ><span id="add-user-to-new-pod">{member.name.slice(0, 8)}</span></label>
                             </div>
                     ))
                     }

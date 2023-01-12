@@ -8,12 +8,12 @@ const LeaveWorkArea = ({name}) => {
 
     const handleClick = (e) => {
         e.preventDefault();
-        setOpen(!open)
-    }
+        setOpen(!open)      
+    }   
 
     const handleLeave = (e) => {
         e.preventDefault();
-        history.push('/client/workareas')
+        history.push('/client/workareas')   
     }
 
     const handleNevermind = (e) => {
@@ -21,7 +21,7 @@ const LeaveWorkArea = ({name}) => {
         setOpen(oldVal => !oldVal)
     }
     return (
-        <div className="create-wa-modal ">
+        <div className="create-wa-modal last-child-of-wa-side ">
             <span className="wa-modal-menu-item" onClick={handleClick}>
                 Leave {name}
             </span>
@@ -33,8 +33,8 @@ const LeaveWorkArea = ({name}) => {
                     </div>
                 </div>
                 <div id="wa-answers">
-                    <span onClick={handleNevermind} className="wa-modal-menu-item hover-effect font-bold">Nevermind</span>
-                    <span className="wa-modal-menu-item hover-effect font-bold" id="leave-btn"onClick={handleLeave}>Lets Leave </span>
+                    <span onClick={handleNevermind} className="wa-modal-menu-item hover-underline">Nevermind</span>
+                    <span className="wa-modal-menu-item hover-underline" id="leave-btn"onClick={handleLeave}>Lets Leave </span>
                 </div>
                 </>
                 }

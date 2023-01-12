@@ -80,6 +80,7 @@
 }
 .workeara-profile-icon-model {
     width: 36px;
+    height: 36px;
     font-weight: 400;
 }
 
@@ -112,9 +113,10 @@
 
 .leave-wa-question{
     font-weight: 800;
+    text-decoration: solid;
     /* background-color: #442a45; */
     /* box-shadow: 0 0 10px #bb7cda; */
-    text-shadow: 0 0 10px rgb(145, 29, 168);
+    /* text-shadow: 0 0 10px rgb(145, 29, 168); */
     color: rgb(1, 0, 0);
 }
 
@@ -160,6 +162,9 @@
     width: 100%;
     justify-content: space-between;
     /* font-style: bold; */
+    padding-bottom: 10px;
+    padding: 0 4px;
+    margin-bottom: 5px;
 }
 
 .hover-effect:hover{
@@ -170,6 +175,18 @@
 }
 .font-bold{
     font-size: large;
+}
+
+.hover-underline:hover{
+    text-decoration: underline;
+    background-color: rgb(167, 132, 203);
+    border-radius: 6px;
+    border: none;
+    width: 60%;
+}
+
+.last-child-of-wa-side{
+    padding-bottom: 12px;
 }
 
 #leave-btn{

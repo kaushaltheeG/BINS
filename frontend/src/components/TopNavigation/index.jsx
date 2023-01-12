@@ -8,6 +8,8 @@ import './TopNav.css';
 import SearchBar from './SearchBar';
 import slackLogo from '../.././utils/images/slack-logo-thumb.png'
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import { useModal } from 'react-hooks-use-modal';
 import classNames from "../../hooksAndMore/classNames"
 
@@ -93,17 +95,26 @@ const TopNavigation = () => {
         document.addEventListener('click', closeProfile);
 
         return () => document.removeEventListener("click", closeProfile);
-    }, [showProfile]);
+    }, [showProfile]);  
 
-    useEffect(() => {
+    useEffect(() => {   
         if (location.pathname === "/") {
             window.addEventListener("scroll", () => {
-                console.log(window.scrollY)
                 setScroll(window.scrollY);
             });
             return () => window.removeEventListener("scroll", setScroll);
         }
     }, []); 
+
+
+    useEffect(() => {
+        if (location.pathname !== '/') {
+            document.body.classList.add('remove-overflow-y')
+            return () => {
+                document.body.classList.remove('remove-overflow-y')
+            }
+        }
+    }, [location.pathname])
 
 
 
@@ -146,7 +157,6 @@ const TopNavigation = () => {
                     <Modal>
                         <ProfileModal user={sessionUser} workarea={currentWorkarea}/>
                     </Modal>
-                    
             </>
         );
     } else if (location.pathname === "/") {
@@ -155,10 +165,19 @@ const TopNavigation = () => {
                 <div className="extra-padding">
                     <div className={classNames('outside-workarea', "c-nav__row", scroll > 160 && 'is-fixed ')}>
                         <div className="outside-container o-nav--primary ">
-                            <a className="binslogo " href="/" target="_self" >
-                                <img src={slackLogo} alt="" id='logo-img'/>
-                                <NavLink id="logo-title" exact to="/">BINS</NavLink>
-                            </a>
+                            <div className="home-github-linkedin-container">
+                                <a className="binslogo " href="/" target="_self" >
+                                    <img src={slackLogo} alt="" id='logo-img'/>
+                                    <NavLink id="logo-title" exact to="/">BINS</NavLink>
+                                </a>
+                                <a href="https://github.com/kaushaltheeG" target="_blank" className="icon-link">
+                                    <GitHubIcon id="icon-fill"/>
+                                </a>
+                                <a href="https://www.linkedin.com/in/kaushalsk/" target="_blank" className="icon-link">
+                                    <LinkedInIcon id="icon-fill" />
+                                </a>
+
+                            </div>
                             <div className="entry-btns">
                                 <div className="signin-btn btn-padding_outside" >
                                     <NavLink id="outside-font" to="/signin">Sign In</NavLink>

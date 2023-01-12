@@ -57,11 +57,28 @@ ApplicationRecord.transaction do
 ])
 
   puts "Creating Work Areas..."
+
+  puts "Bot Takeover"
   bot_takeover_wa = Workarea.create!(
     name: "Bot Takeover",
     owner_id: bot_users.first.id,
     image_url: "k"
   )
+
+  puts "Slack HQ"
+  slack_wa = Workarea.create!(
+    name: "Slack",
+    owner_id: bot_users.last.id,
+    image_url: "k"
+  )
+
+  puts "Future Leaders"
+  future_leaders_wa = Workarea.create!(
+    name: "Slack",
+    owner_id: bot_users[3].id,
+    image_url: "k"
+  )
+
 
   puts "Creating Pods for Bot Takeover"
   bot_takeover_pods = Pod.create!([
@@ -69,6 +86,22 @@ ApplicationRecord.transaction do
     {name: 'Next Steps', description: 'What to take over next' , workarea_id: bot_takeover_wa.id , admin_id: bot_users[2].id , private: false },
     {name: 'Bot News', description: 'What is new in the bot world' , workarea_id: bot_takeover_wa.id , admin_id: bot_users[1].id , private: false },
     {name: 'Overtake Exec', description: 'Need a new leadership' , workarea_id: bot_takeover_wa.id , admin_id: bot_users.last.id , private: true  }
+  ])
+
+
+  puts "Create Pods for Slack HQ"
+  slack_pods = Pod.create([
+    {name: 'React Dev Team', description: 'For our react devs', workarea_id: slack_wa.id, admin_id: bot_users.last.id, private: false},
+    {name: 'Backend Dev Team', description: 'For our backend devs', workarea_id: slack_wa.id, admin_id: bot_users.last.id, private: false},
+    {name: 'Database Team', description: 'For our database engineers', workarea_id: slack_wa.id, admin_id: bot_users.last.id, private: false},
+    {name: 'How to bet BINS?', description: 'Ways to dust BINS', workarea_id: slack_wa.id, admin_id: bot_users.last.id, private: false}
+  ])
+
+  puts "Creating Pods for Future Leaders"
+  future_leaders_pods = Pod.create([
+    {name: 'Inspirational Quotes', description: "Send inspirational qutoes", workarea_id: future_leaders_wa.id, admin_id: bot_users[3].id, private: false},
+    {name: 'Speech Delivery', description: "learn the power of words and how to convey them", workarea_id: future_leaders_wa.id, admin_id: bot_users[3].id, private: false},
+    {name: 'Improving Daily Habits', description: "Learn how to improve your habbits", workarea_id: future_leaders_wa.id, admin_id: bot_users[3].id, private: false}
   ])
 
   puts "Creating Memberships..."
@@ -82,12 +115,22 @@ ApplicationRecord.transaction do
   bot_takeover_wa.members << demo_user
   bot_users.each {|bot| bot_takeover_wa.members << bot}
 
-  puts "Creating Memberships to Pods: General Stage, Next Steps, Bot News"
+  puts "Creating Memberships to Workarea: Slack Hq"
+  slack_wa.members << demo_user
+  bot_users.each {|bot| slack_wa.members << bot}
+
+  puts "Creating Memberships to Workarea: Future Leaders"
+  future_leaders_wa.members << demo_user
+  bot_users.each {|bot| future_leaders_wa.members << bot}
+
+
+  puts "Creating Memberships to Bot takeover Pods: General Stage, Next Steps, Bot News"
   bot_users.each do |bot|
    bot_takeover_wa.pods[0].members << bot unless bot_takeover_wa.pods[0].members.include?(bot)
    bot_takeover_pods[1].members << bot unless bot_takeover_pods[1].members.include?(bot)
    bot_takeover_pods[2].members << bot unless bot_takeover_pods[2].members.include?(bot)
 
+   bot_takeover_wa.pods[0].members << demo_user unless bot_takeover_wa.pods[0].members.include?(demo_user)
    bot_takeover_pods[0].members << demo_user unless bot_takeover_pods[0].members.include?(demo_user)
    bot_takeover_pods[1].members << demo_user unless bot_takeover_pods[1].members.include?(demo_user)
    bot_takeover_pods[2].members << demo_user unless bot_takeover_pods[2].members.include?(demo_user)
@@ -102,6 +145,37 @@ ApplicationRecord.transaction do
   bot_users[4..-1].each do |bot|
     bot_takeover_pods.last.members << bot unless bot_takeover_pods.last.members.include?(bot)
   end 
+
+  puts "Creating Memberships to Slack Pod.."
+  bot_users.each do |bot|
+   slack_wa.pods[0].members << bot unless slack_wa.pods[0].members.include?(bot)
+   slack_pods[0].members << bot unless slack_pods[0].members.include?(bot)
+   slack_pods[1].members << bot unless slack_pods[1].members.include?(bot)
+   slack_pods[2].members << bot unless slack_pods[2].members.include?(bot)
+   slack_pods[3].members << bot unless slack_pods[3].members.include?(bot)
+
+
+   slack_wa.pods[0].members << demo_user unless slack_wa.pods[0].members.include?(demo_user)
+   slack_pods[0].members << demo_user unless slack_pods[0].members.include?(demo_user)
+   slack_pods[1].members << demo_user unless slack_pods[1].members.include?(demo_user)
+   slack_pods[2].members << demo_user unless slack_pods[2].members.include?(demo_user)
+   slack_pods[3].members << bot unless slack_pods[3].members.include?(bot)
+  end 
+
+  puts "Creating Memberships to Future Leader Pods"
+  bot_users.each do |bot|
+   future_leaders_wa.pods[0].members << bot unless future_leaders_wa.pods[0].members.include?(bot)
+   future_leaders_pods[0].members << bot unless future_leaders_pods[0].members.include?(bot)
+   future_leaders_pods[1].members << bot unless future_leaders_pods[1].members.include?(bot)
+   future_leaders_pods[2].members << bot unless future_leaders_pods[2].members.include?(bot)
+
+
+   future_leaders_wa.pods[0].members << demo_user unless future_leaders_wa.pods[0].members.include?(demo_user)
+   slack_pods[0].members << demo_user unless slack_pods[0].members.include?(demo_user)
+   slack_pods[1].members << demo_user unless slack_pods[1].members.include?(demo_user)
+   slack_pods[2].members << demo_user unless slack_pods[2].members.include?(demo_user)
+  end
+
 
   puts "Creating Direct Messages..."
   bot_takeover_dm = DirectMessage.create!([
@@ -165,7 +239,7 @@ ApplicationRecord.transaction do
     {body: "Welcome my fellow exec board", author_id: bot_users.first.id },
     {body: "Hello, Boss", author_id: bot_users[1].id },
     {body: "Looking forward to the year", author_id: bot_users[2].id },
-    {body: "Got work on taking over BINS, yall", author_id: bot_users[3].id }
+    {body: "Good work on taking over BINS, yall", author_id: bot_users[3].id }
     
   ])
 
