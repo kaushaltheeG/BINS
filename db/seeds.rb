@@ -74,7 +74,7 @@ ApplicationRecord.transaction do
 
   puts "Future Leaders"
   future_leaders_wa = Workarea.create!(
-    name: "Slack",
+    name: "Future Leaders",
     owner_id: bot_users[3].id,
     image_url: "k"
   )
@@ -171,9 +171,9 @@ ApplicationRecord.transaction do
 
 
    future_leaders_wa.pods[0].members << demo_user unless future_leaders_wa.pods[0].members.include?(demo_user)
-   slack_pods[0].members << demo_user unless slack_pods[0].members.include?(demo_user)
-   slack_pods[1].members << demo_user unless slack_pods[1].members.include?(demo_user)
-   slack_pods[2].members << demo_user unless slack_pods[2].members.include?(demo_user)
+   future_leaders_pods[0].members << demo_user unless future_leaders_pods[0].members.include?(demo_user)
+   future_leaders_pods[1].members << demo_user unless future_leaders_pods[1].members.include?(demo_user)
+   future_leaders_pods[2].members << demo_user unless future_leaders_pods[2].members.include?(demo_user)
   end
 
 

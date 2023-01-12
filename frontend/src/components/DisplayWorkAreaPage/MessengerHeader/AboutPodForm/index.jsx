@@ -18,11 +18,11 @@ const AboutPodForm = ({ currentMessenger }) => {
 
     let pod, dm; 
     if (type === 'pods' ) {
-        pod = Object.keys(currentMessenger).length ? currentMessenger : null;
+        pod = currentMessenger ? currentMessenger : null;
         dm = null; 
     } else if (type === 'dms') {
         pod = null; 
-        dm = Object.keys(currentMessenger).length ? currentMessenger : null;
+        dm = currentMessenger ? currentMessenger : null;
     }
    
     const currentDmName = dm ? Object.values(dm.members).filter((member) => member.id !== currentUser.id).map(mem => mem.name) : null 
