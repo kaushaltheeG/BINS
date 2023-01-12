@@ -1,0 +1,189 @@
+h2 {
+    font-family: Slack-Circular-Pro-Bold, "Helvetica Neue", Helvetica, "Segoe UI", Tahoma, Arial, sans-serif;
+        font-weight: 900;
+        line-height: 1.1875;
+        letter-spacing: -.3px;
+        font-size: 3rem;
+        margin-bottom: 1rem;
+}
+.c-blurb-row {
+    padding-top: 2rem;
+    /* max-height: 100px; */
+}
+
+.v--borderless {
+    border: none;
+}
+
+.o-section--feature {
+    border: none;
+    padding: 3rem 0;
+    /* border-top: 1px solid #ebeaeb; */
+}
+
+.o-content-container {
+    margin: 0 auto;
+    padding: 0 8vw;
+}
+
+.u-padding-top--x-large {
+    padding-top: 2rem !important;
+}
+
+.u-margin-bottom--large {
+    margin-bottom: 1.5rem !important;
+}
+
+.c-blurb-row__header {
+    margin: 0 auto;
+    max-width: 809px;
+}
+
+.c-blurb-row__header h2 {
+    width: 260px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.c-feature-grid.v--imageicon {
+    padding-left: 0.5rem;
+    padding-right: 2rem;
+}
+
+.c-feature-grid.v--imageicon {
+    text-align: center;
+}
+
+.u-text--left {
+    text-align: left !important;
+}
+
+.c-feature-grid {
+    margin: 0 !important;
+    margin-bottom: 1rem;
+    list-style-type: none;
+    padding-top: 0;
+}
+.c-feature-grid__item{
+    position: relative;
+    padding: 1rem;
+    /* border-bottom: 1px solid #ebeaeb; */
+    max-width: 330px;
+}
+
+.display-as-paragraph {
+    font-family: Slack-Circular-Pro, "Helvetica Neue", Helvetica, "Segoe UI", Tahoma, Arial, sans-serif;
+    font-weight: 400;
+    line-height: 1.4444;
+    letter-spacing: normal;
+    font-size: 1.125rem;
+    margin-bottom: 1rem;
+}
+
+.c-feature-grid__item__copy {
+    font-family: Slack-Circular-Pro, "Helvetica Neue", Helvetica, "Segoe UI", Tahoma, Arial, sans-serif;
+    font-weight: 400;
+    line-height: 1.4444;
+    letter-spacing: normal;
+    font-size: 1.125rem;
+    margin-bottom: 0;
+}
+
+@media screen and (min-width: 64rem) {
+    .c-feature-grid__item__copy {
+            font-size: 1.125rem;
+        }
+}
+
+@media screen and (min-width: 25rem) {
+    .c-feature-grid__item__copy {
+            font-size: calc(1.125rem + (0 * (100vw - 400px)/ 624));
+        }
+}
+
+@media screen and (min-width: 25rem) {
+    .display-as-paragraph {
+        font-size: calc(1.125rem + (0 * (100vw - 400px)/ 624));
+    }
+} 
+
+@media screen and (min-width: 48rem) {
+    .c-feature-grid__item {
+        padding: 3rem 1.5rem;
+    }
+}
+
+@media screen and (min-width: 20.5rem) {
+    .c-feature-grid {
+        padding-top: 1.5rem;
+    }
+}
+@media screen and (min-width: 25rem) {
+    h2 {
+        font-size: calc(1.5rem + (8 * (100vw - 400px)/ 624));
+    }
+}
+
+@media screen and (min-width: 48rem) {
+    .u-text--left--mobile-only {
+        text-align: center !important;
+    }
+
+}
+@media screen and (min-width: 48rem) {
+    .o-section--feature {
+        padding: 5rem 0;
+    }
+}
+
+@media screen and (min-width: 48rem) {
+    .o-content-container {
+        padding: 0 4vw;
+    }
+}
+
+@media screen and (min-width: 54rem) {
+    .o-section--feature .c-blurb-row {
+        padding-bottom: 6rem;
+    }
+}
+
+@media screen and (min-width: 48rem) {
+    .c-blurb-row__header h2 {
+        width: auto;
+        text-align: auto;
+    }
+}
+
+@media screen and (min-width: 20rem) {
+    @supports (display:grid) and (grid-template-columns:repeat(3, 1fr)) and (grid-row-gap:1%) and (grid-gap:1%) and (grid-column-gap:1%) {
+        .c-feature-grid.v--four {
+                grid-template-columns: repeat(1, 1fr);
+            }
+    } 
+} 
+
+@supports (display:grid) and (grid-template-columns:repeat(3, 1fr)) and (grid-row-gap:1%) and (grid-gap:1%) and (grid-column-gap:1%) {
+.c-feature-grid.v--four {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (min-width: 64rem) {
+    @supports (display:grid) and (grid-template-columns:repeat(3, 1fr)) and (grid-row-gap:1%) and (grid-gap:1%) and (grid-column-gap:1%) {
+        .c-feature-grid.v--four,
+        .c-feature-grid.v--four.v--narrow {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+} 
+
+@supports (display:grid) and (grid-template-columns:repeat(3, 1fr)) and (grid-row-gap:1%) and (grid-gap:1%) and (grid-column-gap:1%) {
+    .c-feature-grid {
+            display: grid;
+            grid-gap: 1rem 2.43902439%;
+            justify-content: center;
+        }
+} 
