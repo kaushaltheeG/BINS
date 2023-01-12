@@ -9,6 +9,7 @@ import SearchBar from './SearchBar';
 import slackLogo from '../.././utils/images/slack-logo-thumb.png'
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { useModal } from 'react-hooks-use-modal';
+import classNames from "../../hooksAndMore/classNames"
 
 
 const TopNavigation = () => {
@@ -16,7 +17,9 @@ const TopNavigation = () => {
     const location = useLocation(); //might new a useEffect but do need since useSelectior will cause the render 
     const currentWorkarea = useSelector(state => state.workarea.currentWorkarea);
     const [showProfile, setShowProfile] = useState(false);
+    const [scroll, setScroll] = useState(false);
 
+   
     const [Modal, open, close, isOpen] = useModal('root', {
         preventScroll: true,
         focusTrapOptions: {
@@ -92,6 +95,15 @@ const TopNavigation = () => {
         return () => document.removeEventListener("click", closeProfile);
     }, [showProfile]);
 
+    useEffect(() => {
+        if (location.pathname === "/") {
+            window.addEventListener("scroll", () => {
+                console.log(window.scrollY)
+                setScroll(window.scrollY);
+            });
+            return () => window.removeEventListener("scroll", setScroll);
+        }
+    }, []); 
 
 
 
@@ -140,21 +152,24 @@ const TopNavigation = () => {
     } else if (location.pathname === "/") {
         sessionLinks = (
             <>
-                <div className='outside-workarea'>
-                    <div className="outside-container">
-                        <a className="binslogo " href="/" target="_self" >
-                            <img src={slackLogo} alt="" id='logo-img'/>
-                            <NavLink id="logo-title" exact to="/">BINS</NavLink>
-                        </a>
-                        <div className="entry-btns">
-                            <div className="signin-btn btn-padding_outside" >
-                                <NavLink id="outside-font" to="/signin">Sign In</NavLink>
-                            </div>
-                            <div className="createnew-btn btn-padding_outside" >
-                                <NavLink id="outside-font"  to="/createnew">New to BINS?</NavLink>
+                <div className="extra-padding">
+                    <div className={classNames('outside-workarea', "c-nav__row", scroll > 160 && 'is-fixed ')}>
+                        <div className="outside-container o-nav--primary ">
+                            <a className="binslogo " href="/" target="_self" >
+                                <img src={slackLogo} alt="" id='logo-img'/>
+                                <NavLink id="logo-title" exact to="/">BINS</NavLink>
+                            </a>
+                            <div className="entry-btns">
+                                <div className="signin-btn btn-padding_outside" >
+                                    <NavLink id="outside-font" to="/signin">Sign In</NavLink>
+                                </div>
+                                <div className="createnew-btn btn-padding_outside" >
+                                    <NavLink id="outside-font"  to="/createnew">New to BINS?</NavLink>
+                                </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
                 
             </>

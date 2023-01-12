@@ -23,7 +23,7 @@ const Pros = () => {
                     <h2>One area to work faster together</h2>
                 </header>
                 <div className="c-feature-grid v--imageicon u-text--left v--borderless v--four" data-aos="fade-up">
-                    <div class="c-feature-grid__item u-flush-padding--tablet-only">
+                    <div className="c-feature-grid__item u-flush-padding--tablet-only">
                         <img src={orginzedPeople} alt="" height="150" />
                         <h3 className="display-as-paragraph">
                             <strong>Move faster with organized conversations</strong>
@@ -32,7 +32,7 @@ const Pros = () => {
                             Streamline collaboration with pods and direct messages within dedicated work areas.
                         </p>
                     </div>
-                    <div class="c-feature-grid__item u-flush-padding--tablet-only">
+                    <div className="c-feature-grid__item u-flush-padding--tablet-only">
                         <img src={puzzlePeople} alt="" height="150" />
                         <h3 className="display-as-paragraph">
                             <strong>Find and connect with people and teams</strong>
@@ -41,7 +41,7 @@ const Pros = () => {
                             Be able to join any work area and connect with new people.
                         </p>
                     </div>
-                    <div class="c-feature-grid__item u-flush-padding--tablet-only">
+                    <div className="c-feature-grid__item u-flush-padding--tablet-only">
                         <img src={businessWoman} alt="" height="150" />
                         <h3 className="display-as-paragraph">
                             <strong>Solve problems faster with instant messaging</strong>
@@ -50,7 +50,7 @@ const Pros = () => {
                             High speeds for reddis allow for ideas to be instantly communicated. 
                         </p>
                     </div>
-                    <div class="c-feature-grid__item u-flush-padding--tablet-only">
+                    <div className="c-feature-grid__item u-flush-padding--tablet-only">
                         <img src={idea} alt="" height="150" width="225"/>
                         <h3 className="display-as-paragraph">
                             <strong>Easy to hatch an idea with other companies</strong>

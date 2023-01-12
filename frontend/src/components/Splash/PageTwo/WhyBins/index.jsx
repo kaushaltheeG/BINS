@@ -15,8 +15,10 @@ const WhyBins = () => {
     }
 
     useEffect(() => {
-        Aos.init({ duration: 1500 });
+        Aos.init({ duration: 500 });
     }, []);
+
+    
 
     return (
         <section className="o-section--feature o-section--faq v--borderless page-enterprise-section-faq">

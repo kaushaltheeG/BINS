@@ -128,6 +128,75 @@
 
 }
 
+.is-fixed {
+    /* max-width: 81.25rem;  */
+        position: fixed;
+        background-color: #fff;
+        box-shadow: 0 4px 40px rgb(0 0 0 / 8%);
+        border-bottom: none;
+        box-shadow: none;
+        animation: slide-in--down 420ms cubic-bezier(.165, .84, .44, 1);
+        box-shadow: 0 4px 40px rgb(0 0 0 / 8%);
+}
+
+.o-nav--primary {
+    /* max-width: 81.25rem; */
+    /* background-color: #fff; */
+    /* box-shadow: 0 4px 40px rgb(0 0 0 / 8%); */
+}
+
+.c-nav__row{
+    padding-right: 1rem;
+}
+
+.extra-padding{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+}
+
+@media screen and (min-width: 78rem) {
+    .extra-padding {
+            padding-left: 70px;
+            /* margin: 0 20px; */
+        }
+}
+
+@media screen and  (min-width: 77.8125rem) {
+    .outside-workarea {
+            width: 90%;
+    }
+    .is-fixed{
+    border-radius: 50px;
+        margin-top: 0.5rem;
+        padding: 0 2.225rem;
+    }
+} 
+
+@media screen and (min-width: 67.8125rem) {
+    .is-fixed {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+}
+
+@media screen and (min-width: 93.8125rem) {
+    .extra-padding {
+        padding-left: 80px;
+        /* margin: 0 20px; */
+    }
+}
+
+
+@media screen and  (max-width: 64rem) and (orientation: portrait) {
+    .c-nav__row {
+            padding: 0 2rem;
+        }
+}
+
+
+
 
 
 #logo-img {
