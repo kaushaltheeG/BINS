@@ -25,10 +25,10 @@ const CompanyList = () => {
                             <img src={spotify} alt="Spotify" height="35" width="117" />
                         </div>
                         <div className="c-logo-bar__item">
-                            <img src={aA} alt="aA" height="35" width="117" />
+                            <img src={aA} alt="aA" height="35" width="117" className="grey-it-up"/>
                         </div>
                         <div className="c-logo-bar__item">
-                            <img src={slack} alt="aA" height="80" width="117" />
+                            <img src={slack} alt="aA" height="80" width="117" className="grey-it-up" />
                         </div>
                         <div className="c-logo-bar__item">
                             <img src={TD} alt="TD" height="35" width="180" />

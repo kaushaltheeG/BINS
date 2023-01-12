@@ -3,19 +3,26 @@ import orginzedPeople from "../../../../utils/images/orginized-people-removebg.p
 import puzzlePeople from "../../../../utils/images/connecting-people-removebg.png"
 import businessWoman from "../../../../utils/images/business-woman-vec-removebg.png"
 import idea from "../../../../utils/images/idea-vector-removebg.png"
+import Aos from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react"
 
 
 
 
 const Pros = () => {
 
+    useEffect(() => {
+        Aos.init({ duration: 1500 });
+    }, []);
+
     return (
-        <section className="o-section--feature c-blurb-row v--borderless v--four">
+        <section className="o-section--feature c-blurb-row v--borderless v--four" data-aos="fade-up">
             <div className="o-content-container">
                 <header className="c-blurb-row__header u-padding-top--x-large u-margin-bottom--large">
                     <h2>One area to work faster together</h2>
                 </header>
-                <div className="c-feature-grid v--imageicon u-text--left v--borderless v--four">
+                <div className="c-feature-grid v--imageicon u-text--left v--borderless v--four" data-aos="fade-up">
                     <div class="c-feature-grid__item u-flush-padding--tablet-only">
                         <img src={orginzedPeople} alt="" height="150" />
                         <h3 className="display-as-paragraph">

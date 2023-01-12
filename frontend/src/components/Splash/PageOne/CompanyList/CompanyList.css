@@ -2,6 +2,11 @@
     border:none; 
 }
 
+.grey-it-up{
+    -webkit-filter: grayscale(100%);
+        filter: grayscale(100%);
+}
+
 .v--borderless {
     border: none;
 }

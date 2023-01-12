@@ -20,7 +20,7 @@ const Benefits = () => {
                             </td>
                             <td></td>
                             <td className="benefits-table__feature benefits-table__tier benefits-table__feature--1">
-                                <p className="benefits-table__feature--text">Unlimited messaging</p>
+                                <DoneIcon />
                             </td>
                         </tr>
                         <tr className="benefits-table__row">
