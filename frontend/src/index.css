@@ -31,6 +31,17 @@
     src: url(./utils/fonts/lato-black-b64f5e4.woff2);
 }
 
+
+@font-face {
+    font-family: "Slack-Circular-Pro";
+    src: url(./utils/fonts/circular-pro-book.woff2);
+}
+
+@font-face {
+    font-family: "Slack-Circular-Pro-Bold";
+    src: url(./utils/fonts/circular-pro-bold.woff2);
+}
+
 #root{
     height: 100vh;
     width: 100vw;

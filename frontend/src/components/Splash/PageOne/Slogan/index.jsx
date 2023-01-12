@@ -1,5 +1,6 @@
 import "./Slogan.css"
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { useHistory } from "react-router-dom";
 import mainSplashImg from "../../../../utils/images/main-splash-teamwork-removebg.png"
 
@@ -17,11 +18,11 @@ const Slogan = () => {
                 <h1 className="c-type-headline-jumbo">One BIN for your team and your work</h1>
                 <ul className="u-margin-bottom--medium">
                     <li className="hero-links">
-                        <CheckCircleOutlineIcon /> 
+                        <CheckCircleIcon /> 
                         <p>Instant communication with your team and others</p>
                     </li>
                     <li className="hero-links">
-                        <CheckCircleOutlineIcon />
+                        <CheckCircleIcon />
                         <p>Not worth a penny</p>
                     </li>
                 </ul>

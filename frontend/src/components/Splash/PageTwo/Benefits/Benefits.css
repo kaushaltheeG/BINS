@@ -4,7 +4,7 @@ table {
     width: 100%;
     table-layout: fixed;
 
-    font-family: Slack-Lato-Bold, "Helvetica Neue", Helvetica, "Segoe UI", Tahoma, Arial, sans-serif;
+    font-family: Slack-Circular-Pro, "Helvetica Neue", Helvetica, "Segoe UI", Tahoma, Arial, sans-serif;
     font-weight: 400;
     line-height: 1.2857;
     letter-spacing: normal;
@@ -21,6 +21,11 @@ tbody{
 th {
     background-color: inherit;
     color: #454245;
+    
+}
+
+tr{
+    border-bottom: 1px solid #ebeaeb;
 }
 
 .o-section-benefits{
@@ -56,8 +61,8 @@ th {
 }
 
 .benefits-table__header {
-    font-family: Slack-Lato-Bold, "Helvetica Neue", Helvetica, "Segoe UI", Tahoma, Arial, sans-serif;
-    font-size: 1rem;
+    font-family: Slack-Circular-Pro-Bold, "Helvetica Neue", Helvetica, "Segoe UI", Tahoma, Arial, sans-serif;
+    font-size: 1.5rem;
     line-height: 1.375rem;
 }
 
@@ -76,6 +81,53 @@ th {
 .benefits-table__column-2 {
     text-align: center;
     display: table-cell;
+}
+
+.benefits-table__row td {
+    padding: 0.9rem 0;
+}
+
+.benefits-table td {
+    display: table-cell;
+}
+
+.benefits-table__feature--text{
+    font-family: Slack-Circular-Pro, "Helvetica Neue", Helvetica, "Segoe UI", Tahoma, Arial, sans-serif;
+    font-size: 1rem;
+    max-width: 165px;
+    margin: 0 auto;
+    line-height: 1.069rem;
+}
+
+.benefits-table__row td.benefits-table__column-1 {
+    padding-left: 1.25rem;
+}
+
+.benefits-table__tier {
+    background-color: #F5F4F5;
+}
+
+.benefits-table__feature {
+    text-align: center;
+}
+
+.benefits-table__feature--1 {
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+
+.benefits-table__feature--last {
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+.benefits-table tr p {
+    color: #1d1d1d;
+}
+
+.benefits-table__column-1 p {
+    margin: 0;
+    max-width: 100%;
 }
 
 @media screen and (min-width: 48rem){
