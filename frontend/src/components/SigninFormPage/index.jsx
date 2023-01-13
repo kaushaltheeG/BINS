@@ -20,16 +20,19 @@ const LoginFormPage = () => {
         setErrors([]);
         return dispatch(sessionActions.login({ email, password }))
             .catch(async (res) => {
-                let data;
-                try {
-                    // .clone() essentially allows you to read the response body twice
-                    data = await res.clone().json();
-                } catch {
-                    data = await res.text(); // Will hit this case if the server is down
-                }
-                if (data?.errors) setErrors(data.errors);
-                else if (data) setErrors([data]);
-                else setErrors([res.statusText]);
+                // if (res.status === 401) {
+                   
+                    let data;
+                    try {
+                        // .clone() essentially allows you to read the response body twice
+                        data = await res.clone().json();
+                    } catch {
+                        data = await res.text(); // Will hit this case if the server is down
+                    }
+                    if (data?.errors) setErrors(data.errors);
+                    else if (data) setErrors([data]);
+                    else setErrors([res.statusText]);
+                // }
             });
     }
 

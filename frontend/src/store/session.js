@@ -60,10 +60,14 @@ export const login = ({email, password}) => async (dispatch) => {
             password
         })
     });
-    const data = await response.json();
-    storeCurrentUser(data.user)
-    dispatch(setCurrentUser(data.user));
-    return response;
+    if (response.ok) {
+        const data = await response.json();
+        storeCurrentUser(data.user)
+        dispatch(setCurrentUser(data.user));
+        return response;
+    } else {
+        throw response;
+    }
 };
 
 
@@ -93,6 +97,7 @@ export const signup = ({name, email, password}) => async (dispatch) => {
         return response
     } else {
         dispatch(sessionReqFailed({res: response}))
+        throw response
     }
 }
 

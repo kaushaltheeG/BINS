@@ -130,6 +130,8 @@ li.error-specific {
     display: flex;
     justify-content: center;
     margin: 0 0 20px;
+    font-family: Slack-Lato, Slack-Fractions, appleLogo, sans-serif;
+    color: red;
 }
 
 input.form-ele {
