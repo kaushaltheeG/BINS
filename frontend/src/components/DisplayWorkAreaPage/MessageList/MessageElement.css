@@ -3,7 +3,7 @@
     align-items: center;
     padding: 8px 20px;
     font-family: Slack-Lato, Slack-Fractions, appleLogo, sans-serif;
- 
+    width: calc(100% - 1    00px);
 }
 
 .profile-icon {
@@ -17,9 +17,10 @@
 
 .author-time-body {
     flex: 1 1 0;
-    margin: -12px -8px -16px -16px;
+    /* margin: -12px -8px -16px -16px; */
     min-width: 0;
     padding: 8px 8px 8px 16px;
+    width: calc(100% - 100px);
     /* margin-left: 2px; */
 }
 
@@ -45,15 +46,18 @@
     margin-top: 2px;
 }
 
-.message-body {
+.author-time-body p {
     font-size: 15px;
+    width: 100%;
     text-align: left;
     user-select: text;
     word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-all;
     --saf-0: rgba(var(--sk_foreground_low_solid, 221, 221, 221), 1);
     font-family: Slack-Lato, Slack-Fractions, appleLogo, sans-serif;
     display: flex;
-    max-width: none;
+    /* max-width: none; */
     padding-bottom: 3px;
 }
 

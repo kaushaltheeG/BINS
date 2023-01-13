@@ -143,7 +143,7 @@ const MessageElement = ({ message }) => {
                                 <span className="author-name">{authorName}</span>
                                 <span className="timestamp">{timestamp()}</span>
                             </div>
-                            <span className="message-body">{currentBody}</span>
+                            <p className="message-body">{currentBody}</p>
                         </div>
                         {isHovering && 
                             <div className="edit-and-delete-container" onMouseOver={e => e.stopPropagation()}>
