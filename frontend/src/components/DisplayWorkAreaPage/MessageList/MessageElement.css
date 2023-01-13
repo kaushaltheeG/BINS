@@ -1,7 +1,7 @@
 .message-container {
     display: flex;
     align-items: center;
-    padding: 8px 20px;
+    padding: 0 20px;
     font-family: Slack-Lato, Slack-Fractions, appleLogo, sans-serif;
     width: calc(100% - 1    00px);
 }
