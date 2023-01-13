@@ -16,7 +16,7 @@
 }
 
 .signin-form-h1 {
-    font-family: Slack-Larsseit,
+    font-family: Slack-Lato,
         Helvetica Neue,
         Helvetica,
         Segoe UI,
@@ -31,6 +31,7 @@
 }
 
 .signin-form-subheader {
+    font-family: Slack-Lato, Slack-Fractions, appleLogo, sans-serif;
     color: #454245;
     font-size: 18px;
     line-height: 27px;
@@ -105,6 +106,7 @@ div.rightcol {
 }
 
 div.signin-form-header_sidelink {
+    font-family: Slack-Lato, Slack-Fractions, appleLogo, sans-serif;
     color: rgba(var(--sk_foreground_max_solid, 97, 96, 97), 1);
     font-size: 14px;
     padding-right: 40px;
@@ -131,6 +133,7 @@ li.error-specific {
 }
 
 input.form-ele {
+    font-family: Slack-Lato, Slack-Fractions, appleLogo, sans-serif;
     padding: 11px 12px 13px;
     height: 44px;
     font-size: 18px;
@@ -143,6 +146,7 @@ input.form-ele {
 }
 
 button#form-only {
+    font-family: Slack-Lato, Slack-Fractions, appleLogo, sans-serif;
     margin-bottom: 20px;
     width: 100%;
     background-color: #4a154b;
