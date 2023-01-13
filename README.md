@@ -34,7 +34,9 @@ The birth of BINS was made possible mainly throught the PRR stack. Postgres is u
 ## Significant Code 
 
 ### Creating a Direct Message 
-*description of controller and modal
+Creating a direct message was the most fun feature to implement because it is a search bar that must handle different uses cases. The first use case is that user can create a new direct message or group chat that does not exists. The second use case is creating a new direct messsage or group chat that does not exist, and the user also attaches a message to it. The third case is when a user creates an existing direct message or group chat,. The finally case is the user creates an existing direct message or gorup chat with a message. The following pictures and text describes how the following use cases are handled.
+1. <img width="901" alt="Screen Shot 2023-01-13 at 9 33 52 AM" src="https://user-images.githubusercontent.com/26070301/212384339-49f13291-3f4d-4fb9-b4b8-ff71997950d5.png">
+
 ** add sc 
 
 ## Other Features and Visuals 
