@@ -37,12 +37,11 @@ class Api::DirectMessagesController < ApplicationController
         final_arr =  user_ids.push(current_user.id)
        
         @direct_message = DirectMessage.direct_message_exists(workarea_id, final_arr.uniq)
-        # debugger
+       
         @workarea = Workarea.find_by(id: params[:workarea_id])
         #if chat has been found
         if @direct_message 
-            # debugger
-            
+           
             #sending a boolen within payload 
             addedMsg = false 
 
@@ -57,8 +56,7 @@ class Api::DirectMessagesController < ApplicationController
            
             #retriving members ids and sending it 
             member_ids = @direct_message.members.map {|mem| mem.id}
-            # debugger
-
+           
             WorkareaChannel.broadcast_to(@workarea, 
                     type: 'RECEIVE_DM',
                     payload: member_ids,
@@ -66,7 +64,6 @@ class Api::DirectMessagesController < ApplicationController
                     requestUser: current_user.id,
                     **from_template('api/direct_messages/wbs_show', direct_message: @direct_message))
             render json: nil, status: :ok 
-            # render :show 
         else 
             #drect message has not been found 
             @direct_message = DirectMessage.new(user_ids: params[:direct_message][:user_ids]) # takes in workarea_id and user ids 
@@ -95,15 +92,12 @@ class Api::DirectMessagesController < ApplicationController
                     requestUser: current_user.id,
                     **from_template('api/direct_messages/wbs_show', direct_message: @direct_message))
                 render json: nil, status: :ok 
-
-                # render :show 
             else 
 
                 #direct message fails to be created 
                 render json: { errors: [@direct_message.errors.full_messages]}, status: :unauthorized
             end 
         end 
-
     end 
 
     def add_members 
