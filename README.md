@@ -50,6 +50,7 @@ If the direct message does not exist, a new direct message is created with user 
 ## Other Features and Visuals 
 
 ### Current Messaging Location 
+![](https://github.com/kaushaltheeG/BINS/blob/main/current-loco.gif)
 
 ### Direct Message Search Bar 
 
