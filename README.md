@@ -13,7 +13,7 @@ The birth of BINS was made possible mainly throught the PRR stack. Postgres is b
 ## Features 
 
 ### Live Messages 
-*add live mssage gif 
+![](https://github.com/kaushaltheeG/BINS/blob/main/live-messaging.gif)
 
 ### Message CRUD
 *side by side of updating and creating 
