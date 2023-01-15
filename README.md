@@ -52,7 +52,9 @@ If the direct message does not exist, a new direct message is created with user 
 ### Current Messaging Location 
 ![](https://github.com/kaushaltheeG/BINS/blob/main/current-loco.gif)
 
-### Direct Message Search Bar 
+### Direct Message Search Bar
+![](https://github.com/kaushaltheeG/BINS/blob/main/dm-searchbar.gif)
 
 ### Adding Users to a Pod or Group Chat 
+![](https://github.com/kaushaltheeG/BINS/blob/main/add-user.gif)
 
