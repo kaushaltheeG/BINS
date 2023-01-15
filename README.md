@@ -19,7 +19,7 @@ The birth of BINS was made possible mainly throught the PRR stack. Postgres is b
 ![](https://github.com/kaushaltheeG/BINS/blob/main/message-ud.gif)
 
 ### Pod CRUD 
-*side by side of creating and retriving a pod 
+![](https://github.com/kaushaltheeG/BINS/blob/main/new-pod.gif)
 *side by side of updating and leaving a pod 
 *side by side of deleting a pod 
 
