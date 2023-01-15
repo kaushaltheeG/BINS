@@ -23,8 +23,7 @@ The birth of BINS was made possible mainly throught the PRR stack. Postgres is b
 ![](https://github.com/kaushaltheeG/BINS/blob/main/pod-ud.gif)
 
 ### Direct Message CRUD
-*side by side of creating a dm 
-*side by side of adding user to a group chat and leaving 
+![](https://github.com/kaushaltheeG/BINS/blob/main/dm-gm.gif)
 
 ### Work Area CRU 
 *creating a workarea and showing within toggle list 
