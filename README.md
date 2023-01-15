@@ -26,8 +26,7 @@ The birth of BINS was made possible mainly throught the PRR stack. Postgres is b
 ![](https://github.com/kaushaltheeG/BINS/blob/main/dm-gm.gif)
 
 ### Work Area CRU 
-*creating a workarea and showing within toggle list 
-*creating and toggling to the new work area 
+![](https://github.com/kaushaltheeG/BINS/blob/main/workarea.gif)
 
 ## Significant Code 
 
