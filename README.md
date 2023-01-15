@@ -4,7 +4,7 @@
 
 [BINS](https://bins.onrender.com/) is a messaging clone of the popular professional and organizational communication platform, Slack. Simialar to Slack, users are able to connect and communicate with others through instant messaging. Users are able to create and join work areas. Within a work area, users are able to organize their teams through the help of pods. Users also have the ablility to direct message another user, or create a group chat with others.  
 
-![]()
+![](https://github.com/kaushaltheeG/BINS/blob/main/splashpage.gif)
 
 ## Technologies 
 
