@@ -23,7 +23,7 @@ const LeaveWorkArea = ({name}) => {
     return (
         <div className="create-wa-modal last-child-of-wa-side ">
             <span className="wa-modal-menu-item" onClick={handleClick}>
-                Leave {name}
+                Exit {name}
             </span>
             {open && 
                 <>
@@ -33,8 +33,8 @@ const LeaveWorkArea = ({name}) => {
                     </div>
                 </div>
                 <div id="wa-answers">
-                    <span onClick={handleNevermind} className="wa-modal-menu-item hover-underline">Nevermind</span>
-                    <span className="wa-modal-menu-item hover-underline" id="leave-btn"onClick={handleLeave}>Lets Leave </span>
+                    <span onClick={handleNevermind} className="wa-modal-menu-item hover-underline">Lets Stay!</span>
+                    <span className="wa-modal-menu-item hover-underline" id="leave-btn"onClick={handleLeave}>Lets Exit!</span>
                 </div>
                 </>
                 }

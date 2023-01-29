@@ -164,7 +164,7 @@
     /* font-style: bold; */
     padding-bottom: 10px;
     padding: 0 4px;
-    margin-bottom: 5px;
+    /* margin-bottom: 5px; */
 }
 
 .hover-effect:hover{
@@ -177,12 +177,20 @@
     font-size: large;
 }
 
+.hover-underline{
+    /* text-align: center; */
+    /* width: 30%; */
+
+}
+
 .hover-underline:hover{
-    text-decoration: underline;
+    transition: 500ms;
+    /* text-decoration: underline; */
     background-color: rgb(167, 132, 203);
-    border-radius: 6px;
+    border-radius: 4px;
     border: none;
-    width: 60%;
+    width: 50%;
+    
 }
 
 .last-child-of-wa-side{
@@ -191,6 +199,7 @@
 
 #leave-btn{
     justify-content: right;
+    /* width: auto; */
 }
 
 #modal-wa-hr {
