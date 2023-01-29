@@ -34,7 +34,7 @@ const WhyBins = () => {
                     </div>
                     {open && 
                         <div className="c-accordion__row__answer" data-aos="fade-up">
-                            <p>Great question! The simple answer is becuase it's not Slack. </p>
+                            <p>Great question! The simple answer is because it's not Slack. </p>
                         </div>
                     }
                 </div>
