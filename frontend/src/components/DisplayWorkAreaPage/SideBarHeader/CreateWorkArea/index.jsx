@@ -66,9 +66,7 @@ const CreateWorkArea = () => {
                 <form action="" onSubmit={e => e.preventDefault()} onClick={e => e.stopPropagation()}className="wa-form-inner-container">
                     <div className="create-input-container" >
                         <input type="text" placeholder='Enter Name' value={name} className="create-input" onChange={handleChange } />
-                        {errors?.map((error)=> (
-                            <p className='form-error'>{error}</p>
-                        ))}
+                    
                     </div>
                     <div className="create-wa-buttons">
                         <div className='create-wa-btn btn-spacing'>
@@ -79,6 +77,9 @@ const CreateWorkArea = () => {
                         </div>
 
                     </div>
+                     {errors?.map((error)=> (
+                            <p className='form-error'>{error}</p>
+                        ))}
                 </form>
             }
         </div>
