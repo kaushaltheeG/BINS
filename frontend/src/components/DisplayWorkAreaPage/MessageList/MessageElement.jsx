@@ -109,8 +109,10 @@ const MessageElement = ({ message }) => {
             <div className={classNames("message-container", edit && 'edit-background-color')} onMouseEnter={handleMouseOver} onMouseLeave={handleMouseOut}>
                 {message && 
                 <>
-                    <div className="profile-icon">
-                        <button className="profile-icon" >{authorName?.at(0).toUpperCase()}</button>
+                    <div className="edit-icon-pos">
+                        <div className="profile-icon">
+                            <button className="profile-icon" >{authorName?.at(0).toUpperCase()}</button>
+                        </div>
                     </div>
                     { (edit && !remove) && 
                         <>
