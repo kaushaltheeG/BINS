@@ -17,8 +17,8 @@
     grid-area: message_control;
     display: flex;
     flex-direction: column;
-    height: calc(100% - 72px)
-    /* justify-content: space-between; */
+    height: calc(100% - 72px);
+    justify-content: space-between;
 }
 
 .primary-display-grid {
