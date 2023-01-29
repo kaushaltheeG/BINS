@@ -177,12 +177,6 @@
     font-size: large;
 }
 
-.hover-underline{
-    /* text-align: center; */
-    /* width: 30%; */
-
-}
-
 .hover-underline:hover{
     transition: 500ms;
     /* text-decoration: underline; */

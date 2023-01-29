@@ -14,13 +14,19 @@
     font-family: Slack-Lato, Slack-Fractions, appleLogo, sans-serif;
 }
 
+.no-other-members-msg{
+    font-family: Slack-Lato, Slack-Fractions, appleLogo, sans-serif;
+}
+
 .create-input-style{
     /* background-color: ; */
     border: none;
-    background-color: rgb(177, 184, 190);
+    background-color: rgb(229, 233, 236);
     border-radius: 10px;
         opacity: 0.5;
         resize: none;
+    color: rgb(0, 0, 0);
+    padding: 0 4px;
 }
 
 .create-input-style::placeholder{
@@ -31,8 +37,8 @@
 .create-input-style:focus{
     /* outline: rgb(160, 79, 236); */
     outline: none !important;
-        border: 1px solid rgb(160, 79, 236);
-        box-shadow: 0 0 10px rgb(168, 100, 232);
+        border: 1px solid #3d035a;
+        box-shadow: 0 0 10px #3d035a;
 }
 
 .description-container{
@@ -47,7 +53,8 @@
 
 .private-and-public-container {
     font-size: 15px;
-    color: rgb(160, 79, 236);
+    /* color: rgb(160, 79, 236); */
+    color: #3d035a;
     width: 100%;
     display: flex;
     justify-content: space-evenly;
@@ -67,15 +74,16 @@
     cursor: pointer;
     border: none;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgb(168, 100, 232);
+    box-shadow: 0 0 10px#3d035a;
     margin-bottom: 5px;
     opacity: 0.75;
 }
 
 .create-pod-btn:active{
-    box-shadow: 0 0 10px rgb(144, 113, 173);
+    box-shadow: 0 0 10px rgb(18, 2, 32);
+    
     color: #FFFF;
-    background-color: rgb(168, 100, 232);
+    background-color: rgb(41, 5, 75);
 }
 
 .user-selection-container {
@@ -93,8 +101,14 @@
     overflow-y: scroll;
 }
 
+.user-name:hover{
+    cursor: pointer;
+}
+
+
 .user-name>input[type='radio'] {
     display: none;
+    
 }
 
 input[type='radio']:checked~#member-name-label {
@@ -103,6 +117,7 @@ input[type='radio']:checked~#member-name-label {
 
 #add-user-to-new-pod{
     padding: 10px;
+    cursor: pointer;
 }
 
 .user-name{
@@ -113,6 +128,7 @@ input[type='radio']:checked~#member-name-label {
     height: 2rem; */
     text-align: center;
     justify-content: left;
+    
     /* padding: 0px 4px; */
     /* margin-right: 10px; */
     margin-top: 2px;
@@ -156,7 +172,8 @@ input[type='radio']:checked~#member-name-label {
 #create-pod-name{
     font-size: x-large;
     font-size: bold;
-    color: rgb(160, 79, 236);
+    /* color: rgb(160, 79, 236); */
+    color: #3d035a;
 }
 
 #description-style{

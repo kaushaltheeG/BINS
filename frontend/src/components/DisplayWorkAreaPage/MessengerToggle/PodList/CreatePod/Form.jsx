@@ -51,7 +51,7 @@ const Form = () => {
     const handlePodMembers = (e) => {
         e.stopPropagation()     
         // e.preventDefault()
-        console.log(e.target.value)
+        // console.log(e.target.value)
         if (!members.includes(e.target.value)) {
             setMembers(oldArr => [...oldArr, e.target.value])
 
@@ -59,7 +59,7 @@ const Form = () => {
             let idx = members.indexOf(e.target.value)
             setMembers(oldArr => oldArr.slice(0, idx).concat(oldArr.slice(idx+1)));
         }
-        console.log(members)
+        // console.log(members)
     }
 
 
@@ -122,14 +122,19 @@ const Form = () => {
             </div>
             { isPrivate && 
                 <div className="form-item-padding user-selection-container">
-                    {waMembers?.map((member, i) => (
+                    {waMembers?.length > 1 ? waMembers?.map((member, i) => (
                         member.id !== currentUser.id && 
                             <div className="user-name" key={member.id} >
                                 <input type="radio" id={`members${i}`} className="remove-border member-name " value={member.id} onClick={handlePodMembers} onChange={()=> {}} checked={members.includes(`${member.id}`)} />
                                 <label htmlFor={`members${i}`} id="member-name-label" className="member-name-label " ><span id="add-user-to-new-pod">{member.name.slice(0, 8)}</span></label>
                             </div>
-                    ))
+                    )) : 
+                        <div className='no-other-members-msg'>
+                            <span>Looks like there are not other Members in this Work Area.</span>
+                            <span> Tell your friends about your Work Area, so they can join!</span>
+                        </div>
                     }
+                
                 </div>
             }
             <button className="form-item-padding create-pod-btn" onClick={handleSubmit}>Create Pod</button>
