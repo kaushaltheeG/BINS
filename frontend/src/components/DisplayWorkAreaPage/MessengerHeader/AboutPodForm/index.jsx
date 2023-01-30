@@ -25,13 +25,13 @@ const AboutPodForm = ({ currentMessenger }) => {
         dm = currentMessenger ? currentMessenger : null;
     }
    
-    const currentDmName = dm ? Object.values(dm.members).filter((member) => member.id !== currentUser.id).map(mem => mem.name) : null 
+    const currentDmNames = dm ? Object.values(dm.members).filter((member) => member.id !== currentUser.id).map(mem => mem.name) : null 
     const otherUserEmail = dm ? Object.values(dm.members).filter((mem) => mem.id !== currentUser.id).at(0).email: null 
   
 
     const [name, setName] = useState(pod ? pod.name : null);
     const [description, setDescription] = useState(pod ? pod.description : null );
-    const [gcNames, setGcNames] = useState(dm ? currentDmName : null)
+    const [gcNames, setGcNames] = useState(dm ? currentDmNames : null)
     const formType = !edit && destroy ? 'Delete Pod' : edit && !destroy ? 'Edit Pod' :  type === 'pods' ? 'Leave Pod' : 'Leave Chat'
     const dispatch = useDispatch();
     const history = useHistory();
@@ -39,7 +39,7 @@ const AboutPodForm = ({ currentMessenger }) => {
 
     const firstPod = currentUser ? Object.values(currentUser.memberships.pods)[0] : null; 
     const firstDm = currentUser ? Object.values(currentUser.memberships.directMessages)[0] : null; 
-
+   
     const toggleToEdit = (e) => {
         e.preventDefault();
         setEdit(true)
@@ -156,7 +156,7 @@ const AboutPodForm = ({ currentMessenger }) => {
 
                 }
             </div>
-            { ((type === 'dms' && currentMessenger?.isGroup) || type === 'pods') && 
+            { ((type === 'dms' && currentMessenger?.isGroup && gcNames.length > 2) || type === 'pods') && 
                 <div className="about-pod-form-btns form-item-padding">
                     <button onClick={handleSubmit}>{formType}</button>
                 </div>
