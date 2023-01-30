@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory, useParams } from 'react-router-dom';
+import { Redirect, useHistory, useParams } from 'react-router-dom';
 import { createDirectMessage } from '../../../store/directMessageReducer';
 import { getCurrentUser } from '../../../store/session';
 import { getCurrentWorkArea } from '../../../store/workareaReducer'
@@ -19,8 +19,10 @@ const NewDirectMessage = ({body, setBody, withinSelected, setWithinSelected}) =>
     const history = useHistory();
     const inputFoucs = useRef(null);
     const dispatch = useDispatch();
+    let waMembers; 
 
-    const waMembers = currentWa ? Object.values(currentWa.users).filter(user => user.id !== currentUser.id): [];
+    if (!currentUser) history.push("/signin")
+    else waMembers = currentWa ? Object.values(currentWa.users).filter(user => user.id !== currentUser.id): [];
     
 
     const handleSearch = (e) => {
@@ -94,6 +96,7 @@ const NewDirectMessage = ({body, setBody, withinSelected, setWithinSelected}) =>
         if (!errors.length) inputFoucs.current.focus();
     },[selectedUsers.length])
 
+    // if (!currentUser) return <Redirect to="/signin" />
     return (
         <>
             <div className="new-dm-form-container">

@@ -92,7 +92,7 @@ header.signin-form-header {
     align-items: center;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    padding: 48px 0 40px;
+    padding: 48px 0 0;
     width: 100%;
 }
 
@@ -129,7 +129,7 @@ li.error-specific {
     align-items: center;
     display: flex;
     justify-content: center;
-    margin: 0 0 20px;
+    margin: 0 0 10px;
     font-family: Slack-Lato, Slack-Fractions, appleLogo, sans-serif;
     color: red;
 }
