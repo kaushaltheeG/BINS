@@ -131,7 +131,7 @@
     border: none;
     border-radius: 4px;
     background: white;
-    box-shadow: 0 0 60px 10px rgba(0, 0, 0, 0.9);
+    box-shadow: 0 15px 20px 5px rgba(146, 145, 145, 0.9);
     overflow-y: auto;
     overflow-x: none;
 }

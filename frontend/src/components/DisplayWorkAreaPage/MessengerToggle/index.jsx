@@ -29,7 +29,7 @@ const MessengerToggle = () => {
     const { workareaId, typeId, type} = useParams();
     const history = useHistory();
    
-    console.log(generalStagePod)
+    // console.log(generalStagePod)
     const currentPod = Object.keys(pods).length ? pods[parseInt(typeId)] : null;
     const currentDm = Object.keys(dms).length ? dms[parseInt(typeId)] : null;
 
@@ -61,7 +61,7 @@ const MessengerToggle = () => {
                             dispatch(removePod(workareaObj.id))
 
                             if (workareaObj.payload.includes(currentUser.id)) {
-                                console.log('hittt remove pod dispatch');
+                                // console.log('hittt remove pod dispatch');
                             }
                             if (type == 'pods' && typeId == workareaObj.id) {
                                 history.push(`/client/workareas/${generalStagePod.workareaId}/pods/${generalStagePod.id}`)
@@ -95,7 +95,7 @@ const MessengerToggle = () => {
                                 dispatch(removeGroupChat(workareaObj.id))
                             }
                         default:
-                            console.log('unable to broadcast to', workareaObj.type)
+                            console.error('unable to broadcast to', workareaObj.type)
                             break;
                     }
                 }

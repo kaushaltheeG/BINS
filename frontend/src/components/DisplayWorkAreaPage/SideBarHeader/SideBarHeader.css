@@ -179,6 +179,7 @@
 
 .hover-underline:hover{
     transition: 500ms;
+    color: #FFFF;
     /* text-decoration: underline; */
     background-color: rgb(167, 132, 203);
     border-radius: 4px;

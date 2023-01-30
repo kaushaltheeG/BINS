@@ -19,7 +19,7 @@ const MessageInput = ({ body, setBody, withinSelected, setWithinSelected, dms, p
             currentName = 'Group Chat'
         } else {
             currentName = dms[typeId] ? Object.values(dms[typeId]?.members).filter(mem => mem.id !== currentUser?.id)?.at(0)?.name : "" 
-            console.log(currentName)
+            // console.log(currentName)
 
         }
     } else if (newMsg) {
@@ -35,20 +35,24 @@ const MessageInput = ({ body, setBody, withinSelected, setWithinSelected, dms, p
             }
             if (type === 'pods' && !newMsg) {
                 createPodMessage(message, workareaId, typeId)
-            } else if (newMsg === 'newmessage') {
+                setBody('')
+
+            } else if (newMsg === 'newmessage' && withinSelected.length) {
                 let payload = {
                     body,
                     userIds: withinSelected
                 }
                 
                 dispatch(createDirectMessage(workareaId, payload))
+                setBody('')
+
                 // .then((dm) => {
                 //     history.push(`/client/workareas/${dm.workareaId}/dms/${dm.id}`)
                 // })
             } else if (type === 'dms' && !newMsg) {
                 createDmMessage(message, workareaId, typeId)
+                setBody('')
             }
-            setBody('')
             setWithinSelected([])
         }
     }

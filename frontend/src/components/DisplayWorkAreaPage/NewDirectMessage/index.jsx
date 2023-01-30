@@ -98,7 +98,7 @@ const NewDirectMessage = ({body, setBody, withinSelected, setWithinSelected}) =>
 
     // if (!currentUser) return <Redirect to="/signin" />
     return (
-        <>
+        <div>
             <div className="new-dm-form-container">
                 <div className='to-container-search-new'>
                     <span className='to-new-dm'>To:</span>
@@ -168,7 +168,7 @@ const NewDirectMessage = ({body, setBody, withinSelected, setWithinSelected}) =>
 
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

@@ -62,10 +62,10 @@ const MessageList = () => {
                 {channel: 'PodChannel', workareaId: workareaId, podId: typeId},
                 {
                     connected: () => {
-                        console.log('connected to pod')
+                        // console.log('connected to pod')
                     },
                     received: (message) => {
-                        console.log(message, 'msg')
+                        // console.log(message, 'msg')
                         
                         switch (message.type) {
                             case 'RECEIVE_MESSAGE':
@@ -78,7 +78,7 @@ const MessageList = () => {
                                 dispatch(deleteMessage(message.id))
                                 break;
                             default:
-                                console.log('failed to brodcast ', message.type)
+                                console.error('failed to brodcast ', message.type)
                                 break;
                         }
                         
@@ -97,10 +97,10 @@ const MessageList = () => {
                 { channel: 'DirectMessageChannel', workareaId: workareaId, dmId: typeId },
                 {
                     connected: () => {
-                        console.log('connected to dm')
+                        // console.log('connected to dm')
                     },
                     received: (message) => {
-                        console.log(message, 'msg')
+                        // console.log(message, 'msg')
                         switch (message.type) {
                             case 'RECEIVE_MESSAGE': 
                                 dispatch(receiveMessage(message))
@@ -112,7 +112,7 @@ const MessageList = () => {
                                 dispatch(deleteMessage(message.id))
                                 break;
                             default:
-                                console.log('failed to brodcast ', message.type)
+                                console.error('failed to brodcast ', message.type)
                                 break; 
                         }
                         
